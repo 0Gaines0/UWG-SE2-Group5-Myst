@@ -17,6 +17,10 @@ public class UserProfile {
 	private String username;
 	private String password;
 	
+	private static final String USERNAME_MUST_NOT_BE_NULL_OR_EMPTY = "username must not be null or empty";
+	private static final String PASSWORD_MUST_NOT_BE_NULL_OR_EMPTY = "password must not be null or empty";
+	private static final String INPUT_LIST_MUST_NOT_BE_NULL = "inputted game list must not be null";
+	
 	/**
 	 * Instantiates a new user profile.
 	 */
@@ -32,6 +36,16 @@ public class UserProfile {
 	 */
 	public UserProfile(String username, String password) {
 		this();
+		if (this.username == null) {
+			throw new NullPointerException(USERNAME_MUST_NOT_BE_NULL_OR_EMPTY);
+		} else if (this.username.isBlank()) {
+			throw new IllegalArgumentException(USERNAME_MUST_NOT_BE_NULL_OR_EMPTY);
+		}
+		if (this.password == null) {
+			throw new NullPointerException(PASSWORD_MUST_NOT_BE_NULL_OR_EMPTY);
+		} else if (this.password.isBlank()) {
+			throw new IllegalArgumentException(PASSWORD_MUST_NOT_BE_NULL_OR_EMPTY);
+		}
 		this.username = username;
 		this.password = password;
 	}
@@ -57,6 +71,9 @@ public class UserProfile {
 	 * @param allOwnedGames the new all owned games
 	 */
 	public void setAllOwnedGames(List<Game> allOwnedGames) {
+		if (allOwnedGames == null) {
+			throw new NullPointerException(INPUT_LIST_MUST_NOT_BE_NULL);
+		}
 		this.allOwnedGames = allOwnedGames;
 	}
 
@@ -75,6 +92,9 @@ public class UserProfile {
 	 * @param allLikedGames the new all liked games
 	 */
 	public void setAllLikedGames(List<Game> allLikedGames) {
+		if (allLikedGames == null) {
+			throw new NullPointerException(INPUT_LIST_MUST_NOT_BE_NULL);
+		}
 		this.allLikedGames = allLikedGames;
 	}
 
@@ -93,6 +113,9 @@ public class UserProfile {
 	 * @param allDislikedGames the new all disliked games
 	 */
 	public void setAllDislikedGames(List<Game> allDislikedGames) {
+		if (allDislikedGames == null) {
+			throw new NullPointerException(INPUT_LIST_MUST_NOT_BE_NULL);
+		}
 		this.allDislikedGames = allDislikedGames;
 	}
 
@@ -111,6 +134,11 @@ public class UserProfile {
 	 * @param username the new username
 	 */
 	public void setUsername(String username) {
+		if (this.username == null) {
+			throw new NullPointerException(USERNAME_MUST_NOT_BE_NULL_OR_EMPTY);
+		} else if (this.username.isBlank()) {
+			throw new IllegalArgumentException(USERNAME_MUST_NOT_BE_NULL_OR_EMPTY);
+		}
 		this.username = username;
 	}
 
@@ -129,6 +157,11 @@ public class UserProfile {
 	 * @param password the new password
 	 */
 	public void setPassword(String password) {
+		if (password == null) {
+			throw new NullPointerException(PASSWORD_MUST_NOT_BE_NULL_OR_EMPTY);
+		} else if (password.isBlank()) {
+			throw new IllegalArgumentException(PASSWORD_MUST_NOT_BE_NULL_OR_EMPTY);
+		}
 		this.password = password;
 	}
 }
