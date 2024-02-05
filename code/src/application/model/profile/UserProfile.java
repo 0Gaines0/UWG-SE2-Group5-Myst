@@ -8,6 +8,7 @@ import application.model.game.Game;
 /**
  * The Class UserProfile.
  * @author Jeffrey Gaines
+ * @version Sprint 1
  */
 public class UserProfile {
 	private List<Game> allOwnedGames;
@@ -36,14 +37,14 @@ public class UserProfile {
 	 */
 	public UserProfile(String username, String password) {
 		this();
-		if (this.username == null) {
+		if (username == null) {
 			throw new NullPointerException(USERNAME_MUST_NOT_BE_NULL_OR_EMPTY);
-		} else if (this.username.isBlank()) {
+		} else if (username.isBlank()) {
 			throw new IllegalArgumentException(USERNAME_MUST_NOT_BE_NULL_OR_EMPTY);
 		}
-		if (this.password == null) {
+		if (password == null) {
 			throw new NullPointerException(PASSWORD_MUST_NOT_BE_NULL_OR_EMPTY);
-		} else if (this.password.isBlank()) {
+		} else if (password.isBlank()) {
 			throw new IllegalArgumentException(PASSWORD_MUST_NOT_BE_NULL_OR_EMPTY);
 		}
 		this.username = username;
@@ -134,9 +135,9 @@ public class UserProfile {
 	 * @param username the new username
 	 */
 	public void setUsername(String username) {
-		if (this.username == null) {
+		if (username == null) {
 			throw new NullPointerException(USERNAME_MUST_NOT_BE_NULL_OR_EMPTY);
-		} else if (this.username.isBlank()) {
+		} else if (username.isBlank()) {
 			throw new IllegalArgumentException(USERNAME_MUST_NOT_BE_NULL_OR_EMPTY);
 		}
 		this.username = username;
