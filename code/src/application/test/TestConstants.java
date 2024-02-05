@@ -1,4 +1,4 @@
-package application.tests;
+package application.test;
 
 public class TestConstants {
 
