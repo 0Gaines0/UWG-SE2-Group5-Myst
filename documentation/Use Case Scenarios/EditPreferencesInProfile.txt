@@ -1,0 +1,18 @@
+Context - User is logged in and viewing Profile page
+
+Primary Flow
+1 - User accesses their preferences section within the profile UI
+2 - System presents the user with options to edit their preferences, such as liked and dislikes games/ genres
+3 - User selects the preference they wish to edit
+4 - System displays the current value of the selected preference, Ex(Game: like, dislike, none preference)
+5 - User modifies the preference according to their preference
+6 - System validates the new preference data for correctness and completeness
+7 - System updates the user's profile with the new preference information
+8 - System confirms successful preference update to the user
+
+Alternate Flow(s)
+CANCEL MODIFICATION
+a1 - User cancels the changes
+a2 - System discards any changes made during editing
+a3 - System reverts to the previous preference settings
+a4 - System returns user to profile page

@@ -1,0 +1,7 @@
+Context - User is logged in and is viewing Library page
+
+Primary Flow
+1 - User observes list of owned games
+2 - User selects a game from the list, clicking on title
+3 - System responds by displaying the selected game's details in "Selected Game Details"
+4 - System visually distinguishes selected game from list

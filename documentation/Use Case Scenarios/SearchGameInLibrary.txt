@@ -1,0 +1,15 @@
+Context - User is logged into account, User has access to their game library
+
+Primary Flow
+1 - User navigates to their game library page
+2 - System displays search bar or search functionality in library page
+3 - User enters name or keywords related to the game they are searching for
+4 - System performs search query based on entered keywordss
+5 - System displays search results
+6 - User selects desired game
+
+Alternate Flow(s)
+NO SEARCH RESULTS
+a1 - System search query returns no results
+a2 - System displays message, indicating no matching games were found
+return to step 3
