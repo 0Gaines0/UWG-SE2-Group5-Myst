@@ -1,8 +1,10 @@
 package application.test.profile.credentials;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -139,6 +141,32 @@ public class TestCredential {
 		var credential2 = new Credential(username2, password2);
 		
 		assertNotEquals(credential1.hashCode(), credential2.hashCode());
+	}
+	
+	/**
+	 * Test equals with same object.
+	 */
+	@Test
+	public void testEqualsWithSameObject() {
+		var username1 = TEST_USERNAME;
+		var password1 = TEST_PASSWORD;
+		
+		var credential1 = new Credential(username1, password1);
+		
+		assertTrue(credential1.equals(credential1));
+	}
+	
+	/**
+	 * Test equals with non credential object.
+	 */
+	@Test
+	public void testEqualsWithNonCredentialObject() {
+		var username1 = TEST_USERNAME;
+		var password1 = TEST_PASSWORD;
+		
+		var credential1 = new Credential(username1, password1);
+		
+		assertFalse(credential1.equals(new Object()));
 	}
 	
 	/**
