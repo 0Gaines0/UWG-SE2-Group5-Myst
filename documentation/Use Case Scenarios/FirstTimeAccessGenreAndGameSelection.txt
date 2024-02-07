@@ -1,0 +1,22 @@
+Context - User created account, User is accessing system for first time
+
+Primary Flow
+1 - User logs in to their newly created account
+2 - System detects this is the user's first time accessing the system after account creation
+3 - System prompts the user to select their preferred genres
+4 - User selects three or more genres from a list of available options
+5 - After selecting genres, the system prompts user to choose their liked games
+6 - User selects three or more games from a list of avaiable options under the selected genres
+7 - User confirms their selection
+8 - System stores selected liked genres and games and associates them with user's account
+
+Alternate Flow(s)
+USER CHOOSES NOT TO SELECT ENOUGH GENRES
+a1 - User selects 2 or less genres
+a2 - System displays warning message informing user of requirements
+return to step 4
+
+USER CHOOSES NOT TO SELECT ENOUGH GAMES
+a1 - User selects 2 or less games
+a2 - System displays warning message informing user of requirements
+return to step 5

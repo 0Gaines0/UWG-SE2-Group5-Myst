@@ -1,0 +1,14 @@
+Context - User is logged into system, User has provided preferences in system, User is on Recommendation page
+
+Primary Flow
+1 - System analyzes user's preferences, and other relevant data
+2 - System generates list of recommended games based on user's profile
+3 - User views the list of recommended games presented by platform 
+4 - User can explore individual recommendations for more details
+5 - User may take actions (Ex: like/ dislike/ abstain)
+
+Alternate Flow(s)
+NO RECOMMENDATIONS AVAILABLE
+a1 - System is unable to generate recommendations for the user 
+a2 - System displays message indicating that no recommendations are available
+a3 - User is encouraged to provide preferences to improve recommendations

@@ -1,0 +1,9 @@
+Context - None
+
+Primary Flow
+1 - User selects create profile
+2 - User inputs credentials: username, password, rentering password to ensure correct
+3 - System validates credentials, valid unused username
+4 - System generates new profile, stores provided info securely
+5 - System confirms profile creation to user
+6 - System directs user to landing page

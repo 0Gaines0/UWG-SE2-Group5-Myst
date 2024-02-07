@@ -1,0 +1,5 @@
+Context - User is logged into system, User is in game library
+
+Primary Flow
+1 - User selects a specific game from their library
+2 - System displays detailed information about selected game (Ex: title, description, genre, etc.)

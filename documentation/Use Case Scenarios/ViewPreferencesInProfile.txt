@@ -1,0 +1,13 @@
+Context - User is logged into system, User is on profile page
+
+Primary Flow
+1 - User selects their preference sections
+2 - System displays the user's preferences (Ex: Preferred genres, liked genres/ games, dislikes genres/ games)
+3 - User can view and review their preference
+4 - User has option to edit/ update their preferences
+
+Alternate Flow(s)
+NO PREFERENCES SET
+a1 - User has no preferences set
+a2 - System displays message indicating user has no set preferences
+return to step 4
