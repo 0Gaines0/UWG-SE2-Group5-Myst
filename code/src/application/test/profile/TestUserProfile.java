@@ -42,6 +42,7 @@ public class TestUserProfile {
 		assertTrue(this.userProfile.getAllOwnedGames().isEmpty());
 		assertTrue(this.userProfile.getAllLikedGames().isEmpty());
 		assertTrue(this.userProfile.getAllDislikedGames().isEmpty());
+		assertTrue(this.userProfile.getPreferredGenres().isEmpty());
 	}
 
 	/**
@@ -224,6 +225,29 @@ public class TestUserProfile {
 	@Test
 	public void testConstructorWithBlankPassword() {
 		assertThrows(IllegalArgumentException.class, () -> new UserProfile("testUser", ""));
+	}
+	
+	/**
+	 * test the set preferred genres method
+	 */
+	@Test
+	public void testSetPreferredGenresIsNull() {
+		UserProfile user = new UserProfile();
+		assertThrows(IllegalArgumentException.class, () -> user.setPreferredGenres(null));
+	}
+	
+	/**
+	 * Test preferred genres.
+	 */
+	@Test
+	public void testSetPreferredGenres() {
+		var preferredGenres = new ArrayList<Genre>();
+		preferredGenres.add(Genre.ACTION);
+		preferredGenres.add(Genre.ADVENTURE);
+
+		this.userProfile.setPreferredGenres(preferredGenres);
+
+		assertEquals(preferredGenres, this.userProfile.getPreferredGenres());
 	}
 
 }
