@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import application.model.game.Game;
+import application.model.game.Genre;
 
 /**
  * The Class UserProfile.
+ * 
  * @author Jeffrey Gaines
  * @version Sprint 1
  */
@@ -14,7 +16,8 @@ public class UserProfile {
 	private List<Game> allOwnedGames;
 	private List<Game> allLikedGames;
 	private List<Game> allDislikedGames;
-	
+	private List<Genre> preferredGenres;
+
 	private String username;
 	private String password;
 	
@@ -55,6 +58,7 @@ public class UserProfile {
 		this.allOwnedGames = new ArrayList<Game>();
 		this.allLikedGames = new ArrayList<Game>();
 		this.allDislikedGames = new ArrayList<Game>();
+		this.preferredGenres = new ArrayList<Genre>();
 	}
 
 	/**
@@ -164,5 +168,27 @@ public class UserProfile {
 			throw new IllegalArgumentException(PASSWORD_MUST_NOT_BE_NULL_OR_EMPTY);
 		}
 		this.password = password;
+	}
+	
+	/**
+	 * gets the preferred genres
+	 * 
+	 * @return the preferredGenres
+	 */
+	public List<Genre> getPreferredGenres() {
+		return this.preferredGenres;
+	}
+
+	
+	/**
+	 * Sets the preferred genres.
+	 *
+	 * @param preferredGenres the new preferred genres
+	 */
+	public void setPreferredGenres(List<Genre> preferredGenres) {
+		if (preferredGenres == null) {
+			throw new IllegalArgumentException("preferredGenres cannot be null");
+		}
+		this.preferredGenres = preferredGenres;
 	}
 }
