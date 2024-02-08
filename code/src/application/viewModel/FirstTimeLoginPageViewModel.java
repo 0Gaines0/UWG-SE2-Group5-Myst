@@ -1,5 +1,8 @@
 package application.viewModel;
 
+import java.util.List;
+
+import application.model.GameRecommendationEngine;
 import application.model.game.Game;
 import application.model.game.GameLibrary;
 import application.model.game.Genre;
@@ -11,26 +14,42 @@ import javafx.beans.property.SimpleObjectProperty;
 /**
  * the first time login page view model
  * 
- * @author daniel rivera 
+ * @author Daniel Rivera 
  * @version Sprint 1
  */
 public class FirstTimeLoginPageViewModel {
 
-	private ObjectProperty<Genre> highPriorityGenre;
-	private ObjectProperty<Genre> mediumPriorityGenre;
-	private ObjectProperty<Genre> lowPriorityGenre;
+	private ObjectProperty<Genre> highPreferenceGenre;
+	private ObjectProperty<Genre> mediumPreferenceGenre;
+	private ObjectProperty<Genre> lowPreferenceGenre;
 	private ListProperty<Game> ownedGames;
 	private GameLibrary gameLibrary;
+	private GameRecommendationEngine recommendationEngine;
 	
 	/**
 	 * the first time login page view model
 	 */
 	public FirstTimeLoginPageViewModel() {
-		this.highPriorityGenre = new SimpleObjectProperty<Genre>();
-		this.mediumPriorityGenre = new SimpleObjectProperty<Genre>();
-		this.lowPriorityGenre = new SimpleObjectProperty<Genre>();
+		this.highPreferenceGenre = new SimpleObjectProperty<Genre>();
+		this.mediumPreferenceGenre = new SimpleObjectProperty<Genre>();
+		this.lowPreferenceGenre = new SimpleObjectProperty<Genre>();
 		this.ownedGames = new SimpleListProperty<Game>();
 		this.gameLibrary = new GameLibrary();
+		
+	}
+	
+	/**
+	 * generates the recommendations based off of the preferences by the user
+	 * 
+	 * @param highPreference
+	 * @param mediumPreference
+	 * @param lowPreference
+	 * @param ownedGames
+	 * 
+	 * @return the recommendations for the user
+	 */
+	public List<Game> generateRecommendationPreferences(Genre highPreference, Genre mediumPreference, Genre lowPreference, List<Game> ownedGames) {
+		return this.recommendationEngine.generateRecommendation(highPreference, mediumPreference, lowPreference, ownedGames);
 	}
 
 	/**
@@ -56,7 +75,7 @@ public class FirstTimeLoginPageViewModel {
 	 * @return the medium priority genre
 	 */
 	public ObjectProperty<Genre> getHighPriorityGenre() {
-		return this.highPriorityGenre;
+		return this.highPreferenceGenre;
 	}
 
 	/**
@@ -65,7 +84,7 @@ public class FirstTimeLoginPageViewModel {
 	 * @return the medium priority genre
 	 */
 	public ObjectProperty<Genre> getMediumPriorityGenre() {
-		return this.mediumPriorityGenre;
+		return this.mediumPreferenceGenre;
 	}
 
 	/**
@@ -74,7 +93,7 @@ public class FirstTimeLoginPageViewModel {
 	 * @return the low priority genre
 	 */
 	public ObjectProperty<Genre> getLowPriorityGenre() {
-		return this.lowPriorityGenre;
+		return this.lowPreferenceGenre;
 	}
 
 	/**

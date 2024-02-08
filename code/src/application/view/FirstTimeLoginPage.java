@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import application.model.game.Game;
 import application.model.game.Genre;
+import application.viewModel.FirstTimeLoginPageViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -41,12 +42,14 @@ public class FirstTimeLoginPage {
     
     @FXML
     private ListView<Game> ownedGamesListView;
+    
+    private FirstTimeLoginPageViewModel viewmodel;
 
     /**
      * the first time login page constructor
      */
     public FirstTimeLoginPage() {
-    	
+    	this.viewmodel = new FirstTimeLoginPageViewModel();
     }
     
     @FXML
@@ -54,11 +57,20 @@ public class FirstTimeLoginPage {
     	this.setupButtons();
     	this.setupComboBoxes();
     	this.setupListView();
+    	this.bindToViewModel();
     	this.fxmlValidCmponents();
+    }
+    
+    private void bindToViewModel() {
+    	this.highPreferenceComboBox.valueProperty().bindBidirectional(this.viewmodel.getHighPriorityGenre());
+    	this.mediumPreferenceComboBox.valueProperty().bindBidirectional(this.viewmodel.getMediumPriorityGenre());
+    	this.lowPreferenceComboBox.valueProperty().bindBidirectional(this.viewmodel.getLowPriorityGenre());
+    	this.ownedGamesListView.itemsProperty().bindBidirectional(this.viewmodel.getOwnedGames());
     }
     
     private void setupListView() {
     	this.ownedGamesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    	//still needs to connect to some form of games had some manually entered or something
     }
     
     private void setupComboBoxes() {
@@ -73,7 +85,13 @@ public class FirstTimeLoginPage {
     		stage.close();
     	});
     	this.continueButton.setOnAction((event) -> {
-    		//will launch to another page or will close modal and begin the recommendations, will need more discussion
+    		this.viewmodel.generateRecommendationPreferences(
+    				this.highPreferenceComboBox.getValue(), 
+    				this.mediumPreferenceComboBox.getValue(), 
+    				this.lowPreferenceComboBox.getValue(), 
+    				this.ownedGamesListView.getItems());
+    		var stage = (Stage) this.continueButton.getScene().getWindow();
+    		stage.close();
     	});
     }
 
