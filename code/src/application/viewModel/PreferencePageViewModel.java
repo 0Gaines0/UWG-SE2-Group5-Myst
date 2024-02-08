@@ -4,8 +4,8 @@ import java.util.List;
 
 import application.model.GameRecommendationEngine;
 import application.model.game.Game;
-import application.model.game.GameLibrary;
 import application.model.game.Genre;
+import application.model.profile.UserProfile;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -17,25 +17,22 @@ import javafx.beans.property.SimpleObjectProperty;
  * @author Daniel Rivera 
  * @version Sprint 1
  */
-public class FirstTimeLoginPageViewModel {
+public class PreferencePageViewModel {
 
 	private ObjectProperty<Genre> highPreferenceGenre;
 	private ObjectProperty<Genre> mediumPreferenceGenre;
 	private ObjectProperty<Genre> lowPreferenceGenre;
 	private ListProperty<Game> ownedGames;
-	private GameLibrary gameLibrary;
 	private GameRecommendationEngine recommendationEngine;
 	
 	/**
 	 * the first time login page view model
 	 */
-	public FirstTimeLoginPageViewModel() {
+	public PreferencePageViewModel() {
 		this.highPreferenceGenre = new SimpleObjectProperty<Genre>();
 		this.mediumPreferenceGenre = new SimpleObjectProperty<Genre>();
 		this.lowPreferenceGenre = new SimpleObjectProperty<Genre>();
 		this.ownedGames = new SimpleListProperty<Game>();
-		this.gameLibrary = new GameLibrary();
-		
 	}
 	
 	/**
@@ -49,24 +46,12 @@ public class FirstTimeLoginPageViewModel {
 	 * @return the recommendations for the user
 	 */
 	public List<Game> generateRecommendationPreferences(Genre highPreference, Genre mediumPreference, Genre lowPreference, List<Game> ownedGames) {
-		return this.recommendationEngine.generateRecommendation(highPreference, mediumPreference, lowPreference, ownedGames);
-	}
-
-	/**
-	 * gets the game library
-	 * 
-	 * @return the game library
-	 */
-	public GameLibrary getGameLibrary() {
-		return this.gameLibrary;
-	}
-
-    /**
-     * sets the game library 
-     * @param gameLibrary
-     */
-	public void setGameLibrary(GameLibrary gameLibrary) {
-		this.gameLibrary = gameLibrary;
+		UserProfile user = new UserProfile(); //TODO: change this
+		user.getPreferredGenres().add(highPreference);
+		user.getPreferredGenres().add(mediumPreference);
+		user.getPreferredGenres().add(lowPreference);
+		user.getAllLikedGames().addAll(ownedGames);
+		return this.recommendationEngine.generateRecommendations(user);
 	}
 
 	/**

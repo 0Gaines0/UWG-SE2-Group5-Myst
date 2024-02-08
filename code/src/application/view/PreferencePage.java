@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import application.model.game.Game;
 import application.model.game.Genre;
-import application.viewModel.FirstTimeLoginPageViewModel;
+import application.viewModel.PreferencePageViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -14,7 +14,13 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class FirstTimeLoginPage {
+/**
+ * the preferences page
+ * 
+ * @author Daniel Rivera
+ * @version Sprint 1
+ */
+public class PreferencePage {
 
     @FXML
     private ResourceBundle resources;
@@ -43,13 +49,13 @@ public class FirstTimeLoginPage {
     @FXML
     private ListView<Game> ownedGamesListView;
     
-    private FirstTimeLoginPageViewModel viewmodel;
+    private PreferencePageViewModel viewmodel;
 
     /**
      * the first time login page constructor
      */
-    public FirstTimeLoginPage() {
-    	this.viewmodel = new FirstTimeLoginPageViewModel();
+    public PreferencePage() {
+    	this.viewmodel = new PreferencePageViewModel();
     }
     
     @FXML

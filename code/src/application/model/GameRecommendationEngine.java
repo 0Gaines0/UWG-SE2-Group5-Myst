@@ -1,10 +1,17 @@
 package application.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import application.model.game.Game;
-import application.model.game.Genre;
+import application.model.profile.UserProfile;
 
+/**
+ * the game recommendation engine
+ * 
+ * @author Daniel Rivera
+ * @version Sprint 1
+ */
 public class GameRecommendationEngine {
 
 	/**
@@ -14,20 +21,17 @@ public class GameRecommendationEngine {
 		
 	}
 	
+
 	/**
-	 * generates the recommendations for the user 
-	 * 
-	 * @param highPreference
-	 * @param mediumPreference
-	 * @param lowPreference
-	 * @param ownedGames
-	 * 
-	 * @return a list of games that match the users preferences
+	 * Generate recommendations.
+	 *
+	 * @param user the user
+	 * @return the list
 	 */
-	public List<Game> generateRecommendation(Genre highPreference, Genre mediumPreference, Genre lowPreference,
-			List<Game> ownedGames) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Game> generateRecommendations(UserProfile user) {
+		ArrayList<Game> recommendedGames = new ArrayList<Game>();
+		
+		return recommendedGames;
 	}
 
 }

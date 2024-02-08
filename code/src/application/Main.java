@@ -13,11 +13,16 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent parent = FXMLLoader.load(getClass().getResource(Main.LOGIN_WINDOW));
-			Scene scene = new Scene(parent);
-			primaryStage.setTitle(WINDOW_TITLE);
-			primaryStage.setScene(scene);
-			primaryStage.show();
+//			Parent parent = FXMLLoader.load(getClass().getResource(Main.LOGIN_WINDOW));
+//			Scene scene = new Scene(parent);
+//			primaryStage.setTitle(WINDOW_TITLE);
+//			primaryStage.setScene(scene);
+//			primaryStage.show();
+			Parent parent = FXMLLoader.load(getClass().getResource("view/PreferencePage.fxml"));
+            Scene scene = new Scene(parent, 364, 374);
+            primaryStage.setTitle("What");
+            primaryStage.setScene(scene);
+            primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

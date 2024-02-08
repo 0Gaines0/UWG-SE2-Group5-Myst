@@ -11,7 +11,7 @@
 
 <AnchorPane fx:id="guiPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="374.0" prefWidth="364.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text layoutX="178.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Time Login Information" textAlignment="CENTER" wrappingWidth="169.13671875">
+      <Text layoutX="178.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preferences Page" textAlignment="CENTER" wrappingWidth="169.13671875">
          <font>
             <Font name="Comic Sans MS" size="16.0" />
          </font>
@@ -19,7 +19,7 @@
       <ComboBox fx:id="highPreferenceComboBox" layoutX="188.0" layoutY="72.0" prefWidth="150.0" promptText="Select a Genre" />
       <ComboBox fx:id="mediumPreferenceComboBox" layoutX="188.0" layoutY="110.0" prefWidth="150.0" promptText="Select a Genre" />
       <ComboBox fx:id="lowPreferenceComboBox" layoutX="188.0" layoutY="149.0" prefWidth="150.0" promptText="Select a Genre" />
-      <Text layoutX="23.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please select 3 Genres you are interested in order of most to interest to least interest" textAlignment="CENTER" wrappingWidth="150.0" />
+      <Text layoutX="23.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please select 3 Genres you are most interested in " textAlignment="CENTER" wrappingWidth="150.0" />
       <Button fx:id="cancelButton" layoutX="121.0" layoutY="335.0" mnemonicParsing="false" text="Cancel" />
       <Button fx:id="continueButton" layoutX="188.0" layoutY="335.0" mnemonicParsing="false" text="Continue" />
       <ImageView fitHeight="82.0" fitWidth="142.0" layoutX="27.0" layoutY="2.0">
@@ -28,6 +28,6 @@
          </image>
       </ImageView>
       <ListView fx:id="ownedGamesListView" layoutX="27.0" layoutY="204.0" prefHeight="116.0" prefWidth="311.0" />
-      <Text layoutX="93.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Select Games you own" textAlignment="CENTER" wrappingWidth="169.13671875" />
+      <Text layoutX="86.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Select Games you like" textAlignment="CENTER" wrappingWidth="192.13671875" />
    </children>
 </AnchorPane>
