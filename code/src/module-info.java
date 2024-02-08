@@ -7,7 +7,7 @@ module Myst {
 	requires javafx.graphics;
 	requires javafx.base;
 	
-	exports application.view to javafx.fxml;
-	opens application.view to javafx.fxml;
+	exports application.view.login to javafx.fxml;
+	opens application.view.login to javafx.fxml;
 	opens application to javafx.graphics, javafx.fxml;
 }

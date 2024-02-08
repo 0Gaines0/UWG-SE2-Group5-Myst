@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 
 public class Main extends Application {
 	public static final String WINDOW_TITLE = "Myst";
-	public static final String LOGIN_WINDOW = "view/LoginPage.fxml";
+	public static final String LOGIN_WINDOW = "view/login/LoginPage.fxml";
 	
 	@Override
 	public void start(Stage primaryStage) {

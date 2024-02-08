@@ -17,16 +17,19 @@ public class UserCredentialsIO {
 
 	private static final String FILENAME = "NotUserCredentials.txt";
 
+	
 	/**
 	 * Write credentials to XML file.
 	 *
-	 * @param credential the credential
+	 * @param credentials the credentials
 	 * @throws FileNotFoundException the file not found exception
 	 */
-	public static void writeCredentialsToXMLFile(Credential credential) throws FileNotFoundException {
-		try (var writer = new BufferedWriter(new FileWriter(FILENAME, true))) {
-			writer.write(credential.getUsername() + "," + credential.getPassword());
-			writer.newLine();
+	public static void writeCredentialsToXMLFile(List<Credential> credentials) throws FileNotFoundException {
+		try (var writer = new BufferedWriter(new FileWriter(FILENAME))) {
+			for (var credential : credentials) {
+				writer.write(credential.getUsername() + "," + credential.getPassword());
+				writer.newLine();
+			}
 		} catch (IOException e) {
 			throw new FileNotFoundException(e.getMessage());
 		}

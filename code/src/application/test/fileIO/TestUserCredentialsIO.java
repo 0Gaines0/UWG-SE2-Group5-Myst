@@ -3,6 +3,7 @@ package application.test.fileIO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,10 +18,15 @@ public class TestUserCredentialsIO {
 	 */
 	@Test
 	public void testCredentialWrite() {
+		var credList = new ArrayList<Credential>();
 		var credential = new Credential("username", "password");
+		var credential2 = new Credential("username1", "password1");
+		
+		credList.add(credential);
+		credList.add(credential2);
 		
 		try {
-			UserCredentialsIO.writeCredentialsToXMLFile(credential);
+			UserCredentialsIO.writeCredentialsToXMLFile(credList);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -33,7 +39,7 @@ public class TestUserCredentialsIO {
 	public void testCredentialRead() {
 		try {
 			var credentialList = UserCredentialsIO.readCredentialsFromFile();
-			assertEquals(1, credentialList.size());
+			assertEquals(2, credentialList.size());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

@@ -1,15 +1,16 @@
 package application.model.profile.credentials;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import application.fileIO.UserCredentialsIO;
 
 public class CredentialManager {
 	private static final String USERNAME_MUST_BE_VALID = "username must not be null or empty";
-	
+
 	private HashSet<Credential> userCredentials;
-	
+
 	/**
 	 * Instantiates a new credential manager.
 	 */
@@ -17,7 +18,7 @@ public class CredentialManager {
 		this.userCredentials = new HashSet<Credential>();
 		this.setUpUserCredentials();
 	}
-	
+
 	/**
 	 * User name exist.
 	 *
@@ -37,7 +38,7 @@ public class CredentialManager {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Gets the specified credential.
 	 *
@@ -58,7 +59,6 @@ public class CredentialManager {
 		}
 		return credential;
 	}
-	
 
 	/**
 	 * Gets the user credentials.
@@ -68,8 +68,7 @@ public class CredentialManager {
 	public HashSet<Credential> getUserCredentials() {
 		return this.userCredentials;
 	}
-	
-	
+
 	/**
 	 * Adds the credential.
 	 *
@@ -89,20 +88,19 @@ public class CredentialManager {
 			} else {
 				return false;
 			}
-			
+
 		}
 	}
 
 	private void updateCredentialFile() {
-		for (var credential : this.userCredentials) {
-			try {
-				UserCredentialsIO.writeCredentialsToXMLFile(credential);
-			} catch (FileNotFoundException e) {
-				throw new IllegalArgumentException(e.getMessage());
-			}
+		var credentials = new ArrayList<Credential>(this.userCredentials);
+		try {
+			UserCredentialsIO.writeCredentialsToXMLFile(credentials);
+		} catch (FileNotFoundException e) {
+			throw new IllegalArgumentException(e.getMessage());
 		}
-	}
 
+	}
 
 	private void setUpUserCredentials() {
 		try {
@@ -111,7 +109,7 @@ public class CredentialManager {
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException(e.getMessage());
 		}
-		
+
 	}
 
 }
