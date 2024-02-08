@@ -31,7 +31,7 @@ public class GameLibrary {
 		if (game == null) {
 			throw new IllegalArgumentException("Game must not be null");
 		}
-		for (Game existingGame : games) {
+		for (Game existingGame : this.games) {
 			if (existingGame.equals(game)) {
 				throw new IllegalArgumentException("Duplicate game ID: " + game.getGameID());
 			}
@@ -70,6 +70,6 @@ public class GameLibrary {
 
 	@Override
 	public String toString() {
-		return games.stream().map(Game::toString).collect(Collectors.joining("\n"));
+		return this.games.stream().map(Game::toString).collect(Collectors.joining("\n"));
 	}
 }

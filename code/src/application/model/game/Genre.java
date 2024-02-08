@@ -21,15 +21,15 @@ public enum Genre {
 		StringBuilder titleCase = new StringBuilder();
 		boolean nextTitleCase = true;
 
-		for (char c : input.toCharArray()) {
-			if (Character.isSpaceChar(c)) {
+		for (char character : input.toCharArray()) {
+			if (Character.isSpaceChar(character)) {
 				nextTitleCase = true;
 			} else if (nextTitleCase) {
-				c = Character.toTitleCase(c);
+				character = Character.toTitleCase(character);
 				nextTitleCase = false;
 			}
 
-			titleCase.append(c);
+			titleCase.append(character);
 		}
 		return titleCase.toString();
 	}

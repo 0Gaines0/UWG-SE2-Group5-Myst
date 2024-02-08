@@ -2,6 +2,7 @@ package application.model.game;
 
 import java.util.List;
 import java.util.Objects;
+
 /**
  * Stores and manages information for a single Game.
  *
@@ -29,7 +30,7 @@ public class Game {
 	public String getName() {
 		return this.name;
 	}
-	
+
 	/**
 	 * Returns this.name
 	 * 
@@ -37,7 +38,7 @@ public class Game {
 	 */
 	public String getGamePhoto() {
 		return this.gamePhotoLink;
-	}	
+	}
 
 	/**
 	 * Gets the genres of the games
@@ -133,21 +134,24 @@ public class Game {
 		this.gameID = gameID;
 	}
 
+	
 	/**
-	 * Constructor for Game with all fields.
-	 * 
-	 * @param name                  The name of the game.
-	 * @param genres                The genres of the game.
-	 * @param gameID                The unique identifier for the game.
-	 * @param developers            The name of the developers.
-	 * @param releaseDateYear       The release year of the game.
-	 * @param releaseDateMonth      The release month of the game.
-	 * @param numberPositiveReviews The number of positive reviews.
-	 * @param numberNegativeReviews The number of negative reviews.
-	 * @param averagePlaytime       The average playtime in hours.
+	 * Instantiates a new game.
+	 *
+	 * @param name the name
+	 * @param genres the genres
+	 * @param gameID the game ID
+	 * @param developers the developers
+	 * @param releaseDateYear the release date year
+	 * @param releaseDateMonth the release date month
+	 * @param numberPositiveReviews the number positive reviews
+	 * @param numberNegativeReviews the number negative reviews
+	 * @param averagePlaytime the average playtime
+	 * @param gamePhotoLink the game photo link
 	 */
 	public Game(String name, List<Genre> genres, int gameID, String developers, int releaseDateYear,
-			int releaseDateMonth, int numberPositiveReviews, int numberNegativeReviews, int averagePlaytime, String gamePhotoLink) {
+			int releaseDateMonth, int numberPositiveReviews, int numberNegativeReviews, int averagePlaytime,
+			String gamePhotoLink) {
 		this(name, genres, gameID);
 		this.developers = developers;
 		this.releaseDateYear = releaseDateYear;
@@ -157,26 +161,29 @@ public class Game {
 		this.averagePlaytime = averagePlaytime;
 		this.gamePhotoLink = gamePhotoLink;
 	}
-	
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Game game = (Game) o;
-        return gameID == game.gameID;
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(gameID);
-    }
-    
-    @Override
-    public String toString() {
-        String genresStr = this.genres.get(0).toString();
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
+		Game game = (Game) obj;
+		return this.gameID == game.gameID;
+	}
 
-        return String.format("Name: %s, Genres: [%s], Game ID: %d", name, genresStr, gameID);
-    }
-    
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.gameID);
+	}
+
+	@Override
+	public String toString() {
+		String genresStr = this.genres.get(0).toString();
+
+		return String.format("Name: %s, Genres: [%s], Game ID: %d", this.name, genresStr, this.gameID);
+	}
 
 }
