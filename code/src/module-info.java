@@ -3,6 +3,11 @@ module Myst {
 	requires org.junit.jupiter.api;
 	requires junit;
 	requires java.desktop;
+	requires javafx.fxml;
+	requires javafx.graphics;
+	requires javafx.base;
 	
+	exports application.view to javafx.fxml;
+	opens application.view to javafx.fxml;
 	opens application to javafx.graphics, javafx.fxml;
 }
