@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -31,22 +32,35 @@ public class LoginPage {
 
 	@FXML
 	private TextField userNameTextField;
-	
+
+	@FXML
+	private Hyperlink createAnAccountLink;
+
 	private LoginPageViewModel loginPageViewModel;
+	private CreateAccountPage createAccountCodeBehind;
 
 	/**
 	 * Instantiates a new login page.
 	 */
 	public LoginPage() {
 		this.loginPageViewModel = new LoginPageViewModel();
+		this.createAccountCodeBehind = new CreateAccountPage();
 	}
 
-	@FXML void initialize() {
+	@FXML
+	void initialize() {
 		this.fxmlValidComponents();
 		this.setUpLoginButton();
+		this.setUpCreateAccountPage();
 		this.bindToViewModel();
 	}
 	
+	private void setUpCreateAccountPage() {
+		this.createAnAccountLink.setOnAction(((event) -> {
+			this.createAccountCodeBehind.openCreateAccountPage();
+		}));
+	}
+
 	private void setUpLoginButton() {
 		this.loginButton.setOnAction(((event) -> {
 			var loginResult = this.loginPageViewModel.userLoginIsSuccessful();
@@ -60,7 +74,7 @@ public class LoginPage {
 				errorPopUp.showAndWait();
 			}
 		}));
-		
+
 	}
 
 	private void bindToViewModel() {
@@ -77,7 +91,9 @@ public class LoginPage {
 				: "fx:id=\"passwordTextField\" was not injected: check your FXML file 'LoginPage.fxml'.";
 		assert this.userNameTextField != null
 				: "fx:id=\"userNameTextField\" was not injected: check your FXML file 'LoginPage.fxml'.";
-	}
+		assert this.createAnAccountLink != null
+				: "fx:id=\"createAnAccountLink\" was not injected: check your FXML file 'LoginPage.fxml'.";
 
+	}
 
 }
