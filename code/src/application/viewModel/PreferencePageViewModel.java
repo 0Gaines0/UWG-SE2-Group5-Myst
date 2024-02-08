@@ -46,9 +46,9 @@ public class PreferencePageViewModel {
 	 * @return the recommendations for the user
 	 */
 	public List<Game> generateRecommendationPreferences(Genre highPreference, Genre mediumPreference, Genre lowPreference, List<Game> ownedGames) {
-		UserProfile user = new UserProfile(); //TODO: change this
+		var user = new UserProfile(); //TODO: change this
 		user.getPreferredGenres().add(highPreference);
-		user.getPreferredGenres().add(mediumPreference);
+		user.getPreferredGenres().add(mediumPreference); 
 		user.getPreferredGenres().add(lowPreference);
 		user.getAllLikedGames().addAll(ownedGames);
 		return this.recommendationEngine.generateRecommendations(user);
