@@ -55,7 +55,7 @@ public class CreateAccountPage {
 	public CreateAccountPage() {
 		this.createPageViewModel = new CreatePageViewModel();
 	}
-	
+
 	@FXML
 	void initialize() {
 		this.fxmlValidComponents();
@@ -66,7 +66,15 @@ public class CreateAccountPage {
 
 	private void setUpCreateButton() {
 		this.createAccountButton.setOnAction(((event) -> {
-			if (this.passwordsMatch()) {
+			if (this.fieldsAreNull()) {
+				var errorPopUp = new Alert(AlertType.ERROR);
+				errorPopUp.setContentText("Account creation failed, username and password fields must be valid");
+				errorPopUp.showAndWait();
+			} else if (this.fieldsAreEmpty()) {
+				var errorPopUp = new Alert(AlertType.ERROR);
+				errorPopUp.setContentText("Account creation failed, username and password fields must be valid");
+				errorPopUp.showAndWait();
+			} else if (this.passwordsMatch()) {
 				var attemptCreation = this.createPageViewModel.attemptCreateNewAccount();
 				if (attemptCreation) {
 					var successPopUp = new Alert(AlertType.CONFIRMATION);
@@ -86,13 +94,27 @@ public class CreateAccountPage {
 
 		}));
 	}
-	
+
+	private boolean fieldsAreNull() {
+		var user = this.userNameTextField.textProperty().getValue() == null;
+		var password = this.passwordTextField.textProperty().getValue() == null;
+		var reenterPassword = this.reenterPasswordTextField.textProperty().getValue() == null;
+		
+		return user || password || reenterPassword;
+	}
+
+	private boolean fieldsAreEmpty() {
+		return this.userNameTextField.textProperty().getValue().isBlank()
+				|| this.passwordTextField.textProperty().getValue().isBlank()
+				|| this.reenterPasswordTextField.textProperty().getValue().isBlank();
+	}
+
 	private void setUpCancelButton() {
 		this.cancelButton.setOnAction(((event) -> {
 			this.closeCreateAccountPage(this.cancelButton);
 		}));
 	}
-	
+
 	private void closeCreateAccountPage(Button btn) {
 		var stage = (Stage) btn.getScene().getWindow();
 		stage.close();

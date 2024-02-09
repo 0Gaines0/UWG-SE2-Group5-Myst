@@ -68,18 +68,31 @@ public class LoginPage {
 
 	private void setUpLoginButton() {
 		this.loginButton.setOnAction(((event) -> {
-			var loginResult = this.loginPageViewModel.userLoginIsSuccessful();
-			if (loginResult) {
-				var successPopUp = new Alert(AlertType.CONFIRMATION);
-				successPopUp.setContentText("Login was successful");
-				successPopUp.showAndWait();
-			} else {
+			if (this.loginFieldsAreNull()) {
 				var errorPopUp = new Alert(AlertType.ERROR);
-				errorPopUp.setContentText("Login failed, incorrect username or password");
+				errorPopUp.setContentText("Login failed, valid username or password");
 				errorPopUp.showAndWait();
+			} else {
+				var loginResult = this.loginPageViewModel.userLoginIsSuccessful();
+				if (loginResult) {
+					var successPopUp = new Alert(AlertType.CONFIRMATION);
+					successPopUp.setContentText("Login was successful");
+					successPopUp.showAndWait();
+				} else {
+					var errorPopUp = new Alert(AlertType.ERROR);
+					errorPopUp.setContentText("Login failed, incorrect username or password");
+					errorPopUp.showAndWait();
+				}
 			}
+			
 		}));
 
+	}
+
+	private boolean loginFieldsAreNull() {
+		var user = this.userNameTextField.textProperty().getValue() == null;
+		var password = this.passwordTextField.textProperty().getValue() == null;
+		return user || password;
 	}
 
 	private void bindToViewModel() {
