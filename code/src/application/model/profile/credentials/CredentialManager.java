@@ -58,7 +58,7 @@ public class CredentialManager {
 		}
 		Credential credential = null;
 		for (var cred : this.userCredentials) {
-			if (cred.getUsername().toLowerCase().equals(username)) {
+			if (cred.getUsername().toLowerCase().equals(username.toLowerCase())) {
 				credential = cred;
 			}
 		}
