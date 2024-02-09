@@ -3,7 +3,7 @@ package application.view.login;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import application.viewModel.LoginPageViewModel;
+import application.viewModel.login.LoginPageViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;

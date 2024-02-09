@@ -1,4 +1,4 @@
-package application.viewModel;
+package application.viewModel.login;
 
 import application.model.profile.credentials.CredentialManager;
 import javafx.beans.property.SimpleStringProperty;
