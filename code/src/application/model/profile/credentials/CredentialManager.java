@@ -6,6 +6,11 @@ import java.util.HashSet;
 
 import application.fileIO.UserCredentialsIO;
 
+/**
+ * The Class CredentialManager.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class CredentialManager {
 	private static final String USERNAME_MUST_BE_VALID = "username must not be null or empty";
 
@@ -102,7 +107,10 @@ public class CredentialManager {
 
 	}
 
-	private void setUpUserCredentials() {
+	/**
+	 * Sets the up user credentials.
+	 */
+	public void setUpUserCredentials() {
 		try {
 			var credentialList = UserCredentialsIO.readCredentialsFromFile();
 			this.userCredentials.addAll(credentialList);

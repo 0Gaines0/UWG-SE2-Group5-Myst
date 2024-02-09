@@ -13,6 +13,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * The Class LoginPage.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class LoginPage {
 
 	@FXML
