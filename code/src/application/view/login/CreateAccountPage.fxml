@@ -12,14 +12,14 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="342.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.login.CreateAccountPage">
    <right>
-      <AnchorPane prefHeight="500.0" prefWidth="344.0" style="-fx-background-color: #97bcc4;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="500.0" prefWidth="344.0" style="-fx-background-color: #446662;" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="92.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@assets/loginPageIcon.png" />
                </image>
             </ImageView>
-            <Label layoutX="56.0" layoutY="152.0" text="Create an Account" underline="true">
+            <Label layoutX="56.0" layoutY="152.0" text="Create an Account" textFill="WHITE" underline="true">
                <font>
                   <Font name="Comic Sans MS Bold Italic" size="24.0" />
                </font>

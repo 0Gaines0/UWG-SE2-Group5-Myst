@@ -1,0 +1,8 @@
+.select_button {
+    -fx-border-color: #FFF;
+    -fx-border-width: 0 3 0 0;
+}
+
+.selected::hover {
+	
+}
