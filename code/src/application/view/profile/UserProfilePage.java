@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -33,25 +35,16 @@ public class UserProfilePage {
 	private HBox editProfileHBox;
 
 	@FXML
-	private HBox libraryHBox;
-
-	@FXML
-	private Text libraryTextNavBar;
+	private HBox libraryNavBarHBox;
 
 	@FXML
 	private Text mystTextNavbar;
 
 	@FXML
-	private HBox mystiverseHBox;
-
-	@FXML
-	private Text mystiverseNavBar;
+	private HBox mystiverseNavBarHBox;
 
 	@FXML
 	private AnchorPane navigationAchorPane;
-
-	@FXML
-	private HBox profileHBox;
 
 	@FXML
 	private ImageView profileImageNavBar;
@@ -60,7 +53,7 @@ public class UserProfilePage {
 	private ImageView profileImageSideBar;
 
 	@FXML
-	private Text profileTextNavBar;
+	private HBox profileNavBarHBox;
 
 	@FXML
 	private Text profileUsername;
@@ -76,13 +69,83 @@ public class UserProfilePage {
 
 	@FXML
 	private HBox wishlistHBox;
-	
-	private UserProfile activeUser;
 
+	private UserProfile activeUser;
 
 	@FXML
 	void initialize() {
 		this.validiateFXMLComponents();
+		this.setUpNavBar();
+		this.setUpSideBarButtons();
+	}
+
+	private void setUpNavBar() {
+		this.setUpLibraryNavBarHBox();
+		this.setUpMystiverseNavBarHbox();
+		this.setUpProfileNavBarHBox();
+	}
+
+	private void setUpProfileNavBarHBox() {
+		this.profileNavBarHBox.setOnMouseClicked(((event) -> {
+			var errorPopUp = new Alert(AlertType.CONFIRMATION);
+			errorPopUp.setContentText("Button Click Works!");
+			errorPopUp.showAndWait();
+		}));
+	}
+
+	private void setUpMystiverseNavBarHbox() {
+		this.mystiverseNavBarHBox.setOnMouseClicked(((event) -> {
+			var errorPopUp = new Alert(AlertType.CONFIRMATION);
+			errorPopUp.setContentText("Button Click Works!");
+			errorPopUp.showAndWait();
+		}));
+	}
+
+	private void setUpLibraryNavBarHBox() {
+		this.libraryNavBarHBox.setOnMouseClicked(((event) -> {
+			var errorPopUp = new Alert(AlertType.CONFIRMATION);
+			errorPopUp.setContentText("Button Click Works!");
+			errorPopUp.showAndWait();
+		}));
+	}
+
+	private void setUpSideBarButtons() {
+		this.setUpEditProfileHBox();
+		this.setUpEditPreferencesHBox();
+		this.setUpWishListHBox();
+		this.setUpSettingsHBox();
+	}
+
+	private void setUpSettingsHBox() {
+		this.settingsHbox.setOnMouseClicked(((event) -> {
+			var errorPopUp = new Alert(AlertType.CONFIRMATION);
+			errorPopUp.setContentText("Button Click Works!");
+			errorPopUp.showAndWait();
+		}));
+	}
+
+	private void setUpWishListHBox() {
+		this.wishlistHBox.setOnMouseClicked(((event) -> {
+			var errorPopUp = new Alert(AlertType.CONFIRMATION);
+			errorPopUp.setContentText("Button Click Works!");
+			errorPopUp.showAndWait();
+		}));
+	}
+
+	private void setUpEditPreferencesHBox() {
+		this.editPreferencesHBox.setOnMouseClicked(((event) -> {
+			var errorPopUp = new Alert(AlertType.CONFIRMATION);
+			errorPopUp.setContentText("Button Click Works!");
+			errorPopUp.showAndWait();
+		}));
+	}
+
+	private void setUpEditProfileHBox() {
+		this.editProfileHBox.setOnMouseClicked(((event) -> {
+			var errorPopUp = new Alert(AlertType.CONFIRMATION);
+			errorPopUp.setContentText("Button Click Works!");
+			errorPopUp.showAndWait();
+		}));
 	}
 
 	public void openUserProfilePage(UserProfile user) {
@@ -91,8 +154,7 @@ public class UserProfilePage {
 			var loader = new FXMLLoader(getClass().getResource(Main.USER_PROFILE_WINDOW));
 			Parent parent = loader.load();
 			UserProfilePage controller = loader.getController();
-			controller.setActiveUser(user);
-			controller.profileUsername.setText(controller.getActiveUser().getUsername());
+			this.configurePage(user, controller);
 			var scene = new Scene(parent);
 			newStage.initModality(Modality.WINDOW_MODAL);
 			newStage.initOwner(((Stage) (parent.getScene().getWindow())));
@@ -104,6 +166,15 @@ public class UserProfilePage {
 		}
 	}
 
+	private void configurePage(UserProfile user, UserProfilePage controller) {
+		this.setUsernameDisplay(user, controller);
+	}
+
+	private void setUsernameDisplay(UserProfile user, UserProfilePage controller) {
+		controller.setActiveUser(user);
+		controller.profileUsername.setText(controller.getActiveUser().getUsername());
+	}
+
 	private void validiateFXMLComponents() {
 		this.validateSomeComponents();
 		this.validateOtherComponents();
@@ -112,8 +183,6 @@ public class UserProfilePage {
 	private void validateOtherComponents() {
 		assert this.profileImageSideBar != null
 				: "fx:id=\"profileImageSideBar\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
-		assert this.profileTextNavBar != null
-				: "fx:id=\"profileTextNavBar\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 		assert this.profileUsername != null
 				: "fx:id=\"profileUsername\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 		assert this.settingsHbox != null
@@ -131,19 +200,15 @@ public class UserProfilePage {
 				: "fx:id=\"editPreferencesHBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 		assert this.editProfileHBox != null
 				: "fx:id=\"editProfileHBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
-		assert this.libraryHBox != null
+		assert this.libraryNavBarHBox != null
 				: "fx:id=\"libraryHBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
-		assert this.libraryTextNavBar != null
-				: "fx:id=\"libraryTextNavBar\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 		assert this.mystTextNavbar != null
 				: "fx:id=\"mystTextNavbar\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
-		assert this.mystiverseHBox != null
+		assert this.mystiverseNavBarHBox != null
 				: "fx:id=\"mystiverseHBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
-		assert this.mystiverseNavBar != null
-				: "fx:id=\"mystiverseNavBar\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 		assert this.navigationAchorPane != null
 				: "fx:id=\"navigationAchorPane\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
-		assert this.profileHBox != null
+		assert this.profileNavBarHBox != null
 				: "fx:id=\"profileHBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 		assert this.profileImageNavBar != null
 				: "fx:id=\"profileImageNavBar\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
