@@ -11,6 +11,7 @@ public class Main extends Application {
 	public static final String LOGIN_WINDOW = "view/login/LoginPage.fxml";
 	public static final String CREATE_ACCOUNT_WINDOW = "../login/CreateAccountPage.fxml";
 	public static final String USER_PROFILE_WINDOW = "../profile/UserProfilePage.fxml";
+	public static final String PROFILE_ANCHOR = "../profile/subProfilePages/ProfileAnchor.fxml";
 
 	@Override
 	public void start(Stage primaryStage) {

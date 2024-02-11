@@ -1,7 +1,6 @@
 package application.view.profile;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.Main;
@@ -14,11 +13,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import java.net.URL;
 
 public class UserProfilePage {
 
@@ -27,6 +28,12 @@ public class UserProfilePage {
 
 	@FXML
 	private URL location;
+
+	@FXML
+	private BorderPane parentBorderPane;
+
+	@FXML
+	private AnchorPane baseAnchorPane;
 
 	@FXML
 	private HBox editPreferencesHBox;
@@ -142,12 +149,20 @@ public class UserProfilePage {
 
 	private void setUpEditProfileHBox() {
 		this.editProfileHBox.setOnMouseClicked(((event) -> {
-			var errorPopUp = new Alert(AlertType.CONFIRMATION);
-			errorPopUp.setContentText("Button Click Works!");
-			errorPopUp.showAndWait();
+
+			BorderPane parentContainer = this.parentBorderPane;
+			AnchorPane currentAnchor = (AnchorPane) this.parentBorderPane.getCenter();
+			parentContainer.setCenter(this.baseAnchorPane);
+			parentContainer.getChildren().remove(currentAnchor);
+
 		}));
 	}
 
+	/**
+	 * Open user profile page.
+	 *
+	 * @param user the user
+	 */
 	public void openUserProfilePage(UserProfile user) {
 		var newStage = new Stage();
 		try {
@@ -167,7 +182,21 @@ public class UserProfilePage {
 	}
 
 	private void configurePage(UserProfile user, UserProfilePage controller) {
+		this.setProfilePane(controller);
 		this.setUsernameDisplay(user, controller);
+	}
+
+	private void setProfilePane(UserProfilePage controller) {
+		try {
+			BorderPane parentContainer = controller.parentBorderPane;
+			AnchorPane newAnchor = FXMLLoader.load(getClass().getResource(Main.PROFILE_ANCHOR));
+
+			parentContainer.setCenter(newAnchor);
+			parentContainer.getChildren().remove(controller.baseAnchorPane);
+
+		} catch (IOException error) {
+			error.printStackTrace();
+		}
 	}
 
 	private void setUsernameDisplay(UserProfile user, UserProfilePage controller) {
@@ -193,6 +222,9 @@ public class UserProfilePage {
 				: "fx:id=\"vSideBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 		assert this.wishlistHBox != null
 				: "fx:id=\"wishlistHBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
+		assert this.parentBorderPane != null
+				: "fx:id=\"parentBorderPane\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
+
 	}
 
 	private void validateSomeComponents() {

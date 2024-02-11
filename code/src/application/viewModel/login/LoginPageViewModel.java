@@ -67,6 +67,11 @@ public class LoginPageViewModel {
 	}
 
 
+	/**
+	 * Generate user.
+	 *
+	 * @return the user profile
+	 */
 	public UserProfile generateUser() {
 		var user = new UserProfile(this.usernameProperty.getValue(), this.passwordProperty.getValue());
 		return user;
