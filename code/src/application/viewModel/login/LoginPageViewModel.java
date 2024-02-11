@@ -1,5 +1,6 @@
 package application.viewModel.login;
 
+import application.model.profile.UserProfile;
 import application.model.profile.credentials.CredentialManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -63,6 +64,12 @@ public class LoginPageViewModel {
 	 */
 	public StringProperty getPasswordProperty() {
 		return this.passwordProperty;
+	}
+
+
+	public UserProfile generateUser() {
+		var user = new UserProfile(this.usernameProperty.getValue(), this.passwordProperty.getValue());
+		return user;
 	}
 
 }
