@@ -31,8 +31,8 @@ public class CreatePageViewModel {
 	 * @return true, if successful
 	 */
 	public boolean attemptCreateNewAccount() {
-		var username = this.userNameProperty.getValue();
-		var password = this.passwordProperty.getValue();
+		var username = this.userNameProperty.getValue().trim();
+		var password = this.passwordProperty.getValue().trim();
 		
 		try {
 			this.credentialManger.addCredential(username, password);

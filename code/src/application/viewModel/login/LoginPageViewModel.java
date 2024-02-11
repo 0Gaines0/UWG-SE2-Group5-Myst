@@ -31,8 +31,8 @@ public class LoginPageViewModel {
 	 */
 	public boolean userLoginIsSuccessful() {
 		this.credentialManager.setUpUserCredentials();
-		var username = this.usernameProperty.getValue();
-		var password = this.passwordProperty.getValue();
+		var username = this.usernameProperty.getValue().trim();
+		var password = this.passwordProperty.getValue().trim();
 		if (this.credentialManager.userNameExist(username)) {
 			var credential = this.credentialManager.getSpecifiedCredential(username);
 			if (credential.getPassword().equals(password)) {
