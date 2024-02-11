@@ -1,0 +1,13 @@
+.button {
+	-fx-background-color: #242551;
+}
+
+.select-border {
+    -fx-border-color: #FFF;
+    -fx-border-width: 0 3 0 0;
+}
+
+
+.selected:hover {
+	-fx-background-color: #446662;
+}
