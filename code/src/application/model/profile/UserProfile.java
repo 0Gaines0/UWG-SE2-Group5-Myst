@@ -21,6 +21,8 @@ public class UserProfile {
 	private String username;
 	private String password;
 	
+	private ProfileAttributes profileAttributes;
+	
 	private static final String USERNAME_MUST_NOT_BE_NULL_OR_EMPTY = "username must not be null or empty";
 	private static final String PASSWORD_MUST_NOT_BE_NULL_OR_EMPTY = "password must not be null or empty";
 	private static final String INPUT_LIST_MUST_NOT_BE_NULL = "inputted game list must not be null";
@@ -29,6 +31,7 @@ public class UserProfile {
 	 * Instantiates a new user profile.
 	 */
 	public UserProfile() {
+		this.profileAttributes = new ProfileAttributes();
 		this.setUpUserGameData();
 	}
 	
@@ -190,5 +193,14 @@ public class UserProfile {
 			throw new IllegalArgumentException("preferredGenres cannot be null");
 		}
 		this.preferredGenres = preferredGenres;
+	}
+
+	/**
+	 * Gets the profile attributes.
+	 *
+	 * @return the profile attributes
+	 */
+	public ProfileAttributes getProfileAttributes() {
+		return this.profileAttributes;
 	}
 }

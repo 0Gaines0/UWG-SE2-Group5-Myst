@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import application.Main;
 import application.model.profile.UserProfile;
+import application.view.profile.subProfilePages.EditProfileAnchor;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,9 +31,6 @@ public class UserProfilePage {
 	private URL location;
 
 	@FXML
-	private BorderPane parentBorderPane;
-
-	@FXML
 	private AnchorPane baseAnchorPane;
 
 	@FXML
@@ -54,6 +52,9 @@ public class UserProfilePage {
 	private AnchorPane navigationAchorPane;
 
 	@FXML
+	private BorderPane parentBorderPane;
+
+	@FXML
 	private ImageView profileImageNavBar;
 
 	@FXML
@@ -64,6 +65,9 @@ public class UserProfilePage {
 
 	@FXML
 	private Text profileUsername;
+
+	@FXML
+	private HBox profileUsernameHBox;
 
 	@FXML
 	private HBox settingsHbox;
@@ -77,7 +81,16 @@ public class UserProfilePage {
 	@FXML
 	private HBox wishlistHBox;
 
+	private EditProfileAnchor editProfileCodeBehind;
+
 	private UserProfile activeUser;
+
+	/**
+	 * Instantiates a new user profile page.
+	 */
+	public UserProfilePage() {
+		this.editProfileCodeBehind = new EditProfileAnchor();
+	}
 
 	@FXML
 	void initialize() {
@@ -86,10 +99,37 @@ public class UserProfilePage {
 		this.setUpSideBarButtons();
 	}
 
+	private void setUpSideBarButtons() {
+		this.setUpUserNameHBox();
+		this.setUpEditProfileHBox();
+		this.setUpEditPreferencesHBox();
+		this.setUpWishListHBox();
+		this.setUpSettingsHBox();
+	}
+
 	private void setUpNavBar() {
 		this.setUpLibraryNavBarHBox();
 		this.setUpMystiverseNavBarHbox();
 		this.setUpProfileNavBarHBox();
+	}
+
+	private void setUpUserNameHBox() {
+		this.profileUsernameHBox.setOnMouseClicked(((event) -> {
+			try {
+				this.changeAnchorPane(Main.PROFILE_ANCHOR);
+			} catch (IOException error) {
+				error.getMessage();
+			}
+		}));
+	}
+
+	private void changeAnchorPane(String anchor) throws IOException {
+		BorderPane parentContainer = this.parentBorderPane;
+		AnchorPane newAnchor = FXMLLoader.load(getClass().getResource(anchor));
+		AnchorPane currentAnchor = (AnchorPane) this.parentBorderPane.getCenter();
+
+		parentContainer.setCenter(newAnchor);
+		parentContainer.getChildren().remove(currentAnchor);
 	}
 
 	private void setUpProfileNavBarHBox() {
@@ -114,13 +154,6 @@ public class UserProfilePage {
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
 		}));
-	}
-
-	private void setUpSideBarButtons() {
-		this.setUpEditProfileHBox();
-		this.setUpEditPreferencesHBox();
-		this.setUpWishListHBox();
-		this.setUpSettingsHBox();
 	}
 
 	private void setUpSettingsHBox() {
@@ -149,12 +182,7 @@ public class UserProfilePage {
 
 	private void setUpEditProfileHBox() {
 		this.editProfileHBox.setOnMouseClicked(((event) -> {
-
-			BorderPane parentContainer = this.parentBorderPane;
-			AnchorPane currentAnchor = (AnchorPane) this.parentBorderPane.getCenter();
-			parentContainer.setCenter(this.baseAnchorPane);
-			parentContainer.getChildren().remove(currentAnchor);
-
+			this.editProfileCodeBehind.openAnchorPane(this.activeUser, this.parentBorderPane, Main.EDIT_PROFILE_ANCHOR);
 		}));
 	}
 
@@ -224,7 +252,8 @@ public class UserProfilePage {
 				: "fx:id=\"wishlistHBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 		assert this.parentBorderPane != null
 				: "fx:id=\"parentBorderPane\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
-
+		assert this.profileUsernameHBox != null
+				: "fx:id=\"profileUsernameHBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 	}
 
 	private void validateSomeComponents() {

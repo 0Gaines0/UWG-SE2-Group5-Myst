@@ -4,9 +4,9 @@ import javax.swing.ImageIcon;
 
 import application.model.game.Game;
 
-
 /**
  * The Class ProfileAttributes.
+ * 
  * @author Jeffrey Gaines
  * @version Sprint 1
  */
@@ -16,7 +16,10 @@ public class ProfileAttributes {
 	private ImageIcon userProfilePicture;
 	private int totalLikedGames;
 	private int totalDislikedGame;
-	
+
+	private static final String DESCRIPTION_MUST_BE_VALID = "description inputted must not be null or empty";
+	private static final String IMAGE_PATH_MUST_BE_VALID = "image path inputted must bot be null or empty";
+
 	/**
 	 * Instantiates a new profile attributes.
 	 */
@@ -26,19 +29,58 @@ public class ProfileAttributes {
 		this.totalLikedGames = 0;
 		this.totalDislikedGame = 0;
 	}
-	
+
 	/**
 	 * Instantiates a new profile attributes.
 	 *
-	 * @param description the description
-	 * @param imagePath the image path
-	 * @param likedGames the liked games
+	 * @param description   the description
+	 * @param imagePath     the image path
+	 * @param likedGames    the liked games
 	 * @param dislikedGames the disliked games
 	 */
 	public ProfileAttributes(String description, String imagePath, int likedGames, int dislikedGames) {
+		if (description == null) {
+			throw new NullPointerException(DESCRIPTION_MUST_BE_VALID);
+		} else if (description.isBlank()) {
+			throw new IllegalArgumentException(DESCRIPTION_MUST_BE_VALID);
+		} else if (imagePath == null) {
+			throw new NullPointerException(IMAGE_PATH_MUST_BE_VALID);
+		} else if (imagePath.isBlank()) {
+			throw new IllegalArgumentException(IMAGE_PATH_MUST_BE_VALID);
+		}
 		this.aboutMeDescription = description;
 		this.userProfilePicture = new ImageIcon(imagePath);
-		
+		this.totalLikedGames = likedGames;
+		this.totalDislikedGame = dislikedGames;
+
+	}
+
+	/**
+	 * Sets the profile image.
+	 *
+	 * @param imagePath the new profile image
+	 */
+	public void setProfileImage(String imagePath) {
+		if (imagePath == null) {
+			throw new NullPointerException(IMAGE_PATH_MUST_BE_VALID);
+		} else if (imagePath.isBlank()) {
+			throw new IllegalArgumentException(IMAGE_PATH_MUST_BE_VALID);
+		}
+		this.userProfilePicture = new ImageIcon(imagePath);
+	}
+
+	/**
+	 * Increase liked game count.
+	 */
+	public void increaseLikedGameCount() {
+		this.totalLikedGames++;
+	}
+
+	/**
+	 * Increase disliked game count.
+	 */
+	public void increaseDislikedGameCount() {
+		this.totalDislikedGame++;
 	}
 
 	/**
@@ -130,6 +172,5 @@ public class ProfileAttributes {
 	public void setTotalDislikedGame(int totalDislikedGame) {
 		this.totalDislikedGame = totalDislikedGame;
 	}
-	
 
 }
