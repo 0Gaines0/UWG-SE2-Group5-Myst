@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import application.model.game.Game;
+import application.model.game.Genre;
 
 /**
  * The Class UserProfile.
+ * 
  * @author Jeffrey Gaines
  * @version Sprint 1
  */
@@ -14,9 +16,12 @@ public class UserProfile {
 	private List<Game> allOwnedGames;
 	private List<Game> allLikedGames;
 	private List<Game> allDislikedGames;
-	
+	private List<Genre> preferredGenres;
+
 	private String username;
 	private String password;
+	
+	private ProfileAttributes profileAttributes;
 	
 	private static final String USERNAME_MUST_NOT_BE_NULL_OR_EMPTY = "username must not be null or empty";
 	private static final String PASSWORD_MUST_NOT_BE_NULL_OR_EMPTY = "password must not be null or empty";
@@ -26,6 +31,7 @@ public class UserProfile {
 	 * Instantiates a new user profile.
 	 */
 	public UserProfile() {
+		this.profileAttributes = new ProfileAttributes();
 		this.setUpUserGameData();
 	}
 	
@@ -55,6 +61,7 @@ public class UserProfile {
 		this.allOwnedGames = new ArrayList<Game>();
 		this.allLikedGames = new ArrayList<Game>();
 		this.allDislikedGames = new ArrayList<Game>();
+		this.preferredGenres = new ArrayList<Genre>();
 	}
 
 	/**
@@ -164,5 +171,36 @@ public class UserProfile {
 			throw new IllegalArgumentException(PASSWORD_MUST_NOT_BE_NULL_OR_EMPTY);
 		}
 		this.password = password;
+	}
+	
+	/**
+	 * gets the preferred genres
+	 * 
+	 * @return the preferredGenres
+	 */
+	public List<Genre> getPreferredGenres() {
+		return this.preferredGenres;
+	}
+
+	
+	/**
+	 * Sets the preferred genres.
+	 *
+	 * @param preferredGenres the new preferred genres
+	 */
+	public void setPreferredGenres(List<Genre> preferredGenres) {
+		if (preferredGenres == null) {
+			throw new IllegalArgumentException("preferredGenres cannot be null");
+		}
+		this.preferredGenres = preferredGenres;
+	}
+
+	/**
+	 * Gets the profile attributes.
+	 *
+	 * @return the profile attributes
+	 */
+	public ProfileAttributes getProfileAttributes() {
+		return this.profileAttributes;
 	}
 }

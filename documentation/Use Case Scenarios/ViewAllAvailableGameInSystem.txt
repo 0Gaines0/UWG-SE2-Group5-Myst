@@ -1,0 +1,7 @@
+Context - User is logged into system
+
+Primary Flow
+1 - User navigates to recommendation page
+2 - User is presented with a list of recommended games based on their preferences
+3 - User locates and clicks on option to view all available games in system
+4 - System retrieves and displays list of all games avaiable in system

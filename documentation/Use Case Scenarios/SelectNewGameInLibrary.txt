@@ -1,0 +1,17 @@
+Context - User is logged into system, User is on game library page, Game is available on system database
+
+Primary Flow
+1 - User navigates to their game library section
+2 - User locates and clicks on the "Add New Game" button
+3 - System prompts user to enter the title or search the new game to add
+4 - User inputs title or keywords for newly purchased game
+5 - System performs search query based on user inputs
+6 - User selects correct game from the system results
+7 - System adds selected game to their User game library
+8 - System notifies game has been successfully added to library
+
+Alternate Flow(s)
+NO SEARCH RESULTS
+a1 - System search query returns no results
+a2 - System displays message, indicating no matching games were found
+return to step 4
