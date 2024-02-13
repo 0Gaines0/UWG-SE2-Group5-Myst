@@ -3,6 +3,11 @@ package application.model.profile.credentials;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * The Class Credential.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class Credential implements Serializable  {
 	private static final long serialVersionUID = 1L;
 	private String username;

@@ -249,5 +249,13 @@ public class TestUserProfile {
 
 		assertEquals(preferredGenres, this.userProfile.getPreferredGenres());
 	}
+	
+	/**
+	 * Test profile attributes.
+	 */
+	@Test
+	public void testProfileAttributes() {
+		assertNotNull(this.userProfile.getProfileAttributes());
+	}
 
 }
