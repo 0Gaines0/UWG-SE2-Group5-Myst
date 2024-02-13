@@ -1,0 +1,39 @@
+.button {
+	-fx-background-color: #242551;
+}
+
+.select-border {
+    -fx-border-color: #FFF;
+    -fx-border-width: 0.0 3.0 0.0 0.0;
+}
+
+
+.selected:hover {
+	-fx-background-color: #446662;
+}
+
+.root {
+	-jewelsea-lined-notepad:
+	linear-gradient(
+		from 0px 0px to 0px 20px,
+		repeat,
+		gainsboro,
+		gainsboro 6.25%,
+		#000000 6.25%,
+		#000000
+	);
+}
+
+.text-area {
+	-fx-font-family: "Gotham";
+	-fx-text-fill: #FFF;
+	-fx-font-size: 13.0px
+}
+
+.text-area .text {
+	-fx-line-spacing: 1px;
+}
+
+.text-area .content {
+	-fx-background-color: -jewelsea-lined-notepad;
+}

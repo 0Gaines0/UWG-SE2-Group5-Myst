@@ -1,9 +1,15 @@
-package application.viewModel;
+package application.viewModel.login;
 
+import application.model.profile.UserProfile;
 import application.model.profile.credentials.CredentialManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * The Class LoginPageViewModel.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class LoginPageViewModel {
 	private StringProperty usernameProperty;
 	private StringProperty passwordProperty;
@@ -25,8 +31,9 @@ public class LoginPageViewModel {
 	 * @return true, if successful
 	 */
 	public boolean userLoginIsSuccessful() {
-		var username = this.usernameProperty.getValue();
-		var password = this.passwordProperty.getValue();
+		this.credentialManager.setUpUserCredentials();
+		var username = this.usernameProperty.getValue().trim();
+		var password = this.passwordProperty.getValue().trim();
 		if (this.credentialManager.userNameExist(username)) {
 			var credential = this.credentialManager.getSpecifiedCredential(username);
 			if (credential.getPassword().equals(password)) {
@@ -57,6 +64,17 @@ public class LoginPageViewModel {
 	 */
 	public StringProperty getPasswordProperty() {
 		return this.passwordProperty;
+	}
+
+
+	/**
+	 * Generate user.
+	 *
+	 * @return the user profile
+	 */
+	public UserProfile generateUser() {
+		var user = new UserProfile(this.usernameProperty.getValue(), this.passwordProperty.getValue());
+		return user;
 	}
 
 }

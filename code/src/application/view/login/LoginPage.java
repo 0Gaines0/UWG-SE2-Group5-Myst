@@ -3,7 +3,8 @@ package application.view.login;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import application.viewModel.LoginPageViewModel;
+import application.view.profile.UserProfilePage;
+import application.viewModel.login.LoginPageViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -12,7 +13,13 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
+/**
+ * The Class LoginPage.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class LoginPage {
 
 	@FXML
@@ -38,6 +45,7 @@ public class LoginPage {
 
 	private LoginPageViewModel loginPageViewModel;
 	private CreateAccountPage createAccountCodeBehind;
+	private UserProfilePage userProfileCodeBehind;
 
 	/**
 	 * Instantiates a new login page.
@@ -45,6 +53,7 @@ public class LoginPage {
 	public LoginPage() {
 		this.loginPageViewModel = new LoginPageViewModel();
 		this.createAccountCodeBehind = new CreateAccountPage();
+		this.userProfileCodeBehind = new UserProfilePage();
 	}
 
 	@FXML
@@ -63,18 +72,37 @@ public class LoginPage {
 
 	private void setUpLoginButton() {
 		this.loginButton.setOnAction(((event) -> {
-			var loginResult = this.loginPageViewModel.userLoginIsSuccessful();
-			if (loginResult) {
-				var successPopUp = new Alert(AlertType.CONFIRMATION);
-				successPopUp.setContentText("Login was successful");
-				successPopUp.showAndWait();
-			} else {
+			if (this.loginFieldsAreNull()) {
 				var errorPopUp = new Alert(AlertType.ERROR);
-				errorPopUp.setContentText("Login failed, incorrect username or password");
+				errorPopUp.setContentText("Login failed, valid username or password");
 				errorPopUp.showAndWait();
+			} else {
+				var loginResult = this.loginPageViewModel.userLoginIsSuccessful();
+				if (loginResult) {
+					this.closeWindow();
+					var user = this.loginPageViewModel.generateUser();
+					this.userProfileCodeBehind.openUserProfilePage(user);
+					
+				} else {
+					var errorPopUp = new Alert(AlertType.ERROR);
+					errorPopUp.setContentText("Login failed, incorrect username or password");
+					errorPopUp.showAndWait();
+				}
 			}
+			
 		}));
 
+	}
+
+	private void closeWindow() {
+		var stage = (Stage) this.borderPane.getScene().getWindow();
+		stage.close();
+	}
+
+	private boolean loginFieldsAreNull() {
+		var user = this.userNameTextField.textProperty().getValue() == null;
+		var password = this.passwordTextField.textProperty().getValue() == null;
+		return user || password;
 	}
 
 	private void bindToViewModel() {
