@@ -17,9 +17,10 @@ public class UserGameLibrary {
 	
 	/**
 	 * Instantiates a new UserGameLibrary.
+	 *
+	 * @param user the user
 	 */
 	public UserGameLibrary(UserProfile user) {
-		
 		this.user = user;
 		this.library = user.getAllOwnedGames();
 	}
