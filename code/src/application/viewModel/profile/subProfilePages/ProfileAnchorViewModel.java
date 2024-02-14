@@ -12,6 +12,7 @@ public class ProfileAnchorViewModel {
 	private StringProperty titleFavoriteGameProperty;
 	private StringProperty genresFavoriteGameProperty;
 	
+	
 	/**
 	 * Instantiates a new profile anchor view model.
 	 */
@@ -28,6 +29,16 @@ public class ProfileAnchorViewModel {
 	 */
 	public void setUpAboutMeDescription() {
 		this.aboutMeProperty.setValue(ActiveUser.getActiveUser().getProfileAttributes().getAboutMeDescription());
+	}
+	
+	/**
+	 * Sets the up game liked and dislike counters.
+	 */
+	public void setUpGameLikedAndDislikeCounters() {
+		var likedGames = String.valueOf(ActiveUser.getActiveUser().getProfileAttributes().getTotalLikedGames());
+		var dislikedGames = String.valueOf(ActiveUser.getActiveUser().getProfileAttributes().getTotalDislikedGame());
+		this.likedGamesProperty.setValue(likedGames);
+		this.dislikedGamesProperty.setValue(dislikedGames);
 	}
 
 	/**

@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import application.model.game.Game;
 import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
+import application.viewModel.profile.subProfilePages.EditProfileAnchorViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -52,18 +53,28 @@ public class EditProfileAnchor {
 	@FXML
 	private ComboBox<Game> selectAGameComboBox;
 
+	private EditProfileAnchorViewModel editProfileAnchorViewModel;
 	/**
 	 * Instantiates a new edits the profile anchor.
 	 */
 	public EditProfileAnchor() {
-
+		this.editProfileAnchorViewModel = new EditProfileAnchorViewModel();
 	}
 
 	@FXML
 	void initialize() {
 		this.validateFXMLComponents();
-		this.setUpAboutMeTextArea();
+		this.bindToViewModel();
+		this.configurePage();
 		this.setUpSaveButton();
+	}
+
+	private void configurePage() {
+		this.editProfileAnchorViewModel.setAboutMeTextArea();
+	}
+
+	private void bindToViewModel() {
+		this.aboutMeTextArea.textProperty().bindBidirectional(this.editProfileAnchorViewModel.getAboutMeProperty());		
 	}
 
 	/**
@@ -87,13 +98,8 @@ public class EditProfileAnchor {
 
 	private void setUpSaveButton() {
 		this.saveEditAboutMeButton.setOnAction(((event) -> {
-			
+			this.editProfileAnchorViewModel.setActiveUserAboutMe();
 		}));
-	}
-
-	private void setUpAboutMeTextArea() {
-		this.aboutMeTextArea.setText(ActiveUser.getActiveUser().getProfileAttributes().getAboutMeDescription());
-
 	}
 
 	private void validateFXMLComponents() {

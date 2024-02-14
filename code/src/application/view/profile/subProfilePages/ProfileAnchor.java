@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
 import application.viewModel.profile.subProfilePages.ProfileAnchorViewModel;
 import javafx.fxml.FXML;
@@ -56,6 +55,7 @@ public class ProfileAnchor {
         this.validateFXMLComponets();
         this.bindToViewModel();
         this.profileAnchorViewModel.setUpAboutMeDescription();
+        this.profileAnchorViewModel.setUpGameLikedAndDislikeCounters();
 
     }
     
