@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="624.0" prefWidth="877.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ListView layoutX="14.0" layoutY="80.0" prefHeight="533.0" prefWidth="213.0" />
+      <TextArea layoutX="239.0" layoutY="80.0" prefHeight="398.0" prefWidth="626.0" />
+      <TextArea layoutX="239.0" layoutY="490.0" prefHeight="123.0" prefWidth="626.0" />
+      <Label layoutX="22.0" layoutY="22.0" text="Myst">
+         <font>
+            <Font name="Comic Sans MS" size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
