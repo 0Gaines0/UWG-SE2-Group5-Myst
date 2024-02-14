@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 
 import application.Main;
+import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
 import application.view.profile.subProfilePages.EditProfileAnchor;
+import application.view.profile.subProfilePages.ProfileAnchor;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -82,6 +84,7 @@ public class UserProfilePage {
 	private HBox wishlistHBox;
 
 	private EditProfileAnchor editProfileCodeBehind;
+	private ProfileAnchor profileAnchorCodeBehind;
 
 	private UserProfile activeUser;
 
@@ -90,6 +93,7 @@ public class UserProfilePage {
 	 */
 	public UserProfilePage() {
 		this.editProfileCodeBehind = new EditProfileAnchor();
+		this.profileAnchorCodeBehind = new ProfileAnchor();
 	}
 
 	@FXML
@@ -97,6 +101,7 @@ public class UserProfilePage {
 		this.validiateFXMLComponents();
 		this.setUpNavBar();
 		this.setUpSideBarButtons();
+		this.configurePage();
 	}
 
 	private void setUpSideBarButtons() {
@@ -115,21 +120,9 @@ public class UserProfilePage {
 
 	private void setUpUserNameHBox() {
 		this.profileUsernameHBox.setOnMouseClicked(((event) -> {
-			try {
-				this.changeAnchorPane(Main.PROFILE_ANCHOR);
-			} catch (IOException error) {
-				error.getMessage();
-			}
+			this.profileAnchorCodeBehind.openAnchorPane(this.activeUser, this.parentBorderPane,
+					Main.PROFILE_ANCHOR_PATH_TWO);
 		}));
-	}
-
-	private void changeAnchorPane(String anchor) throws IOException {
-		BorderPane parentContainer = this.parentBorderPane;
-		AnchorPane newAnchor = FXMLLoader.load(getClass().getResource(anchor));
-		AnchorPane currentAnchor = (AnchorPane) this.parentBorderPane.getCenter();
-
-		parentContainer.setCenter(newAnchor);
-		parentContainer.getChildren().remove(currentAnchor);
 	}
 
 	private void setUpProfileNavBarHBox() {
@@ -189,15 +182,12 @@ public class UserProfilePage {
 	/**
 	 * Open user profile page.
 	 *
-	 * @param user the user
 	 */
-	public void openUserProfilePage(UserProfile user) {
+	public void openUserProfilePage() {
 		var newStage = new Stage();
 		try {
 			var loader = new FXMLLoader(getClass().getResource(Main.USER_PROFILE_WINDOW));
 			Parent parent = loader.load();
-			UserProfilePage controller = loader.getController();
-			this.configurePage(user, controller);
 			var scene = new Scene(parent);
 			newStage.initModality(Modality.WINDOW_MODAL);
 			newStage.initOwner(((Stage) (parent.getScene().getWindow())));
@@ -209,28 +199,29 @@ public class UserProfilePage {
 		}
 	}
 
-	private void configurePage(UserProfile user, UserProfilePage controller) {
-		this.setProfilePane(controller);
-		this.setUsernameDisplay(user, controller);
+	private void configurePage() {
+		this.setProfilePane();
+		this.setUsernameLabel();
 	}
 
-	private void setProfilePane(UserProfilePage controller) {
-		try {
-			BorderPane parentContainer = controller.parentBorderPane;
-			AnchorPane newAnchor = FXMLLoader.load(getClass().getResource(Main.PROFILE_ANCHOR));
+	private void setUsernameLabel() {
+		this.profileUsername.setText(ActiveUser.getActiveUser().getUsername());
+		
+	}
 
+	private void setProfilePane() {
+		try {
+			BorderPane parentContainer = this.parentBorderPane;
+			var loader = new FXMLLoader(getClass().getResource(Main.PROFILE_ANCHOR_PATH_ONE));
+			AnchorPane newAnchor = loader.load();
 			parentContainer.setCenter(newAnchor);
-			parentContainer.getChildren().remove(controller.baseAnchorPane);
+			parentContainer.getChildren().remove(this.baseAnchorPane);
 
 		} catch (IOException error) {
 			error.printStackTrace();
 		}
 	}
 
-	private void setUsernameDisplay(UserProfile user, UserProfilePage controller) {
-		controller.setActiveUser(user);
-		controller.profileUsername.setText(controller.getActiveUser().getUsername());
-	}
 
 	private void validiateFXMLComponents() {
 		this.validateSomeComponents();

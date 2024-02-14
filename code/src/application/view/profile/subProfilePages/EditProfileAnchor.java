@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.model.game.Game;
+import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,11 +52,17 @@ public class EditProfileAnchor {
 	@FXML
 	private ComboBox<Game> selectAGameComboBox;
 
-	private UserProfile activeUser;
+	/**
+	 * Instantiates a new edits the profile anchor.
+	 */
+	public EditProfileAnchor() {
+
+	}
 
 	@FXML
 	void initialize() {
 		this.validateFXMLComponents();
+		this.setUpAboutMeTextArea();
 		this.setUpSaveButton();
 	}
 
@@ -70,10 +77,7 @@ public class EditProfileAnchor {
 		try {
 			AnchorPane currentAnchor = (AnchorPane) parent.getCenter();
 			var loader = new FXMLLoader(getClass().getResource(newAnchorPath));
-			
-			EditProfileAnchor contoller = loader.getController();
 			AnchorPane newAnchor = loader.load();
-			
 			parent.setCenter(newAnchor);
 			parent.getChildren().remove(currentAnchor);
 		} catch (IOException error) {
@@ -83,8 +87,13 @@ public class EditProfileAnchor {
 
 	private void setUpSaveButton() {
 		this.saveEditAboutMeButton.setOnAction(((event) -> {
-			var description = this.aboutMeTextArea.getText();
+			
 		}));
+	}
+
+	private void setUpAboutMeTextArea() {
+		this.aboutMeTextArea.setText(ActiveUser.getActiveUser().getProfileAttributes().getAboutMeDescription());
+
 	}
 
 	private void validateFXMLComponents() {
@@ -106,24 +115,6 @@ public class EditProfileAnchor {
 				: "fx:id=\"saveEditAboutMeButton\" was not injected: check your FXML file 'EditProfileAnchor.fxml'.";
 		assert this.selectAGameComboBox != null
 				: "fx:id=\"selectAGameComboBox\" was not injected: check your FXML file 'EditProfileAnchor.fxml'.";
-	}
-
-	/**
-	 * Gets the active user.
-	 *
-	 * @return the active user
-	 */
-	public UserProfile getActiveUser() {
-		return this.activeUser;
-	}
-
-	/**
-	 * Sets the active user.
-	 *
-	 * @param activeUser the new active user
-	 */
-	public void setActiveUser(UserProfile activeUser) {
-		this.activeUser = activeUser;
 	}
 
 }
