@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javax.imageio.ImageIO;
-
-
 import application.model.game.Game;
 import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
@@ -96,6 +93,9 @@ public class EditProfileAnchor {
 
 	private void configurePage() {
 		this.editProfileAnchorViewModel.setAboutMeTextArea();
+		if (!ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath().equals("")) {
+			this.updateCurrentImage();
+		}
 	}
 
 	private void bindToViewModel() {
