@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.model.game.Game;
-import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
 import application.viewModel.profile.subProfilePages.EditProfileAnchorViewModel;
 import javafx.fxml.FXML;

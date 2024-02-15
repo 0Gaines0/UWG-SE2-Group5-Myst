@@ -1,11 +1,13 @@
 package application.test.viewModel.login;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import application.model.profile.ActiveUser;
 import application.viewModel.login.LoginPageViewModel;
 
 public class TestLoginPageViewModel {
@@ -50,5 +52,16 @@ public class TestLoginPageViewModel {
 	public void testUserLoginWithNonexistentUsername() {
 		this.loginPageViewModel.getUsernameProperty().set("nonexistentUser");
 		assertFalse(this.loginPageViewModel.userLoginIsSuccessful());
+	}
+	
+	/**
+	 * Test generate user.
+	 */
+	@Test
+	public void testGenerateUser() {
+		this.loginPageViewModel.generateUser();
+		
+		assertNotNull(ActiveUser.getActiveUser());
+		ActiveUser.setActiveUser(null);
 	}
 }
