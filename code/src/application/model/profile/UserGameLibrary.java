@@ -15,8 +15,11 @@ public class UserGameLibrary {
 	private UserProfile user;
 	private List<Game> library;
 	
+	
 	/**
-	 * Instantiates a new UserGameLibrary.
+	 * Instantiates a new user game library.
+	 *
+	 * @param user the user
 	 */
 	public UserGameLibrary(UserProfile user) {
 		

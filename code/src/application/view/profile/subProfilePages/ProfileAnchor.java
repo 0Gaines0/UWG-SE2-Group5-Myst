@@ -1,12 +1,18 @@
 package application.view.profile.subProfilePages;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import application.model.profile.UserProfile;
+import application.viewModel.profile.subProfilePages.ProfileAnchorViewModel;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextArea;
 
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
 public class ProfileAnchor {
@@ -34,11 +40,52 @@ public class ProfileAnchor {
 
     @FXML
     private TextField titleFavoriteGameTextField;
-
+    
+    private ProfileAnchorViewModel profileAnchorViewModel;
+    
+    /**
+     * Instantiates a new profile anchor.
+     */
+    public ProfileAnchor() {
+    	this.profileAnchorViewModel = new ProfileAnchorViewModel();
+    }
+    
     @FXML
     void initialize() {
         this.validateFXMLComponets();
+        this.bindToViewModel();
+        this.profileAnchorViewModel.setUpAboutMeDescription();
+        this.profileAnchorViewModel.setUpGameLikedAndDislikeCounters();
 
+    }
+    
+    private void bindToViewModel() {
+		this.aboutMeTextArea.textProperty().bindBidirectional(this.profileAnchorViewModel.getAboutMeProperty());
+		this.likedGamesTextField.textProperty().bindBidirectional(this.profileAnchorViewModel.getLikedGamesProperty());
+		this.dislikedGamesTextField.textProperty().bindBidirectional(this.profileAnchorViewModel.getDislikedGamesProperty());		
+	}
+	
+    
+    
+	/**
+     * Open anchor pane.
+     *
+     * @param activeUser the active user
+     * @param parent the parent
+     * @param newAnchorPath the new anchor path
+     */
+    public void openAnchorPane(UserProfile activeUser, BorderPane parent, String newAnchorPath) {
+    	try {
+    		AnchorPane currentAnchor = (AnchorPane) parent.getCenter();
+    		var loader = new FXMLLoader(getClass().getResource(newAnchorPath));
+    		AnchorPane newAnchor = loader.load();
+    		
+    		parent.setCenter(newAnchor);
+    		parent.getChildren().remove(currentAnchor);
+    		
+    	} catch (IOException error) {
+    		
+    	}
     }
 
 	private void validateFXMLComponets() {

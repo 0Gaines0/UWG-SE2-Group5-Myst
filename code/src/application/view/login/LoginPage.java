@@ -80,8 +80,8 @@ public class LoginPage {
 				var loginResult = this.loginPageViewModel.userLoginIsSuccessful();
 				if (loginResult) {
 					this.closeWindow();
-					var user = this.loginPageViewModel.generateUser();
-					this.userProfileCodeBehind.openUserProfilePage(user);
+					this.loginPageViewModel.generateUser();
+					this.userProfileCodeBehind.openUserProfilePage();
 					
 				} else {
 					var errorPopUp = new Alert(AlertType.ERROR);
