@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.imageio.ImageIO;
+
+
 import application.model.game.Game;
 import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
@@ -14,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -42,7 +46,7 @@ public class EditProfileAnchor {
 	private TextField genreTitleTextField;
 
 	@FXML
-	private Button importAPhototButton;
+    private Button importAPhotoButton;
 
 	@FXML
 	private ImageView profileImageView;
@@ -67,6 +71,27 @@ public class EditProfileAnchor {
 		this.bindToViewModel();
 		this.configurePage();
 		this.setUpSaveButton();
+		this.setUpImportProfilePictureButton();
+		this.setUpSelectAnAvatarButton();
+	}
+
+	private void setUpImportProfilePictureButton() {
+		this.importAPhotoButton.setOnAction(((event) -> { 
+			this.editProfileAnchorViewModel.importAnImage();
+			this.updateCurrentImage();
+		}));
+	}
+	
+	private void updateCurrentImage() {
+		var imagePath = ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath();
+		Image userImage = new Image(imagePath);
+		this.profileImageView.setImage(userImage);
+	}
+
+	private void setUpSelectAnAvatarButton() {
+		this.chooseAnAvatarButton.setOnAction(((event) -> {
+		
+		}));
 	}
 
 	private void configurePage() {
@@ -74,7 +99,7 @@ public class EditProfileAnchor {
 	}
 
 	private void bindToViewModel() {
-		this.aboutMeTextArea.textProperty().bindBidirectional(this.editProfileAnchorViewModel.getAboutMeProperty());		
+		this.aboutMeTextArea.textProperty().bindBidirectional(this.editProfileAnchorViewModel.getAboutMeProperty());	
 	}
 
 	/**
@@ -113,7 +138,7 @@ public class EditProfileAnchor {
 				: "fx:id=\"gameTitleTextFIeld\" was not injected: check your FXML file 'EditProfileAnchor.fxml'.";
 		assert this.genreTitleTextField != null
 				: "fx:id=\"genreTitleTextField\" was not injected: check your FXML file 'EditProfileAnchor.fxml'.";
-		assert this.importAPhototButton != null
+		assert this.importAPhotoButton != null
 				: "fx:id=\"importAPhototButton\" was not injected: check your FXML file 'EditProfileAnchor.fxml'.";
 		assert this.profileImageView != null
 				: "fx:id=\"profileImageView\" was not injected: check your FXML file 'EditProfileAnchor.fxml'.";
