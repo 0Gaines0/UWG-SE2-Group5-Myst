@@ -1,21 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="624.0" prefWidth="877.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <ListView layoutX="14.0" layoutY="80.0" prefHeight="533.0" prefWidth="213.0" />
-      <TextArea layoutX="239.0" layoutY="80.0" prefHeight="398.0" prefWidth="626.0" />
-      <TextArea layoutX="239.0" layoutY="490.0" prefHeight="123.0" prefWidth="626.0" />
-      <Label layoutX="22.0" layoutY="22.0" text="Myst">
-         <font>
-            <Font name="Comic Sans MS" size="30.0" />
-         </font>
-      </Label>
-   </children>
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="727.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.UserGameLibraryPage.UserGameLibraryPage">
+   <top>
+      <AnchorPane prefHeight="72.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="14.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Myst">
+               <font>
+                  <Font name="Comic Sans MS" size="42.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="68.0" fitWidth="85.0" layoutX="514.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
+            <HBox fx:id="libraryHBox" layoutX="132.0" layoutY="25.0" prefHeight="40.0" prefWidth="85.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Library">
+                     <font>
+                        <Font name="Comic Sans MS" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox fx:id="mystiverseHBox" layoutX="242.0" layoutY="26.0" prefHeight="38.0" prefWidth="116.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mystiverse">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox fx:id="profileHBox" layoutX="393.0" layoutY="26.0" prefHeight="38.0" prefWidth="121.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Profile">
+                     <font>
+                        <Font name="Comic Sans MS" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <AnchorPane prefHeight="328.0" prefWidth="189.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="67.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Games">
+               <font>
+                  <Font name="Comic Sans MS" size="20.0" />
+               </font>
+            </Text>
+            <ListView fx:id="myGamesListView" layoutX="14.0" layoutY="48.0" prefHeight="593.0" prefWidth="200.0" />
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="402.0" prefWidth="388.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="144.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Info">
+               <font>
+                  <Font name="Comic Sans MS" size="20.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="gameInfoTextArea" layoutX="11.0" layoutY="48.0" prefHeight="357.0" prefWidth="364.0" />
+            <Text layoutX="143.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Community">
+               <font>
+                  <Font name="Comic Sans MS" size="20.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="communityTextArea" layoutX="14.0" layoutY="440.0" prefHeight="200.0" prefWidth="360.0" />
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>
