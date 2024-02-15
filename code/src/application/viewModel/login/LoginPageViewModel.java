@@ -1,5 +1,6 @@
 package application.viewModel.login;
 
+import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
 import application.model.profile.credentials.CredentialManager;
 import javafx.beans.property.SimpleStringProperty;
@@ -7,6 +8,7 @@ import javafx.beans.property.StringProperty;
 
 /**
  * The Class LoginPageViewModel.
+ * 
  * @author Jeffrey Gaines
  * @version Sprint 1
  */
@@ -14,7 +16,7 @@ public class LoginPageViewModel {
 	private StringProperty usernameProperty;
 	private StringProperty passwordProperty;
 	private CredentialManager credentialManager;
-	
+
 	/**
 	 * Instantiates a new login page view model.
 	 */
@@ -24,7 +26,6 @@ public class LoginPageViewModel {
 		this.credentialManager = new CredentialManager();
 	}
 
-	
 	/**
 	 * User login is successful.
 	 *
@@ -43,9 +44,7 @@ public class LoginPageViewModel {
 			return false;
 		}
 		return false;
-		
-		
-		
+
 	}
 
 	/**
@@ -66,15 +65,12 @@ public class LoginPageViewModel {
 		return this.passwordProperty;
 	}
 
-
 	/**
 	 * Generate user.
-	 *
-	 * @return the user profile
 	 */
-	public UserProfile generateUser() {
+	public void generateUser() {
 		var user = new UserProfile(this.usernameProperty.getValue(), this.passwordProperty.getValue());
-		return user;
+		ActiveUser.setActiveUser(user);
 	}
 
 }

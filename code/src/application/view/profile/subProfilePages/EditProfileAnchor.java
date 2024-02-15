@@ -5,7 +5,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.model.game.Game;
+import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
+import application.viewModel.profile.subProfilePages.EditProfileAnchorViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -51,12 +53,28 @@ public class EditProfileAnchor {
 	@FXML
 	private ComboBox<Game> selectAGameComboBox;
 
-	private UserProfile activeUser;
+	private EditProfileAnchorViewModel editProfileAnchorViewModel;
+	/**
+	 * Instantiates a new edits the profile anchor.
+	 */
+	public EditProfileAnchor() {
+		this.editProfileAnchorViewModel = new EditProfileAnchorViewModel();
+	}
 
 	@FXML
 	void initialize() {
 		this.validateFXMLComponents();
+		this.bindToViewModel();
+		this.configurePage();
 		this.setUpSaveButton();
+	}
+
+	private void configurePage() {
+		this.editProfileAnchorViewModel.setAboutMeTextArea();
+	}
+
+	private void bindToViewModel() {
+		this.aboutMeTextArea.textProperty().bindBidirectional(this.editProfileAnchorViewModel.getAboutMeProperty());		
 	}
 
 	/**
@@ -70,10 +88,7 @@ public class EditProfileAnchor {
 		try {
 			AnchorPane currentAnchor = (AnchorPane) parent.getCenter();
 			var loader = new FXMLLoader(getClass().getResource(newAnchorPath));
-			
-			EditProfileAnchor contoller = loader.getController();
 			AnchorPane newAnchor = loader.load();
-			
 			parent.setCenter(newAnchor);
 			parent.getChildren().remove(currentAnchor);
 		} catch (IOException error) {
@@ -83,7 +98,7 @@ public class EditProfileAnchor {
 
 	private void setUpSaveButton() {
 		this.saveEditAboutMeButton.setOnAction(((event) -> {
-			var description = this.aboutMeTextArea.getText();
+			this.editProfileAnchorViewModel.setActiveUserAboutMe();
 		}));
 	}
 
@@ -106,24 +121,6 @@ public class EditProfileAnchor {
 				: "fx:id=\"saveEditAboutMeButton\" was not injected: check your FXML file 'EditProfileAnchor.fxml'.";
 		assert this.selectAGameComboBox != null
 				: "fx:id=\"selectAGameComboBox\" was not injected: check your FXML file 'EditProfileAnchor.fxml'.";
-	}
-
-	/**
-	 * Gets the active user.
-	 *
-	 * @return the active user
-	 */
-	public UserProfile getActiveUser() {
-		return this.activeUser;
-	}
-
-	/**
-	 * Sets the active user.
-	 *
-	 * @param activeUser the new active user
-	 */
-	public void setActiveUser(UserProfile activeUser) {
-		this.activeUser = activeUser;
 	}
 
 }
