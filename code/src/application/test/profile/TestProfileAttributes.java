@@ -40,7 +40,7 @@ public class TestProfileAttributes {
 	public void testDefaultContructor() {
 		assertNotNull(this.profileAttributes);
 		assertEquals("", this.profileAttributes.getAboutMeDescription());
-		assertNotNull(this.profileAttributes.getUserProfilePicture());
+		assertNotNull(this.profileAttributes.getUserProfilePicturePath());
 		assertEquals(0, this.profileAttributes.getTotalLikedGames());
 		assertEquals(0, this.profileAttributes.getTotalDislikedGame());
 	}
@@ -58,7 +58,7 @@ public class TestProfileAttributes {
 		var profile = new ProfileAttributes(description, imagePath, likedGames, dislikedGames);
 
 		assertEquals(description, profile.getAboutMeDescription());
-		assertNotNull(profile.getUserProfilePicture());
+		assertNotNull(profile.getUserProfilePicturePath());
 		assertEquals(likedGames, profile.getTotalLikedGames());
 		assertEquals(dislikedGames, profile.getTotalDislikedGame());
 	}
@@ -140,9 +140,8 @@ public class TestProfileAttributes {
 	 */
 	@Test
 	public void testSetUserProfilePicture() {
-		var imageIcon = new ImageIcon(TEST_IMAGE_PATH);
-		this.profileAttributes.setUserProfilePicture(imageIcon);
-		assertEquals(imageIcon, this.profileAttributes.getUserProfilePicture());
+		this.profileAttributes.setUserProfilePicturePath(TEST_IMAGE_PATH);
+		assertEquals(TEST_IMAGE_PATH, this.profileAttributes.getUserProfilePicturePath());
 	}
 	
 	/**
