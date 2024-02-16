@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import application.Main;
 import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
+import application.view.UserGameLibraryPage.UserGameLibraryPage;
 import application.view.profile.subProfilePages.EditProfileAnchor;
 import application.view.profile.subProfilePages.ProfileAnchor;
 import javafx.fxml.FXML;
@@ -85,6 +86,7 @@ public class UserProfilePage {
 
 	private EditProfileAnchor editProfileCodeBehind;
 	private ProfileAnchor profileAnchorCodeBehind;
+	private UserGameLibraryPage userGameLibraryCodeBehind;
 
 	private UserProfile activeUser;
 
@@ -94,6 +96,7 @@ public class UserProfilePage {
 	public UserProfilePage() {
 		this.editProfileCodeBehind = new EditProfileAnchor();
 		this.profileAnchorCodeBehind = new ProfileAnchor();
+		this.userGameLibraryCodeBehind = new UserGameLibraryPage();
 	}
 
 	@FXML
@@ -143,9 +146,10 @@ public class UserProfilePage {
 
 	private void setUpLibraryNavBarHBox() {
 		this.libraryNavBarHBox.setOnMouseClicked(((event) -> {
-			var errorPopUp = new Alert(AlertType.CONFIRMATION);
-			errorPopUp.setContentText("Button Click Works!");
-			errorPopUp.showAndWait();
+//			var errorPopUp = new Alert(AlertType.CONFIRMATION);
+//			errorPopUp.setContentText("Button Click Works!");
+//			errorPopUp.showAndWait();
+		this.userGameLibraryCodeBehind.openUserGameLibraryPage();
 		}));
 	}
 
@@ -198,7 +202,7 @@ public class UserProfilePage {
 			error.printStackTrace();
 		}
 	}
-
+	
 	private void configurePage() {
 		this.setProfilePane();
 		this.setUsernameLabel();
