@@ -8,6 +8,7 @@ import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
 import application.view.profile.subProfilePages.EditProfileAnchor;
 import application.view.profile.subProfilePages.ProfileAnchor;
+import application.viewModel.profile.UserProfilePageViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -83,16 +84,18 @@ public class UserProfilePage {
 
 	@FXML
 	private HBox wishlistHBox;
-
+	
+	
+	private UserProfilePageViewModel userProfilePageViewModel;
 	private EditProfileAnchor editProfileCodeBehind;
 	private ProfileAnchor profileAnchorCodeBehind;
-
 	private UserProfile activeUser;
 
 	/**
 	 * Instantiates a new user profile page.
 	 */
 	public UserProfilePage() {
+		this.userProfilePageViewModel = new UserProfilePageViewModel();
 		this.editProfileCodeBehind = new EditProfileAnchor();
 		this.profileAnchorCodeBehind = new ProfileAnchor();
 	}
@@ -119,21 +122,32 @@ public class UserProfilePage {
 		this.setUpProfileNavBarHBox();
 	}
 	
+	
 	private void updateProfileImage() {
-		if (!ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath().equals("")) {
+		if (this.profilePictureHasChanged()) {
 			var imagePath = ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath();
 			Image userImage = new Image(imagePath);
 			this.profileImageNavBar.setImage(userImage);
 			this.profileImageSideBar.setImage(userImage);
+			this.userProfilePageViewModel.setCachedProfilePicturePath(imagePath);
 		}
 		
+	}
+
+	private boolean profilePictureHasChanged() {
+		var profilePictureSet = !ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath().equals("");
+		var profilePictureNotTheSameAsCached = !this.userProfilePageViewModel.getCachedProfilePicturePath().equals(ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath());
+		
+		return profilePictureSet && profilePictureNotTheSameAsCached;
 	}
 
 	private void setUpUserNameHBox() {
 		this.profileUsernameHBox.setOnMouseClicked(((event) -> {
 			this.profileAnchorCodeBehind.openAnchorPane(this.activeUser, this.parentBorderPane,
 					Main.PROFILE_ANCHOR_PATH_TWO);
+			this.updateProfileImage();
 		}));
+		
 	}
 
 	private void setUpProfileNavBarHBox() {
@@ -142,6 +156,7 @@ public class UserProfilePage {
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
 		}));
+		this.updateProfileImage();
 	}
 
 	private void setUpMystiverseNavBarHbox() {
@@ -150,6 +165,7 @@ public class UserProfilePage {
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
 		}));
+		this.updateProfileImage();
 	}
 
 	private void setUpLibraryNavBarHBox() {
@@ -158,6 +174,7 @@ public class UserProfilePage {
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
 		}));
+		this.updateProfileImage();
 	}
 
 	private void setUpSettingsHBox() {
@@ -166,6 +183,7 @@ public class UserProfilePage {
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
 		}));
+		this.updateProfileImage();
 	}
 
 	private void setUpWishListHBox() {
@@ -174,6 +192,7 @@ public class UserProfilePage {
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
 		}));
+		this.updateProfileImage();
 	}
 
 	private void setUpEditPreferencesHBox() {
@@ -182,12 +201,14 @@ public class UserProfilePage {
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
 		}));
+		this.updateProfileImage();
 	}
 
 	private void setUpEditProfileHBox() {
 		this.editProfileHBox.setOnMouseClicked(((event) -> {
 			this.editProfileCodeBehind.openAnchorPane(this.activeUser, this.parentBorderPane, Main.EDIT_PROFILE_ANCHOR);
 		}));
+		this.updateProfileImage();
 	}
 
 	/**

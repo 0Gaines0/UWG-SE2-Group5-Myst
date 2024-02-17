@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import application.model.game.Game;
 import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
+import application.view.profile.UserProfilePage;
 import application.viewModel.profile.subProfilePages.EditProfileAnchorViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -80,9 +81,12 @@ public class EditProfileAnchor {
 	}
 	
 	private void updateCurrentImage() {
-		var imagePath = ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath();
-		Image userImage = new Image(imagePath);
-		this.profileImageView.setImage(userImage);
+		if (!ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath().isBlank()) {
+			var imagePath = ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath();
+			Image userImage = new Image(imagePath);
+			this.profileImageView.setImage(userImage);
+		}
+		
 	}
 
 	private void setUpSelectAnAvatarButton() {

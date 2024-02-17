@@ -29,7 +29,7 @@ public class EditProfileAnchorViewModel {
 		fileChooser.setFileFilter(filter);
 		
 		var returnValue = fileChooser.showOpenDialog(null);
-		if (returnValue == JFileChooser.APPROVE_OPTION) {
+		if (returnValue != JFileChooser.CANCEL_OPTION) {
 			var selectedFile = fileChooser.getSelectedFile();
 			var imagePath = selectedFile.getPath();
 			ActiveUser.getActiveUser().getProfileAttributes().setUserProfilePicturePath(imagePath);
