@@ -125,7 +125,7 @@ public class UserProfilePage {
 	
 	
 	private void updateProfileImage() {
-		if (this.profilePictureHasChanged()) {
+		if (this.userProfilePageViewModel.profilePictureHasChanged()) {
 			var imagePath = ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath();
 			Image userImage = new Image(imagePath);
 			this.profileImageNavBar.setImage(userImage);
@@ -133,13 +133,6 @@ public class UserProfilePage {
 			this.userProfilePageViewModel.setCachedProfilePicturePath(imagePath);
 		}
 		
-	}
-
-	private boolean profilePictureHasChanged() {
-		var profilePictureSet = !ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath().equals("");
-		var profilePictureNotTheSameAsCached = !this.userProfilePageViewModel.getCachedProfilePicturePath().equals(ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath());
-		
-		return profilePictureSet && profilePictureNotTheSameAsCached;
 	}
 
 	private void setUpUserNameHBox() {
@@ -156,8 +149,9 @@ public class UserProfilePage {
 			var errorPopUp = new Alert(AlertType.CONFIRMATION);
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
+			this.updateProfileImage();
 		}));
-		this.updateProfileImage();
+		
 	}
 
 	private void setUpMystiverseNavBarHbox() {
@@ -165,8 +159,8 @@ public class UserProfilePage {
 			var errorPopUp = new Alert(AlertType.CONFIRMATION);
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
+			this.updateProfileImage();
 		}));
-		this.updateProfileImage();
 	}
 
 	private void setUpLibraryNavBarHBox() {
@@ -174,8 +168,8 @@ public class UserProfilePage {
 			var errorPopUp = new Alert(AlertType.CONFIRMATION);
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
+			this.updateProfileImage();
 		}));
-		this.updateProfileImage();
 	}
 
 	private void setUpSettingsHBox() {
@@ -183,8 +177,8 @@ public class UserProfilePage {
 			var errorPopUp = new Alert(AlertType.CONFIRMATION);
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
+			this.updateProfileImage();
 		}));
-		this.updateProfileImage();
 	}
 
 	private void setUpWishListHBox() {
@@ -192,22 +186,22 @@ public class UserProfilePage {
 			var errorPopUp = new Alert(AlertType.CONFIRMATION);
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
+			this.updateProfileImage();
 		}));
-		this.updateProfileImage();
 	}
 
 	private void setUpEditPreferencesHBox() {
 		this.editPreferencesHBox.setOnMouseClicked(((event) -> {
 			this.editPreferencesCodeBehind.openAnchorPane(this.parentBorderPane, Main.EDIT_PREFERENCES_ANCHOR);
+			this.updateProfileImage();
 		}));
-		this.updateProfileImage();
 	}
 
 	private void setUpEditProfileHBox() {
 		this.editProfileHBox.setOnMouseClicked(((event) -> {
 			this.editProfileCodeBehind.openAnchorPane(this.parentBorderPane, Main.EDIT_PROFILE_ANCHOR);
+			this.updateProfileImage();
 		}));
-		this.updateProfileImage();
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package application.viewModel.profile;
 
+import application.model.profile.ActiveUser;
+
 public class UserProfilePageViewModel {
 
 	private String cachedProfilePicturePath;
@@ -9,6 +11,18 @@ public class UserProfilePageViewModel {
 	 */
 	public UserProfilePageViewModel() {
 		this.cachedProfilePicturePath = "";
+	}
+	
+	/**
+	 * Profile picture has changed.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean profilePictureHasChanged() {
+		var profilePictureSet = !ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath().equals("");
+		var profilePictureNotTheSameAsCached = !this.cachedProfilePicturePath.equals(ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath());
+		
+		return profilePictureSet && profilePictureNotTheSameAsCached;
 	}
 
 	/**

@@ -9,10 +9,12 @@ import application.model.profile.ActiveUser;
 import application.viewModel.profile.subProfilePages.EditProfileAnchorViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -126,6 +128,9 @@ public class EditProfileAnchor {
 	private void setUpSaveButton() {
 		this.saveEditAboutMeButton.setOnAction(((event) -> {
 			this.editProfileAnchorViewModel.setActiveUserAboutMe();
+			var errorPopUp = new Alert(AlertType.CONFIRMATION);
+			errorPopUp.setContentText("About me has been edited and saved");
+			errorPopUp.showAndWait();
 		}));
 	}
 

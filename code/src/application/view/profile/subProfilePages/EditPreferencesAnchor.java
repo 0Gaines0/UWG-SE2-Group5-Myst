@@ -1,12 +1,7 @@
 package application.view.profile.subProfilePages;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-
 import application.model.game.Game;
-import application.model.game.Genre;
 import application.model.profile.ActiveUser;
 import application.viewModel.profile.subProfilePages.EditPreferencesAnchorViewModel;
 import javafx.collections.FXCollections;
@@ -58,7 +53,7 @@ public class EditPreferencesAnchor {
 	public EditPreferencesAnchor() {
 		this.editPreferencesAnchorViewModel = new EditPreferencesAnchorViewModel();
 	}
-	
+
 	/**
 	 * Open anchor pane.
 	 *
@@ -187,6 +182,5 @@ public class EditPreferencesAnchor {
 		assert this.removeGameLikedMenuItem != null
 				: "fx:id=\"removeGameLikedMenuItem\" was not injected: check your FXML file 'EditPreferencesAnchor.fxml'.";
 	}
-
 
 }
