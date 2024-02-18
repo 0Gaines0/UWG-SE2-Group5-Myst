@@ -14,6 +14,7 @@ public class Main extends Application {
 	public static final String PROFILE_ANCHOR_PATH_ONE = "../profile/subProfilePages/ProfileAnchor.fxml";
 	public static final String PROFILE_ANCHOR_PATH_TWO = "../subProfilePages/ProfileAnchor.fxml";
 	public static final String EDIT_PROFILE_ANCHOR = "../subProfilePages/EditProfileAnchor.fxml";
+	public static final String EDIT_PREFERENCES_ANCHOR = "../subProfilePages/EditPreferencesAnchor.fxml";
 
 	@Override
 	public void start(Stage primaryStage) {

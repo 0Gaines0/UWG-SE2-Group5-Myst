@@ -6,8 +6,6 @@ import java.util.ResourceBundle;
 
 import application.model.game.Game;
 import application.model.profile.ActiveUser;
-import application.model.profile.UserProfile;
-import application.view.profile.UserProfilePage;
 import application.viewModel.profile.subProfilePages.EditProfileAnchorViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -106,14 +104,14 @@ public class EditProfileAnchor {
 		this.aboutMeTextArea.textProperty().bindBidirectional(this.editProfileAnchorViewModel.getAboutMeProperty());	
 	}
 
+	
 	/**
 	 * Open anchor pane.
 	 *
-	 * @param activeUser    the active user
-	 * @param parent        the parent
+	 * @param parent the parent
 	 * @param newAnchorPath the new anchor path
 	 */
-	public void openAnchorPane(UserProfile activeUser, BorderPane parent, String newAnchorPath) {
+	public void openAnchorPane(BorderPane parent, String newAnchorPath) {
 		try {
 			AnchorPane currentAnchor = (AnchorPane) parent.getCenter();
 			var loader = new FXMLLoader(getClass().getResource(newAnchorPath));

@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import application.Main;
 import application.model.profile.ActiveUser;
-import application.model.profile.UserProfile;
+import application.view.profile.subProfilePages.EditPreferencesAnchor;
 import application.view.profile.subProfilePages.EditProfileAnchor;
 import application.view.profile.subProfilePages.ProfileAnchor;
 import application.viewModel.profile.UserProfilePageViewModel;
@@ -89,7 +89,7 @@ public class UserProfilePage {
 	private UserProfilePageViewModel userProfilePageViewModel;
 	private EditProfileAnchor editProfileCodeBehind;
 	private ProfileAnchor profileAnchorCodeBehind;
-	private UserProfile activeUser;
+	private EditPreferencesAnchor editPreferencesCodeBehind;
 
 	/**
 	 * Instantiates a new user profile page.
@@ -98,6 +98,7 @@ public class UserProfilePage {
 		this.userProfilePageViewModel = new UserProfilePageViewModel();
 		this.editProfileCodeBehind = new EditProfileAnchor();
 		this.profileAnchorCodeBehind = new ProfileAnchor();
+		this.editPreferencesCodeBehind =  new EditPreferencesAnchor();
 	}
 
 	@FXML
@@ -143,7 +144,7 @@ public class UserProfilePage {
 
 	private void setUpUserNameHBox() {
 		this.profileUsernameHBox.setOnMouseClicked(((event) -> {
-			this.profileAnchorCodeBehind.openAnchorPane(this.activeUser, this.parentBorderPane,
+			this.profileAnchorCodeBehind.openAnchorPane(this.parentBorderPane,
 					Main.PROFILE_ANCHOR_PATH_TWO);
 			this.updateProfileImage();
 		}));
@@ -197,16 +198,14 @@ public class UserProfilePage {
 
 	private void setUpEditPreferencesHBox() {
 		this.editPreferencesHBox.setOnMouseClicked(((event) -> {
-			var errorPopUp = new Alert(AlertType.CONFIRMATION);
-			errorPopUp.setContentText("Button Click Works!");
-			errorPopUp.showAndWait();
+			this.editPreferencesCodeBehind.openAnchorPane(this.parentBorderPane, Main.EDIT_PREFERENCES_ANCHOR);
 		}));
 		this.updateProfileImage();
 	}
 
 	private void setUpEditProfileHBox() {
 		this.editProfileHBox.setOnMouseClicked(((event) -> {
-			this.editProfileCodeBehind.openAnchorPane(this.activeUser, this.parentBorderPane, Main.EDIT_PROFILE_ANCHOR);
+			this.editProfileCodeBehind.openAnchorPane(this.parentBorderPane, Main.EDIT_PROFILE_ANCHOR);
 		}));
 		this.updateProfileImage();
 	}
@@ -297,24 +296,6 @@ public class UserProfilePage {
 				: "fx:id=\"profileHBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 		assert this.profileImageNavBar != null
 				: "fx:id=\"profileImageNavBar\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
-	}
-
-	/**
-	 * Gets the active user.
-	 *
-	 * @return the active user
-	 */
-	public UserProfile getActiveUser() {
-		return this.activeUser;
-	}
-
-	/**
-	 * Sets the active user.
-	 *
-	 * @param activeUser the new active user
-	 */
-	public void setActiveUser(UserProfile activeUser) {
-		this.activeUser = activeUser;
 	}
 
 }

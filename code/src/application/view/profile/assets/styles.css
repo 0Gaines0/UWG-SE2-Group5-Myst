@@ -37,3 +37,8 @@
 .text-area .content {
 	-fx-background-color: -jewelsea-lined-notepad;
 }
+
+.listview-cell {
+    -fx-control-inner-background: #DDE2C6;
+    -fx-text-fill: #FFF;
+}

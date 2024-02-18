@@ -8,7 +8,7 @@ public class UserProfilePageViewModel {
 	 * Instantiates a new user profile page view model.
 	 */
 	public UserProfilePageViewModel() {
-		this.setCachedProfilePicturePath("");
+		this.cachedProfilePicturePath = "";
 	}
 
 	/**
