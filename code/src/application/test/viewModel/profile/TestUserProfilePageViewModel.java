@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import application.model.profile.ActiveUser;
+import application.model.profile.UserProfile;
 import application.viewModel.profile.UserProfilePageViewModel;
 
 public class TestUserProfilePageViewModel {
@@ -27,6 +28,7 @@ public class TestUserProfilePageViewModel {
 	 */
 	@Test
 	public void testProfilePictureChanged() {
+		ActiveUser.setActiveUser(new UserProfile());
 		assertFalse(this.userProfilePageViewModel.profilePictureHasChanged());
 		this.userProfilePageViewModel.setCachedProfilePicturePath("oldPath");
 		ActiveUser.getActiveUser().getProfileAttributes().setUserProfilePicturePath("newPath");
