@@ -79,6 +79,6 @@ public class LoginPageViewModel {
 		var game = new Game("testGame", genreList, 1001);
 		ActiveUser.setActiveUser(user);
 		ActiveUser.getActiveUser().getAllLikedGames().add(game);
-		}
+	}
 
 }
