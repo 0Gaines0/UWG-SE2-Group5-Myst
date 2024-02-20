@@ -146,9 +146,8 @@ public class UserProfilePage {
 
 	private void setUpProfileNavBarHBox() {
 		this.profileNavBarHBox.setOnMouseClicked(((event) -> {
-			var errorPopUp = new Alert(AlertType.CONFIRMATION);
-			errorPopUp.setContentText("Button Click Works!");
-			errorPopUp.showAndWait();
+			this.profileAnchorCodeBehind.openAnchorPane(this.parentBorderPane,
+					Main.PROFILE_ANCHOR_PATH_TWO);
 			this.updateProfileImage();
 		}));
 		

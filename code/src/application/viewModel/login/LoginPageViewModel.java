@@ -1,5 +1,9 @@
 package application.viewModel.login;
 
+import java.util.ArrayList;
+
+import application.model.game.Game;
+import application.model.game.Genre;
 import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
 import application.model.profile.credentials.CredentialManager;
@@ -70,7 +74,11 @@ public class LoginPageViewModel {
 	 */
 	public void generateUser() {
 		var user = new UserProfile(this.usernameProperty.getValue(), this.passwordProperty.getValue());
+		var genreList = new ArrayList<Genre>();
+		genreList.add(Genre.ACCOUNTING);
+		var game = new Game("testGame", genreList, 1001);
 		ActiveUser.setActiveUser(user);
-	}
+		ActiveUser.getActiveUser().getAllLikedGames().add(game);
+		}
 
 }
