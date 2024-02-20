@@ -75,6 +75,9 @@ public class UserProfilePage {
 
 	@FXML
 	private HBox settingsHbox;
+	
+	@FXML
+    private HBox profilePhotoNavBarHBox;
 
 	@FXML
 	private AnchorPane sideBar;
@@ -121,9 +124,22 @@ public class UserProfilePage {
 		this.setUpLibraryNavBarHBox();
 		this.setUpMystiverseNavBarHbox();
 		this.setUpProfileNavBarHBox();
+		this.setUpProfilePhotoNavBarHBox();
 	}
 	
 	
+	private void setUpProfilePhotoNavBarHBox() {
+		this.profilePhotoNavBarHBox.setOnMouseClicked(((event) -> {
+			this.redirectToProfilePage();
+		}));
+	}
+
+	private void redirectToProfilePage() {
+		this.profileAnchorCodeBehind.openAnchorPane(this.parentBorderPane,
+				Main.PROFILE_ANCHOR_PATH_TWO);
+		this.updateProfileImage();
+	}
+
 	private void updateProfileImage() {
 		if (this.userProfilePageViewModel.profilePictureHasChanged()) {
 			var imagePath = ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath();
@@ -137,18 +153,14 @@ public class UserProfilePage {
 
 	private void setUpUserNameHBox() {
 		this.profileUsernameHBox.setOnMouseClicked(((event) -> {
-			this.profileAnchorCodeBehind.openAnchorPane(this.parentBorderPane,
-					Main.PROFILE_ANCHOR_PATH_TWO);
-			this.updateProfileImage();
+			this.redirectToProfilePage();
 		}));
 		
 	}
 
 	private void setUpProfileNavBarHBox() {
 		this.profileNavBarHBox.setOnMouseClicked(((event) -> {
-			this.profileAnchorCodeBehind.openAnchorPane(this.parentBorderPane,
-					Main.PROFILE_ANCHOR_PATH_TWO);
-			this.updateProfileImage();
+			this.redirectToProfilePage();
 		}));
 		
 	}
@@ -289,6 +301,8 @@ public class UserProfilePage {
 				: "fx:id=\"profileHBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 		assert this.profileImageNavBar != null
 				: "fx:id=\"profileImageNavBar\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
+		assert this.profilePhotoNavBarHBox != null
+				: "fx:id=\"profilePhotoNavBarHBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 	}
 
 }
