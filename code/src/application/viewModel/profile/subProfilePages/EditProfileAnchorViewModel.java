@@ -3,9 +3,6 @@
  */
 package application.viewModel.profile.subProfilePages;
 
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import application.model.profile.ActiveUser;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -20,20 +17,14 @@ public class EditProfileAnchorViewModel {
 		this.aboutMeProperty = new SimpleStringProperty();
 	}
 
+	
 	/**
-	 * Import an image.
+	 * Configure users profile picture.
+	 *
+	 * @param imagePath the image path
 	 */
-	public void importAnImage() {
-		var fileChooser = new JFileChooser();
-		var filter = new FileNameExtensionFilter("Image Files", "jpg", "png");
-		fileChooser.setFileFilter(filter);
-		
-		var returnValue = fileChooser.showOpenDialog(null);
-		if (returnValue != JFileChooser.CANCEL_OPTION) {
-			var selectedFile = fileChooser.getSelectedFile();
-			var imagePath = selectedFile.getPath();
-			ActiveUser.getActiveUser().getProfileAttributes().setUserProfilePicturePath(imagePath);
-		}
+	public void configureUsersProfilePicture(String imagePath) {
+		ActiveUser.getActiveUser().getProfileAttributes().setUserProfilePicturePath(imagePath);
 	}
 
 	/**
@@ -57,14 +48,5 @@ public class EditProfileAnchorViewModel {
 	 */
 	public StringProperty getAboutMeProperty() {
 		return this.aboutMeProperty;
-	}
-
-	/**
-	 * Sets the about me property.
-	 *
-	 * @param aboutMeProperty the new about me property
-	 */
-	public void setAboutMeProperty(StringProperty aboutMeProperty) {
-		this.aboutMeProperty = aboutMeProperty;
 	}
 }

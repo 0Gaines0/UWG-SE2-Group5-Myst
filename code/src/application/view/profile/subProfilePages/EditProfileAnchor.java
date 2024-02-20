@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import application.model.game.Game;
 import application.model.profile.ActiveUser;
 import application.viewModel.profile.subProfilePages.EditProfileAnchorViewModel;
@@ -75,8 +78,15 @@ public class EditProfileAnchor {
 
 	private void setUpImportProfilePictureButton() {
 		this.importAPhotoButton.setOnAction(((event) -> { 
-			this.editProfileAnchorViewModel.importAnImage();
-			this.updateCurrentImage();
+			var fileChooser = new JFileChooser();
+			var filter = new FileNameExtensionFilter("Image Files", "jpg", "png");
+			fileChooser.setFileFilter(filter);
+			var returnValue = fileChooser.showOpenDialog(null);
+			if (returnValue != JFileChooser.CANCEL_OPTION) {
+				var selectedFile = fileChooser.getSelectedFile();
+				this.editProfileAnchorViewModel.configureUsersProfilePicture(selectedFile.getPath());
+				this.updateCurrentImage();
+			}
 		}));
 	}
 	
