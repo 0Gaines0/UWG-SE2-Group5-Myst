@@ -1,5 +1,6 @@
 package application.viewModel;
 
+import application.model.profile.ActiveUser;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -58,7 +59,7 @@ public class GameCardPageViewModel {
 	 * @return true if the add was successful false other wise
 	 */
 	public Boolean addGameToLikedLibrary() {
-		return false;
+		return ActiveUser.getActiveUser().getAllLikedGames().add(null);
 	}
 
 	/**
@@ -67,7 +68,7 @@ public class GameCardPageViewModel {
 	 * @return the boolean
 	 */
 	public Boolean addGameToDislikedLibrary() {
-		return false;
+		return ActiveUser.getActiveUser().getAllDislikedGames().add(null);
 	}
 
 }
