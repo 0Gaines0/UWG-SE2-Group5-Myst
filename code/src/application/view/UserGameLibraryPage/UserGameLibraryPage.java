@@ -3,6 +3,8 @@ package application.view.UserGameLibraryPage;
 import java.io.IOException;
 
 import application.Main;
+import application.model.game.Game;
+import application.model.game.Genre;
 import application.model.profile.UserProfile;
 import application.view.profile.UserProfilePage;
 import application.viewModel.UserGameLibrary.UserGameLibraryViewModel;
@@ -15,6 +17,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
@@ -32,10 +36,19 @@ public class UserGameLibraryPage {
 	private HBox profileHBox;
 	
 	@FXML
-	private ListView myGamesListView;
+	private ListView<Game> myGamesListView;
 	
 	@FXML
-	private TextArea gameInfoTextArea;
+	private TextField gameTitleTextField;
+	
+	@FXML
+	private TextField gameDevelopersTextField;
+	
+	@FXML
+	private ListView<Genre> gameGenresListView;
+	
+	@FXML
+	private ImageView gamePhotoImageView;
 	
 	@FXML
 	private TextArea communityTextArea;
@@ -57,9 +70,9 @@ public class UserGameLibraryPage {
 	
 	@FXML
 	public void Initialize() {
+		this.setupListView();
 		this.bindToViewModel();
 		this.setUpNavBar();
-		this.setupListView();
 	}
 	
 	public void openUserGameLibraryPage() {
@@ -80,6 +93,7 @@ public class UserGameLibraryPage {
 
 	private void bindToViewModel() {
 		this.myGamesListView.itemsProperty().bindBidirectional(this.viewModel.getOwnedGames());
+		
 		
 	}
 
@@ -115,5 +129,13 @@ public class UserGameLibraryPage {
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
 		}));
+	}
+	
+	@FXML 
+	public void updateSelectedGame() {
+		this.viewModel.setSelectedGame(this.myGamesListView.getSelectionModel().getSelectedItem());
+		this.gameTitleTextField.textProperty().set(this.viewModel.getSelectedGame().getName());
+		this.gameDevelopersTextField.textProperty().set(this.viewModel.getSelectedGame().getDevelopers());
+		this.gameGenresListView.itemsProperty().bind(this.viewModel.getSelectedGameGenres());
 	}
 }
