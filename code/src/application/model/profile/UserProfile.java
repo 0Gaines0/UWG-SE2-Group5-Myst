@@ -1,7 +1,9 @@
 package application.model.profile;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import application.model.game.Game;
 import application.model.game.Genre;
@@ -203,4 +205,82 @@ public class UserProfile {
 	public ProfileAttributes getProfileAttributes() {
 		return this.profileAttributes;
 	}
+	/**
+     * Calculates the breakdown of genre percentages for liked and owned games.
+     *
+     * @return A map of genres to their percentage representation among liked and owned games.
+     */
+    public Map<Genre, Double> calculateGenrePercentages() {
+        Map<Genre, Integer> genreCounts = new HashMap<>();
+        int totalGenres = 0;
+
+        for (Game game : this.allLikedGames) {
+            for (Genre genre : game.getGenres()) {
+                genreCounts.put(genre, genreCounts.getOrDefault(genre, 0) + 1);
+                totalGenres++;
+            }
+        }
+
+        for (Game game : this.allOwnedGames) {
+            for (Genre genre : game.getGenres()) {
+                genreCounts.put(genre, genreCounts.getOrDefault(genre, 0) + 1);
+                totalGenres++;
+            }
+        }
+
+        // Calculate percentages
+        Map<Genre, Double> genrePercentages = new HashMap<>();
+        for (Map.Entry<Genre, Integer> entry : genreCounts.entrySet()) {
+            double percentage = 100.0 * entry.getValue() / totalGenres;
+            genrePercentages.put(entry.getKey(), percentage);
+        }
+
+        return genrePercentages;
+    }
+
+	/**
+     * Calculates the average release year of liked and owned games.
+     *
+     * @return The average release year of games.
+     */
+    public double calculateAverageReleaseYear() {
+        int totalYears = 0;
+        int count = 0;
+
+        for (Game game : this.allLikedGames) {
+            totalYears += game.getReleaseDateYear();
+            count++;
+        }
+
+        for (Game game : this.allOwnedGames) {
+            totalYears += game.getReleaseDateYear();
+            count++;
+        }
+
+        if (count == 0) return 0;
+        return (double) totalYears / count;
+    }
+
+	/**
+     * Calculates the average playtime of liked and owned games.
+     *
+     * @return The average playtime of games in hours.
+     */
+    public double calculateAveragePlaytime() {
+        int totalPlaytime = 0;
+        int count = 0;
+
+        for (Game game : this.allLikedGames) {
+            totalPlaytime += game.getAveragePlaytime();
+            count++;
+        }
+
+        for (Game game : this.allOwnedGames) {
+            totalPlaytime += game.getAveragePlaytime();
+            count++;
+        }
+
+        if (count == 0) return 0;
+        return (double) totalPlaytime / count;
+    }
 }
