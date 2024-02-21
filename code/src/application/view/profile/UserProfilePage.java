@@ -8,6 +8,7 @@ import application.model.profile.ActiveUser;
 import application.view.profile.subProfilePages.EditPreferencesAnchor;
 import application.view.profile.subProfilePages.EditProfileAnchor;
 import application.view.profile.subProfilePages.ProfileAnchor;
+import application.view.profile.subProfilePages.SettingProfileAnchor;
 import application.viewModel.profile.UserProfilePageViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -93,6 +94,7 @@ public class UserProfilePage {
 	private EditProfileAnchor editProfileCodeBehind;
 	private ProfileAnchor profileAnchorCodeBehind;
 	private EditPreferencesAnchor editPreferencesCodeBehind;
+	private SettingProfileAnchor profileSettingsAnchorCodeBehind;
 
 	/**
 	 * Instantiates a new user profile page.
@@ -102,6 +104,7 @@ public class UserProfilePage {
 		this.editProfileCodeBehind = new EditProfileAnchor();
 		this.profileAnchorCodeBehind = new ProfileAnchor();
 		this.editPreferencesCodeBehind =  new EditPreferencesAnchor();
+		this.profileSettingsAnchorCodeBehind = new SettingProfileAnchor();
 	}
 
 	@FXML
@@ -185,9 +188,7 @@ public class UserProfilePage {
 
 	private void setUpSettingsHBox() {
 		this.settingsHbox.setOnMouseClicked(((event) -> {
-			var errorPopUp = new Alert(AlertType.CONFIRMATION);
-			errorPopUp.setContentText("Button Click Works!");
-			errorPopUp.showAndWait();
+			this.profileSettingsAnchorCodeBehind.openAnchorPane(this.parentBorderPane, Main.PROFILE_SETTINGS_ANCHOR);
 			this.updateProfileImage();
 		}));
 	}
