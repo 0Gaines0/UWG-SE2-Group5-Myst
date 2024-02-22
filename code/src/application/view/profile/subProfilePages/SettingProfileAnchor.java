@@ -7,8 +7,10 @@ import java.util.ResourceBundle;
 import application.viewModel.profile.subProfilePages.SettingProfileAnchorViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -90,8 +92,64 @@ public class SettingProfileAnchor {
 	void initialize() {
 		this.validateFXMLComponents();
 		this.bindToViewModel();
+		this.setUpSaveButtons();
 		this.settingProfileAnchorViewModel.setUpUserInformationFields();
+		
 
+	}
+
+	private void setUpSaveButtons() {
+		this.setUpChangeUsernameSaveButton();
+		this.setUpChangePasswordSaveButton();
+		
+	}
+
+	private void setUpChangePasswordSaveButton() {
+		this.changePasswordSaveButton.setOnAction(((event) -> {
+			var attemptChangePassword = this.settingProfileAnchorViewModel.attemptToChangePassword();
+			if (attemptChangePassword) {
+				var errorPopUp = new Alert(AlertType.CONFIRMATION);
+				errorPopUp.setContentText("password has been updated");
+				errorPopUp.showAndWait();
+				this.settingProfileAnchorViewModel.setUpUserInformationFields();
+				this.clearChangePasswordFields();
+			} else {
+				var errorPopUp = new Alert(AlertType.ERROR);
+				errorPopUp.setContentText("Password has not been updated. Possible errors: Incorrect Password Username, Incorrect Reentered Password, Invalid new Password");
+				errorPopUp.showAndWait();
+			}
+		}));
+	}
+
+	private void clearChangePasswordFields() {
+		this.changeInformationCurrentPasswordTextField.clear();
+		this.changeInformationNewPasswordTextField.clear();
+		this.changeInformationReenterNewPasswordTextField.clear();
+		
+	}
+
+	private void setUpChangeUsernameSaveButton() {
+		this.changeUsernameSaveButton.setOnAction(((event) -> {
+			var attemptChangeUsername = this.settingProfileAnchorViewModel.attemptToChangeUsername();
+			if (attemptChangeUsername) {
+				var errorPopUp = new Alert(AlertType.CONFIRMATION);
+				errorPopUp.setContentText("Username has been updated");
+				errorPopUp.showAndWait();
+				this.settingProfileAnchorViewModel.setUpUserInformationFields();
+				this.clearChangeUsernameFields();
+			} else {
+				var errorPopUp = new Alert(AlertType.ERROR);
+				errorPopUp.setContentText("Username has not been updated. Possible errors: Incorrect Current Username, Incorrect Reentered Username, New Username already exist, Invalid new Username");
+				errorPopUp.showAndWait();
+			}
+		}));
+	}
+
+	private void clearChangeUsernameFields() {
+		this.changeInformationCurrentUsernameTextField.clear();
+		this.changeInformationNewUsernameTextField.clear();
+		this.changeInformationReenterNewUsernameTextField.clear();
+		
 	}
 
 	private void bindToViewModel() {
