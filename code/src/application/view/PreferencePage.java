@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import application.model.game.Game;
 import application.model.game.Genre;
+import application.view.profile.UserProfilePage;
 import application.viewModel.PreferencePageViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -60,18 +61,18 @@ public class PreferencePage {
     
     @FXML
     void initialize() {
+    	this.fxmlValidCmponents();
     	this.setupButtons();
     	this.setupComboBoxes();
     	this.setupListView();
     	this.bindToViewModel();
-    	this.fxmlValidCmponents();
     }
     
     private void bindToViewModel() {
     	this.highPreferenceComboBox.valueProperty().bindBidirectional(this.viewmodel.getHighPriorityGenre());
     	this.mediumPreferenceComboBox.valueProperty().bindBidirectional(this.viewmodel.getMediumPriorityGenre());
     	this.lowPreferenceComboBox.valueProperty().bindBidirectional(this.viewmodel.getLowPriorityGenre());
-    	this.ownedGamesListView.itemsProperty().bindBidirectional(this.viewmodel.getOwnedGames());
+    	this.ownedGamesListView.itemsProperty().bindBidirectional(this.viewmodel.getSelectedLikedGames());
     }
     
     private void setupListView() {
@@ -91,11 +92,7 @@ public class PreferencePage {
     		stage.close();
     	});
     	this.continueButton.setOnAction((event) -> {
-    		this.viewmodel.generateRecommendationPreferences(
-    				this.highPreferenceComboBox.getValue(), 
-    				this.mediumPreferenceComboBox.getValue(), 
-    				this.lowPreferenceComboBox.getValue(), 
-    				this.ownedGamesListView.getItems());
+    		this.viewmodel.configureNewUserPreferences();
     		var stage = (Stage) this.continueButton.getScene().getWindow();
     		stage.close();
     	});

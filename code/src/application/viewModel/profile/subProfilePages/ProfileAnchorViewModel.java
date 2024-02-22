@@ -51,30 +51,12 @@ public class ProfileAnchorViewModel {
 	}
 
 	/**
-	 * Sets the about me property.
-	 *
-	 * @param aboutMeProperty the new about me property
-	 */
-	public void setAboutMeProperty(StringProperty aboutMeProperty) {
-		this.aboutMeProperty = aboutMeProperty;
-	}
-
-	/**
 	 * Gets the liked games property.
 	 *
 	 * @return the liked games property
 	 */
 	public StringProperty getLikedGamesProperty() {
 		return this.likedGamesProperty;
-	}
-
-	/**
-	 * Sets the liked games property.
-	 *
-	 * @param likedGamesProperty the new liked games property
-	 */
-	public void setLikedGamesProperty(StringProperty likedGamesProperty) {
-		this.likedGamesProperty = likedGamesProperty;
 	}
 
 	/**
@@ -85,16 +67,6 @@ public class ProfileAnchorViewModel {
 	public StringProperty getDislikedGamesProperty() {
 		return this.dislikedGamesProperty;
 	}
-
-	/**
-	 * Sets the disliked games property.
-	 *
-	 * @param dislikedGamesProperty the new disliked games property
-	 */
-	public void setDislikedGamesProperty(StringProperty dislikedGamesProperty) {
-		this.dislikedGamesProperty = dislikedGamesProperty;
-	}
-
 	/**
 	 * Gets the title favorite game property.
 	 *
@@ -105,29 +77,11 @@ public class ProfileAnchorViewModel {
 	}
 
 	/**
-	 * Sets the title favorite game property.
-	 *
-	 * @param titleFavoriteGameProperty the new title favorite game property
-	 */
-	public void setTitleFavoriteGameProperty(StringProperty titleFavoriteGameProperty) {
-		this.titleFavoriteGameProperty = titleFavoriteGameProperty;
-	}
-
-	/**
 	 * Gets the genres favorite game property.
 	 *
 	 * @return the genres favorite game property
 	 */
 	public StringProperty getGenresFavoriteGameProperty() {
 		return this.genresFavoriteGameProperty;
-	}
-
-	/**
-	 * Sets the genres favorite game property.
-	 *
-	 * @param genresFavoriteGameProperty the new genres favorite game property
-	 */
-	public void setGenresFavoriteGameProperty(StringProperty genresFavoriteGameProperty) {
-		this.genresFavoriteGameProperty = genresFavoriteGameProperty;
 	}
 }

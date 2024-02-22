@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="530.0" prefWidth="844.0" style="-fx-background-color: #446662;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.profile.subProfilePages.EditPreferencesAnchor">
+   <children>
+      <Text layoutX="72.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liked Games: ">
+         <font>
+            <Font name="Comic Sans MS" size="18.0" />
+         </font>
+      </Text>
+      <ListView fx:id="likedGamesListView" layoutX="70.0" layoutY="59.0" prefHeight="370.0" prefWidth="334.0" style="-fx-background-color: #DDE2C6;" styleClass="listview-cell" stylesheets="@../assets/styles.css">
+         <contextMenu>
+            <ContextMenu fx:id="likedGamesContextMenu">
+              <items>
+                  <MenuItem fx:id="moveGameToDislikedMenuItem" mnemonicParsing="false" text="Move to Disliked List" />
+                  <MenuItem fx:id="removeGameLikedMenuItem" mnemonicParsing="false" text="Remove Game" />
+              </items>
+            </ContextMenu>
+         </contextMenu></ListView>
+      <ListView fx:id="dislikedGamesListView" layoutX="460.0" layoutY="59.0" prefHeight="370.0" prefWidth="334.0" style="-fx-background-color: #DDE2C6;" styleClass="listview-cell" stylesheets="@../assets/styles.css">
+         <contextMenu>
+            <ContextMenu fx:id="dislikedGamesContextMenu">
+              <items>
+                <MenuItem fx:id="moveGameToLikedMenuItem" mnemonicParsing="false" text="Move to Liked List" />
+                <MenuItem fx:id="removeGameDislikedMenuItem" mnemonicParsing="false" text="Remove Game" />
+              </items>
+            </ContextMenu>
+         </contextMenu></ListView>
+      <Text layoutX="458.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Disliked Games:">
+         <font>
+            <Font name="Comic Sans MS" size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

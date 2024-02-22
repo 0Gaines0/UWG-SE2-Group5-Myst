@@ -5,58 +5,60 @@ import java.util.List;
 import application.model.GameRecommendationEngine;
 import application.model.game.Game;
 import application.model.game.Genre;
+import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
+// TODO: Auto-generated Javadoc
 /**
- * the first time login page view model
- * 
- * @author Daniel Rivera 
+ * the first time login page view model.
+ *
+ * @author Daniel Rivera
  * @version Sprint 1
  */
 public class PreferencePageViewModel {
 
+	/** The high preference genre. */
 	private ObjectProperty<Genre> highPreferenceGenre;
+	
+	/** The medium preference genre. */
 	private ObjectProperty<Genre> mediumPreferenceGenre;
+	
+	/** The low preference genre. */
 	private ObjectProperty<Genre> lowPreferenceGenre;
-	private ListProperty<Game> ownedGames;
-	private GameRecommendationEngine recommendationEngine;
+	
+	/** The liked games. */
+	private ListProperty<Game> likedGames;	
 	
 	/**
-	 * the first time login page view model
+	 * the first time login page view model.
 	 */
 	public PreferencePageViewModel() {
 		this.highPreferenceGenre = new SimpleObjectProperty<Genre>();
 		this.mediumPreferenceGenre = new SimpleObjectProperty<Genre>();
 		this.lowPreferenceGenre = new SimpleObjectProperty<Genre>();
-		this.ownedGames = new SimpleListProperty<Game>();
+		this.likedGames = new SimpleListProperty<Game>();
 	}
 	
+	
+
+	
 	/**
-	 * generates the recommendations based off of the preferences by the user
-	 * 
-	 * @param highPreference
-	 * @param mediumPreference
-	 * @param lowPreference
-	 * @param ownedGames
-	 * 
-	 * @return the recommendations for the user
+	 * Configure new user preferences.
 	 */
-	public List<Game> generateRecommendationPreferences(Genre highPreference, Genre mediumPreference, Genre lowPreference, List<Game> ownedGames) {
-		var user = new UserProfile(); //TODO: change this
-		user.getPreferredGenres().add(highPreference);
-		user.getPreferredGenres().add(mediumPreference); 
-		user.getPreferredGenres().add(lowPreference);
-		user.getAllLikedGames().addAll(ownedGames);
-		return this.recommendationEngine.generateRecommendations(user);
+	public void configureNewUserPreferences() {
+		ActiveUser.getActiveUser().getPreferredGenres().add(this.highPreferenceGenre.getValue());
+		ActiveUser.getActiveUser().getPreferredGenres().add(this.mediumPreferenceGenre.getValue());
+		ActiveUser.getActiveUser().getPreferredGenres().add(this.lowPreferenceGenre.getValue());
+		ActiveUser.getActiveUser().getAllLikedGames().addAll(this.likedGames);
 	}
 
 	/**
-	 * gets the medium priority genre
-	 * 
+	 * gets the medium priority genre.
+	 *
 	 * @return the medium priority genre
 	 */
 	public ObjectProperty<Genre> getHighPriorityGenre() {
@@ -64,8 +66,8 @@ public class PreferencePageViewModel {
 	}
 
 	/**
-	 * gets the medium priority genre
-	 * 
+	 * gets the medium priority genre.
+	 *
 	 * @return the medium priority genre
 	 */
 	public ObjectProperty<Genre> getMediumPriorityGenre() {
@@ -73,21 +75,22 @@ public class PreferencePageViewModel {
 	}
 
 	/**
-	 * gets the low priority genre
-	 * 
+	 * gets the low priority genre.
+	 *
 	 * @return the low priority genre
 	 */
 	public ObjectProperty<Genre> getLowPriorityGenre() {
 		return this.lowPreferenceGenre;
 	}
 
+	
 	/**
-	 * gets the owned games list property
-	 * 
-	 * @return the owned games list property
+	 * Gets the selected liked game.
+	 *
+	 * @return the selected liked game
 	 */
-	public ListProperty<Game> getOwnedGames() {
-		return this.ownedGames;
+	public ListProperty<Game> getSelectedLikedGames() {
+		return this.likedGames;
 	}
 	
 }
