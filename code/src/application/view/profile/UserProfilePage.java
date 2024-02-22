@@ -1,4 +1,3 @@
-package application.view.profile;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,12 +10,9 @@ import application.model.GameRecommendationEngine;
 import application.model.game.GameLibrary;
 import application.model.game.Genre;
 import application.model.profile.ActiveUser;
-<<<<<<< HEAD
 import application.model.profile.UserProfile;
 import application.view.UserGameLibraryPage.UserGameLibraryPage;
-=======
 import application.view.profile.subProfilePages.EditPreferencesAnchor;
->>>>>>> master
 import application.view.profile.subProfilePages.EditProfileAnchor;
 import application.view.profile.subProfilePages.ProfileAnchor;
 import application.view.profile.subProfilePages.SettingProfileAnchor;
