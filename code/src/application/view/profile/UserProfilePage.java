@@ -33,6 +33,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.net.URL;
 
+/**
+ * The Class UserProfilePage.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class UserProfilePage {
 
 	@FXML
@@ -101,12 +106,7 @@ public class UserProfilePage {
 	private ProfileAnchor profileAnchorCodeBehind;
 	private EditPreferencesAnchor editPreferencesCodeBehind;
 	private SettingProfileAnchor profileSettingsAnchorCodeBehind;
-
-	private UserProfile activeUser;
-	private GameLibrary gameLibrary;
-	private GameRecommendationEngine gameRecommendationEngine;
-	private UserProfile testUser;
-
+	
 	/**
 	 * Instantiates a new user profile page.
 	 */
@@ -116,9 +116,6 @@ public class UserProfilePage {
 		this.profileAnchorCodeBehind = new ProfileAnchor();
 		this.editPreferencesCodeBehind =  new EditPreferencesAnchor();
 		this.profileSettingsAnchorCodeBehind = new SettingProfileAnchor();
-		this.gameLibrary = GameLibraryIO.parseGamesFromFile();
-		this.gameRecommendationEngine = new GameRecommendationEngine(this.gameLibrary.getGames());
-		this.setupTestUser();
 		
 	}
 
@@ -185,8 +182,6 @@ public class UserProfilePage {
 
 	private void setUpMystiverseNavBarHbox() {
 		this.mystiverseNavBarHBox.setOnMouseClicked(((event) -> {
-			//System.out.println(this.gameLibrary.toString());			
-			System.out.println(this.gameRecommendationEngine.generateRecommendations(this.testUser));
 			var errorPopUp = new Alert(AlertType.CONFIRMATION);
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
