@@ -1,6 +1,5 @@
 package application.view.profile;
 
-
 import java.io.IOException;
 import java.util.ResourceBundle;
 
@@ -31,6 +30,7 @@ import java.net.URL;
 
 /**
  * The Class UserProfilePage.
+ * 
  * @author Jeffrey Gaines
  * @version Sprint 1
  */
@@ -83,9 +83,9 @@ public class UserProfilePage {
 
 	@FXML
 	private HBox settingsHbox;
-	
+
 	@FXML
-    private HBox profilePhotoNavBarHBox;
+	private HBox profilePhotoNavBarHBox;
 
 	@FXML
 	private AnchorPane sideBar;
@@ -95,15 +95,14 @@ public class UserProfilePage {
 
 	@FXML
 	private HBox wishlistHBox;
-	
-	
+
 	private UserProfilePageViewModel userProfilePageViewModel;
 	private EditProfileAnchor editProfileCodeBehind;
 	private ProfileAnchor profileAnchorCodeBehind;
 	private UserGameLibraryPage userGameLibraryCodeBehind;
 	private EditPreferencesAnchor editPreferencesCodeBehind;
 	private SettingProfileAnchor profileSettingsAnchorCodeBehind;
-	
+
 	/**
 	 * Instantiates a new user profile page.
 	 */
@@ -114,15 +113,21 @@ public class UserProfilePage {
 		this.profileSettingsAnchorCodeBehind = new SettingProfileAnchor();
 		this.editPreferencesCodeBehind = new EditPreferencesAnchor();
 		this.userGameLibraryCodeBehind = new UserGameLibraryPage();
-		
+
 	}
-	
+
 	@FXML
 	void initialize() {
 		this.validiateFXMLComponents();
+		this.bindToViewModel();
 		this.setUpNavBar();
 		this.setUpSideBarButtons();
 		this.configurePage();
+	}
+
+	private void bindToViewModel() {
+		this.profileUsername.textProperty().bindBidirectional(this.userProfilePageViewModel.getUsernameTextProperty());
+
 	}
 
 	private void setUpSideBarButtons() {
@@ -139,43 +144,25 @@ public class UserProfilePage {
 		this.setUpProfileNavBarHBox();
 		this.setUpProfilePhotoNavBarHBox();
 	}
-	
-	
+
 	private void setUpProfilePhotoNavBarHBox() {
 		this.profilePhotoNavBarHBox.setOnMouseClicked(((event) -> {
 			this.redirectToProfilePage();
 		}));
 	}
 
-	private void redirectToProfilePage() {
-		this.profileAnchorCodeBehind.openAnchorPane(this.parentBorderPane,
-				Main.PROFILE_ANCHOR_PATH_TWO);
-		this.updateProfileImage();
-	}
-
-	private void updateProfileImage() {
-		if (this.userProfilePageViewModel.profilePictureHasChanged()) {
-			var imagePath = ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath();
-			Image userImage = new Image(imagePath);
-			this.profileImageNavBar.setImage(userImage);
-			this.profileImageSideBar.setImage(userImage);
-			this.userProfilePageViewModel.setCachedProfilePicturePath(imagePath);
-		}
-		
-	}
-
 	private void setUpUserNameHBox() {
 		this.profileUsernameHBox.setOnMouseClicked(((event) -> {
 			this.redirectToProfilePage();
 		}));
-		
+
 	}
 
 	private void setUpProfileNavBarHBox() {
 		this.profileNavBarHBox.setOnMouseClicked(((event) -> {
 			this.redirectToProfilePage();
 		}));
-		
+
 	}
 
 	private void setUpMystiverseNavBarHbox() {
@@ -183,21 +170,21 @@ public class UserProfilePage {
 			var errorPopUp = new Alert(AlertType.CONFIRMATION);
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
-			this.updateProfileImage();
+			this.updatePage();
 		}));
 	}
 
 	private void setUpLibraryNavBarHBox() {
 		this.libraryNavBarHBox.setOnMouseClicked(((event) -> {
-			
 			this.userGameLibraryCodeBehind.openUserGameLibraryPage();
+			this.updatePage();
 		}));
 	}
 
 	private void setUpSettingsHBox() {
 		this.settingsHbox.setOnMouseClicked(((event) -> {
 			this.profileSettingsAnchorCodeBehind.openAnchorPane(this.parentBorderPane, Main.PROFILE_SETTINGS_ANCHOR);
-			this.updateProfileImage();
+			this.updatePage();
 		}));
 	}
 
@@ -206,21 +193,21 @@ public class UserProfilePage {
 			var errorPopUp = new Alert(AlertType.CONFIRMATION);
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
-			this.updateProfileImage();
+			this.updatePage();
 		}));
 	}
 
 	private void setUpEditPreferencesHBox() {
 		this.editPreferencesHBox.setOnMouseClicked(((event) -> {
 			this.editPreferencesCodeBehind.openAnchorPane(this.parentBorderPane, Main.EDIT_PREFERENCES_ANCHOR);
-			this.updateProfileImage();
+			this.updatePage();
 		}));
 	}
 
 	private void setUpEditProfileHBox() {
 		this.editProfileHBox.setOnMouseClicked(((event) -> {
 			this.editProfileCodeBehind.openAnchorPane(this.parentBorderPane, Main.EDIT_PROFILE_ANCHOR);
-			this.updateProfileImage();
+			this.updatePage();
 		}));
 	}
 
@@ -243,7 +230,33 @@ public class UserProfilePage {
 			error.printStackTrace();
 		}
 	}
-	
+
+	private void redirectToProfilePage() {
+		this.profileAnchorCodeBehind.openAnchorPane(this.parentBorderPane, Main.PROFILE_ANCHOR_PATH_TWO);
+		this.updatePage();
+	}
+
+	private void updateProfileImage() {
+		if (this.userProfilePageViewModel.profilePictureHasChanged()) {
+			var imagePath = ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath();
+			Image userImage = new Image(imagePath);
+			this.profileImageNavBar.setImage(userImage);
+			this.profileImageSideBar.setImage(userImage);
+			this.userProfilePageViewModel.setCachedProfilePicturePath(imagePath);
+		}
+
+	}
+
+	private void updatePage() {
+		this.updateProfileImage();
+		this.updateProfileName();
+	}
+
+	private void updateProfileName() {
+		this.userProfilePageViewModel.updateUsernameOnPage();
+
+	}
+
 	private void configurePage() {
 		this.setProfilePane();
 		this.setUsernameLabel();
@@ -251,8 +264,8 @@ public class UserProfilePage {
 	}
 
 	private void setUsernameLabel() {
-		this.profileUsername.setText(ActiveUser.getActiveUser().getUsername());
-		
+		this.profileUsername.textProperty().setValue(ActiveUser.getActiveUser().getUsername());
+
 	}
 
 	private void setProfilePane() {
@@ -267,7 +280,6 @@ public class UserProfilePage {
 			error.printStackTrace();
 		}
 	}
-
 
 	private void validiateFXMLComponents() {
 		this.validateSomeComponents();
