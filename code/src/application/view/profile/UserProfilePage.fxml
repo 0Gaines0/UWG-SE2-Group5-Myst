@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="parentBorderPane" maxHeight="600.0" maxWidth="1024.0" minHeight="600.0" minWidth="1024.0" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.profile.UserProfilePage">
+<BorderPane fx:id="parentBorderPane" maxHeight="600.0" maxWidth="1024.0" minHeight="600.0" minWidth="1024.0" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.profile.UserProfilePage">
    <top>
       <AnchorPane fx:id="navigationAchorPane" prefHeight="70.0" prefWidth="1036.0" style="-fx-background-color: #2E3138;" BorderPane.alignment="CENTER">
          <children>
@@ -20,11 +20,15 @@
                   <Font name="Comic Sans MS" size="36.0" />
                </font>
             </Text>
-            <ImageView fx:id="profileImageNavBar" fitHeight="58.0" fitWidth="58.0" layoutX="950.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/placeholder_profile_image.jpg" />
-               </image>
-            </ImageView>
+            <HBox fx:id="profilePhotoNavBarHBox" alignment="CENTER" layoutX="944.0" layoutY="1.0" prefHeight="67.0" prefWidth="75.0">
+               <children>
+                  <ImageView fx:id="profileImageNavBar" fitHeight="67.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/placeholder_profile_image.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
             <HBox fx:id="libraryNavBarHBox" alignment="CENTER" layoutX="155.0" layoutY="15.0" prefHeight="55.0" prefWidth="146.0" styleClass="selected" stylesheets="@assets/styles.css">
                <children>
                   <Text fill="#e3e4db" strokeType="OUTSIDE" strokeWidth="0.0" text="Library" textAlignment="CENTER">
