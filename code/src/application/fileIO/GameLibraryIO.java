@@ -4,6 +4,11 @@ import application.model.game.Game;
 import application.model.game.GameLibrary;
 import application.model.game.Genre;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +23,9 @@ import java.util.stream.Collectors;
  * @version Sprint 1
  */
 public class GameLibraryIO {
+	
+	//private static final String DATABASE_FILENAME = "merged_steam_game_database.csv";
+	private static final String DATABASE_FILENAME = "testData.csv";
 
 	/**
      * Parses a CSV string containing game data and returns a populated GameLibrary instance.
@@ -25,55 +33,83 @@ public class GameLibraryIO {
      * @param csvData The CSV data as a string, where each line represents a game.
      * @return A GameLibrary containing all the games parsed from the CSV data.
      */
-	public static GameLibrary parseGames(String csvData) {
-		GameLibrary library = new GameLibrary();
-		List<String> lines = Arrays.asList(csvData.split("\n"));
+	public static GameLibrary parseGamesFromFile() {
+        GameLibrary library = new GameLibrary();
+        Path path = Paths.get(DATABASE_FILENAME);
+        
+        try {
+            List<String> lines = Files.readAllLines(path);
+            
+            for (int i = 1; i < lines.size(); i++) { 
+                String line = lines.get(i);
+                List<String> fields = parseCsvLine(line);
+                Game game = parseGame(fields);
+                if (game != null) {
+                    library.addGame(game);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading CSV file: " + e.getMessage());
+        }
+        System.out.println(library.size());
+        return library;
+    }
+	private static List<String> parseCsvLine(String csvLine) {
+        List<String> fields = new ArrayList<>();
+        boolean inQuotes = false;
+        StringBuilder buffer = new StringBuilder();
+        
+        for (char c : csvLine.toCharArray()) {
+            if (c == '"') {
+                inQuotes = !inQuotes; 
+            } else if (c == ',' && !inQuotes) {
+                fields.add(buffer.toString());
+                buffer = new StringBuilder(); 
+            } else {
+                buffer.append(c);
+            }
+        }
+        fields.add(buffer.toString()); 
+        
+        return fields;
+    }
 
-		for (int i = 1; i < lines.size(); i++) {
-			String line = lines.get(i);
-			Game game = parseGame(line);
-			if (game != null) {
-				library.addGame(game);
-			}
-		}
+    private static Game parseGame(List<String> fields) {
+        try {
+            int appId = Integer.parseInt(fields.get(0));
+            String name = fields.get(1).replaceAll("^\"|\"$", "");
+            String[] releaseDateParts = fields.get(2).split("/");
+            int releaseDateMonth = Integer.parseInt(releaseDateParts[0]);
+            int releaseDateYear = Integer.parseInt(releaseDateParts[2]);
+            String developer = fields.get(3);
+            List<Genre> genres = Arrays.stream(fields.get(7).split(";"))
+                                       .map(GameLibraryIO::toGenre)
+                                       .filter(Optional::isPresent)
+                                       .map(Optional::get)
+                                       .collect(Collectors.toList());
+            int positiveRatings = Integer.parseInt(fields.get(9));
+            int negativeRatings = Integer.parseInt(fields.get(10));
+            int averagePlaytime = Integer.parseInt(fields.get(11));
+            String gamePhotoLink = fields.get(13);
+            Game game = new Game(name, genres, appId, developer, releaseDateYear, releaseDateMonth, positiveRatings,
+                    negativeRatings, averagePlaytime, gamePhotoLink);
+            //System.out.println("added" + game);
+            return game;
+        } catch (NumberFormatException e) {
+            System.err.println("Error parsing game from CSV fields: " + fields);
+            return null;
+        } catch (IndexOutOfBoundsException e) {
+            System.err.println("CSV fields list has missing elements: " + fields);
+            return null;
+        }
+    }
 
-		return library;
-	}
-
-	private static Game parseGame(String csvLine) {
-		String[] fields = csvLine.split("\t");
-
-		try {
-			int appId = Integer.parseInt(fields[0]);
-			String name = fields[1];
-			String[] releaseDateParts = fields[2].split("/");
-			int releaseDateMonth = Integer.parseInt(releaseDateParts[0]);
-			int releaseDateYear = Integer.parseInt(releaseDateParts[2]);
-			String developer = fields[3];
-			List<Genre> genres = Arrays.stream(fields[7].split(";")).map(GameLibraryIO::toGenre)
-					.filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
-			int positiveRatings = Integer.parseInt(fields[9]);
-			int negativeRatings = Integer.parseInt(fields[10]);
-			int averagePlaytime = Integer.parseInt(fields[11]);
-			String gamePhotoLink = fields[13];
-
-			return new Game(name, genres, appId, developer, releaseDateYear, releaseDateMonth, positiveRatings,
-					negativeRatings, averagePlaytime, gamePhotoLink);
-		} catch (NumberFormatException e) {
-			System.err.println("Error parsing game from CSV line: " + csvLine);
-			return null;
-		} catch (ArrayIndexOutOfBoundsException e) {
-			System.err.println("CSV line has missing fields: " + csvLine);
-			return null;
-		}
-	}
-
-	private static Optional<Genre> toGenre(String genreStr) {
-		String normalized = genreStr.toUpperCase().replace(" ", "_").replace("-", "_");
-		try {
-			return Optional.of(Genre.valueOf(normalized));
-		} catch (IllegalArgumentException e) {
-			return Optional.empty();
-		}
-	}
+    private static Optional<Genre> toGenre(String genreStr) {
+        String normalized = genreStr.toUpperCase().replace(" ", "_").replace("-", "_");
+        try {
+            return Optional.of(Genre.valueOf(normalized));
+        } catch (IllegalArgumentException e) {
+            return Optional.empty();
+        }
+    }
 }
