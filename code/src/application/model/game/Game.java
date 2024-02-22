@@ -21,6 +21,7 @@ public class Game {
 	private int numberNegativeReviews;
 	private int averagePlaytime;
 	private String gamePhotoLink;
+	private double averageReview;
 
 	/**
 	 * Returns this.name
@@ -111,6 +112,15 @@ public class Game {
 	public int getAveragePlaytime() {
 		return this.averagePlaytime;
 	}
+	
+	/**
+	 * Gets the average playtime of the game.
+	 * 
+	 * @return The average playtime in hours.
+	 */
+	public double getAverageReview() {
+		return this.averageReview;
+	}
 
 	/**
 	 * Constructor for Game with minimal information.
@@ -160,6 +170,7 @@ public class Game {
 		this.numberNegativeReviews = numberNegativeReviews;
 		this.averagePlaytime = averagePlaytime;
 		this.gamePhotoLink = gamePhotoLink;
+		this.averageReview = (double) numberPositiveReviews/numberNegativeReviews;
 	}
 
 	@Override
@@ -181,7 +192,8 @@ public class Game {
 
 	@Override
 	public String toString() {
-		String genresStr = this.genres.get(0).toString();
+		//String genresStr = this.genres.get(0).toString();
+		String genresStr = this.genres.toString();
 
 		return String.format("Name: %s, Genres: [%s], Game ID: %d", this.name, genresStr, this.gameID);
 	}
