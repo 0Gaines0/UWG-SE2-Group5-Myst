@@ -22,13 +22,14 @@ public class UserProfile {
 
 	private String username;
 	private String password;
-	
+	private boolean firstTimeLogin;
+
 	private ProfileAttributes profileAttributes;
-	
+
 	private static final String USERNAME_MUST_NOT_BE_NULL_OR_EMPTY = "username must not be null or empty";
 	private static final String PASSWORD_MUST_NOT_BE_NULL_OR_EMPTY = "password must not be null or empty";
 	private static final String INPUT_LIST_MUST_NOT_BE_NULL = "inputted game list must not be null";
-	
+
 	/**
 	 * Instantiates a new user profile.
 	 */
@@ -36,7 +37,7 @@ public class UserProfile {
 		this.profileAttributes = new ProfileAttributes();
 		this.setUpUserGameData();
 	}
-	
+
 	/**
 	 * Instantiates a new user profile.
 	 *
@@ -58,7 +59,7 @@ public class UserProfile {
 		this.username = username;
 		this.password = password;
 	}
-	
+
 	private void setUpUserGameData() {
 		this.allOwnedGames = new ArrayList<Game>();
 		this.allLikedGames = new ArrayList<Game>();
@@ -174,7 +175,7 @@ public class UserProfile {
 		}
 		this.password = password;
 	}
-	
+
 	/**
 	 * gets the preferred genres
 	 * 
@@ -184,7 +185,6 @@ public class UserProfile {
 		return this.preferredGenres;
 	}
 
-	
 	/**
 	 * Sets the preferred genres.
 	 *
@@ -205,82 +205,107 @@ public class UserProfile {
 	public ProfileAttributes getProfileAttributes() {
 		return this.profileAttributes;
 	}
-	/**
-     * Calculates the breakdown of genre percentages for liked and owned games.
-     *
-     * @return A map of genres to their percentage representation among liked and owned games.
-     */
-    public Map<Genre, Double> calculateGenrePercentages() {
-        Map<Genre, Integer> genreCounts = new HashMap<>();
-        int totalGenres = 0;
-
-        for (Game game : this.allLikedGames) {
-            for (Genre genre : game.getGenres()) {
-                genreCounts.put(genre, genreCounts.getOrDefault(genre, 0) + 1);
-                totalGenres++;
-            }
-        }
-
-        for (Game game : this.allOwnedGames) {
-            for (Genre genre : game.getGenres()) {
-                genreCounts.put(genre, genreCounts.getOrDefault(genre, 0) + 1);
-                totalGenres++;
-            }
-        }
-
-        // Calculate percentages
-        Map<Genre, Double> genrePercentages = new HashMap<>();
-        for (Map.Entry<Genre, Integer> entry : genreCounts.entrySet()) {
-            double percentage = 100.0 * entry.getValue() / totalGenres;
-            genrePercentages.put(entry.getKey(), percentage);
-        }
-
-        return genrePercentages;
-    }
 
 	/**
-     * Calculates the average release year of liked and owned games.
-     *
-     * @return The average release year of games.
-     */
-    public double calculateAverageReleaseYear() {
-        int totalYears = 0;
-        int count = 0;
-
-        for (Game game : this.allLikedGames) {
-            totalYears += game.getReleaseDateYear();
-            count++;
-        }
-
-        for (Game game : this.allOwnedGames) {
-            totalYears += game.getReleaseDateYear();
-            count++;
-        }
-
-        if (count == 0) return 0;
-        return (double) totalYears / count;
-    }
+	 * Checks if is first time login.
+	 *
+	 * @return true, if is first time login
+	 */
+	public boolean isFirstTimeLogin() {
+		return this.firstTimeLogin;
+	}
 
 	/**
-     * Calculates the average playtime of liked and owned games.
-     *
-     * @return The average playtime of games in hours.
-     */
-    public double calculateAveragePlaytime() {
-        int totalPlaytime = 0;
-        int count = 0;
+	 * Sets the first time login.
+	 *
+	 * @param firstTimeLogin the new first time login
+	 */
+	public void setFirstTimeLogin(boolean firstTimeLogin) {
+		this.firstTimeLogin = firstTimeLogin;
+	}
 
-        for (Game game : this.allLikedGames) {
-            totalPlaytime += game.getAveragePlaytime();
-            count++;
-        }
+	/**
+	 * Calculates the breakdown of genre percentages for liked and owned games.
+	 *
+	 * @return A map of genres to their percentage representation among liked and
+	 *         owned games.
+	 */
+	public Map<Genre, Double> calculateGenrePercentages() {
+		Map<Genre, Integer> genreCounts = new HashMap<>();
+		int totalGenres = 0;
 
-        for (Game game : this.allOwnedGames) {
-            totalPlaytime += game.getAveragePlaytime();
-            count++;
-        }
+		for (Game game : this.allLikedGames) {
+			for (Genre genre : game.getGenres()) {
+				genreCounts.put(genre, genreCounts.getOrDefault(genre, 0) + 1);
+				totalGenres++;
+			}
+		}
 
-        if (count == 0) return 0;
-        return (double) totalPlaytime / count;
-    }
+		for (Game game : this.allOwnedGames) {
+			for (Genre genre : game.getGenres()) {
+				genreCounts.put(genre, genreCounts.getOrDefault(genre, 0) + 1);
+				totalGenres++;
+			}
+		}
+
+		// Calculate percentages
+		Map<Genre, Double> genrePercentages = new HashMap<>();
+		for (Map.Entry<Genre, Integer> entry : genreCounts.entrySet()) {
+			double percentage = 100.0 * entry.getValue() / totalGenres;
+			genrePercentages.put(entry.getKey(), percentage);
+		}
+
+		return genrePercentages;
+	}
+
+	/**
+	 * Calculates the average release year of liked and owned games.
+	 *
+	 * @return The average release year of games.
+	 */
+	public double calculateAverageReleaseYear() {
+		int totalYears = 0;
+		int count = 0;
+
+		for (Game game : this.allLikedGames) {
+			totalYears += game.getReleaseDateYear();
+			count++;
+		}
+
+		for (Game game : this.allOwnedGames) {
+			totalYears += game.getReleaseDateYear();
+			count++;
+		}
+
+		if (count == 0) {
+			return 0;
+		}
+		return (double) totalYears / count;
+	}
+
+	/**
+	 * Calculates the average playtime of liked and owned games.
+	 *
+	 * @return The average playtime of games in hours.
+	 */
+	public double calculateAveragePlaytime() {
+		int totalPlaytime = 0;
+		int count = 0;
+
+		for (Game game : this.allLikedGames) {
+			totalPlaytime += game.getAveragePlaytime();
+			count++;
+		}
+
+		for (Game game : this.allOwnedGames) {
+			totalPlaytime += game.getAveragePlaytime();
+			count++;
+		}
+
+		if (count == 0) {
+			return 0;
+		}
+
+		return (double) totalPlaytime / count;
+	}
 }
