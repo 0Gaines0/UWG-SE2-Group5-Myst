@@ -10,6 +10,11 @@ import org.junit.jupiter.api.Test;
 import application.model.profile.ActiveUser;
 import application.viewModel.login.LoginPageViewModel;
 
+/**
+ * The Class TestLoginPageViewModel.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class TestLoginPageViewModel {
 
 	private LoginPageViewModel loginPageViewModel;

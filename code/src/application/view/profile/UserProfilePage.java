@@ -5,10 +5,7 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 
 import application.Main;
-import application.fileIO.GameLibraryIO;
-import application.model.GameRecommendationEngine;
 import application.model.profile.ActiveUser;
-import application.model.profile.UserProfile;
 import application.view.UserGameLibraryPage.UserGameLibraryPage;
 import application.view.profile.subProfilePages.EditPreferencesAnchor;
 import application.view.profile.subProfilePages.EditProfileAnchor;

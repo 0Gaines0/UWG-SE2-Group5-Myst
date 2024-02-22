@@ -14,6 +14,11 @@ import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
 import application.viewModel.profile.subProfilePages.EditPreferencesAnchorViewModel;
 
+/**
+ * The Class TestEditPreferencesAnchorViewModel.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class TestEditPreferencesAnchorViewModel {
 	private EditPreferencesAnchorViewModel viewModel;
 	private Game testGame;

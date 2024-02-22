@@ -11,6 +11,11 @@ import org.junit.jupiter.api.Test;
 
 import application.model.profile.credentials.CredentialManager;
 
+/**
+ * The Class TestCredentialManager.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class TestCredentialManager {
 
 	private CredentialManager credentialManager;

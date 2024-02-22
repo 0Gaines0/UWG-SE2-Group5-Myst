@@ -17,6 +17,11 @@ import application.model.game.Game;
 import application.model.game.Genre;
 import application.model.profile.UserProfile;
 
+/**
+ * The Class TestUserProfile.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class TestUserProfile {
 
 	private UserProfile userProfile;

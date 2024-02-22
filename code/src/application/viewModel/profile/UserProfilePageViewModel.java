@@ -2,6 +2,11 @@ package application.viewModel.profile;
 
 import application.model.profile.ActiveUser;
 
+/**
+ * The Class UserProfilePageViewModel.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class UserProfilePageViewModel {
 
 	private String cachedProfilePicturePath;

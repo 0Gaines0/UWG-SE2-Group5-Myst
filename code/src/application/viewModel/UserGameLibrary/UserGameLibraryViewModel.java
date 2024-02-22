@@ -7,7 +7,6 @@ import application.model.profile.UserGameLibrary;
 import application.model.profile.UserProfile;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
-import javafx.collections.FXCollections;
 
 /**
  * The userGameLibraryViewModel

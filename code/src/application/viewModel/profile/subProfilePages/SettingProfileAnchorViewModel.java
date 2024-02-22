@@ -5,6 +5,11 @@ import application.model.profile.credentials.CredentialManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * The Class SettingProfileAnchorViewModel.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class SettingProfileAnchorViewModel {
 
 	private StringProperty changeInformationCurrentPasswordProperty;

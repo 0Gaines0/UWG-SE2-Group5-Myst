@@ -8,6 +8,11 @@ import org.junit.jupiter.api.Test;
 
 import application.viewModel.login.CreatePageViewModel;
 
+/**
+ * The Class TestCreatePageViewModel.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class TestCreatePageViewModel {
 	private CreatePageViewModel viewModel;
 	

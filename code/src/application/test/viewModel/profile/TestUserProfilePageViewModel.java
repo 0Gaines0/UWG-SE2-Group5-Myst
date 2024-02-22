@@ -11,6 +11,11 @@ import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
 import application.viewModel.profile.UserProfilePageViewModel;
 
+/**
+ * The Class TestUserProfilePageViewModel.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class TestUserProfilePageViewModel {
 
 	private UserProfilePageViewModel userProfilePageViewModel;

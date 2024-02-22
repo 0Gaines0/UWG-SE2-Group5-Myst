@@ -16,6 +16,11 @@ import application.model.game.Game;
 import application.model.game.Genre;
 import application.model.profile.ProfileAttributes;
 
+/**
+ * The Class TestProfileAttributes.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class TestProfileAttributes {
 
 	private ProfileAttributes profileAttributes;
