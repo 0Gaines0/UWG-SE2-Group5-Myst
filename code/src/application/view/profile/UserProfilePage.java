@@ -1,15 +1,9 @@
 package application.view.profile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
-import application.fileIO.GameLibraryIO;
-import application.model.GameRecommendationEngine;
-import application.model.game.GameLibrary;
-import application.model.game.Genre;
 import application.model.profile.ActiveUser;
 import application.view.profile.subProfilePages.EditPreferencesAnchor;
 import application.view.profile.subProfilePages.EditProfileAnchor;
