@@ -22,7 +22,6 @@ public class UserGameLibrary {
 	 * @param user the user
 	 */
 	public UserGameLibrary(UserProfile user) {
-		
 		this.user = user;
 		this.library = user.getAllOwnedGames();
 	}

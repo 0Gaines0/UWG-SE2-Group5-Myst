@@ -44,8 +44,6 @@ public class LoginPageViewModel {
 			if (credential.getPassword().equals(password)) {
 				return true;
 			}
-		} else {
-			return false;
 		}
 		return false;
 
