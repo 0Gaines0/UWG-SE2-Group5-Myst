@@ -77,6 +77,7 @@ public class LoginPageViewModel {
 		var game = new Game("testGame", genreList, 1001);
 		var game2 = new Game("testGame2", genreList, 1200);
 		ActiveUser.setActiveUser(user);
+		ActiveUser.getActiveUser().getAllOwnedGames().add(game);
 		ActiveUser.getActiveUser().getAllLikedGames().add(game);
 		ActiveUser.getActiveUser().getAllLikedGames().add(game2);
 	}
