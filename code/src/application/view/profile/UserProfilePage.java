@@ -11,15 +11,18 @@ import application.model.GameRecommendationEngine;
 import application.model.game.GameLibrary;
 import application.model.game.Genre;
 import application.model.profile.ActiveUser;
-import application.model.profile.UserProfile;
+import application.view.profile.subProfilePages.EditPreferencesAnchor;
 import application.view.profile.subProfilePages.EditProfileAnchor;
 import application.view.profile.subProfilePages.ProfileAnchor;
+import application.view.profile.subProfilePages.SettingProfileAnchor;
+import application.viewModel.profile.UserProfilePageViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -30,6 +33,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.net.URL;
 
+/**
+ * The Class UserProfilePage.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class UserProfilePage {
 
 	@FXML
@@ -79,6 +87,9 @@ public class UserProfilePage {
 
 	@FXML
 	private HBox settingsHbox;
+	
+	@FXML
+    private HBox profilePhotoNavBarHBox;
 
 	@FXML
 	private AnchorPane sideBar;
@@ -88,34 +99,24 @@ public class UserProfilePage {
 
 	@FXML
 	private HBox wishlistHBox;
-
+	
+	
+	private UserProfilePageViewModel userProfilePageViewModel;
 	private EditProfileAnchor editProfileCodeBehind;
 	private ProfileAnchor profileAnchorCodeBehind;
-
-	private UserProfile activeUser;
-	private GameLibrary gameLibrary;
-	private GameRecommendationEngine gameRecommendationEngine;
-	private UserProfile testUser;
-
+	private EditPreferencesAnchor editPreferencesCodeBehind;
+	private SettingProfileAnchor profileSettingsAnchorCodeBehind;
+	
 	/**
 	 * Instantiates a new user profile page.
 	 */
 	public UserProfilePage() {
+		this.userProfilePageViewModel = new UserProfilePageViewModel();
 		this.editProfileCodeBehind = new EditProfileAnchor();
 		this.profileAnchorCodeBehind = new ProfileAnchor();
-		this.gameLibrary = GameLibraryIO.parseGamesFromFile();
-		this.gameRecommendationEngine = new GameRecommendationEngine(this.gameLibrary.getGames());
-		this.setupTestUser();
+		this.editPreferencesCodeBehind =  new EditPreferencesAnchor();
+		this.profileSettingsAnchorCodeBehind = new SettingProfileAnchor();
 		
-	}
-	
-	private void setupTestUser() {
-		this.testUser = new UserProfile("user", "pass");
-		List<Genre> testGenres = new ArrayList<Genre>();
-		testGenres.add(Genre.ACTION);
-		testGenres.add(Genre.ADVENTURE);
-		testGenres.add(Genre.RPG);
-		this.testUser.setPreferredGenres(testGenres);
 	}
 
 	@FXML
@@ -138,30 +139,53 @@ public class UserProfilePage {
 		this.setUpLibraryNavBarHBox();
 		this.setUpMystiverseNavBarHbox();
 		this.setUpProfileNavBarHBox();
+		this.setUpProfilePhotoNavBarHBox();
+	}
+	
+	
+	private void setUpProfilePhotoNavBarHBox() {
+		this.profilePhotoNavBarHBox.setOnMouseClicked(((event) -> {
+			this.redirectToProfilePage();
+		}));
+	}
+
+	private void redirectToProfilePage() {
+		this.profileAnchorCodeBehind.openAnchorPane(this.parentBorderPane,
+				Main.PROFILE_ANCHOR_PATH_TWO);
+		this.updateProfileImage();
+	}
+
+	private void updateProfileImage() {
+		if (this.userProfilePageViewModel.profilePictureHasChanged()) {
+			var imagePath = ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath();
+			Image userImage = new Image(imagePath);
+			this.profileImageNavBar.setImage(userImage);
+			this.profileImageSideBar.setImage(userImage);
+			this.userProfilePageViewModel.setCachedProfilePicturePath(imagePath);
+		}
+		
 	}
 
 	private void setUpUserNameHBox() {
 		this.profileUsernameHBox.setOnMouseClicked(((event) -> {
-			this.profileAnchorCodeBehind.openAnchorPane(this.activeUser, this.parentBorderPane,
-					Main.PROFILE_ANCHOR_PATH_TWO);
+			this.redirectToProfilePage();
 		}));
+		
 	}
 
 	private void setUpProfileNavBarHBox() {
 		this.profileNavBarHBox.setOnMouseClicked(((event) -> {
-			var errorPopUp = new Alert(AlertType.CONFIRMATION);
-			errorPopUp.setContentText("Button Click Works!");
-			errorPopUp.showAndWait();
+			this.redirectToProfilePage();
 		}));
+		
 	}
 
 	private void setUpMystiverseNavBarHbox() {
 		this.mystiverseNavBarHBox.setOnMouseClicked(((event) -> {
-			//System.out.println(this.gameLibrary.toString());			
-			System.out.println(this.gameRecommendationEngine.generateRecommendations(this.testUser));
 			var errorPopUp = new Alert(AlertType.CONFIRMATION);
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
+			this.updateProfileImage();
 		}));
 	}
 
@@ -170,14 +194,14 @@ public class UserProfilePage {
 			var errorPopUp = new Alert(AlertType.CONFIRMATION);
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
+			this.updateProfileImage();
 		}));
 	}
 
 	private void setUpSettingsHBox() {
 		this.settingsHbox.setOnMouseClicked(((event) -> {
-			var errorPopUp = new Alert(AlertType.CONFIRMATION);
-			errorPopUp.setContentText("Button Click Works!");
-			errorPopUp.showAndWait();
+			this.profileSettingsAnchorCodeBehind.openAnchorPane(this.parentBorderPane, Main.PROFILE_SETTINGS_ANCHOR);
+			this.updateProfileImage();
 		}));
 	}
 
@@ -186,20 +210,21 @@ public class UserProfilePage {
 			var errorPopUp = new Alert(AlertType.CONFIRMATION);
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
+			this.updateProfileImage();
 		}));
 	}
 
 	private void setUpEditPreferencesHBox() {
 		this.editPreferencesHBox.setOnMouseClicked(((event) -> {
-			var errorPopUp = new Alert(AlertType.CONFIRMATION);
-			errorPopUp.setContentText("Button Click Works!");
-			errorPopUp.showAndWait();
+			this.editPreferencesCodeBehind.openAnchorPane(this.parentBorderPane, Main.EDIT_PREFERENCES_ANCHOR);
+			this.updateProfileImage();
 		}));
 	}
 
 	private void setUpEditProfileHBox() {
 		this.editProfileHBox.setOnMouseClicked(((event) -> {
-			this.editProfileCodeBehind.openAnchorPane(this.activeUser, this.parentBorderPane, Main.EDIT_PROFILE_ANCHOR);
+			this.editProfileCodeBehind.openAnchorPane(this.parentBorderPane, Main.EDIT_PROFILE_ANCHOR);
+			this.updateProfileImage();
 		}));
 	}
 
@@ -226,6 +251,7 @@ public class UserProfilePage {
 	private void configurePage() {
 		this.setProfilePane();
 		this.setUsernameLabel();
+		this.updateProfileImage();
 	}
 
 	private void setUsernameLabel() {
@@ -288,24 +314,8 @@ public class UserProfilePage {
 				: "fx:id=\"profileHBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 		assert this.profileImageNavBar != null
 				: "fx:id=\"profileImageNavBar\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
-	}
-
-	/**
-	 * Gets the active user.
-	 *
-	 * @return the active user
-	 */
-	public UserProfile getActiveUser() {
-		return this.activeUser;
-	}
-
-	/**
-	 * Sets the active user.
-	 *
-	 * @param activeUser the new active user
-	 */
-	public void setActiveUser(UserProfile activeUser) {
-		this.activeUser = activeUser;
+		assert this.profilePhotoNavBarHBox != null
+				: "fx:id=\"profilePhotoNavBarHBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 	}
 
 }

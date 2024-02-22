@@ -1,7 +1,5 @@
 package application.model.profile;
 
-import javax.swing.ImageIcon;
-
 import application.model.game.Game;
 
 /**
@@ -13,7 +11,7 @@ import application.model.game.Game;
 public class ProfileAttributes {
 	private String aboutMeDescription;
 	private Game favoriteGame;
-	private ImageIcon userProfilePicture;
+	private String userProfilePicturePath;
 	private int totalLikedGames;
 	private int totalDislikedGame;
 
@@ -25,7 +23,7 @@ public class ProfileAttributes {
 	 */
 	public ProfileAttributes() {
 		this.aboutMeDescription = "";
-		this.userProfilePicture = new ImageIcon();
+		this.userProfilePicturePath = "";
 		this.totalLikedGames = 0;
 		this.totalDislikedGame = 0;
 	}
@@ -49,24 +47,10 @@ public class ProfileAttributes {
 			throw new IllegalArgumentException(IMAGE_PATH_MUST_BE_VALID);
 		}
 		this.aboutMeDescription = description;
-		this.userProfilePicture = new ImageIcon(imagePath);
+		this.userProfilePicturePath = imagePath;
 		this.totalLikedGames = likedGames;
 		this.totalDislikedGame = dislikedGames;
 
-	}
-
-	/**
-	 * Sets the profile image.
-	 *
-	 * @param imagePath the new profile image
-	 */
-	public void setProfileImage(String imagePath) {
-		if (imagePath == null) {
-			throw new NullPointerException(IMAGE_PATH_MUST_BE_VALID);
-		} else if (imagePath.isBlank()) {
-			throw new IllegalArgumentException(IMAGE_PATH_MUST_BE_VALID);
-		}
-		this.userProfilePicture = new ImageIcon(imagePath);
 	}
 
 	/**
@@ -124,8 +108,8 @@ public class ProfileAttributes {
 	 *
 	 * @return the user profile picture
 	 */
-	public ImageIcon getUserProfilePicture() {
-		return this.userProfilePicture;
+	public String getUserProfilePicturePath() {
+		return this.userProfilePicturePath;
 	}
 
 	/**
@@ -133,8 +117,8 @@ public class ProfileAttributes {
 	 *
 	 * @param userProfilePicture the new user profile picture
 	 */
-	public void setUserProfilePicture(ImageIcon userProfilePicture) {
-		this.userProfilePicture = userProfilePicture;
+	public void setUserProfilePicturePath(String userProfilePicture) {
+		this.userProfilePicturePath = userProfilePicture;
 	}
 
 	/**
