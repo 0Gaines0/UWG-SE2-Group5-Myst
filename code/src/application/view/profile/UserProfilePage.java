@@ -114,6 +114,8 @@ public class UserProfilePage {
 		this.userProfilePageViewModel = new UserProfilePageViewModel();
 		this.editProfileCodeBehind = new EditProfileAnchor();
 		this.profileAnchorCodeBehind = new ProfileAnchor();
+		this.profileSettingsAnchorCodeBehind = new SettingProfileAnchor();
+		this.editPreferencesCodeBehind = new EditPreferencesAnchor();
 		this.userGameLibraryCodeBehind = new UserGameLibraryPage();
 		
 	}
