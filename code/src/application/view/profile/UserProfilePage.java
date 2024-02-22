@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 
 import application.Main;
+import application.fileIO.GameLibraryIO;
+import application.model.GameRecommendationEngine;
 import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
 import application.view.UserGameLibraryPage.UserGameLibraryPage;
@@ -112,9 +114,6 @@ public class UserProfilePage {
 		this.userProfilePageViewModel = new UserProfilePageViewModel();
 		this.editProfileCodeBehind = new EditProfileAnchor();
 		this.profileAnchorCodeBehind = new ProfileAnchor();
-		this.gameLibrary = GameLibraryIO.parseGamesFromFile();
-		this.gameRecommendationEngine = new GameRecommendationEngine(this.gameLibrary.getGames());
-		this.setupTestUser();		
 		this.userGameLibraryCodeBehind = new UserGameLibraryPage();
 		
 	}
@@ -182,11 +181,6 @@ public class UserProfilePage {
 
 	private void setUpMystiverseNavBarHbox() {
 		this.mystiverseNavBarHBox.setOnMouseClicked(((event) -> {
-			//System.out.println(this.gameLibrary.toString());	
-			
-			//System.out.println(this.gameRecommendationEngine.generateRecommendations(ActiveUser.getActiveUser()));
-			//System.out.println(this.gameRecommendationEngine.generateRecommendations(this.testUser));
-			System.out.println(this.gameRecommendationEngine.generateRecommendationsRandom(this.testUser));
 			var errorPopUp = new Alert(AlertType.CONFIRMATION);
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
