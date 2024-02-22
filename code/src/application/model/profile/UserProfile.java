@@ -257,7 +257,9 @@ public class UserProfile {
             count++;
         }
 
-        if (count == 0) return 0;
+        if (count == 0) {
+        	return 0;
+        }
         return (double) totalYears / count;
     }
 
@@ -280,7 +282,9 @@ public class UserProfile {
             count++;
         }
 
-        if (count == 0) return 0;
+        if (count == 0) {
+        	return 0;
+        }
         return (double) totalPlaytime / count;
     }
 }

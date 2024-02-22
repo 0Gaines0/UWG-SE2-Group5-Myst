@@ -105,8 +105,7 @@ public class UserProfilePage {
 		this.profileAnchorCodeBehind = new ProfileAnchor();
 		this.gameLibrary = GameLibraryIO.parseGamesFromFile();
 		this.gameRecommendationEngine = new GameRecommendationEngine(this.gameLibrary.getGames());
-		this.setupTestUser();
-		
+		this.setupTestUser();		
 	}
 	
 	private void setupTestUser() {
@@ -157,8 +156,11 @@ public class UserProfilePage {
 
 	private void setUpMystiverseNavBarHbox() {
 		this.mystiverseNavBarHBox.setOnMouseClicked(((event) -> {
-			//System.out.println(this.gameLibrary.toString());			
-			System.out.println(this.gameRecommendationEngine.generateRecommendations(this.testUser));
+			//System.out.println(this.gameLibrary.toString());	
+			
+			//System.out.println(this.gameRecommendationEngine.generateRecommendations(ActiveUser.getActiveUser()));
+			//System.out.println(this.gameRecommendationEngine.generateRecommendations(this.testUser));
+			System.out.println(this.gameRecommendationEngine.generateRecommendationsRandom(this.testUser));
 			var errorPopUp = new Alert(AlertType.CONFIRMATION);
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();

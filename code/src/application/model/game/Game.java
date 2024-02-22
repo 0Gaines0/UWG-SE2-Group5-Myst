@@ -1,5 +1,6 @@
 package application.model.game;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,6 +23,7 @@ public class Game {
 	private int averagePlaytime;
 	private String gamePhotoLink;
 	private double averageReview;
+	private int totalNumberOfReviews;
 
 	/**
 	 * Returns this.name
@@ -112,7 +114,7 @@ public class Game {
 	public int getAveragePlaytime() {
 		return this.averagePlaytime;
 	}
-	
+
 	/**
 	 * Gets the average playtime of the game.
 	 * 
@@ -120,6 +122,15 @@ public class Game {
 	 */
 	public double getAverageReview() {
 		return this.averageReview;
+	}
+	
+	/**
+	 * Gets the average playtime of the game.
+	 * 
+	 * @return The average playtime in hours.
+	 */
+	public int getTotalNumberOfReviews() {
+		return this.totalNumberOfReviews;
 	}
 
 	/**
@@ -133,31 +144,31 @@ public class Game {
 		if (name == null) {
 			throw new IllegalArgumentException("Name must not be null");
 		}
-		if (genres == null) {
-			this.genres.add(Genre.MISSING_GENRE);
-		}
+		this.genres = (genres == null) ? new ArrayList<>() : new ArrayList<>(genres);
+	    if (this.genres.isEmpty()) {
+	        this.genres.add(Genre.MISSING_GENRE);
+	        System.out.println(this.genres);
+	    }
 		if (gameID == 0) {
 			throw new IllegalArgumentException("Genre must not be null");
 		}
 		this.name = name;
-		this.genres = genres;
 		this.gameID = gameID;
 	}
 
-	
 	/**
 	 * Instantiates a new game.
 	 *
-	 * @param name the name
-	 * @param genres the genres
-	 * @param gameID the game ID
-	 * @param developers the developers
-	 * @param releaseDateYear the release date year
-	 * @param releaseDateMonth the release date month
+	 * @param name                  the name
+	 * @param genres                the genres
+	 * @param gameID                the game ID
+	 * @param developers            the developers
+	 * @param releaseDateYear       the release date year
+	 * @param releaseDateMonth      the release date month
 	 * @param numberPositiveReviews the number positive reviews
 	 * @param numberNegativeReviews the number negative reviews
-	 * @param averagePlaytime the average playtime
-	 * @param gamePhotoLink the game photo link
+	 * @param averagePlaytime       the average playtime
+	 * @param gamePhotoLink         the game photo link
 	 */
 	public Game(String name, List<Genre> genres, int gameID, String developers, int releaseDateYear,
 			int releaseDateMonth, int numberPositiveReviews, int numberNegativeReviews, int averagePlaytime,
@@ -170,7 +181,36 @@ public class Game {
 		this.numberNegativeReviews = numberNegativeReviews;
 		this.averagePlaytime = averagePlaytime;
 		this.gamePhotoLink = gamePhotoLink;
-		this.averageReview = (double) numberPositiveReviews/numberNegativeReviews;
+		this.averageReview = this.calculateWeightedAverage(numberPositiveReviews, numberNegativeReviews);
+		this.totalNumberOfReviews = numberPositiveReviews + numberNegativeReviews;
+	}
+
+	private double calculateWeightedAverage(int numberPositiveReviews, int numberNegativeReviews) {
+	    final double baselineScore = 5.0;
+	    final double baselineCount = 10.0;
+	    final double reviewVolumeWeight = 0.5;
+	    final double maxVolumeEffect = 2.0;
+	    double totalReviews = numberPositiveReviews + numberNegativeReviews;
+	    double weightedScore;
+
+	    if (totalReviews == 0) {
+	        return baselineScore; 
+	    } else {
+	        weightedScore = ((double) numberPositiveReviews + baselineScore * baselineCount - numberNegativeReviews) / (totalReviews + baselineCount);
+	    }
+
+	    double reviewVolumeFactor = Math.min(1.0 + Math.log10(1 + totalReviews) * reviewVolumeWeight, maxVolumeEffect);
+	    weightedScore *= reviewVolumeFactor;
+
+	    weightedScore = Math.max(weightedScore, 0); 
+
+	    double minScale = 1.0;
+	    double maxScale = 10.0;
+	    double normalizedScore = ((weightedScore + 1) / 2) * (maxScale - minScale) + minScale;
+
+	    normalizedScore = Math.max(minScale, Math.min(normalizedScore, maxScale));
+
+	    return normalizedScore;
 	}
 
 	@Override
@@ -192,7 +232,7 @@ public class Game {
 
 	@Override
 	public String toString() {
-		//String genresStr = this.genres.get(0).toString();
+		// String genresStr = this.genres.get(0).toString();
 		String genresStr = this.genres.toString();
 
 		return String.format("Name: %s, Genres: [%s], Game ID: %d", this.name, genresStr, this.gameID);
