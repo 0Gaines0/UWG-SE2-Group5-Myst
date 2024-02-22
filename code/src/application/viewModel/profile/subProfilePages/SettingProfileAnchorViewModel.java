@@ -1,26 +1,30 @@
 package application.viewModel.profile.subProfilePages;
 
 import application.model.profile.ActiveUser;
+import application.model.profile.credentials.CredentialManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class SettingProfileAnchorViewModel {
-	
+
 	private StringProperty changeInformationCurrentPasswordProperty;
 	private StringProperty changeInformationNewPasswordProperty;
 	private StringProperty changeInformationReenterNewPasswordProperty;
-	
+
 	private StringProperty changeInformationCurrentUsernameProperty;
 	private StringProperty changeInformationNewUsernameProperty;
 	private StringProperty changeInformationReenterNewUsernameProperty;
-	
+
 	private StringProperty userInformationPasswordProperty;
 	private StringProperty userInformationUsernameProperty;
 	
+	private CredentialManager credentialManager;
+
 	/**
 	 * Instantiates a new setting profile anchor view model.
 	 */
 	public SettingProfileAnchorViewModel() {
+		this.credentialManager = new CredentialManager();
 		this.changeInformationCurrentPasswordProperty = new SimpleStringProperty();
 		this.changeInformationCurrentUsernameProperty = new SimpleStringProperty();
 		this.changeInformationNewPasswordProperty = new SimpleStringProperty();
@@ -30,13 +34,47 @@ public class SettingProfileAnchorViewModel {
 		this.userInformationPasswordProperty = new SimpleStringProperty();
 		this.userInformationUsernameProperty = new SimpleStringProperty();
 	}
-	
+
 	/**
 	 * Sets the up user information fields.
 	 */
 	public void setUpUserInformationFields() {
 		this.userInformationUsernameProperty.set(ActiveUser.getActiveUser().getUsername());
 		this.userInformationPasswordProperty.set(ActiveUser.getActiveUser().getPassword());
+	}
+
+	/**
+	 * Attempt to change username.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean attemptToChangeUsername() {
+		var currentUserName = ActiveUser.getActiveUser().getUsername();
+		var inputtedCurrentUserName = this.changeInformationCurrentUsernameProperty.getValue();
+		var inputtedNewUserName = this.changeInformationNewUsernameProperty.getValue();
+		var inputtedReenterNewUserName = this.changeInformationReenterNewUsernameProperty.getValue();
+
+		if (this.invalidateChangeUsernameComponents(inputtedCurrentUserName, inputtedNewUserName,
+				inputtedReenterNewUserName)) {
+			return false;
+		} else if (this.usernamesDoNotMatch(currentUserName, inputtedCurrentUserName)) {
+			return false;
+		} else if (this.credentialManager.getSpecifiedCredential(inputtedCurrentUserName) != null) {
+			return false;
+		} else {
+			return this.credentialManager.changeCredentialUserName(currentUserName, inputtedCurrentUserName);
+		}
+	}
+
+	private boolean usernamesDoNotMatch(String currentUserName, String inputtedCurrentUserName) {
+		return !currentUserName.equals(inputtedCurrentUserName);
+	}
+
+	private boolean invalidateChangeUsernameComponents(String inputtedCurrentUserName, String inputtedNewUserName,
+			String inputtedReenterNewUserName) {
+		return inputtedCurrentUserName == null || inputtedCurrentUserName.isBlank() || inputtedNewUserName == null
+				|| inputtedNewUserName.isBlank() || inputtedReenterNewUserName == null
+				|| inputtedReenterNewUserName.isBlank();
 	}
 
 	/**

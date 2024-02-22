@@ -8,6 +8,7 @@ import application.fileIO.UserCredentialsIO;
 
 /**
  * The Class CredentialManager.
+ * 
  * @author Jeffrey Gaines
  * @version Sprint 1
  */
@@ -63,6 +64,69 @@ public class CredentialManager {
 			}
 		}
 		return credential;
+	}
+
+	/**
+	 * Change credential user name.
+	 *
+	 * @param currentUsername the current username
+	 * @param newUsername     the new username
+	 * @return true, if successful
+	 */
+	public boolean changeCredentialUserName(String currentUsername, String newUsername) {
+		if (currentUsername == null) {
+			throw new NullPointerException(USERNAME_MUST_BE_VALID);
+		} else if (currentUsername.isBlank()) {
+			throw new IllegalArgumentException(USERNAME_MUST_BE_VALID);
+		}
+		if (newUsername == null) {
+			throw new NullPointerException(USERNAME_MUST_BE_VALID);
+		} else if (newUsername.isBlank()) {
+			throw new IllegalArgumentException(USERNAME_MUST_BE_VALID);
+		}
+		var credential = this.getSpecifiedCredential(currentUsername);
+		if (credential != null) {
+			credential.setUsername(newUsername);
+			this.updateCredentialFile();
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	/**
+	 * Change credential password.
+	 *
+	 * @param currentUsername the current username
+	 * @param currentPassword the current password
+	 * @param newPassword     the new password
+	 * @return true, if successful
+	 */
+	public boolean changeCredentialPassword(String currentUsername, String currentPassword, String newPassword) {
+		if (currentUsername == null) {
+			throw new NullPointerException(USERNAME_MUST_BE_VALID);
+		} else if (currentUsername.isBlank()) {
+			throw new IllegalArgumentException(USERNAME_MUST_BE_VALID);
+		}
+		if (currentPassword == null) {
+			throw new NullPointerException(USERNAME_MUST_BE_VALID);
+		} else if (currentPassword.isBlank()) {
+			throw new IllegalArgumentException(USERNAME_MUST_BE_VALID);
+		}
+		if (newPassword == null) {
+			throw new NullPointerException(USERNAME_MUST_BE_VALID);
+		} else if (newPassword.isBlank()) {
+			throw new IllegalArgumentException(USERNAME_MUST_BE_VALID);
+		}
+		var credential = this.getSpecifiedCredential(currentUsername);
+		if (credential != null && credential.getPassword().equals(currentPassword)) {
+			credential.setPassword(newPassword);
+			this.updateCredentialFile();
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
