@@ -1,10 +1,13 @@
 package application.view.profile;
 
+
 import java.io.IOException;
 import java.util.ResourceBundle;
 
 import application.Main;
 import application.model.profile.ActiveUser;
+import application.model.profile.UserProfile;
+import application.view.UserGameLibraryPage.UserGameLibraryPage;
 import application.view.profile.subProfilePages.EditPreferencesAnchor;
 import application.view.profile.subProfilePages.EditProfileAnchor;
 import application.view.profile.subProfilePages.ProfileAnchor;
@@ -98,6 +101,13 @@ public class UserProfilePage {
 	private UserProfilePageViewModel userProfilePageViewModel;
 	private EditProfileAnchor editProfileCodeBehind;
 	private ProfileAnchor profileAnchorCodeBehind;
+	private UserGameLibraryPage userGameLibraryCodeBehind;
+
+	private UserProfile activeUser;
+	private GameLibrary gameLibrary;
+	private GameRecommendationEngine gameRecommendationEngine;
+	private UserProfile testUser;
+
 	private EditPreferencesAnchor editPreferencesCodeBehind;
 	private SettingProfileAnchor profileSettingsAnchorCodeBehind;
 	
@@ -108,6 +118,20 @@ public class UserProfilePage {
 		this.userProfilePageViewModel = new UserProfilePageViewModel();
 		this.editProfileCodeBehind = new EditProfileAnchor();
 		this.profileAnchorCodeBehind = new ProfileAnchor();
+		this.userGameLibraryCodeBehind = new UserGameLibraryPage();
+		this.gameLibrary = GameLibraryIO.parseGamesFromFile();
+		this.gameRecommendationEngine = new GameRecommendationEngine(this.gameLibrary.getGames());
+		this.setupTestUser();
+		
+	}
+	
+	private void setupTestUser() {
+		this.testUser = new UserProfile("user", "pass");
+		List<Genre> testGenres = new ArrayList<Genre>();
+		testGenres.add(Genre.ACTION);
+		testGenres.add(Genre.ADVENTURE);
+		testGenres.add(Genre.RPG);
+		this.testUser.setPreferredGenres(testGenres);
 		this.editPreferencesCodeBehind =  new EditPreferencesAnchor();
 		this.profileSettingsAnchorCodeBehind = new SettingProfileAnchor();
 		
@@ -176,6 +200,8 @@ public class UserProfilePage {
 
 	private void setUpMystiverseNavBarHbox() {
 		this.mystiverseNavBarHBox.setOnMouseClicked(((event) -> {
+			//System.out.println(this.gameLibrary.toString());			
+			System.out.println(this.gameRecommendationEngine.generateRecommendations(this.testUser));
 			var errorPopUp = new Alert(AlertType.CONFIRMATION);
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
@@ -185,6 +211,10 @@ public class UserProfilePage {
 
 	private void setUpLibraryNavBarHBox() {
 		this.libraryNavBarHBox.setOnMouseClicked(((event) -> {
+//			var errorPopUp = new Alert(AlertType.CONFIRMATION);
+//			errorPopUp.setContentText("Button Click Works!");
+//			errorPopUp.showAndWait();
+		this.userGameLibraryCodeBehind.openUserGameLibraryPage();
 			var errorPopUp = new Alert(AlertType.CONFIRMATION);
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
@@ -241,7 +271,7 @@ public class UserProfilePage {
 			error.printStackTrace();
 		}
 	}
-
+	
 	private void configurePage() {
 		this.setProfilePane();
 		this.setUsernameLabel();
