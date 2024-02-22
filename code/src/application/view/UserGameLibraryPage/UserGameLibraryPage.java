@@ -5,10 +5,12 @@ import java.io.IOException;
 import application.Main;
 import application.model.game.Game;
 import application.model.game.Genre;
+import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
 import application.view.profile.UserProfilePage;
 import application.viewModel.UserGameLibrary.UserGameLibraryViewModel;
 import application.viewModel.profile.UserProfilePageViewModel;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -63,18 +65,32 @@ public class UserGameLibraryPage {
 	private UserProfilePage userProfilePageCodeBehind;
 	
 	
+	/**
+	 * Instantiates a new user game library page.
+	 */
 	public UserGameLibraryPage() {
 		this.viewModel = new UserGameLibraryViewModel();
 		this.profileViewModel = new UserProfilePageViewModel();
 	}
 	
 	@FXML
-	public void Initialize() {
+	public void initialize() {
 		this.setupListView();
 		this.bindToViewModel();
 		this.setUpNavBar();
+		this.populateListViews();
+		this.viewModel.setUpGameLibrary();
 	}
 	
+	private void populateListViews() {
+		var ownedGamesObsList = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllOwnedGames());
+		this.myGamesListView.setItems(ownedGamesObsList);
+		
+	}
+
+	/**
+	 * Open user game library page.
+	 */
 	public void openUserGameLibraryPage() {
 		var newStage = new Stage();
 		try {
@@ -93,7 +109,6 @@ public class UserGameLibraryPage {
 
 	private void bindToViewModel() {
 		this.myGamesListView.itemsProperty().bindBidirectional(this.viewModel.getOwnedGames());
-		
 		
 	}
 
@@ -131,6 +146,9 @@ public class UserGameLibraryPage {
 		}));
 	}
 	
+	/**
+	 * Update selected game.
+	 */
 	@FXML 
 	public void updateSelectedGame() {
 		this.viewModel.setSelectedGame(this.myGamesListView.getSelectionModel().getSelectedItem());

@@ -73,6 +73,11 @@ public class GameLibrary {
 		return this.games.stream().map(Game::toString).collect(Collectors.joining("\n"));
 	}
 	
+	/**
+	 * Gets the size of this.games
+	 * 
+	 * @return size of this.games
+	 */
 	public int size() {
 		return this.getGames().size();
 	}

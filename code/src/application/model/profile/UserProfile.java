@@ -301,11 +301,9 @@ public class UserProfile {
 			totalPlaytime += game.getAveragePlaytime();
 			count++;
 		}
-
-		if (count == 0) {
-			return 0;
-		}
-
-		return (double) totalPlaytime / count;
-	}
+        if (count == 0) {
+        	return 0;
+        }
+        return (double) totalPlaytime / count;
+    }
 }
