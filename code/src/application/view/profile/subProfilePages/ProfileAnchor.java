@@ -14,6 +14,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
+/**
+ * The Class ProfileAnchor.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class ProfileAnchor {
 
 	@FXML

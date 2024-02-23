@@ -9,6 +9,11 @@ import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
 import application.viewModel.profile.subProfilePages.EditProfileAnchorViewModel;
 
+/**
+ * The Class TestEditProfileAnchorViewModel.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class TestEditProfileAnchorViewModel {
 
 	private EditProfileAnchorViewModel viewModel;

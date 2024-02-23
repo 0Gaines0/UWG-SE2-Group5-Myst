@@ -23,6 +23,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * The Class EditProfileAnchor.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class EditProfileAnchor {
 
 	@FXML

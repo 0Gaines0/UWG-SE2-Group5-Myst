@@ -5,6 +5,12 @@ import application.model.profile.credentials.CredentialManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * The Class SettingProfileAnchorViewModel.
+ * 
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class SettingProfileAnchorViewModel {
 
 	private StringProperty changeInformationCurrentPasswordProperty;
@@ -17,7 +23,7 @@ public class SettingProfileAnchorViewModel {
 
 	private StringProperty userInformationPasswordProperty;
 	private StringProperty userInformationUsernameProperty;
-	
+
 	private CredentialManager credentialManager;
 
 	/**
@@ -57,13 +63,56 @@ public class SettingProfileAnchorViewModel {
 		if (this.invalidateChangeUsernameComponents(inputtedCurrentUserName, inputtedNewUserName,
 				inputtedReenterNewUserName)) {
 			return false;
-		} else if (this.usernamesDoNotMatch(currentUserName, inputtedCurrentUserName)) {
+		} else if (this.usernamesDoNotMatch(currentUserName, inputtedCurrentUserName) || this.usernamesDoNotMatch(inputtedNewUserName, inputtedReenterNewUserName)) {
 			return false;
-		} else if (this.credentialManager.getSpecifiedCredential(inputtedCurrentUserName) != null) {
+		} else if (this.credentialManager.getSpecifiedCredential(inputtedCurrentUserName) == null) {
 			return false;
 		} else {
-			return this.credentialManager.changeCredentialUserName(currentUserName, inputtedCurrentUserName);
+			if (this.credentialManager.changeCredentialUserName(inputtedCurrentUserName, inputtedNewUserName)) {
+				ActiveUser.getActiveUser().setUsername(inputtedNewUserName);
+				return true;
+			} else {
+				return false;
+			}
 		}
+	}
+
+	/**
+	 * Attempt to change password.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean attemptToChangePassword() {
+		var currentPassword = ActiveUser.getActiveUser().getPassword();
+		var inputtedCurrentPassword = this.changeInformationCurrentPasswordProperty.getValue();
+		var inputtedNewPassword = this.changeInformationNewPasswordProperty.getValue();
+		var inputtedReenterNewPassword = this.changeInformationReenterNewPasswordProperty.getValue();
+
+		if (this.invalidateChangePasswordComponents(inputtedCurrentPassword, inputtedNewPassword,
+				inputtedReenterNewPassword)) {
+			return false;
+		} else if (this.passwordsDoNotMatch(currentPassword, inputtedCurrentPassword) || this.passwordsDoNotMatch(inputtedNewPassword, inputtedReenterNewPassword)) {
+			return false;
+		} else {
+			if (this.credentialManager.changeCredentialPassword(ActiveUser.getActiveUser().getUsername(),
+					inputtedCurrentPassword, inputtedNewPassword)) {
+				ActiveUser.getActiveUser().setPassword(inputtedNewPassword);
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	private boolean passwordsDoNotMatch(String currentPassword, String inputtedCurrentPassword) {
+		return !currentPassword.equals(inputtedCurrentPassword);
+	}
+
+	private boolean invalidateChangePasswordComponents(String inputtedCurrentPassword, String inputtedNewPassword,
+			String inputtedReenterNewPassword) {
+		return inputtedCurrentPassword == null || inputtedCurrentPassword.isBlank() || inputtedNewPassword == null
+				|| inputtedNewPassword.isBlank() || inputtedReenterNewPassword == null
+				|| inputtedReenterNewPassword.isBlank();
 	}
 
 	private boolean usernamesDoNotMatch(String currentUserName, String inputtedCurrentUserName) {

@@ -10,6 +10,11 @@ import org.junit.jupiter.api.Test;
 
 import application.model.profile.credentials.Credential;
 
+/**
+ * The Class TestCredential.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class TestCredential {
 	
 	private static final String TEST_USERNAME = "testuser";

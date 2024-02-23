@@ -16,6 +16,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * The Class EditPreferencesAnchor.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class EditPreferencesAnchor {
 
 	@FXML

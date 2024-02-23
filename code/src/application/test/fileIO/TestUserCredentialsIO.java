@@ -10,6 +10,11 @@ import org.junit.jupiter.api.Test;
 import application.fileIO.UserCredentialsIO;
 import application.model.profile.credentials.Credential;
 
+/**
+ * The Class TestUserCredentialsIO.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class TestUserCredentialsIO {
 
 	

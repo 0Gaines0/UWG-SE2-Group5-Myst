@@ -7,6 +7,11 @@ import application.model.profile.ActiveUser;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * The Class EditProfileAnchorViewModel.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class EditProfileAnchorViewModel {
 	private StringProperty aboutMeProperty;
 

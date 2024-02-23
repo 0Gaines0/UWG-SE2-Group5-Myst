@@ -1,5 +1,10 @@
 package application.model.profile;
 
+/**
+ * The Class ActiveUser.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class ActiveUser {
 	private static UserProfile activeUser;
 

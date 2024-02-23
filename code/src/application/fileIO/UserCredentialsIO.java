@@ -13,6 +13,11 @@ import java.util.List;
 
 import application.model.profile.credentials.Credential;
 
+/**
+ * The Class UserCredentialsIO.
+ * @author Jeffrey Gaines
+ * @version Sprint 1
+ */
 public class UserCredentialsIO {
 
 	private static final String FILENAME = "NotUserCredentials.txt";
