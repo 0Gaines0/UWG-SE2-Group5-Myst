@@ -7,6 +7,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import application.Main;
+
 //import org.junit.jupiter.api.ClassOrderer.Random;
 
 import application.model.game.Game;
@@ -31,6 +33,13 @@ public class GameRecommendationEngine {
 	private static final int SAMPLE_SIZE = 1000;
 	private static final int NUMBER_RECOMMENDATIONS = 10;
 
+	/**
+	 * Constructs a GameRecommendationEngine with a specified list of games.
+	 */
+	public GameRecommendationEngine() {
+		this.gameDatabase = Main.getGames();
+	}
+	
 	/**
 	 * Constructs a GameRecommendationEngine with a specified list of games.
 	 * 

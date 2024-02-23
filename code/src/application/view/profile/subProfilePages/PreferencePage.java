@@ -1,12 +1,11 @@
-package application.view;
+package application.view.profile.subProfilePages;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.model.game.Game;
 import application.model.game.Genre;
-import application.view.profile.UserProfilePage;
-import application.viewModel.PreferencePageViewModel;
+import application.viewModel.profile.subProfilePages.PreferencePageViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;

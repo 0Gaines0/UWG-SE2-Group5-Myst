@@ -1,18 +1,13 @@
-package application.viewModel;
+package application.viewModel.profile.subProfilePages;
 
-import java.util.List;
-
-import application.model.GameRecommendationEngine;
 import application.model.game.Game;
 import application.model.game.Genre;
 import application.model.profile.ActiveUser;
-import application.model.profile.UserProfile;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
-// TODO: Auto-generated Javadoc
 /**
  * the first time login page view model.
  *

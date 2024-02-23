@@ -7,7 +7,6 @@ import application.model.profile.UserGameLibrary;
 import application.model.profile.UserProfile;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
-import javafx.collections.FXCollections;
 
 /**
  * The userGameLibraryViewModel
@@ -75,6 +74,11 @@ public class UserGameLibraryViewModel {
 
 	}
 
+	/**
+	 * Gets the selected game genres.
+	 *
+	 * @return the selected game genres
+	 */
 	public ListProperty<Genre> getSelectedGameGenres() {
 		return this.selectedGameGenresListProperty;
 	}
