@@ -58,7 +58,7 @@
                   <Font name="Comic Sans MS" size="20.0" />
                </font>
             </Text>
-            <ListView fx:id="myGamesListView" layoutX="14.0" layoutY="48.0" onMouseClicked="#updateSelectedGame" prefHeight="593.0" prefWidth="200.0" />
+            <ListView fx:id="myGamesListView" layoutX="14.0" layoutY="48.0" prefHeight="593.0" prefWidth="200.0" />
          </children>
       </AnchorPane>
    </left>

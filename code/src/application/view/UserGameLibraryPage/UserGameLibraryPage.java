@@ -78,8 +78,9 @@ public class UserGameLibraryPage {
 		this.setupListView();
 		this.bindToViewModel();
 		this.setUpNavBar();
-		this.populateListViews();
+		//this.populateListViews();
 		this.viewModel.setUpGameLibrary();
+		this.setUpGamesListViewListener();
 	}
 	
 	private void populateListViews() {
@@ -109,6 +110,9 @@ public class UserGameLibraryPage {
 
 	private void bindToViewModel() {
 		this.myGamesListView.itemsProperty().bindBidirectional(this.viewModel.getOwnedGames());
+		this.gameTitleTextField.textProperty().bindBidirectional(this.viewModel.getSelectedGameName());
+		this.gameDevelopersTextField.textProperty().bindBidirectional(this.viewModel.getSelectedGameDevelopers());
+		this.gameGenresListView.itemsProperty().bindBidirectional(this.viewModel.getSelectedGameGenres());
 		
 	}
 
@@ -146,14 +150,15 @@ public class UserGameLibraryPage {
 		}));
 	}
 	
+	private void setUpGamesListViewListener() {
+		this.myGamesListView.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> this.updateSelectedGame());
+	}
+	
 	/**
 	 * Update selected game.
 	 */
 	@FXML 
 	public void updateSelectedGame() {
 		this.viewModel.setSelectedGame(this.myGamesListView.getSelectionModel().getSelectedItem());
-		this.gameTitleTextField.textProperty().set(this.viewModel.getSelectedGame().getName());
-		this.gameDevelopersTextField.textProperty().set(this.viewModel.getSelectedGame().getDevelopers());
-		this.gameGenresListView.itemsProperty().bind(this.viewModel.getSelectedGameGenres());
 	}
 }
