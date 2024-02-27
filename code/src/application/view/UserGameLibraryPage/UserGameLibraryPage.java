@@ -71,6 +71,7 @@ public class UserGameLibraryPage {
 	public UserGameLibraryPage() {
 		this.viewModel = new UserGameLibraryViewModel();
 		this.profileViewModel = new UserProfilePageViewModel();
+		
 	}
 	
 	@FXML
@@ -130,7 +131,7 @@ public class UserGameLibraryPage {
 	
 	private void setUpProfileNavBarHBox() {
 		this.profileHBox.setOnMouseClicked(((event) -> {
-			this.userProfilePageCodeBehind.openUserProfilePage();
+			
 		}));
 	}
 
