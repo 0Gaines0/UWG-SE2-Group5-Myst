@@ -26,9 +26,9 @@ class GameRecommendationEngineTest {
     @BeforeEach
     void setUp() {
         GameLibrary gameLibrary = new GameLibrary();
-        gameLibrary.addGame(new Game("Game 1", Arrays.asList(Genre.ACTION), 1, "Developer 1", 2020, 5, 100, 10, 20, "http://example.com/game1.jpg"));
-        gameLibrary.addGame(new Game("Game 2", Arrays.asList(Genre.ADVENTURE), 2, "Developer 2", 2021, 6, 200, 20, 30, "http://example.com/game2.jpg"));
-        gameLibrary.addGame(new Game("Game 3", Arrays.asList(Genre.RPG), 3, "Developer 3", 2022, 7, 300, 30, 40, "http://example.com/game3.jpg"));
+        gameLibrary.addGame(new Game("Game 1", Arrays.asList(Genre.ACTION), 1, "Developer 1", 2020, 5, 100, 10, 20, "http://example.com/game1.jpg", "not"));
+        gameLibrary.addGame(new Game("Game 2", Arrays.asList(Genre.ADVENTURE), 2, "Developer 2", 2021, 6, 200, 20, 30, "http://example.com/game2.jpg", "yes"));
+        gameLibrary.addGame(new Game("Game 3", Arrays.asList(Genre.RPG), 3, "Developer 3", 2022, 7, 300, 30, 40, "http://example.com/game3.jpg", "maybe"));
 
         this.engine = new GameRecommendationEngine(gameLibrary.getGames());
 

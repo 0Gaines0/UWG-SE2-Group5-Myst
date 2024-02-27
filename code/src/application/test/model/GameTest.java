@@ -30,7 +30,7 @@ class GameTest {
 	
 	@Test
 	void testGameConstructorFullInfo() {
-	    Game game = new Game(TestConstants.EXAMPLE_TITLE, Arrays.asList(Genre.ACTION), 1, TestConstants.EXAMPLE_DEVELOPER, 2020, 1, 100, 50, 10, TestConstants.EXAMPLE_IMG_LINK);
+	    Game game = new Game(TestConstants.EXAMPLE_TITLE, Arrays.asList(Genre.ACTION), 1, TestConstants.EXAMPLE_DEVELOPER, 2020, 1, 100, 50, 10, TestConstants.EXAMPLE_IMG_LINK, "string");
 	    assertNotNull(game);
 	    assertEquals(TestConstants.EXAMPLE_DEVELOPER, game.getDevelopers());
 	    assertEquals(2020, game.getReleaseDateYear());
@@ -45,13 +45,13 @@ class GameTest {
 	
 	@Test
 	void testCalculateWeightedAverage() {
-	    Game game = new Game(TestConstants.EXAMPLE_TITLE, Arrays.asList(Genre.ACTION), 1, TestConstants.EXAMPLE_DEVELOPER, 2020, 1, 100, 0, 10, TestConstants.EXAMPLE_IMG_LINK);
+	    Game game = new Game(TestConstants.EXAMPLE_TITLE, Arrays.asList(Genre.ACTION), 1, TestConstants.EXAMPLE_DEVELOPER, 2020, 1, 100, 0, 10, TestConstants.EXAMPLE_IMG_LINK, "something");
 	    assertTrue(game.getAverageReview() >= 1.0 && game.getAverageReview() <= 10.0);
 	}
 	
 	@Test
 	void testCalculateWeightedAverageNoReviews() {
-	    Game game = new Game(TestConstants.EXAMPLE_TITLE, Arrays.asList(Genre.ACTION), 1, TestConstants.EXAMPLE_DEVELOPER, 2020, 1, 0, 0, 10, TestConstants.EXAMPLE_IMG_LINK);
+	    Game game = new Game(TestConstants.EXAMPLE_TITLE, Arrays.asList(Genre.ACTION), 1, TestConstants.EXAMPLE_DEVELOPER, 2020, 1, 0, 0, 10, TestConstants.EXAMPLE_IMG_LINK, "something");
 	    assertEquals(5.0, game.getAverageReview(), "Expected baseline score for no reviews.");
 	}
 	
@@ -87,7 +87,7 @@ class GameTest {
 	}
 	@Test
 	void testConstructorWithNullGenre() {
-	    Game game = new Game(TestConstants.EXAMPLE_TITLE, null, 1, TestConstants.EXAMPLE_DEVELOPER, 2020, 1, 100, 50, 10, TestConstants.EXAMPLE_IMG_LINK);
+	    Game game = new Game(TestConstants.EXAMPLE_TITLE, null, 1, TestConstants.EXAMPLE_DEVELOPER, 2020, 1, 100, 50, 10, TestConstants.EXAMPLE_IMG_LINK, "seomthign");
 	    assertTrue(game.getGenres().contains(Genre.MISSING_GENRE), "Genres should contain MISSING_GENRE when initialized with null.");
 	}
 	
@@ -99,27 +99,27 @@ class GameTest {
 	
 	@Test
 	void testEqualsSameObject() {
-	    Game game = new Game(TestConstants.EXAMPLE_TITLE, Arrays.asList(Genre.ACTION), 1, TestConstants.EXAMPLE_DEVELOPER, 2020, 1, 100, 50, 10, TestConstants.EXAMPLE_IMG_LINK);
+	    Game game = new Game(TestConstants.EXAMPLE_TITLE, Arrays.asList(Genre.ACTION), 1, TestConstants.EXAMPLE_DEVELOPER, 2020, 1, 100, 50, 10, TestConstants.EXAMPLE_IMG_LINK, "sumthing");
 	    assertTrue(game.equals(game), "A game should be equal to itself.");
 	}
 	
 	@Test
 	void testEqualsNullObject() {
-	    Game game = new Game(TestConstants.EXAMPLE_TITLE, Arrays.asList(Genre.ACTION), 1, TestConstants.EXAMPLE_DEVELOPER, 2020, 1, 100, 50, 10, TestConstants.EXAMPLE_IMG_LINK);
+	    Game game = new Game(TestConstants.EXAMPLE_TITLE, Arrays.asList(Genre.ACTION), 1, TestConstants.EXAMPLE_DEVELOPER, 2020, 1, 100, 50, 10, TestConstants.EXAMPLE_IMG_LINK, "something");
 	    assertFalse(game.equals(null), "A game should not be equal to null.");
 	}
 	
 	@Test
 	void testEqualsDifferentClass() {
-	    Game game = new Game(TestConstants.EXAMPLE_TITLE, Arrays.asList(Genre.ACTION), 1, TestConstants.EXAMPLE_DEVELOPER, 2020, 1, 100, 50, 10, TestConstants.EXAMPLE_IMG_LINK);
+	    Game game = new Game(TestConstants.EXAMPLE_TITLE, Arrays.asList(Genre.ACTION), 1, TestConstants.EXAMPLE_DEVELOPER, 2020, 1, 100, 50, 10, TestConstants.EXAMPLE_IMG_LINK, "somethinbg");
 	    String differentClassObject = "I am not a game";
 	    assertFalse(game.equals(differentClassObject), "A game should not be equal to an object of a different class.");
 	}
 	
 	@Test
 	void testEqualsDifferentGameID() {
-	    Game game1 = new Game(TestConstants.EXAMPLE_TITLE, Arrays.asList(Genre.ACTION), 1, TestConstants.EXAMPLE_DEVELOPER, 2020, 1, 100, 50, 10, TestConstants.EXAMPLE_IMG_LINK);
-	    Game game2 = new Game(TestConstants.EXAMPLE_TITLE, Arrays.asList(Genre.ACTION), 2, TestConstants.EXAMPLE_DEVELOPER, 2020, 1, 100, 50, 10, TestConstants.EXAMPLE_IMG_LINK);
+	    Game game1 = new Game(TestConstants.EXAMPLE_TITLE, Arrays.asList(Genre.ACTION), 1, TestConstants.EXAMPLE_DEVELOPER, 2020, 1, 100, 50, 10, TestConstants.EXAMPLE_IMG_LINK, "seomthing");
+	    Game game2 = new Game(TestConstants.EXAMPLE_TITLE, Arrays.asList(Genre.ACTION), 2, TestConstants.EXAMPLE_DEVELOPER, 2020, 1, 100, 50, 10, TestConstants.EXAMPLE_IMG_LINK, "something");
 	    assertFalse(game1.equals(game2), "Two games with different IDs should not be equal.");
 	}
 	

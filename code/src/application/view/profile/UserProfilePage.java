@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import application.Main;
 import application.model.profile.ActiveUser;
 import application.view.UserGameLibraryPage.UserGameLibraryPage;
+import application.view.mystiverse.MystiversePage;
 import application.view.profile.subProfilePages.EditPreferencesAnchor;
 import application.view.profile.subProfilePages.EditProfileAnchor;
 import application.view.profile.subProfilePages.ProfileAnchor;
@@ -102,7 +103,7 @@ public class UserProfilePage {
 	private UserGameLibraryPage userGameLibraryCodeBehind;
 	private EditPreferencesAnchor editPreferencesCodeBehind;
 	private SettingProfileAnchor profileSettingsAnchorCodeBehind;
-
+	private MystiversePage mystiverseCodeBehind;
 	/**
 	 * Instantiates a new user profile page.
 	 */
@@ -113,7 +114,7 @@ public class UserProfilePage {
 		this.profileSettingsAnchorCodeBehind = new SettingProfileAnchor();
 		this.editPreferencesCodeBehind = new EditPreferencesAnchor();
 		this.userGameLibraryCodeBehind = new UserGameLibraryPage();
-
+		this.mystiverseCodeBehind = new MystiversePage();
 	}
 
 	@FXML
@@ -167,10 +168,7 @@ public class UserProfilePage {
 
 	private void setUpMystiverseNavBarHbox() {
 		this.mystiverseNavBarHBox.setOnMouseClicked(((event) -> {
-			var errorPopUp = new Alert(AlertType.CONFIRMATION);
-			errorPopUp.setContentText("Button Click Works!");
-			errorPopUp.showAndWait();
-			this.updatePage();
+			this.mystiverseCodeBehind.openMystiversePage();
 		}));
 	}
 
