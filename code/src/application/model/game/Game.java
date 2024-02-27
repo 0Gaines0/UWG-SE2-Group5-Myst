@@ -24,6 +24,25 @@ public class Game {
 	private String gamePhotoLink;
 	private double averageReview;
 	private int totalNumberOfReviews;
+	private String description;
+
+	/**
+	 * Gets the description.
+	 *
+	 * @return the description
+	 */
+	public String getDescription() {
+		return this.description;
+	}
+
+	/**
+	 * Sets the description.
+	 *
+	 * @param description the new description
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	/**
 	 * Returns this.name
@@ -169,10 +188,11 @@ public class Game {
 	 * @param numberNegativeReviews the number negative reviews
 	 * @param averagePlaytime       the average playtime
 	 * @param gamePhotoLink         the game photo link
+	 * @param description the description
 	 */
 	public Game(String name, List<Genre> genres, int gameID, String developers, int releaseDateYear,
 			int releaseDateMonth, int numberPositiveReviews, int numberNegativeReviews, int averagePlaytime,
-			String gamePhotoLink) {
+			String gamePhotoLink, String description) {
 		this(name, genres, gameID);
 		this.developers = developers;
 		this.releaseDateYear = releaseDateYear;
@@ -183,6 +203,7 @@ public class Game {
 		this.gamePhotoLink = gamePhotoLink;
 		this.averageReview = this.calculateWeightedAverage(numberPositiveReviews, numberNegativeReviews);
 		this.totalNumberOfReviews = numberPositiveReviews + numberNegativeReviews;
+		this.description = description;
 	}
 
 	private double calculateWeightedAverage(int numberPositiveReviews, int numberNegativeReviews) {
