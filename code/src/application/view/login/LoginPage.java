@@ -3,6 +3,8 @@ package application.view.login;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.model.profile.ActiveUser;
+import application.view.PreferencePage;
 import application.view.profile.UserProfilePage;
 import application.viewModel.login.LoginPageViewModel;
 import javafx.fxml.FXML;
@@ -46,6 +48,7 @@ public class LoginPage {
 	private LoginPageViewModel loginPageViewModel;
 	private CreateAccountPage createAccountCodeBehind;
 	private UserProfilePage userProfileCodeBehind;
+	private PreferencePage preferencePageCodeBehind;
 
 	/**
 	 * Instantiates a new login page.
@@ -54,6 +57,7 @@ public class LoginPage {
 		this.loginPageViewModel = new LoginPageViewModel();
 		this.createAccountCodeBehind = new CreateAccountPage();
 		this.userProfileCodeBehind = new UserProfilePage();
+		this.preferencePageCodeBehind = new PreferencePage();
 	}
 
 	@FXML
@@ -81,6 +85,9 @@ public class LoginPage {
 				if (loginResult) {
 					this.closeWindow();
 					this.loginPageViewModel.generateUser();
+					if (ActiveUser.getActiveUser().isFirstTimeLogin()) {
+						this.preferencePageCodeBehind.
+					}
 					this.userProfileCodeBehind.openUserProfilePage();
 					
 				} else {

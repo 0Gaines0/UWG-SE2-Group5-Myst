@@ -17,6 +17,7 @@ public class Main extends Application {
 	public static final String USER_GAME_LIBRARY_WINDOW = "../UserGameLibraryPage/UserGameLibraryPage.fxml";
 	public static final String EDIT_PREFERENCES_ANCHOR = "../subProfilePages/EditPreferencesAnchor.fxml";
 	public static final String PROFILE_SETTINGS_ANCHOR = "../subProfilePages/SettingsProfileAnchor.fxml";
+	public static final String PREFERENCE_PAGE_WINDOW = "/Myst/src/application/view/PreferencePage.fxml";
 
 	@Override
 	public void start(Stage primaryStage) {

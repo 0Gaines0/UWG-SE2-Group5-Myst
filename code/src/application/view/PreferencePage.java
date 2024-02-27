@@ -1,18 +1,24 @@
 package application.view;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.Main;
 import application.model.game.Game;
 import application.model.game.Genre;
 import application.view.profile.UserProfilePage;
 import application.viewModel.PreferencePageViewModel;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -58,6 +64,23 @@ public class PreferencePage {
     public PreferencePage() {
     	this.viewmodel = new PreferencePageViewModel();
     }
+    
+    public void openPreferencePAge() {
+		var newStage = new Stage();
+		try {
+			var loader = new FXMLLoader(getClass().getResource(Main.CREATE_ACCOUNT_WINDOW));
+			Parent parent = loader.load();
+			var scene = new Scene(parent);
+			newStage.initModality(Modality.APPLICATION_MODAL);
+			newStage.initOwner(((Stage) (parent.getScene().getWindow())));
+			newStage.setTitle(Main.WINDOW_TITLE);
+			newStage.setScene(scene);
+			newStage.show();
+
+		} catch (IOException error) {
+			error.printStackTrace();
+		}
+	}
     
     @FXML
     void initialize() {
