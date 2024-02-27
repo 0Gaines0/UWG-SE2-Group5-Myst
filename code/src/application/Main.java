@@ -19,13 +19,14 @@ public class Main extends Application {
 	public static final String PROFILE_ANCHOR_PATH_TWO = "../subProfilePages/ProfileAnchor.fxml";
 	public static final String EDIT_PROFILE_ANCHOR = "../subProfilePages/EditProfileAnchor.fxml";
 	public static final String USER_GAME_LIBRARY_WINDOW = "../UserGameLibraryPage/UserGameLibraryPage.fxml";
+	public static final String MYSTIVERSE_PAGE = "../mystiverse/MystiversePage.fxml";
 	public static final String EDIT_PREFERENCES_ANCHOR = "../subProfilePages/EditPreferencesAnchor.fxml";
 	public static final String PROFILE_SETTINGS_ANCHOR = "../subProfilePages/SettingsProfileAnchor.fxml";
-	public static final String PREFERENCE_PAGE_WINDOW = "/Myst/src/application/view/PreferencePage.fxml";
-	public static final String GAME_CARD_PAGE =            "../game/GameCardPage.fxml";
+	public static final String GAME_CARD_PAGE = "../game/GameCardPage.fxml";
+	public static final String PREFERENCE_PAGE_WINDOW = "../login/PreferencePage.fxml";
+	
 	
 	private static List<Game> allGames;
-
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -49,7 +50,7 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
+
 	/**
 	 * Gets the games.
 	 *

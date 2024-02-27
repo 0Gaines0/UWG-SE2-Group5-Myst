@@ -4,6 +4,7 @@
 package application.viewModel.profile.subProfilePages;
 
 import application.model.game.Game;
+import application.model.game.Genre;
 import application.model.profile.ActiveUser;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -19,8 +20,10 @@ public class EditPreferencesAnchorViewModel {
 
 	private ListProperty<Game> likedGamesProperty;
 	private ListProperty<Game> dislikedGamesProperty;
+	private ListProperty<Genre> preferredGenreProperty;
 	private ObjectProperty<Game> selectedLikedGameProperty;
 	private ObjectProperty<Game> selectedDislikedGameProperty;
+	private ObjectProperty<Genre> selectedPreferredGenreProperty;
 
 	/**
 	 * Instantiates a new edits the preferences anchor view model.
@@ -28,8 +31,10 @@ public class EditPreferencesAnchorViewModel {
 	public EditPreferencesAnchorViewModel() {
 		this.likedGamesProperty = new SimpleListProperty<Game>();
 		this.dislikedGamesProperty = new SimpleListProperty<Game>();
+		this.preferredGenreProperty = new SimpleListProperty<Genre>();
 		this.selectedLikedGameProperty = new SimpleObjectProperty<Game>();
 		this.selectedDislikedGameProperty = new SimpleObjectProperty<Game>();
+		this.selectedPreferredGenreProperty = new SimpleObjectProperty<Genre>();
 	}
 	
 	/**
@@ -41,6 +46,20 @@ public class EditPreferencesAnchorViewModel {
 		if (this.selectedLikedGameProperty.getValue() != null) {
 			var game = this.selectedLikedGameProperty.getValue();
 			ActiveUser.getActiveUser().getAllLikedGames().remove(game);
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Removes the selected genre from preferred list.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean removeSelectedGenreFromPreferredList() {
+		if (this.selectedPreferredGenreProperty.getValue() != null) {
+			var genre = this.selectedPreferredGenreProperty.getValue();
+			ActiveUser.getActiveUser().getPreferredGenres().remove(genre);
 			return true;
 		}
 		return false;
@@ -124,5 +143,23 @@ public class EditPreferencesAnchorViewModel {
 	 */
 	public ObjectProperty<Game> getSelectedDislikedGameProperty() {
 		return this.selectedDislikedGameProperty;
+	}
+
+	/**
+	 * Gets the preferred genre property.
+	 *
+	 * @return the preferred genre property
+	 */
+	public ListProperty<Genre> getPreferredGenreProperty() {
+		return this.preferredGenreProperty;
+	}
+
+	/**
+	 * Gets the selected preferred genre property.
+	 *
+	 * @return the selected preferred genre property
+	 */
+	public ObjectProperty<Genre> getSelectedPreferredGenreProperty() {
+		return this.selectedPreferredGenreProperty;
 	}
 }

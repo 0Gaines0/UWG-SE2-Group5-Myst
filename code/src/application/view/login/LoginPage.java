@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.model.profile.ActiveUser;
-import application.view.PreferencePage;
 import application.view.profile.UserProfilePage;
 import application.viewModel.login.LoginPageViewModel;
 import javafx.fxml.FXML;
@@ -19,6 +18,7 @@ import javafx.stage.Stage;
 
 /**
  * The Class LoginPage.
+ * 
  * @author Jeffrey Gaines
  * @version Sprint 1
  */
@@ -67,7 +67,7 @@ public class LoginPage {
 		this.setUpCreateAccountPage();
 		this.bindToViewModel();
 	}
-	
+
 	private void setUpCreateAccountPage() {
 		this.createAnAccountLink.setOnAction(((event) -> {
 			this.createAccountCodeBehind.openCreateAccountPage();
@@ -85,20 +85,24 @@ public class LoginPage {
 				if (loginResult) {
 					this.closeWindow();
 					this.loginPageViewModel.generateUser();
-					if (ActiveUser.getActiveUser().isFirstTimeLogin()) {
-						this.preferencePageCodeBehind.
-					}
-					this.userProfileCodeBehind.openUserProfilePage();
-					
+					this.navigateUser();
 				} else {
 					var errorPopUp = new Alert(AlertType.ERROR);
 					errorPopUp.setContentText("Login failed, incorrect username or password");
 					errorPopUp.showAndWait();
 				}
 			}
-			
+
 		}));
 
+	}
+
+	private void navigateUser() {
+		if (ActiveUser.getActiveUser().isFirstTimeLogin()) {
+			this.preferencePageCodeBehind.openPreferencePage();
+		} else {
+			this.userProfileCodeBehind.openUserProfilePage();
+		}
 	}
 
 	private void closeWindow() {

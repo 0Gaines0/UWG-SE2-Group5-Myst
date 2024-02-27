@@ -35,6 +35,7 @@ public class UserProfile {
 	 */
 	public UserProfile() {
 		this.profileAttributes = new ProfileAttributes();
+		this.firstTimeLogin = true;
 		this.setUpUserGameData();
 	}
 

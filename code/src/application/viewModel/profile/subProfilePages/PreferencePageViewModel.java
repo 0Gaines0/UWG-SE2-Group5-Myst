@@ -1,5 +1,9 @@
 package application.viewModel.profile.subProfilePages;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import application.Main;
 import application.model.game.Game;
 import application.model.game.Genre;
 import application.model.profile.ActiveUser;
@@ -7,6 +11,8 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * the first time login page view model.
@@ -26,7 +32,9 @@ public class PreferencePageViewModel {
 	private ObjectProperty<Genre> lowPreferenceGenre;
 	
 	/** The liked games. */
-	private ListProperty<Game> likedGames;	
+	private ListProperty<Game> allGames;	
+	
+	private List<Game> selectedLikedGames;
 	
 	/**
 	 * the first time login page view model.
@@ -35,9 +43,18 @@ public class PreferencePageViewModel {
 		this.highPreferenceGenre = new SimpleObjectProperty<Genre>();
 		this.mediumPreferenceGenre = new SimpleObjectProperty<Genre>();
 		this.lowPreferenceGenre = new SimpleObjectProperty<Genre>();
-		this.likedGames = new SimpleListProperty<Game>();
+		this.allGames = new SimpleListProperty<Game>();
+		this.selectedLikedGames = new ArrayList<Game>();
 	}
 	
+	/**
+	 * Sets the up all games list.
+	 */
+	public void setUpAllGamesList() {
+		ObservableList<Game> allGamesList = FXCollections.observableArrayList(Main.getGames());
+    	this.allGames.setValue(allGamesList);
+	}
+
 	/**
 	 * Configure new user preferences.
 	 */
@@ -45,7 +62,17 @@ public class PreferencePageViewModel {
 		ActiveUser.getActiveUser().getPreferredGenres().add(this.highPreferenceGenre.getValue());
 		ActiveUser.getActiveUser().getPreferredGenres().add(this.mediumPreferenceGenre.getValue());
 		ActiveUser.getActiveUser().getPreferredGenres().add(this.lowPreferenceGenre.getValue());
-		ActiveUser.getActiveUser().getAllLikedGames().addAll(this.likedGames);
+		ActiveUser.getActiveUser().getAllLikedGames().addAll(this.selectedLikedGames);
+	}
+	
+	/**
+	 * Adds the selected game.
+	 *
+	 * @param newValue the new value
+	 */
+	public void addSelectedGame(Game newValue) {
+		this.selectedLikedGames.add(newValue);
+		
 	}
 
 	/**
@@ -81,8 +108,20 @@ public class PreferencePageViewModel {
 	 *
 	 * @return the selected liked game
 	 */
-	public ListProperty<Game> getSelectedLikedGames() {
-		return this.likedGames;
+	public ListProperty<Game> getAllGames() {
+		return this.allGames;
 	}
+	
+	/**
+	 * Gets the selected liked games.
+	 *
+	 * @return the selected liked games
+	 */
+	public List<Game> getSelectedLikedGames() {
+		return this.selectedLikedGames;
+	}
+
+	
+
 	
 }
