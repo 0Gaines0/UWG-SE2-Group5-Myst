@@ -38,9 +38,6 @@ public class PreferencePageViewModel {
 		this.likedGames = new SimpleListProperty<Game>();
 	}
 	
-	
-
-	
 	/**
 	 * Configure new user preferences.
 	 */

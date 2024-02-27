@@ -103,6 +103,7 @@ public class UserProfilePage {
 	private UserGameLibraryPage userGameLibraryCodeBehind;
 	private EditPreferencesAnchor editPreferencesCodeBehind;
 	private SettingProfileAnchor profileSettingsAnchorCodeBehind;
+	private MystiversePage mystiverseCodeBehind;
 	/**
 	 * Instantiates a new user profile page.
 	 */
@@ -113,6 +114,7 @@ public class UserProfilePage {
 		this.profileSettingsAnchorCodeBehind = new SettingProfileAnchor();
 		this.editPreferencesCodeBehind = new EditPreferencesAnchor();
 		this.userGameLibraryCodeBehind = new UserGameLibraryPage();
+		this.mystiverseCodeBehind = new MystiversePage();
 	}
 
 	@FXML

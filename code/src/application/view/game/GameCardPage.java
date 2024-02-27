@@ -106,7 +106,7 @@ public class GameCardPage {
      */
     private void handleInterestedButton() {
     	Game currGame = MystiverseViewModel.getRecommendedGames().stream().filter(game -> game.getName().equals(this.titleTextBox.getText())).findFirst().orElseThrow();
-    	this.gameCardPageViewmodel.addGameToDislikedLibrary(ActiveUser.getActiveUser(), currGame);
+    	this.gameCardPageViewmodel.addGameToLikedLibrary(ActiveUser.getActiveUser(), currGame);
     	Stage stage = (Stage) this.guiPane.getScene().getWindow();
     	stage.close();
     }
@@ -119,7 +119,7 @@ public class GameCardPage {
     private void setGameInformation(Game game) {
 		this.titleTextBox.setText(game.getName());
 		this.genresTextBox.setText(game.getGenres().toString());
-		this.descriptionTextBox.setText(game.getDevelopers());
+		this.descriptionTextBox.setText(game.getDescription());
     }
     
     /**
