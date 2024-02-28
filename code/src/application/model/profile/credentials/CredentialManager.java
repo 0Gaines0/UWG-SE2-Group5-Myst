@@ -184,4 +184,11 @@ public class CredentialManager {
 
 	}
 
+	/**
+	 * Clear user credentials.
+	 */
+	public void clearUserCredentials() {
+		this.userCredentials.clear();
+	}
+	
 }

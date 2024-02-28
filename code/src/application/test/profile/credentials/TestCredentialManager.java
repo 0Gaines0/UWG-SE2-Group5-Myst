@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +31,18 @@ public class TestCredentialManager {
 	@BeforeEach
 	public void setUp() {
 		this.credentialManager = new CredentialManager();
+	}
+	
+	/**
+	 * Clean up and re add.
+	 */
+	@AfterEach
+	public void cleanUpAndReAdd() {
+		this.credentialManager.clearUserCredentials();
+		this.credentialManager.addCredential("changePassword", FAKE_PASSWORD);
+		this.credentialManager.addCredential("0Gaines0", FAKE_PASSWORD);
+		this.credentialManager.addCredential("username", FAKE_PASSWORD);
+
 	}
 
 	/**

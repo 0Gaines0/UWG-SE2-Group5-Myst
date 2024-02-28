@@ -2,6 +2,7 @@ package application.view.profile.subProfilePages;
 
 import java.io.IOException;
 import application.model.game.Game;
+import application.model.game.Genre;
 import application.model.profile.ActiveUser;
 import application.viewModel.profile.subProfilePages.EditPreferencesAnchorViewModel;
 import javafx.collections.FXCollections;
@@ -18,6 +19,7 @@ import javafx.scene.layout.BorderPane;
 
 /**
  * The Class EditPreferencesAnchor.
+ * 
  * @author Jeffrey Gaines
  * @version Sprint 1
  */
@@ -49,6 +51,18 @@ public class EditPreferencesAnchor {
 
 	@FXML
 	private MenuItem removeGameLikedMenuItem;
+
+	@FXML
+	private ContextMenu preferredGenreContextMenu;
+
+	@FXML
+	private ListView<Genre> preferredGenresListView;
+
+	@FXML
+	private MenuItem removeGenreFromPreferredGenre;
+
+	@FXML
+	private MenuItem addGenreToPreferredGenreMenuItem;
 
 	private EditPreferencesAnchorViewModel editPreferencesAnchorViewModel;
 
@@ -86,14 +100,19 @@ public class EditPreferencesAnchor {
 	}
 
 	private void populateListViews() {
-		this.likedGamesListView.setItems(null);
-		this.dislikedGamesListView.setItems(null);
 		ObservableList<Game> likedGameList = FXCollections
 				.observableArrayList(ActiveUser.getActiveUser().getAllLikedGames());
 		ObservableList<Game> dislikedGameList = FXCollections
 				.observableArrayList(ActiveUser.getActiveUser().getAllDislikedGames());
+		ObservableList<Genre> preferredGenreList = FXCollections
+				.observableArrayList(ActiveUser.getActiveUser().getPreferredGenres());
+		this.likedGamesListView.setItems(null);
+		this.dislikedGamesListView.setItems(null);
+		this.preferredGenresListView.setItems(null);
 		this.likedGamesListView.setItems(likedGameList);
 		this.dislikedGamesListView.setItems(dislikedGameList);
+		this.preferredGenresListView.setItems(preferredGenreList);
+
 	}
 
 	private void bindToViewModel() {
@@ -105,6 +124,10 @@ public class EditPreferencesAnchor {
 				.bindBidirectional(this.editPreferencesAnchorViewModel.getLikedGamesProperty());
 		this.dislikedGamesListView.itemsProperty()
 				.bindBidirectional(this.editPreferencesAnchorViewModel.getDislikedGamesProperty());
+		this.preferredGenresListView.itemsProperty()
+				.bindBidirectional(this.editPreferencesAnchorViewModel.getPreferredGenreProperty());
+		this.editPreferencesAnchorViewModel.getSelectedPreferredGenreProperty()
+				.bind(this.preferredGenresListView.getSelectionModel().selectedItemProperty());
 	}
 
 	private void setUpListViewContextMenus() {
@@ -112,6 +135,20 @@ public class EditPreferencesAnchor {
 		this.setUpMoveGameToLikedMenuItem();
 		this.setUpRemoveLikedGameMenuItem();
 		this.setUpRemoveDislikedGameMenuItem();
+		this.setUpRemovePreferredGenre();
+	}
+
+	private void setUpRemovePreferredGenre() {
+		this.removeGenreFromPreferredGenre.setOnAction(((event -> {
+			if (!this.editPreferencesAnchorViewModel.removeSelectedGenreFromPreferredList()) {
+				var errorPopUp = new Alert(AlertType.ERROR);
+				errorPopUp.setContentText("Genre could not be remove, select and try again");
+				errorPopUp.showAndWait();
+			} else {
+				this.updateListViews();
+			}
+
+		})));
 	}
 
 	private void setUpRemoveDislikedGameMenuItem() {
