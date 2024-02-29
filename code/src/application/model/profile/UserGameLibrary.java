@@ -22,6 +22,10 @@ public class UserGameLibrary {
 	 * @param user the user
 	 */
 	public UserGameLibrary(UserProfile user) {
+		if (user == null) {
+			throw new IllegalArgumentException("User cannot be null.");
+		}
+		
 		this.user = user;
 		this.library = user.getAllOwnedGames();
 	}

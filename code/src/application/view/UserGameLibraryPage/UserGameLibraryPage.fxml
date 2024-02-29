@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -68,6 +69,7 @@
                </font>
             </Text>
             <ListView fx:id="myGamesListView" layoutX="14.0" layoutY="48.0" prefHeight="429.0" prefWidth="200.0" />
+            <Button fx:id="addGameButton" layoutX="148.0" layoutY="489.0" mnemonicParsing="false" text="Add Game" />
          </children>
       </AnchorPane>
    </left>
@@ -79,7 +81,10 @@
                   <Font name="Comic Sans MS" size="20.0" />
                </font>
             </Text>
-            <ImageView fx:id="gamePhotoImageView" fitHeight="150.0" fitWidth="200.0" layoutX="216.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="gamePhotoImageView" fitHeight="150.0" fitWidth="200.0" layoutX="216.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../profile/assets/fortnite-og-social-1920x1080-a5adda66fab9.jpg" />
+               </image></ImageView>
             <Text layoutX="50.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title">
                <font>
                   <Font size="15.0" />

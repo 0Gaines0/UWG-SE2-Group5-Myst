@@ -58,37 +58,25 @@ public class UserGameLibraryPage {
 	
 	private UserGameLibraryViewModel viewModel;
 	
-	private UserProfilePageViewModel profileViewModel;
-	
-	private UserProfile activeUser;
-	
-	private UserProfilePage userProfilePageCodeBehind;
-	
-	
 	/**
 	 * Instantiates a new user game library page.
 	 */
 	public UserGameLibraryPage() {
 		this.viewModel = new UserGameLibraryViewModel();
-		this.profileViewModel = new UserProfilePageViewModel();
+		new UserProfilePageViewModel();
 		
 	}
 	
 	@FXML
 	public void initialize() {
+		this.validateFXMLComponents();
 		this.setupListView();
 		this.bindToViewModel();
 		this.setUpNavBar();
-		//this.populateListViews();
 		this.viewModel.setUpGameLibrary();
 		this.setUpGamesListViewListener();
 	}
 	
-	private void populateListViews() {
-		var ownedGamesObsList = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllOwnedGames());
-		this.myGamesListView.setItems(ownedGamesObsList);
-		
-	}
 
 	/**
 	 * Open user game library page.
@@ -112,7 +100,7 @@ public class UserGameLibraryPage {
 	private void bindToViewModel() {
 		this.myGamesListView.itemsProperty().bindBidirectional(this.viewModel.getOwnedGames());
 		this.gameTitleTextField.textProperty().bindBidirectional(this.viewModel.getSelectedGameName());
-		this.gameDevelopersTextField.textProperty().bindBidirectional(this.viewModel.getSelectedGameDevelopers());
+		//this.gameDevelopersTextField.textProperty().bindBidirectional(this.viewModel.getSelectedGameDevelopers());
 		this.gameGenresListView.itemsProperty().bindBidirectional(this.viewModel.getSelectedGameGenres());
 		
 	}
@@ -120,7 +108,6 @@ public class UserGameLibraryPage {
 
 	private void setupListView() {
 		this.myGamesListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-		//still needs to connect to some form of games had some manually entered or something
 	}
 	
 	private void setUpNavBar() {
@@ -161,5 +148,18 @@ public class UserGameLibraryPage {
 	@FXML 
 	public void updateSelectedGame() {
 		this.viewModel.setSelectedGame(this.myGamesListView.getSelectionModel().getSelectedItem());
+	}
+	
+	private void validateFXMLComponents() {
+		 assert communityTextArea != null : "fx:id=\"communityTextArea\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+	        assert gameDevelopersTextField != null : "fx:id=\"gameDevelopersTextField\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+	        assert gameGenresListView != null : "fx:id=\"gameGenresListView\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+	        assert gamePhotoImageView != null : "fx:id=\"gamePhotoImageView\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+	        assert gameTitleTextField != null : "fx:id=\"gameTitleTextField\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+	        assert libraryHBox != null : "fx:id=\"libraryHBox\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+	        assert myGamesListView != null : "fx:id=\"myGamesListView\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+	        assert mystiverseHBox != null : "fx:id=\"mystiverseHBox\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+	        assert profileHBox != null : "fx:id=\"profileHBox\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+
 	}
 }

@@ -102,7 +102,9 @@ public class UserGameLibraryViewModel {
 	 */
 	public void setSelectedGame(Game game) {
 		this.selectedGame = game;
-		this.selectedGameGenresListProperty.addAll(game.getGenres());
+		ObservableList<Genre> genres = FXCollections.observableArrayList(game.getGenres());
+		this.selectedGameGenresListProperty.clear();
+		this.selectedGameGenresListProperty.set(genres);
 		this.selectedGameNameProperty.set(this.selectedGame.getName());
 		this.selectedGameDeveloperProperty.set(this.selectedGame.getDevelopers());
 
