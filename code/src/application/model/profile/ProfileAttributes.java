@@ -14,7 +14,7 @@ public class ProfileAttributes {
 	private String userProfilePicturePath;
 
 	private static final String DESCRIPTION_MUST_BE_VALID = "description inputted must not be null or empty";
-	private static final String IMAGE_PATH_MUST_BE_VALID = "image path inputted must bot be null or empty";
+	private static final String IMAGE_PATH_MUST_BE_VALID = "image path inputted must not be null or empty";
 
 	/**
 	 * Instantiates a new profile attributes.

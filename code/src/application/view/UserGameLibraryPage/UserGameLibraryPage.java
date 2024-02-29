@@ -6,7 +6,6 @@ import application.Main;
 import application.model.game.Game;
 import application.model.game.Genre;
 import application.model.profile.ActiveUser;
-import application.view.profile.UserProfilePage;
 import application.viewModel.UserGameLibrary.UserGameLibraryViewModel;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -56,9 +55,6 @@ public class UserGameLibraryPage {
 	
 	private UserGameLibraryViewModel viewModel;
 	
-	private UserProfilePage userProfilePageCodeBehind;
-	
-	
 	/**
 	 * Instantiates a new user game library page.
 	 */
@@ -71,18 +67,14 @@ public class UserGameLibraryPage {
 	 */
 	@FXML
 	public void initialize() {
+		this.validateFXMLComponents();
 		this.setupListView();
 		this.bindToViewModel();
 		this.setUpNavBar();
-		this.populateListViews();
 		this.viewModel.setUpGameLibrary();
+		this.setUpGamesListViewListener();
 	}
 	
-	private void populateListViews() {
-		var ownedGamesObsList = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllOwnedGames());
-		this.myGamesListView.setItems(ownedGamesObsList);
-	}
-
 	/**
 	 * Open user game library page.
 	 */
@@ -104,13 +96,15 @@ public class UserGameLibraryPage {
 
 	private void bindToViewModel() {
 		this.myGamesListView.itemsProperty().bindBidirectional(this.viewModel.getOwnedGames());
+		this.gameTitleTextField.textProperty().bindBidirectional(this.viewModel.getSelectedGameName());
+		//this.gameDevelopersTextField.textProperty().bindBidirectional(this.viewModel.getSelectedGameDevelopers());
+		this.gameGenresListView.itemsProperty().bindBidirectional(this.viewModel.getSelectedGameGenres());
 		
 	}
 
 
 	private void setupListView() {
 		this.myGamesListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-		//still needs to connect to some form of games had some manually entered or something
 	}
 	
 	private void setUpNavBar() {
@@ -121,7 +115,7 @@ public class UserGameLibraryPage {
 	
 	private void setUpProfileNavBarHBox() {
 		this.profileHBox.setOnMouseClicked(((event) -> {
-			this.userProfilePageCodeBehind.openUserProfilePage();
+			
 		}));
 	}
 
@@ -141,14 +135,28 @@ public class UserGameLibraryPage {
 		}));
 	}
 	
+	private void setUpGamesListViewListener() {
+		this.myGamesListView.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> this.updateSelectedGame());
+	}
+	
 	/**
 	 * Update selected game.
 	 */
 	@FXML 
 	public void updateSelectedGame() {
 		this.viewModel.setSelectedGame(this.myGamesListView.getSelectionModel().getSelectedItem());
-		this.gameTitleTextField.textProperty().set(this.viewModel.getSelectedGame().getName());
-		this.gameDevelopersTextField.textProperty().set(this.viewModel.getSelectedGame().getDevelopers());
-		this.gameGenresListView.itemsProperty().bind(this.viewModel.getSelectedGameGenres());
+	}
+	
+	private void validateFXMLComponents() {
+		 assert communityTextArea != null : "fx:id=\"communityTextArea\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+	        assert gameDevelopersTextField != null : "fx:id=\"gameDevelopersTextField\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+	        assert gameGenresListView != null : "fx:id=\"gameGenresListView\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+	        assert gamePhotoImageView != null : "fx:id=\"gamePhotoImageView\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+	        assert gameTitleTextField != null : "fx:id=\"gameTitleTextField\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+	        assert libraryHBox != null : "fx:id=\"libraryHBox\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+	        assert myGamesListView != null : "fx:id=\"myGamesListView\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+	        assert mystiverseHBox != null : "fx:id=\"mystiverseHBox\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+	        assert profileHBox != null : "fx:id=\"profileHBox\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+
 	}
 }
