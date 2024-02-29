@@ -143,9 +143,12 @@ public class MystiversePage {
 	private void setupNavBar() {
 		this.libraryNavBarHBox.setOnMouseClicked((event) -> {
 			this.redirectToPage(Main.USER_GAME_LIBRARY_WINDOW);
+			this.closeMystiversePage();
 		});
 		this.mystiverseNavBarHBox.setOnMouseClicked((event) -> {
 			this.redirectToPage(Main.MYSTIVERSE_PAGE);
+			this.closeMystiversePage();
+
 		});
 		this.profileNavBarHBox.setOnMouseClicked((event) -> {
 			this.redirectToPage(Main.USER_PROFILE_WINDOW);
@@ -153,6 +156,7 @@ public class MystiversePage {
 		});
 		this.profilePhotoNavBarHBox.setOnMouseClicked((event) -> {
 			this.redirectToPage(Main.USER_PROFILE_WINDOW);
+			this.closeMystiversePage();
 		});
 	}
 

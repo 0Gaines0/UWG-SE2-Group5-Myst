@@ -182,7 +182,8 @@ public class UserProfilePage {
 	private void setUpLibraryNavBarHBox() {
 		this.libraryNavBarHBox.setOnMouseClicked(((event) -> {
 			this.userGameLibraryCodeBehind.openUserGameLibraryPage();
-			this.updatePage();
+			this.closeProfilePage();
+
 		}));
 	}
 
