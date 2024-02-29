@@ -27,7 +27,7 @@ public class UserGameLibrary {
 		}
 		
 		this.user = user;
-		this.library = user.getAllOwnedGames();
+		this.library = user.getAllLikedGames();
 	}
 	
 	/**
