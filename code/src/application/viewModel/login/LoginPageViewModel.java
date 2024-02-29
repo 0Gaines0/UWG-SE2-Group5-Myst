@@ -72,14 +72,7 @@ public class LoginPageViewModel {
 	 */
 	public void generateUser() {
 		var user = new UserProfile(this.usernameProperty.getValue(), this.passwordProperty.getValue());
-		var genreList = new ArrayList<Genre>();
-		genreList.add(Genre.ACCOUNTING);
-		var game = new Game("testGame", genreList, 1001);
-		var game2 = new Game("testGame2", genreList, 1200);
 		ActiveUser.setActiveUser(user);
-		ActiveUser.getActiveUser().getAllOwnedGames().add(game);
-		ActiveUser.getActiveUser().getAllLikedGames().add(game);
-		ActiveUser.getActiveUser().getAllLikedGames().add(game2);
 	}
 
 }

@@ -1,8 +1,13 @@
 package application.viewModel.profile.subProfilePages;
 
+import java.util.ArrayList;
+
 import application.model.profile.ActiveUser;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 
 /**
  * The Class ProfileAnchorViewModel.
@@ -40,10 +45,31 @@ public class ProfileAnchorViewModel {
 	 * Sets the up game liked and dislike counters.
 	 */
 	public void setUpGameLikedAndDislikeCounters() {
-		var likedGames = String.valueOf(ActiveUser.getActiveUser().getProfileAttributes().getTotalLikedGames());
-		var dislikedGames = String.valueOf(ActiveUser.getActiveUser().getProfileAttributes().getTotalDislikedGame());
+		var likedGames = String.valueOf(ActiveUser.getActiveUser().getAllLikedGames().size());
+		var dislikedGames = String.valueOf(ActiveUser.getActiveUser().getAllDislikedGames().size());
 		this.likedGamesProperty.setValue(likedGames);
 		this.dislikedGamesProperty.setValue(dislikedGames);
+	}
+	
+	/**
+	 * Sets the up genre pie chart data.
+	 *
+	 * @return the observable list
+	 */
+	public ObservableList<PieChart.Data> setUpGenrePieChartData() {
+		var userGenreMap = ActiveUser.getActiveUser().calculateGenrePercentages();
+		var dataList = new ArrayList<PieChart.Data>();
+		for (var genre : userGenreMap.keySet()) {
+			var value = userGenreMap.get(genre);
+			var data = new PieChart.Data(genre.toString(), value);
+			dataList.add(data);
+		}
+		
+		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(dataList);
+		
+		return pieChartData;
+		
+		
 	}
 
 	/**

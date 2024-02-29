@@ -4,6 +4,7 @@
 package application.test.profile;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -27,6 +28,8 @@ public class TestUserProfile {
 	private UserProfile userProfile;
 	private static final String GAMEONE = "Game1";
 	private static final String GAMETWO = "Game2";
+	private static final String OWNED_GAME = "Game3";
+	private static final String OWNED_GAME_TWO = "Game4";
 
 	/**
 	 * Sets the up.
@@ -261,6 +264,104 @@ public class TestUserProfile {
 	@Test
 	public void testProfileAttributes() {
 		assertNotNull(this.userProfile.getProfileAttributes());
+	}
+	
+	/**
+	 * Test first time login.
+	 */
+	@Test
+	public void testFirstTimeLogin() {
+		assertTrue(this.userProfile.isFirstTimeLogin());
+	}
+	
+	/**
+	 * Test set first time login.
+	 */
+	@Test
+	public void testSetFirstTimeLogin() {
+		this.userProfile.setFirstTimeLogin(false);
+		assertFalse(this.userProfile.isFirstTimeLogin());
+	}
+	
+	/**
+	 * Test calculate genre percentages.
+	 */
+	@Test
+	public void testCalculateGenrePercentages() {
+		var likedGames = new ArrayList<Game>();
+		var ownedGames = new ArrayList<Game>();
+		var genreList = new ArrayList<Genre>();
+		genreList.add(Genre.ACTION);
+		genreList.add(Genre.ADVENTURE);
+		var genre2List = new ArrayList<Genre>();
+		genre2List.add(Genre.CASUAL);
+		genre2List.add(Genre.MASSIVELY_MULTIPLAYER);
+		
+		var gameOne = new Game(GAMEONE, genreList, 001);
+		var gameTwo = new Game(GAMETWO, genreList, 003);
+		var gameThree = new Game(OWNED_GAME, genre2List, 004);
+		var gameFour = new Game(OWNED_GAME_TWO, genreList, 006);
+		
+		likedGames.add(gameOne);
+		likedGames.add(gameTwo);
+		ownedGames.add(gameThree);
+		ownedGames.add(gameFour);
+
+		this.userProfile.setAllLikedGames(likedGames);
+		this.userProfile.setAllOwnedGames(ownedGames);
+		
+		var genrePercentage = this.userProfile.calculateGenrePercentages();
+		
+		
+		assertEquals(genrePercentage.get(Genre.ACTION), 37.5);
+		assertEquals(genrePercentage.get(Genre.ADVENTURE), 37.5);
+		assertEquals(genrePercentage.get(Genre.CASUAL), 12.5);
+		assertEquals(genrePercentage.get(Genre.MASSIVELY_MULTIPLAYER), 12.5);
+	}
+	
+	/**
+	 * Test calculate average release year.
+	 */
+	@Test
+	public void testCalculateAverageReleaseYear() {
+		var likedGames = new ArrayList<Game>();
+		var ownedGames = new ArrayList<Game>();
+		var genreList = new ArrayList<Genre>();
+		genreList.add(Genre.ACTION);
+		genreList.add(Genre.ADVENTURE);
+		var genre2List = new ArrayList<Genre>();
+		genre2List.add(Genre.CASUAL);
+		genre2List.add(Genre.MASSIVELY_MULTIPLAYER);
+		
+		var gameOne = new Game(GAMEONE, genreList, 001);
+		var gameTwo = new Game(GAMETWO, genreList, 003);
+		var gameThree = new Game(OWNED_GAME, genre2List, 004);
+		var gameFour = new Game(OWNED_GAME_TWO, genreList, 006);
+		
+		gameOne.setReleaseDateYear(2002);
+		gameTwo.setReleaseDateYear(2003);
+		gameThree.setReleaseDateYear(2004);
+		gameFour.setReleaseDateYear(1999);
+		
+		likedGames.add(gameOne);
+		likedGames.add(gameTwo);
+		ownedGames.add(gameThree);
+		ownedGames.add(gameFour);
+		
+		this.userProfile.setAllLikedGames(likedGames);
+		this.userProfile.setAllOwnedGames(ownedGames);
+		
+		assertEquals(this.userProfile.calculateAverageReleaseYear(), 2002);
+		
+		
+	}
+	
+	/**
+	 * Test calculate average release year no games.
+	 */
+	@Test 
+	public void testCalculateAverageReleaseYearNoGames() {
+		assertEquals(this.userProfile.calculateAverageReleaseYear(), 0);
 	}
 
 }

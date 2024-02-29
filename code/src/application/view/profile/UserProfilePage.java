@@ -169,7 +169,14 @@ public class UserProfilePage {
 	private void setUpMystiverseNavBarHbox() {
 		this.mystiverseNavBarHBox.setOnMouseClicked(((event) -> {
 			this.mystiverseCodeBehind.openMystiversePage();
+			this.closeProfilePage();
 		}));
+	}
+
+	private void closeProfilePage() {
+    	Stage stage = (Stage) this.parentBorderPane.getScene().getWindow();
+    	stage.close();
+
 	}
 
 	private void setUpLibraryNavBarHBox() {
