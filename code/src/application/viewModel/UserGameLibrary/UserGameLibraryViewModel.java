@@ -7,6 +7,10 @@ import application.model.profile.UserGameLibrary;
 import application.model.profile.UserProfile;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * The userGameLibraryViewModel
@@ -17,11 +21,13 @@ import javafx.beans.property.SimpleListProperty;
 public class UserGameLibraryViewModel {
 
 	private UserGameLibrary userGameLibrary;
-	private UserProfile user = new UserProfile();
+	private UserProfile user = ActiveUser.getActiveUser();
 
 	private ListProperty<Game> ownedGamesListProperty;
 	private Game selectedGame;
 	private ListProperty<Genre> selectedGameGenresListProperty;
+	private StringProperty selectedGameNameProperty;
+	private StringProperty selectedGameDeveloperProperty;
 
 	/**
 	 * Creates a new userGameLibraryViewModel
@@ -29,14 +35,20 @@ public class UserGameLibraryViewModel {
 	public UserGameLibraryViewModel() {
 
 		this.ownedGamesListProperty = new SimpleListProperty<Game>();
+		this.selectedGameNameProperty = new SimpleStringProperty();
+		this.selectedGameDeveloperProperty = new SimpleStringProperty();
 		this.selectedGameGenresListProperty = new SimpleListProperty<Genre>();
+		
+		
 	}
 
 	/**
 	 * Sets the up game library.
 	 */
 	public void setUpGameLibrary() {
-		this.userGameLibrary = new UserGameLibrary(ActiveUser.getActiveUser());
+		this.userGameLibrary = new UserGameLibrary(this.user);
+		ObservableList<Game> ownedGames = FXCollections.observableArrayList(this.userGameLibrary.getGameLibrary());
+		this.ownedGamesListProperty.set(ownedGames);
 	}
 
 	/**
@@ -48,6 +60,26 @@ public class UserGameLibraryViewModel {
 	 */
 	public ListProperty<Game> getOwnedGames() {
 		return this.ownedGamesListProperty;
+	}
+	
+	/**
+	 * Gets the selected game name.
+	 * @pre none
+	 * @post none
+	 * @return the selected game name
+	 */
+	public StringProperty getSelectedGameName() {
+		return this.selectedGameNameProperty;
+	}
+	
+	/**
+	 * Gets the selected game developers.
+	 * @pre none
+	 * @post none
+	 * @return the selected game developers.
+	 */
+	public StringProperty getSelectedGameDevelopers() {
+		return this.selectedGameDeveloperProperty;
 	}
 
 	/**
@@ -70,11 +102,19 @@ public class UserGameLibraryViewModel {
 	 */
 	public void setSelectedGame(Game game) {
 		this.selectedGame = game;
-		this.selectedGameGenresListProperty.addAll(game.getGenres());
+		ObservableList<Genre> genres = FXCollections.observableArrayList(game.getGenres());
+		this.selectedGameGenresListProperty.clear();
+		this.selectedGameGenresListProperty.set(genres);
+		this.selectedGameNameProperty.set(this.selectedGame.getName());
+		this.selectedGameDeveloperProperty.set(this.selectedGame.getDevelopers());
 
 	}
 
 	/**
+	 * Gets the list of genres for the selected game
+	 * @pre none
+	 * @post none
+	 * @return the selected game's genres.
 	 * Gets the selected game genres.
 	 *
 	 * @return the selected game genres
