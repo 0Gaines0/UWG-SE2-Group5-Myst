@@ -284,27 +284,4 @@ public class UserProfile {
 		return (double) totalYears / count;
 	}
 
-	/**
-	 * Calculates the average playtime of liked and owned games.
-	 *
-	 * @return The average playtime of games in hours.
-	 */
-	public double calculateAveragePlaytime() {
-		int totalPlaytime = 0;
-		int count = 0;
-
-		for (Game game : this.allLikedGames) {
-			totalPlaytime += game.getAveragePlaytime();
-			count++;
-		}
-
-		for (Game game : this.allOwnedGames) {
-			totalPlaytime += game.getAveragePlaytime();
-			count++;
-		}
-        if (count == 0) {
-        	return 0;
-        }
-        return (double) totalPlaytime / count;
-    }
 }

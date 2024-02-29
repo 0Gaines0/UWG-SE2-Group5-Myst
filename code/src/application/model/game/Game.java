@@ -97,6 +97,15 @@ public class Game {
 	public int getReleaseDateYear() {
 		return this.releaseDateYear;
 	}
+	
+	/**
+	 * Sets the release date year.
+	 *
+	 * @param year the new release date year
+	 */
+	public void setReleaseDateYear(int year) {
+		this.releaseDateYear = year;
+	}
 
 	/**
 	 * Gets the release month of the game.

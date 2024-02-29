@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import application.viewModel.profile.subProfilePages.ProfileAnchorViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.TextArea;
 
 import javafx.scene.control.TextField;
@@ -16,6 +17,7 @@ import javafx.scene.text.Text;
 
 /**
  * The Class ProfileAnchor.
+ * 
  * @author Jeffrey Gaines
  * @version Sprint 1
  */
@@ -45,6 +47,9 @@ public class ProfileAnchor {
 	@FXML
 	private TextField titleFavoriteGameTextField;
 
+	@FXML
+	private PieChart topGenrePieChart;
+
 	private ProfileAnchorViewModel profileAnchorViewModel;
 
 	/**
@@ -58,9 +63,16 @@ public class ProfileAnchor {
 	void initialize() {
 		this.validateFXMLComponets();
 		this.bindToViewModel();
+		this.setUpPieChart();
 		this.profileAnchorViewModel.setUpAboutMeDescription();
 		this.profileAnchorViewModel.setUpGameLikedAndDislikeCounters();
 
+	}
+
+	private void setUpPieChart() {
+		var pieChartData = this.profileAnchorViewModel.setUpGenrePieChartData();
+		this.topGenrePieChart.setData(pieChartData);
+		
 	}
 
 	private void bindToViewModel() {
@@ -103,6 +115,9 @@ public class ProfileAnchor {
 				: "fx:id=\"profileAnchor\" was not injected: check your FXML file 'ProfileAnchor.fxml'.";
 		assert this.titleFavoriteGameTextField != null
 				: "fx:id=\"titleFavoriteGameTextField\" was not injected: check your FXML file 'ProfileAnchor.fxml'.";
+		assert this.topGenrePieChart != null
+				: "fx:id=\"topGenrePieChart\" was not injected: check your FXML file 'ProfileAnchor.fxml'.";
+
 	}
 
 }

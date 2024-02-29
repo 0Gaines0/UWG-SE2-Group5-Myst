@@ -44,8 +44,6 @@ public class TestProfileAttributes {
 		assertNotNull(this.profileAttributes);
 		assertEquals("", this.profileAttributes.getAboutMeDescription());
 		assertNotNull(this.profileAttributes.getUserProfilePicturePath());
-		assertEquals(0, this.profileAttributes.getTotalLikedGames());
-		assertEquals(0, this.profileAttributes.getTotalDislikedGame());
 	}
 
 	/**
@@ -55,15 +53,13 @@ public class TestProfileAttributes {
 	public void testParameterConstructor() {
 		var description = TEST_DESCRIPTION;
 		var imagePath = TEST_IMAGE_PATH;
-		var likedGames = 5;
-		var dislikedGames = 3;
 
-		var profile = new ProfileAttributes(description, imagePath, likedGames, dislikedGames);
+
+		var profile = new ProfileAttributes(description, imagePath);
 
 		assertEquals(description, profile.getAboutMeDescription());
 		assertNotNull(profile.getUserProfilePicturePath());
-		assertEquals(likedGames, profile.getTotalLikedGames());
-		assertEquals(dislikedGames, profile.getTotalDislikedGame());
+
 	}
 
 	/**
@@ -71,7 +67,7 @@ public class TestProfileAttributes {
 	 */
 	@Test
 	public void testNullDescriptionConstructor() {
-		assertThrows(NullPointerException.class, () -> new ProfileAttributes(null, TEST_IMAGE_PATH, 5, 3));
+		assertThrows(NullPointerException.class, () -> new ProfileAttributes(null, TEST_IMAGE_PATH));
 	}
 	
 	/**
@@ -79,7 +75,7 @@ public class TestProfileAttributes {
 	 */
 	@Test
 	public void testEmptyDescriptionConstructor() {
-		assertThrows(IllegalArgumentException.class, () -> new ProfileAttributes("", TEST_IMAGE_PATH, 5, 3));
+		assertThrows(IllegalArgumentException.class, () -> new ProfileAttributes("", TEST_IMAGE_PATH));
 	}
 	
 	/**
@@ -87,7 +83,7 @@ public class TestProfileAttributes {
 	 */
 	@Test
 	public void testNullImagePathConstructor() {
-		assertThrows(NullPointerException.class, () -> new ProfileAttributes(TEST_DESCRIPTION, null, 5, 3));
+		assertThrows(NullPointerException.class, () -> new ProfileAttributes(TEST_DESCRIPTION, null));
 	}
 	
 	/**
@@ -95,26 +91,9 @@ public class TestProfileAttributes {
 	 */
 	@Test
 	public void testEmptyImagePathConstructor() {
-		assertThrows(IllegalArgumentException.class, () -> new ProfileAttributes(TEST_DESCRIPTION, "", 5, 3));
+		assertThrows(IllegalArgumentException.class, () -> new ProfileAttributes(TEST_DESCRIPTION, ""));
 	}
 	
-	/**
-	 * Test increase liked game count.
-	 */
-	@Test
-	public void testIncreaseLikedGameCount() {
-		this.profileAttributes.increaseLikedGameCount();
-		assertEquals(1, this.profileAttributes.getTotalLikedGames());
-	}
-	
-	/**
-	 * Test decrease disliked game count.
-	 */
-	@Test
-	public void testDecreaseDislikedGameCount() {
-		this.profileAttributes.increaseDislikedGameCount();
-		assertEquals(1, this.profileAttributes.getTotalDislikedGame());
-	}
 	
 	/**
 	 * Test set about me description.
@@ -147,23 +126,6 @@ public class TestProfileAttributes {
 		assertEquals(TEST_IMAGE_PATH, this.profileAttributes.getUserProfilePicturePath());
 	}
 	
-	/**
-	 * Test set total liked games.
-	 */
-	@Test
-	public void testSetTotalLikedGames() {
-		this.profileAttributes.setTotalLikedGames(10);
-		assertEquals(10, this.profileAttributes.getTotalLikedGames());
-	}
-	
-	/**
-	 * Test set total disliked games.
-	 */
-	@Test
-	public void testSetTotalDislikedGames() {
-		this.profileAttributes.setTotalDislikedGame(10);
-		assertEquals(10, this.profileAttributes.getTotalDislikedGame());
-	}
 	
 	
 	

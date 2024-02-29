@@ -40,21 +40,4 @@ public class TestProfileAnchorViewModel {
 
 	}
 	
-	/**
-	 * Test set up game liked and disliked counters.
-	 */
-	@Test
-	public void testSetUpGameLikedAndDislikedCounters() {
-		var likedGameCount = 5;
-		var dislikedGameCount = 3;
-		
-		ActiveUser.getActiveUser().getProfileAttributes().setTotalLikedGames(likedGameCount);
-		ActiveUser.getActiveUser().getProfileAttributes().setTotalDislikedGame(dislikedGameCount);
-		
-		this.viewModel.setUpGameLikedAndDislikeCounters();
-		
-		assertEquals(String.valueOf(likedGameCount), this.viewModel.getLikedGamesProperty().get());
-		assertEquals(String.valueOf(dislikedGameCount), this.viewModel.getDislikedGamesProperty().get());
-		
-	}
 }
