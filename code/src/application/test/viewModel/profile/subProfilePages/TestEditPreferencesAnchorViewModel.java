@@ -1,5 +1,6 @@
 package application.test.viewModel.profile.subProfilePages;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -13,6 +14,7 @@ import application.model.game.Genre;
 import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
 import application.viewModel.profile.subProfilePages.EditPreferencesAnchorViewModel;
+import javafx.collections.FXCollections;
 
 /**
  * The Class TestEditPreferencesAnchorViewModel.
@@ -89,6 +91,19 @@ public class TestEditPreferencesAnchorViewModel {
 	}
 	
 	/**
+	 * Test remove genre from preferred genre list.
+	 */
+	@Test
+	public void testRemoveGenreFromPreferredGenreList() {
+		ActiveUser.getActiveUser().getPreferredGenres().add(Genre.ACCOUNTING);
+		
+		this.viewModel.getSelectedPreferredGenreProperty().set(Genre.ACCOUNTING);
+		
+		assertTrue(this.viewModel.removeSelectedGenreFromPreferredList());
+		assertFalse(ActiveUser.getActiveUser().getPreferredGenres().contains(Genre.ACCOUNTING));
+	}
+	
+	/**
 	 * Test remove game from liked list but null.
 	 */
 	@Test
@@ -118,5 +133,27 @@ public class TestEditPreferencesAnchorViewModel {
 	@Test
 	public void testMoveGameFromDislikedListToLikedListNull() {
 		assertFalse(this.viewModel.moveGameFromDislikedListToLikedList());
+	}
+	
+	/**
+	 * Test getters.
+	 */
+	@Test
+	public void testGetters() {
+		var gameList = new ArrayList<Game>();
+		gameList.add(this.testGame);
+		
+		var genreList = new ArrayList<Genre>();
+		genreList.add(Genre.ACCOUNTING);
+		
+		this.viewModel.getLikedGamesProperty().set(FXCollections.observableArrayList(gameList));
+		this.viewModel.getDislikedGamesProperty().set(FXCollections.observableArrayList(gameList));
+		this.viewModel.getPreferredGenreProperty().set(FXCollections.observableArrayList(genreList));
+		assertEquals(1, this.viewModel.getLikedGamesProperty().getValue().size());
+		assertEquals(1, this.viewModel.getDislikedGamesProperty().getValue().size());
+		assertEquals(1, this.viewModel.getPreferredGenreProperty().getValue().size());
+
+
+		
 	}
 }
