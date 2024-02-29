@@ -25,7 +25,7 @@ class TestGameLibraryIO {
 	@Test
 	void testParseGamesFromTextSuccess() {
 	    String csvText = TestConstants.IO_HEADER
-	    		+ "1,\"\"\"Counter-Strike\"\" \",11/1/2000,Valve,windows;mac;linux,0,Multi-player;Online Multi-Player;Local Multi-Player;Valve Anti-Cheat enabled,Action,Action;FPS;Multiplayer,124534,3339,17612,317,https://steamcdn-a.akamaihd.net/steam/apps/10/header.jpg?t=1528733245";
+	    		+ "1,\"\"\"Counter-Strike\"\" \",11/1/2000,Valve,windows;mac;linux,0,Multi-player;Online Multi-Player;Local Multi-Player;Valve Anti-Cheat enabled,Action,Action;FPS;Multiplayer,124534,3339,17612,317,https://steamcdn-a.akamaihd.net/steam/apps/10/header.jpg?t=1528733245,description";
 
 	    GameLibrary resultLibrary = GameLibraryIO.parseGamesFromText(csvText);
 
@@ -35,7 +35,7 @@ class TestGameLibraryIO {
 	@Test
 	void testParseGamesFromTextMalformedData() {
 	    String csvText = TestConstants.IO_HEADER 
-	    		+ "10,\"\"\"Counter-Strike\"\" \",11/1/2000,Valve,windows;mac;linux,0,Multi-player;Online Multi-Player;Local Multi-Player;Valve Anti-Cheat enabled,Action,Action;FPS;Multiplayer,124534,F,F,F,https://steamcdn-a.akamaihd.net/steam/apps/10/header.jpg?t=1528733245";
+	    		+ "10,\"\"\"Counter-Strike\"\" \",11/1/2000,Valve,windows;mac;linux,0,Multi-player;Online Multi-Player;Local Multi-Player;Valve Anti-Cheat enabled,Action,Action;FPS;Multiplayer,124534,F,F,F,https://steamcdn-a.akamaihd.net/steam/apps/10/header.jpg?t=1528733245,description";
 
 	    GameLibrary resultLibrary = GameLibraryIO.parseGamesFromText(csvText);
 	    assertEquals(0, resultLibrary.size(), "Library should be empty due to malformed data.");
@@ -44,7 +44,7 @@ class TestGameLibraryIO {
 	@Test
 	void testParseGamesFromTextMissingField() {
 	    String csvText = TestConstants.IO_HEADER 
-	    		+ "10,\"\"\"Counter-Strike\"\" \",11/1/2000,windows;mac;linux,0,Multi-player;Online Multi-Player;Local Multi-Player;Valve Anti-Cheat enabled,Action,Action;FPS;Multiplayer,124534,F,F,F,https://steamcdn-a.akamaihd.net/steam/apps/10/header.jpg?t=1528733245";
+	    		+ "10,\"\"\"Counter-Strike\"\" \",11/1/2000,windows;mac;linux,0,Multi-player;Online Multi-Player;Local Multi-Player;Valve Anti-Cheat enabled,Action,Action;FPS;Multiplayer,124534,F,F,F,https://steamcdn-a.akamaihd.net/steam/apps/10/header.jpg?t=1528733245,description";
 
 	    GameLibrary resultLibrary = GameLibraryIO.parseGamesFromText(csvText);
 
@@ -54,7 +54,7 @@ class TestGameLibraryIO {
 	@Test
 	void testParseGamesGoodGenre() {
 	    String csvText = TestConstants.IO_HEADER 
-	                    + "10,\"\"\"Counter-Strike\"\" \",11/1/2000,Valve,windows;mac;linux,0,Multi-player;Online Multi-Player;Local Multi-Player;Valve Anti-Cheat enabled,Action,Action;FPS;Multiplayer,124534,3339,17612,317,https://steamcdn-a.akamaihd.net/steam/apps/10/header.jpg?t=1528733245";
+	                    + "10,\"\"\"Counter-Strike\"\" \",11/1/2000,Valve,windows;mac;linux,0,Multi-player;Online Multi-Player;Local Multi-Player;Valve Anti-Cheat enabled,Action,Action;FPS;Multiplayer,124534,3339,17612,317,https://steamcdn-a.akamaihd.net/steam/apps/10/header.jpg?t=1528733245,description";
 
 	    GameLibrary resultLibrary = GameLibraryIO.parseGamesFromText(csvText);
 	    assertEquals(Genre.ACTION, resultLibrary.getGames().get(0).getGenres().get(0), "Library should contain one game.");
@@ -63,7 +63,7 @@ class TestGameLibraryIO {
 	@Test
 	void testParseGameBadGenre() {
 	    String csvText = TestConstants.IO_HEADER
-	                    + "10,\"\"\"Counter-Strike\"\" \",11/1/2000,Valve,windows;mac;linux,0,Multi-player;Online Multi-Player;Local Multi-Player;Valve Anti-Cheat enabled,Fraction,Fraction;FPS;Multiplayer,124534,3339,17612,317,https://steamcdn-a.akamaihd.net/steam/apps/10/header.jpg?t=1528733245";
+	                    + "10,\"\"\"Counter-Strike\"\" \",11/1/2000,Valve,windows;mac;linux,0,Multi-player;Online Multi-Player;Local Multi-Player;Valve Anti-Cheat enabled,Fraction,Fraction;FPS;Multiplayer,124534,3339,17612,317,https://steamcdn-a.akamaihd.net/steam/apps/10/header.jpg?t=1528733245,description";
 
 	    GameLibrary resultLibrary = GameLibraryIO.parseGamesFromText(csvText);
 
