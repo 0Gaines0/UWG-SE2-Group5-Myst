@@ -27,8 +27,8 @@ class GameLibraryTest {
     @BeforeEach
     void setUp() {
         this.library = new GameLibrary();
-        this.game1 = new Game("Game 1", List.of(Genre.ACTION), 1, "Developer 1", 2020, 5, 100, 10, 20, TestConstants.EXAMPLE_IMG_LINK);
-        this.game2 = new Game("Game 2", List.of(Genre.ADVENTURE), 2, "Developer 2", 2021, 6, 200, 20, 30, TestConstants.EXAMPLE_IMG_LINK);
+        this.game1 = new Game("Game 1", List.of(Genre.ACTION), 1, "Developer 1", 2020, 5, 100, 10, 20, TestConstants.EXAMPLE_IMG_LINK, "who is this");
+        this.game2 = new Game("Game 2", List.of(Genre.ADVENTURE), 2, "Developer 2", 2021, 6, 200, 20, 30, TestConstants.EXAMPLE_IMG_LINK, "what is this");
     }
 
     @Test

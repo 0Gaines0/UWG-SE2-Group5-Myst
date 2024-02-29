@@ -113,8 +113,9 @@ public class GameLibraryIO {
 			int negativeRatings = Integer.parseInt(fields.get(10));
 			int averagePlaytime = Integer.parseInt(fields.get(11));
 			String gamePhotoLink = fields.get(13);
+			String description = fields.get(14);
 			Game game = new Game(name, genres, appId, developer, releaseDateYear, releaseDateMonth, positiveRatings,
-					negativeRatings, averagePlaytime, gamePhotoLink);
+					negativeRatings, averagePlaytime, gamePhotoLink, description);
 			// System.out.println("added" + game);
 			return game;
 		} catch (Exception e) {

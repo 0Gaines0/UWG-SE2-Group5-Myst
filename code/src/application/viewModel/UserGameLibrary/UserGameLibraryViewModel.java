@@ -115,6 +115,9 @@ public class UserGameLibraryViewModel {
 	 * @pre none
 	 * @post none
 	 * @return the selected game's genres.
+	 * Gets the selected game genres.
+	 *
+	 * @return the selected game genres
 	 */
 	public ListProperty<Genre> getSelectedGameGenres() {
 		return this.selectedGameGenresListProperty;

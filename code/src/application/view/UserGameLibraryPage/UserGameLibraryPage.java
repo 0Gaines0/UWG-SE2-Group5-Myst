@@ -6,10 +6,7 @@ import application.Main;
 import application.model.game.Game;
 import application.model.game.Genre;
 import application.model.profile.ActiveUser;
-import application.model.profile.UserProfile;
-import application.view.profile.UserProfilePage;
 import application.viewModel.UserGameLibrary.UserGameLibraryViewModel;
-import application.viewModel.profile.UserProfilePageViewModel;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -63,10 +60,11 @@ public class UserGameLibraryPage {
 	 */
 	public UserGameLibraryPage() {
 		this.viewModel = new UserGameLibraryViewModel();
-		new UserProfilePageViewModel();
-		
 	}
 	
+	/**
+	 * Initialize.
+	 */
 	@FXML
 	public void initialize() {
 		this.validateFXMLComponents();
@@ -77,7 +75,6 @@ public class UserGameLibraryPage {
 		this.setUpGamesListViewListener();
 	}
 	
-
 	/**
 	 * Open user game library page.
 	 */
