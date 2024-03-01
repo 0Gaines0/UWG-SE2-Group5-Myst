@@ -3,9 +3,11 @@ package application.test.viewModel.login;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import application.model.profile.credentials.CredentialManager;
 import application.viewModel.login.CreatePageViewModel;
 
 /**
@@ -15,9 +17,11 @@ import application.viewModel.login.CreatePageViewModel;
  */
 public class TestCreatePageViewModel {
 	private CreatePageViewModel viewModel;
+	private CredentialManager credentialManager;
 	
 	private static final String TEST_USER = "testUser";
 	private static final String PASSWORD = "testPassword";
+	private static final String FAKE_PASSWORD = "password";
 	
 	/**
 	 * Sets the up.
@@ -25,6 +29,18 @@ public class TestCreatePageViewModel {
 	@BeforeEach
 	public void setUp() {
 		this.viewModel = new CreatePageViewModel();
+		this.credentialManager = new CredentialManager();
+	}
+	
+	/**
+	 * Reset info.
+	 */
+	@AfterEach
+	public void resetInfo() {
+		this.credentialManager.clearUserCredentials();
+		this.credentialManager.addCredential("changePassword", FAKE_PASSWORD);
+		this.credentialManager.addCredential("0Gaines0", FAKE_PASSWORD);
+		this.credentialManager.addCredential("username", FAKE_PASSWORD);
 	}
 	
 	/**

@@ -85,7 +85,8 @@ public class CredentialManager {
 			throw new IllegalArgumentException(USERNAME_MUST_BE_VALID);
 		}
 		var credential = this.getSpecifiedCredential(currentUsername);
-		if (credential != null) {
+		var potentialCredential = this.getSpecifiedCredential(newUsername);
+		if (credential != null && potentialCredential == null) {
 			credential.setUsername(newUsername);
 			this.updateCredentialFile();
 			return true;

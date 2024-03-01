@@ -50,4 +50,18 @@ public class TestUserProfilePageViewModel {
 		this.userProfilePageViewModel.setCachedProfilePicturePath("newPath");
 		assertEquals("newPath", this.userProfilePageViewModel.getCachedProfilePicturePath());
 	}
+	
+	/**
+	 * Test update username on page.
+	 */ 
+	@Test
+	public void testupdateUsernameOnPage() {
+		ActiveUser.setActiveUser(new UserProfile());
+		this.userProfilePageViewModel.getUsernameTextProperty().setValue("John");
+		ActiveUser.getActiveUser().setUsername("Sam");
+		
+		this.userProfilePageViewModel.updateUsernameOnPage();
+		
+		assertEquals("Sam", this.userProfilePageViewModel.getUsernameTextProperty().getValue());
+	}
 }

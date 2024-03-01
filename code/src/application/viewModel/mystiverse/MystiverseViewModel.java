@@ -34,6 +34,15 @@ public class MystiverseViewModel {
 	}
 
 	/**
+	 * Sets the engine.
+	 *
+	 * @param engine the new engine
+	 */
+	public void setEngine(GameRecommendationEngine engine) {
+		this.engine = engine;
+	}
+
+	/**
 	 * Gets the recommended games.
 	 *
 	 * @return the recommended games

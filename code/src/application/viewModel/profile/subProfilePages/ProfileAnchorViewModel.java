@@ -11,6 +11,7 @@ import javafx.scene.chart.PieChart;
 
 /**
  * The Class ProfileAnchorViewModel.
+ * 
  * @author Jeffrey Gaines
  * @version Sprint 1
  */
@@ -21,8 +22,7 @@ public class ProfileAnchorViewModel {
 	private StringProperty dislikedGamesProperty;
 	private StringProperty titleFavoriteGameProperty;
 	private StringProperty genresFavoriteGameProperty;
-	
-	
+
 	/**
 	 * Instantiates a new profile anchor view model.
 	 */
@@ -33,14 +33,14 @@ public class ProfileAnchorViewModel {
 		this.titleFavoriteGameProperty = new SimpleStringProperty();
 		this.genresFavoriteGameProperty = new SimpleStringProperty();
 	}
-	
+
 	/**
 	 * Sets the up about me description.
 	 */
 	public void setUpAboutMeDescription() {
 		this.aboutMeProperty.setValue(ActiveUser.getActiveUser().getProfileAttributes().getAboutMeDescription());
 	}
-	
+
 	/**
 	 * Sets the up game liked and dislike counters.
 	 */
@@ -50,7 +50,7 @@ public class ProfileAnchorViewModel {
 		this.likedGamesProperty.setValue(likedGames);
 		this.dislikedGamesProperty.setValue(dislikedGames);
 	}
-	
+
 	/**
 	 * Sets the up genre pie chart data.
 	 *
@@ -64,12 +64,11 @@ public class ProfileAnchorViewModel {
 			var data = new PieChart.Data(genre.toString(), value);
 			dataList.add(data);
 		}
-		
+
 		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(dataList);
-		
+
 		return pieChartData;
-		
-		
+
 	}
 
 	/**
@@ -98,6 +97,7 @@ public class ProfileAnchorViewModel {
 	public StringProperty getDislikedGamesProperty() {
 		return this.dislikedGamesProperty;
 	}
+
 	/**
 	 * Gets the title favorite game property.
 	 *
