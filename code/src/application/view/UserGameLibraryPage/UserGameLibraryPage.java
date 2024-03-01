@@ -6,22 +6,17 @@ import application.Main;
 import application.model.game.Game;
 import application.model.game.Genre;
 import application.model.profile.ActiveUser;
-import application.view.mystiverse.MystiversePage;
-import application.view.profile.UserProfilePage;
 import application.viewModel.UserGameLibrary.UserGameLibraryViewModel;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -59,8 +54,6 @@ public class UserGameLibraryPage {
 	private ImageView profileImageNavBar;
 
 	private UserGameLibraryViewModel viewModel;
-	private UserProfilePage userProfileCodeBehind;
-	private MystiversePage mystiverseCodeBehind;
 
 	/**
 	 * Instantiates a new user game library page.

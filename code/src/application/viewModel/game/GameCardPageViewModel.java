@@ -1,10 +1,7 @@
 package application.viewModel.game;
 
 import application.model.game.Game;
-import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 /**
  * the GameCardPageViewModel.
