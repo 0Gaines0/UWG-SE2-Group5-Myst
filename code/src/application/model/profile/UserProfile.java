@@ -2,8 +2,10 @@ package application.model.profile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import application.model.game.Game;
 import application.model.game.Genre;
@@ -15,6 +17,9 @@ import application.model.game.Genre;
  * @version Sprint 1
  */
 public class UserProfile {
+	
+	private static final int LIMIT_GENRES = 6;
+	
 	private List<Game> allOwnedGames;
 	private List<Game> allLikedGames;
 	private List<Game> allDislikedGames;
@@ -249,12 +254,16 @@ public class UserProfile {
 			}
 		}
 
-		// Calculate percentages
 		Map<Genre, Double> genrePercentages = new HashMap<>();
 		for (Map.Entry<Genre, Integer> entry : genreCounts.entrySet()) {
 			double percentage = 100.0 * entry.getValue() / totalGenres;
 			genrePercentages.put(entry.getKey(), percentage);
 		}
+		
+		genrePercentages = genrePercentages.entrySet().stream()
+	            .sorted(Map.Entry.<Genre, Double>comparingByValue().reversed())
+	            .limit(LIMIT_GENRES)
+	            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (oldValue, newValue) -> oldValue, LinkedHashMap::new));
 
 		return genrePercentages;
 	}

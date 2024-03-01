@@ -71,8 +71,9 @@ public class PreferencePageViewModel {
 	 * @param newValue the new value
 	 */
 	public void addSelectedGame(Game newValue) {
-		this.selectedLikedGames.add(newValue);
-		
+		if (!this.selectedLikedGames.contains(newValue)) {
+			this.selectedLikedGames.add(newValue);
+		}
 	}
 
 	/**

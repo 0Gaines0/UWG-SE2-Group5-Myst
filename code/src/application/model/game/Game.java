@@ -262,10 +262,7 @@ public class Game {
 
 	@Override
 	public String toString() {
-		// String genresStr = this.genres.get(0).toString();
-		String genresStr = this.genres.toString();
-
-		return String.format("Name: %s, Genres: [%s], Game ID: %d", this.name, genresStr, this.gameID);
+		return String.format(this.name);
 	}
 
 }
