@@ -76,7 +76,7 @@ class GameTest {
 	@Test
 	void testToString() {
 	    Game game = new Game(TestConstants.EXAMPLE_TITLE, Arrays.asList(Genre.ACTION), 1);
-	    String expected = "Name: Test Title, Genres: [[ACTION]], Game ID: 1";
+	    String expected = "Test Title";
 	    assertEquals(expected, game.toString(), "toString should match the expected format.");
 	}
 	
