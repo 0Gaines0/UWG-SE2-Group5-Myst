@@ -1,0 +1,12 @@
+Context - User is logged in and viewing Library page
+
+Primary Flow
+1 - User's owned games are displayed by default in the Library page's list view
+2 - User can select a game
+3 - System displays selected game info card
+
+Alternative Flow
+SWITCH TO INTERESTED/NOT INTERESTED/ PLAYED GAMES LIST
+a1 - User selects other list to display from drop down menu
+a2 - System updates list view to show the selected list of games
+Return to Primary Flow 2
