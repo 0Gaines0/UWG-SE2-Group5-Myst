@@ -4,7 +4,6 @@ import application.model.game.Game;
 import application.model.game.Genre;
 import application.model.profile.ActiveUser;
 import application.model.profile.UserGameLibrary;
-import application.model.profile.UserProfile;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -23,9 +22,6 @@ public class UserGameLibraryViewModel {
 	/** The user game library. */
 	private UserGameLibrary userGameLibrary;
 	
-	/** The user. */
-	private UserProfile user;
-
 	/** The owned games list property. */
 	private ListProperty<Game> ownedGamesListProperty;
 	

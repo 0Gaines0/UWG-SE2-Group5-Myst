@@ -1,9 +1,5 @@
 package application.viewModel.login;
 
-import java.util.ArrayList;
-
-import application.model.game.Game;
-import application.model.game.Genre;
 import application.model.profile.ActiveUser;
 import application.model.profile.UserProfile;
 import application.model.profile.credentials.CredentialManager;
