@@ -1,0 +1,6 @@
+Context - User is logged in and viewing Library page with a game selected
+
+Primary Flow
+1 - User changes Interested/Not Interested property on selected game card
+2 - System updates game properties
+3 - System updates game lists to reflect changes in game's properties
