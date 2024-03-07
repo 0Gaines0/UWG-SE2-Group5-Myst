@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import application.model.GameRecommendationEngine;
-import application.model.game.Game;
-import application.model.game.Genre;
-import application.model.profile.ActiveUser;
-import application.model.profile.UserProfile;
+import application.model.local_impl.GameRecommendationEngine;
+import application.model.local_impl.game.Game;
+import application.model.local_impl.game.Genre;
+import application.model.local_impl.profile.ActiveUser;
+import application.model.local_impl.profile.UserProfile;
 import application.viewModel.mystiverse.MystiverseViewModel;
 
 public class TestMystiverseViewModel {

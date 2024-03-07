@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import application.model.profile.credentials.Credential;
+import application.model.local_impl.profile.credentials.Credential;
 
 /**
  * The Class TestCredential.

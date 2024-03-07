@@ -8,9 +8,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import application.model.profile.ActiveUser;
-import application.model.profile.UserProfile;
-import application.model.profile.credentials.CredentialManager;
+import application.model.local_impl.profile.ActiveUser;
+import application.model.local_impl.profile.UserProfile;
+import application.model.local_impl.profile.credentials.CredentialManager;
 import application.viewModel.profile.subProfilePages.SettingProfileAnchorViewModel;
 
 public class TestSettingsAnchorViewModel {

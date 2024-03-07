@@ -10,7 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import application.model.profile.credentials.CredentialManager;
+import application.model.local_impl.profile.credentials.CredentialManager;
 
 /**
  * The Class TestCredentialManager.

@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import application.model.profile.ActiveUser;
-import application.model.profile.UserProfile;
+import application.model.local_impl.profile.ActiveUser;
+import application.model.local_impl.profile.UserProfile;
 import application.viewModel.profile.subProfilePages.EditProfileAnchorViewModel;
 
 /**

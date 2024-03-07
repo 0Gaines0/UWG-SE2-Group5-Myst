@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 
 import application.Main;
-import application.model.profile.ActiveUser;
+import application.model.local_impl.profile.ActiveUser;
 import application.view.UserGameLibraryPage.UserGameLibraryPage;
 import application.view.mystiverse.MystiversePage;
 import application.view.profile.subProfilePages.EditPreferencesAnchor;

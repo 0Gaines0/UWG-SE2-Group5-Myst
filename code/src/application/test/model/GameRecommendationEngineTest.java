@@ -12,11 +12,11 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import application.model.GameRecommendationEngine;
-import application.model.game.Game;
-import application.model.game.GameLibrary;
-import application.model.game.Genre;
-import application.model.profile.UserProfile;
+import application.model.local_impl.GameRecommendationEngine;
+import application.model.local_impl.game.Game;
+import application.model.local_impl.game.GameLibrary;
+import application.model.local_impl.game.Genre;
+import application.model.local_impl.profile.UserProfile;
 
 class GameRecommendationEngineTest {
 

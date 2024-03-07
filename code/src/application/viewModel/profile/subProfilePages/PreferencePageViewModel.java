@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import application.Main;
-import application.model.game.Game;
-import application.model.game.Genre;
-import application.model.profile.ActiveUser;
+import application.model.local_impl.game.Game;
+import application.model.local_impl.game.Genre;
+import application.model.local_impl.profile.ActiveUser;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;

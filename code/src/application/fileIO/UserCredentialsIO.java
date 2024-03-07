@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import application.model.profile.credentials.Credential;
+import application.model.local_impl.profile.credentials.Credential;
 
 /**
  * The Class UserCredentialsIO.

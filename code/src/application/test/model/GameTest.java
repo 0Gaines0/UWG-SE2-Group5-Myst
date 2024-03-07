@@ -12,8 +12,8 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import application.model.game.Game;
-import application.model.game.Genre;
+import application.model.local_impl.game.Game;
+import application.model.local_impl.game.Genre;
 import application.test.TestConstants;
 
 class GameTest {

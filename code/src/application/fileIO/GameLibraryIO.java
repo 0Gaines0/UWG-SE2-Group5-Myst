@@ -1,8 +1,8 @@
 package application.fileIO;
 
-import application.model.game.Game;
-import application.model.game.GameLibrary;
-import application.model.game.Genre;
+import application.model.local_impl.game.Game;
+import application.model.local_impl.game.GameLibrary;
+import application.model.local_impl.game.Genre;
 
 import java.io.IOException;
 import java.nio.file.Files;

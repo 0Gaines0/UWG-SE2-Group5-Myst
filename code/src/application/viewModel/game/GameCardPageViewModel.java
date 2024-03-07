@@ -1,7 +1,7 @@
 package application.viewModel.game;
 
-import application.model.game.Game;
-import application.model.profile.UserProfile;
+import application.model.local_impl.game.Game;
+import application.model.local_impl.profile.UserProfile;
 
 /**
  * the GameCardPageViewModel.
