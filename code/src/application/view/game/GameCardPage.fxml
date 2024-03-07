@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="guiPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="286.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.game.GameCardPage">
+<AnchorPane fx:id="guiPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="286.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.game.GameCardPage">
    <children>
       <TextField fx:id="titleTextBox" editable="false" layoutX="14.0" layoutY="178.0" prefHeight="25.0" prefWidth="258.0" />
       <TextField fx:id="genresTextBox" editable="false" layoutX="14.0" layoutY="220.0" prefHeight="25.0" prefWidth="258.0" />
@@ -18,5 +18,6 @@
       <Label layoutX="14.0" layoutY="245.0" prefHeight="17.0" prefWidth="99.0" text="Game Description" />
       <Button fx:id="interestedButton" layoutX="152.0" layoutY="402.0" mnemonicParsing="false" text="Interested" />
       <Button fx:id="notInterestedButton" layoutX="50.0" layoutY="402.0" mnemonicParsing="false" text="Not Interested" />
+      <ImageView fx:id="gameImageView" fitHeight="150.0" fitWidth="200.0" layoutX="43.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

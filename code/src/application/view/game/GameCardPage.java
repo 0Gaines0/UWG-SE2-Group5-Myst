@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
 
 /**
  * The Class GameCardPage.
@@ -61,6 +62,9 @@ public class GameCardPage {
     
     /** The game card page viewmodel. */
     private GameCardPageViewModel gameCardPageViewmodel;
+    
+    @FXML
+    private ImageView gameImageView;
     
     /**
      * the game card page constructor
@@ -120,6 +124,9 @@ public class GameCardPage {
 		this.titleTextBox.setText(game.getName());
 		this.genresTextBox.setText(game.getGenres().toString());
 		this.descriptionTextBox.setText(game.getDescription());
+	    String imageUrl = game.getGamePhoto(); 
+	    Image image = new Image(imageUrl, true); 
+	    this.imageView.setImage(image);
     }
     
     /**
