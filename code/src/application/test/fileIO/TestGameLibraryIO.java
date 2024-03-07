@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import application.fileIO.GameLibraryIO;
-import application.model.game.GameLibrary;
-import application.model.game.Genre;
+import application.model.local_impl.game.GameLibrary;
+import application.model.local_impl.game.Genre;
 import application.test.TestConstants;
 
 class TestGameLibraryIO {

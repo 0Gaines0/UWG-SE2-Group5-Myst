@@ -1,4 +1,4 @@
-package application.model;
+package application.model.local_impl;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -8,12 +8,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import application.Main;
-
-//import org.junit.jupiter.api.ClassOrderer.Random;
-
-import application.model.game.Game;
-import application.model.game.Genre;
-import application.model.profile.UserProfile;
+import application.model.local_impl.game.Game;
+import application.model.local_impl.game.Genre;
+import application.model.local_impl.profile.UserProfile;
 
 /**
  * The GameRecommendationEngine class provides functionality to generate

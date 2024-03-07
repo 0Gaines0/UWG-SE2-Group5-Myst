@@ -5,8 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.Main;
-import application.model.game.Game;
-import application.model.game.Genre;
+import application.model.local_impl.game.Game;
+import application.model.local_impl.game.Genre;
 import application.view.profile.UserProfilePage;
 import application.viewModel.profile.subProfilePages.PreferencePageViewModel;
 import javafx.fxml.FXML;

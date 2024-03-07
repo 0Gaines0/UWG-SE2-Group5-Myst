@@ -3,7 +3,7 @@ package application;
 import java.util.List;
 
 import application.fileIO.GameLibraryIO;
-import application.model.game.Game;
+import application.model.local_impl.game.Game;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;

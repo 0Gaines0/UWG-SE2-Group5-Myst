@@ -1,4 +1,4 @@
-package application.model.profile;
+package application.model.local_impl.profile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import application.model.game.Game;
-import application.model.game.Genre;
+import application.model.local_impl.game.Game;
+import application.model.local_impl.game.Genre;
 
 /**
  * The Class UserProfile.

@@ -1,4 +1,4 @@
-package application.model.profile;
+package application.model.local_impl.profile;
 
 /**
  * The Class ActiveUser.

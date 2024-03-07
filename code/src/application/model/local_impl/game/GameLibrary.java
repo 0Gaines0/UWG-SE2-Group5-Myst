@@ -1,4 +1,4 @@
-package application.model.game;
+package application.model.local_impl.game;
 
 import java.util.ArrayList;
 import java.util.List;

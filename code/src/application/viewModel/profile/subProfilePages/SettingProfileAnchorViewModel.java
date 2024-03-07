@@ -1,7 +1,7 @@
 package application.viewModel.profile.subProfilePages;
 
-import application.model.profile.ActiveUser;
-import application.model.profile.credentials.CredentialManager;
+import application.model.local_impl.profile.ActiveUser;
+import application.model.local_impl.profile.credentials.CredentialManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 

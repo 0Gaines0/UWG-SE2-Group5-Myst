@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import application.model.profile.UserGameLibrary;
-import application.model.profile.UserProfile;
+import application.model.local_impl.profile.UserGameLibrary;
+import application.model.local_impl.profile.UserProfile;
 
 class TestUserGameLibrary {
 

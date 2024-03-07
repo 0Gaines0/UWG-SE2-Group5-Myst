@@ -9,7 +9,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import application.fileIO.UserCredentialsIO;
-import application.model.profile.credentials.Credential;
+import application.model.local_impl.profile.credentials.Credential;
 
 /**
  * The Class TestUserCredentialsIO.

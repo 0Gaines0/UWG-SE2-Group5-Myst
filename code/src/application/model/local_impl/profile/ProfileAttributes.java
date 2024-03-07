@@ -1,6 +1,6 @@
-package application.model.profile;
+package application.model.local_impl.profile;
 
-import application.model.game.Game;
+import application.model.local_impl.game.Game;
 
 /**
  * The Class ProfileAttributes.

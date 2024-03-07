@@ -1,8 +1,8 @@
-package application.model.profile;
+package application.model.local_impl.profile;
 
 import java.util.List;
 
-import application.model.game.Game;
+import application.model.local_impl.game.Game;
 
 /**
  * Stores and manages the game library for a user.

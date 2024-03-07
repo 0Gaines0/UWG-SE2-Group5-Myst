@@ -13,9 +13,9 @@ import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import application.model.game.Game;
-import application.model.game.GameLibrary;
-import application.model.game.Genre;
+import application.model.local_impl.game.Game;
+import application.model.local_impl.game.GameLibrary;
+import application.model.local_impl.game.Genre;
 import application.test.TestConstants;
 
 class GameLibraryTest {

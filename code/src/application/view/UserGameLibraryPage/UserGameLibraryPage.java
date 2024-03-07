@@ -3,9 +3,9 @@ package application.view.UserGameLibraryPage;
 import java.io.IOException;
 
 import application.Main;
-import application.model.game.Game;
-import application.model.game.Genre;
-import application.model.profile.ActiveUser;
+import application.model.local_impl.game.Game;
+import application.model.local_impl.game.Genre;
+import application.model.local_impl.profile.ActiveUser;
 import application.viewModel.UserGameLibrary.UserGameLibraryViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

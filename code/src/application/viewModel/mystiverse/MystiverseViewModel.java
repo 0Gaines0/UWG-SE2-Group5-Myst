@@ -3,9 +3,9 @@ package application.viewModel.mystiverse;
 import java.util.ArrayList;
 import java.util.List;
 
-import application.model.GameRecommendationEngine;
-import application.model.game.Game;
-import application.model.profile.ActiveUser;
+import application.model.local_impl.GameRecommendationEngine;
+import application.model.local_impl.game.Game;
+import application.model.local_impl.profile.ActiveUser;
 
 /**
  * The Class MystiverseViewModel.

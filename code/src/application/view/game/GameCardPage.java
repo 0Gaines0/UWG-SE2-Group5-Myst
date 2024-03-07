@@ -3,8 +3,8 @@ package application.view.game;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import application.model.game.Game;
-import application.model.profile.ActiveUser;
+import application.model.local_impl.game.Game;
+import application.model.local_impl.profile.ActiveUser;
 import application.viewModel.game.GameCardPageViewModel;
 import application.viewModel.mystiverse.MystiverseViewModel;
 import javafx.fxml.FXML;

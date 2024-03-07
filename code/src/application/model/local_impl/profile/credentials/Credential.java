@@ -1,4 +1,4 @@
-package application.model.profile.credentials;
+package application.model.local_impl.profile.credentials;
 
 import java.io.Serializable;
 import java.util.Objects;

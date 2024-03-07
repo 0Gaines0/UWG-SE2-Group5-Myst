@@ -1,4 +1,4 @@
-package application.model.game;
+package application.model.local_impl.game;
 
 public enum Genre {
 	ACCOUNTING, VIDEO_PRODUCTION, RACING, ONLINE_MULTI_PLAYER, LINUX, CASUAL, EDUCATION, STEAM_ACHIEVEMENTS,
