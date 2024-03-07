@@ -12,7 +12,7 @@ import application.fileIO.UserCredentialsIO;
  * @author Jeffrey Gaines
  * @version Sprint 1
  */
-public class CredentialManager {
+public class CredentialManager extends application.model.abstract_impl.profile.credentials.CredentialManager {
 	private static final String USERNAME_MUST_BE_VALID = "username must not be null or empty";
 
 	private HashSet<Credential> userCredentials;
@@ -31,6 +31,7 @@ public class CredentialManager {
 	 * @param username the username
 	 * @return true, if successful
 	 */
+	@Override
 	public boolean userNameExist(String username) {
 		if (username == null) {
 			throw new NullPointerException(USERNAME_MUST_BE_VALID);
@@ -51,6 +52,7 @@ public class CredentialManager {
 	 * @param username the username
 	 * @return the specified credential
 	 */
+	@Override
 	public Credential getSpecifiedCredential(String username) {
 		if (username == null) {
 			throw new NullPointerException(USERNAME_MUST_BE_VALID);
@@ -73,6 +75,7 @@ public class CredentialManager {
 	 * @param newUsername     the new username
 	 * @return true, if successful
 	 */
+	@Override
 	public boolean changeCredentialUserName(String currentUsername, String newUsername) {
 		if (currentUsername == null) {
 			throw new NullPointerException(USERNAME_MUST_BE_VALID);
@@ -104,6 +107,7 @@ public class CredentialManager {
 	 * @param newPassword     the new password
 	 * @return true, if successful
 	 */
+	@Override
 	public boolean changeCredentialPassword(String currentUsername, String currentPassword, String newPassword) {
 		if (currentUsername == null) {
 			throw new NullPointerException(USERNAME_MUST_BE_VALID);
@@ -146,6 +150,7 @@ public class CredentialManager {
 	 * @param password the password
 	 * @return true, if successful
 	 */
+	@Override
 	public boolean addCredential(String username, String password) {
 		var credential = new Credential(username, password);
 		if (this.userCredentials.contains(credential)) {
