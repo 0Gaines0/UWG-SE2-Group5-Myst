@@ -1,4 +1,4 @@
-package application.model.server_impl.game;
+package application.model.server_impl.profile.credentials;
 
 import application.model.local_impl.profile.credentials.Credential;
 
@@ -6,7 +6,6 @@ public class CredentialManager extends application.model.abstract_impl.profile.c
 
 	@Override
 	public boolean userNameExist(String username) {
-		
 		return false;
 	}
 

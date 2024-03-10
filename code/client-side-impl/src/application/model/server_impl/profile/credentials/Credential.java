@@ -1,4 +1,4 @@
-package application.model.server_impl.game;
+package application.model.server_impl.profile.credentials;
 
 import java.util.Objects;
 
