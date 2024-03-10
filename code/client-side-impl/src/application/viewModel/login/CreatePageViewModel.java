@@ -1,6 +1,6 @@
 package application.viewModel.login;
 
-import application.model.local_impl.profile.credentials.CredentialManager;
+import application.model.server_impl.profile.credentials.CredentialManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
