@@ -1,6 +1,6 @@
 package application.viewModel.login;
 
-import application.model.local_impl.profile.credentials.CredentialManager;
+import application.model.server_impl.profile.credentials.CredentialManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -34,12 +34,7 @@ public class CreatePageViewModel {
 		var username = this.userNameProperty.getValue().trim();
 		var password = this.passwordProperty.getValue().trim();
 		
-		try {
-			this.credentialManger.addCredential(username, password);
-		} catch (Exception e) {
-			return false;
-		} 
-		return true;
+		return this.credentialManger.addCredential(username, password);
 		
 	}
 
