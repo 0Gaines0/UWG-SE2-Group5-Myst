@@ -15,8 +15,12 @@ public class CredentialManager extends application.model.abstract_impl.profile.c
 			json.put("request_type", "username_exist");
 			json.put("username", username);
 			var response = Server.sendRequest(json.toString());
+			var responseJson = new JSONObject(response);
 			
-			
+			var result = responseJson.get("success");
+			if (result.equals("true")) {
+				return true;
+			}
 		} catch (JSONException e) {
 			throw new IllegalArgumentException(e.getMessage());
 		}
@@ -47,8 +51,12 @@ public class CredentialManager extends application.model.abstract_impl.profile.c
 			json.put("username", username);
 			json.put("password", password);
 			var response = Server.sendRequest(json.toString());
+			var responseJson = new JSONObject(response);
 			
-			
+			var result = responseJson.get("success");
+			if (result.equals("true")) {
+				return true;
+			}
 		} catch (JSONException e) {
 			throw new IllegalArgumentException(e.getMessage());
 		}

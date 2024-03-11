@@ -34,12 +34,7 @@ public class CreatePageViewModel {
 		var username = this.userNameProperty.getValue().trim();
 		var password = this.passwordProperty.getValue().trim();
 		
-		try {
-			this.credentialManger.addCredential(username, password);
-		} catch (Exception e) {
-			return false;
-		} 
-		return true;
+		return this.credentialManger.addCredential(username, password);
 		
 	}
 
