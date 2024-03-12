@@ -11,6 +11,7 @@ class Server_Request_Handler:
     
     def __init__(self):
         self.credential_manager = Credential_Manager()
+        self.credential_manager.add_credential("username", "password")
         
     
     def handle_request(self, request):
