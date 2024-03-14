@@ -42,6 +42,26 @@ public class PreferencePageViewModel {
 	}
 	
 	/**
+	 * Search all games and filter.
+	 *
+	 * @param filterValue the filter value
+	 */
+	public void searchAllGamesAndFilter(String filterValue) {
+		var filteredList = new ArrayList<Game>();
+		
+		for (var game : Main.getGames()) {
+			if (game.getName().toLowerCase().startsWith(filterValue.toLowerCase())) {
+				filteredList.add(game);
+			} else if (game.getName().toLowerCase().contains(filterValue.toLowerCase()) && !filteredList.contains(game)) {
+				filteredList.add(game);
+			}
+		}
+		ObservableList<Game> filteredGames = FXCollections.observableArrayList(filteredList);
+		this.allGames.setValue(filteredGames);
+		
+	}
+	
+	/**
 	 * Sets the up all games list.
 	 */
 	public void setUpAllGamesList() {

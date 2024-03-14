@@ -32,7 +32,6 @@ public class LoginPageViewModel {
 	 * @return true, if successful
 	 */
 	public boolean userLoginIsSuccessful() {
-		//this.credentialManager.setUpUserCredentials();
 		var username = this.usernameProperty.getValue().trim();
 		var password = this.passwordProperty.getValue().trim();
 		if (this.credentialManager.userNameExist(username)) {
