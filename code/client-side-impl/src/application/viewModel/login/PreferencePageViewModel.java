@@ -1,4 +1,4 @@
-package application.viewModel.profile.subProfilePages;
+package application.viewModel.login;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,30 +21,24 @@ import javafx.collections.ObservableList;
  * @version Sprint 1
  */
 public class PreferencePageViewModel {
-
-	/** The high preference genre. */
-	private ObjectProperty<Genre> highPreferenceGenre;
-	
-	/** The medium preference genre. */
-	private ObjectProperty<Genre> mediumPreferenceGenre;
-	
-	/** The low preference genre. */
-	private ObjectProperty<Genre> lowPreferenceGenre;
 	
 	/** The liked games. */
 	private ListProperty<Game> allGames;	
 	
+	private ListProperty<Genre> allGenres;
+	
 	private List<Game> selectedLikedGames;
+	private List<Genre> selectedLikedGenres;
 	
 	/**
 	 * the first time login page view model.
 	 */
 	public PreferencePageViewModel() {
-		this.highPreferenceGenre = new SimpleObjectProperty<Genre>();
-		this.mediumPreferenceGenre = new SimpleObjectProperty<Genre>();
-		this.lowPreferenceGenre = new SimpleObjectProperty<Genre>();
 		this.allGames = new SimpleListProperty<Game>();
+		this.allGenres = new SimpleListProperty<Genre>();
+		
 		this.selectedLikedGames = new ArrayList<Game>();
+		this.selectedLikedGenres = new ArrayList<Genre>();
 	}
 	
 	/**
@@ -54,15 +48,21 @@ public class PreferencePageViewModel {
 		ObservableList<Game> allGamesList = FXCollections.observableArrayList(Main.getGames());
     	this.allGames.setValue(allGamesList);
 	}
+	
+	/**
+	 * Sets the up all genres list.
+	 */
+	public void setUpAllGenresList() {
+		ObservableList<Genre> allGenreList = FXCollections.observableArrayList(Genre.values());
+		this.allGenres.setValue(allGenreList);
+	}
 
 	/**
 	 * Configure new user preferences.
 	 */
 	public void configureNewUserPreferences() {
-		ActiveUser.getActiveUser().getPreferredGenres().add(this.highPreferenceGenre.getValue());
-		ActiveUser.getActiveUser().getPreferredGenres().add(this.mediumPreferenceGenre.getValue());
-		ActiveUser.getActiveUser().getPreferredGenres().add(this.lowPreferenceGenre.getValue());
 		ActiveUser.getActiveUser().getAllLikedGames().addAll(this.selectedLikedGames);
+		ActiveUser.getActiveUser().getPreferredGenres().addAll(this.selectedLikedGenres);
 	}
 	
 	/**
@@ -75,32 +75,25 @@ public class PreferencePageViewModel {
 			this.selectedLikedGames.add(newValue);
 		}
 	}
-
+	
 	/**
-	 * gets the medium priority genre.
+	 * Adds the selected genre.
 	 *
-	 * @return the medium priority genre
+	 * @param newGenre the new genre
 	 */
-	public ObjectProperty<Genre> getHighPriorityGenre() {
-		return this.highPreferenceGenre;
+	public void addSelectedGenre(Genre newGenre) {
+		if (!this.selectedLikedGenres.contains(newGenre)) {
+			this.selectedLikedGenres.add(newGenre);
+		}
 	}
-
+	
 	/**
-	 * gets the medium priority genre.
+	 * Gets the all genre property.
 	 *
-	 * @return the medium priority genre
+	 * @return the all genre property
 	 */
-	public ObjectProperty<Genre> getMediumPriorityGenre() {
-		return this.mediumPreferenceGenre;
-	}
-
-	/**
-	 * gets the low priority genre.
-	 *
-	 * @return the low priority genre
-	 */
-	public ObjectProperty<Genre> getLowPriorityGenre() {
-		return this.lowPreferenceGenre;
+	public ListProperty<Genre> getAllGenreProperty() {
+		return this.allGenres;
 	}
 
 	

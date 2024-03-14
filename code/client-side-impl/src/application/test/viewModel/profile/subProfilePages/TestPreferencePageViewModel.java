@@ -12,7 +12,7 @@ import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
 import application.model.local_impl.profile.ActiveUser;
 import application.model.local_impl.profile.UserProfile;
-import application.viewModel.profile.subProfilePages.PreferencePageViewModel;
+import application.viewModel.login.PreferencePageViewModel;
 
 public class TestPreferencePageViewModel {
 	
@@ -31,11 +31,7 @@ public class TestPreferencePageViewModel {
 	 */
 	@Test
 	public void testConfigureNewPreferences() {
-		ActiveUser.setActiveUser(new UserProfile());
-		this.viewModel.getHighPriorityGenre().setValue(Genre.ACCOUNTING);
-		this.viewModel.getMediumPriorityGenre().setValue(Genre.ACTION);
-		this.viewModel.getLowPriorityGenre().setValue(Genre.ADVENTURE);
-		
+		ActiveUser.setActiveUser(new UserProfile());		
 		this.viewModel.configureNewUserPreferences();
 		
 		assertTrue(ActiveUser.getActiveUser().getPreferredGenres().contains(Genre.ACCOUNTING));

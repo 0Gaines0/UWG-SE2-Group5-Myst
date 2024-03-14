@@ -14,7 +14,9 @@ import application.fileIO.UserCredentialsIO;
  */
 public class CredentialManager extends application.model.abstract_impl.profile.credentials.CredentialManager {
 	private static final String USERNAME_MUST_BE_VALID = "username must not be null or empty";
-
+	private static final String PASSWORD_MUST_BE_VALID = "password must not be null or empty";
+	
+	
 	private HashSet<Credential> userCredentials;
 
 	/**
@@ -115,14 +117,14 @@ public class CredentialManager extends application.model.abstract_impl.profile.c
 			throw new IllegalArgumentException(USERNAME_MUST_BE_VALID);
 		}
 		if (currentPassword == null) {
-			throw new NullPointerException(USERNAME_MUST_BE_VALID);
+			throw new NullPointerException(PASSWORD_MUST_BE_VALID);
 		} else if (currentPassword.isBlank()) {
-			throw new IllegalArgumentException(USERNAME_MUST_BE_VALID);
+			throw new IllegalArgumentException(PASSWORD_MUST_BE_VALID);
 		}
 		if (newPassword == null) {
-			throw new NullPointerException(USERNAME_MUST_BE_VALID);
+			throw new NullPointerException(PASSWORD_MUST_BE_VALID);
 		} else if (newPassword.isBlank()) {
-			throw new IllegalArgumentException(USERNAME_MUST_BE_VALID);
+			throw new IllegalArgumentException(PASSWORD_MUST_BE_VALID);
 		}
 		var credential = this.getSpecifiedCredential(currentUsername);
 		if (credential != null && credential.getPassword().equals(currentPassword)) {
@@ -152,6 +154,11 @@ public class CredentialManager extends application.model.abstract_impl.profile.c
 	 */
 	@Override
 	public boolean addCredential(String username, String password) {
+		if (username == null) {
+			throw new NullPointerException(USERNAME_MUST_BE_VALID);
+		} else if (username.isBlank()) {
+			throw new IllegalArgumentException(USERNAME_MUST_BE_VALID);
+		}
 		var credential = new Credential(username, password);
 		if (this.userCredentials.contains(credential)) {
 			throw new IllegalArgumentException("Credential can not be added, username already exist");

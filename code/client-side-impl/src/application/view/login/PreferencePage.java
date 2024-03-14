@@ -8,7 +8,7 @@ import application.Main;
 import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
 import application.view.profile.UserProfilePage;
-import application.viewModel.profile.subProfilePages.PreferencePageViewModel;
+import application.viewModel.login.PreferencePageViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,48 +29,48 @@ import javafx.stage.Stage;
  */
 public class PreferencePage {
 
-    @FXML
-    private ResourceBundle resources;
-    
-    @FXML
-    private AnchorPane guiPane;
+	@FXML
+	private ResourceBundle resources;
 
-    @FXML
-    private URL location;
+	@FXML
+	private URL location;
 
-    @FXML
-    private Button continueButton;
+	@FXML
+	private Button cancelButton;
 
-    @FXML
-    private Button cancelButton;
+	@FXML
+	private Button continueButton;
 
-    @FXML
-    private ComboBox<Genre> highPreferenceComboBox;
+	@FXML
+	private ListView<Genre> genresListView;
 
-    @FXML
-    private ComboBox<Genre> lowPreferenceComboBox;
+	@FXML
+	private AnchorPane guiPane;
 
-    @FXML
-    private ComboBox<Genre> mediumPreferenceComboBox;
-    
-    @FXML
-    private ListView<Game> ownedGamesListView;
-    
-    private PreferencePageViewModel viewmodel;
-    private UserProfilePage userProfileCodeBehind;
+	@FXML
+	private ListView<Game> likedGamesListView;
 
-    /**
-     * the first time login page constructor
-     */
-    public PreferencePage() {
-    	this.viewmodel = new PreferencePageViewModel();
-    	this.userProfileCodeBehind = new UserProfilePage();
-    }
-    
-    /**
-     * Open preference page.
-     */
-    public void openPreferencePage() {
+	@FXML
+	private ListView<Genre> selectedGenresListView;
+
+	@FXML
+	private ListView<Game> selectedLikedGamesListView;
+
+	private PreferencePageViewModel viewmodel;
+	private UserProfilePage userProfileCodeBehind;
+
+	/**
+	 * the first time login page constructor
+	 */
+	public PreferencePage() {
+		this.viewmodel = new PreferencePageViewModel();
+		this.userProfileCodeBehind = new UserProfilePage();
+	}
+
+	/**
+	 * Open preference page.
+	 */
+	public void openPreferencePage() {
 		var newStage = new Stage();
 		try {
 			var loader = new FXMLLoader(getClass().getResource(Main.PREFERENCE_PAGE_WINDOW));
@@ -86,62 +86,82 @@ public class PreferencePage {
 			error.printStackTrace();
 		}
 	}
-    
-    @FXML
-    void initialize() {
-    	this.fxmlValidCmponents();
-    	this.bindToViewModel();
-    	this.setupButtons();
-    	this.setupComboBoxes();
-    	this.setupListView();
-    	
-    }
-    
-    private void bindToViewModel() {
-    	this.highPreferenceComboBox.valueProperty().bindBidirectional(this.viewmodel.getHighPriorityGenre());
-    	this.mediumPreferenceComboBox.valueProperty().bindBidirectional(this.viewmodel.getMediumPriorityGenre());
-    	this.lowPreferenceComboBox.valueProperty().bindBidirectional(this.viewmodel.getLowPriorityGenre());
-    	this.ownedGamesListView.itemsProperty().bindBidirectional(this.viewmodel.getAllGames());
-    	
-    	this.ownedGamesListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-    		if (newValue != null) {
-    			this.viewmodel.addSelectedGame(newValue);
-    		}
-    	});
-    }
-    
-    private void setupListView() {
-    	this.ownedGamesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-    	this.viewmodel.setUpAllGamesList();
-    }
-    
-    private void setupComboBoxes() {
-		this.highPreferenceComboBox.getItems().addAll(Genre.values());
-		this.mediumPreferenceComboBox.getItems().addAll(Genre.values());
-		this.lowPreferenceComboBox.getItems().addAll(Genre.values());
-    }
-    
-    private void setupButtons() {
-    	this.cancelButton.setOnAction((event) -> {
-    		var stage = (Stage) this.cancelButton.getScene().getWindow();
-    		stage.close();
-    		this.userProfileCodeBehind.openUserProfilePage();
-    	});
-    	this.continueButton.setOnAction((event) -> {
-    		this.viewmodel.configureNewUserPreferences();
-    		var stage = (Stage) this.continueButton.getScene().getWindow();
-    		stage.close();
-    		this.userProfileCodeBehind.openUserProfilePage();
-    	});
-    }
 
-    private void fxmlValidCmponents() {
-        assert this.continueButton != null : "fx:id=\"Continue\" was not injected: check your FXML file 'PreferencePage.fxml'.";
-        assert this.cancelButton != null : "fx:id=\"cancelButton\" was not injected: check your FXML file 'PreferencePage.fxml'.";
-        assert this.guiPane != null : "fx:id=\"guiPane\" was not injected: check your FXML file 'PreferencePage.fxml'.";
-        assert this.highPreferenceComboBox != null : "fx:id=\"highPreferenceComboBox\" was not injected: check your FXML file 'PreferencePage.fxml'.";
-        assert this.lowPreferenceComboBox != null : "fx:id=\"lowPreferenceComboBox\" was not injected: check your FXML file 'PreferencePage.fxml'.";
-        assert this.mediumPreferenceComboBox != null : "fx:id=\"mediumPreferenceComboBox\" was not injected: check your FXML file 'PreferencePage.fxml'.";
-        assert this.ownedGamesListView != null : "fx:id=\"ownedGamesListView\" was not injected: check your FXML file 'PreferencePage.fxml'.";
-    }
+	@FXML
+	void initialize() {
+		this.fxmlValidCmponents();
+		this.bindToViewModel();
+		this.setupButtons();
+		this.setupListView();
+
+	}
+
+	private void bindToViewModel() {
+		this.likedGamesListView.itemsProperty().bindBidirectional(this.viewmodel.getAllGames());
+		this.genresListView.itemsProperty().bindBidirectional(this.viewmodel.getAllGenreProperty());
+
+		this.setUpLikedGamesChangeListener();
+		this.setUpLikedGenresChangeListener();
+	}
+
+	private void setUpLikedGenresChangeListener() {
+		this.genresListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null) {
+				this.viewmodel.addSelectedGenre(newValue);
+				if (!this.selectedGenresListView.getItems().contains(newValue)) {
+					this.selectedGenresListView.getItems().add(newValue);
+				}
+			}
+		});
+	}
+
+	private void setUpLikedGamesChangeListener() {
+		this.likedGamesListView.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> {
+					if (newValue != null) {
+						this.viewmodel.addSelectedGame(newValue);
+						if (!this.selectedLikedGamesListView.getItems().contains(newValue)) {
+							this.selectedLikedGamesListView.getItems().add(newValue);
+						}
+					}
+				});
+	}
+
+	private void setupListView() {
+		this.likedGamesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		this.genresListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		this.viewmodel.setUpAllGamesList();
+		this.viewmodel.setUpAllGenresList();
+	}
+
+	private void setupButtons() {
+		this.cancelButton.setOnAction((event) -> {
+			var stage = (Stage) this.cancelButton.getScene().getWindow();
+			stage.close();
+			this.userProfileCodeBehind.openUserProfilePage();
+		});
+		this.continueButton.setOnAction((event) -> {
+			this.viewmodel.configureNewUserPreferences();
+			var stage = (Stage) this.continueButton.getScene().getWindow();
+			stage.close();
+			this.userProfileCodeBehind.openUserProfilePage();
+		});
+	}
+
+	private void fxmlValidCmponents() {
+		assert this.cancelButton != null
+				: "fx:id=\"cancelButton\" was not injected: check your FXML file 'PreferencePage.fxml'.";
+		assert this.continueButton != null
+				: "fx:id=\"continueButton\" was not injected: check your FXML file 'PreferencePage.fxml'.";
+		assert this.genresListView != null
+				: "fx:id=\"genresListView\" was not injected: check your FXML file 'PreferencePage.fxml'.";
+		assert this.guiPane != null : "fx:id=\"guiPane\" was not injected: check your FXML file 'PreferencePage.fxml'.";
+		assert this.likedGamesListView != null
+				: "fx:id=\"likedGamesListView\" was not injected: check your FXML file 'PreferencePage.fxml'.";
+		assert this.selectedGenresListView != null
+				: "fx:id=\"selectedGenresListView\" was not injected: check your FXML file 'PreferencePage.fxml'.";
+		assert this.selectedLikedGamesListView != null
+				: "fx:id=\"selectedLikedGamesListView\" was not injected: check your FXML file 'PreferencePage.fxml'.";
+
+	}
 }
