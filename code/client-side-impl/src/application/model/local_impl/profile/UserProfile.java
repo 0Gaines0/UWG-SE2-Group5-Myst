@@ -16,7 +16,7 @@ import application.model.local_impl.game.Genre;
  * @author Jeffrey Gaines
  * @version Sprint 1
  */
-public class UserProfile {
+public class UserProfile extends application.model.abstract_impl.profile.UserProfile {
 	
 	private static final int LIMIT_GENRES = 6;
 	
@@ -78,6 +78,7 @@ public class UserProfile {
 	 *
 	 * @return the all owned games
 	 */
+	@Override
 	public List<Game> getAllOwnedGames() {
 		return this.allOwnedGames;
 	}
@@ -87,6 +88,7 @@ public class UserProfile {
 	 *
 	 * @param allOwnedGames the new all owned games
 	 */
+	@Override
 	public void setAllOwnedGames(List<Game> allOwnedGames) {
 		if (allOwnedGames == null) {
 			throw new NullPointerException(INPUT_LIST_MUST_NOT_BE_NULL);
@@ -99,6 +101,7 @@ public class UserProfile {
 	 *
 	 * @return the all liked games
 	 */
+	@Override
 	public List<Game> getAllLikedGames() {
 		return this.allLikedGames;
 	}
@@ -108,6 +111,7 @@ public class UserProfile {
 	 *
 	 * @param allLikedGames the new all liked games
 	 */
+	@Override
 	public void setAllLikedGames(List<Game> allLikedGames) {
 		if (allLikedGames == null) {
 			throw new NullPointerException(INPUT_LIST_MUST_NOT_BE_NULL);
@@ -120,6 +124,7 @@ public class UserProfile {
 	 *
 	 * @return the all disliked games
 	 */
+	@Override
 	public List<Game> getAllDislikedGames() {
 		return this.allDislikedGames;
 	}
@@ -129,6 +134,7 @@ public class UserProfile {
 	 *
 	 * @param allDislikedGames the new all disliked games
 	 */
+	@Override
 	public void setAllDislikedGames(List<Game> allDislikedGames) {
 		if (allDislikedGames == null) {
 			throw new NullPointerException(INPUT_LIST_MUST_NOT_BE_NULL);
@@ -141,6 +147,7 @@ public class UserProfile {
 	 *
 	 * @return the username
 	 */
+	@Override
 	public String getUsername() {
 		return this.username;
 	}
@@ -150,6 +157,7 @@ public class UserProfile {
 	 *
 	 * @param username the new username
 	 */
+	@Override
 	public void setUsername(String username) {
 		if (username == null) {
 			throw new NullPointerException(USERNAME_MUST_NOT_BE_NULL_OR_EMPTY);
@@ -164,6 +172,7 @@ public class UserProfile {
 	 *
 	 * @return the password
 	 */
+	@Override
 	public String getPassword() {
 		return this.password;
 	}
@@ -173,6 +182,7 @@ public class UserProfile {
 	 *
 	 * @param password the new password
 	 */
+	@Override
 	public void setPassword(String password) {
 		if (password == null) {
 			throw new NullPointerException(PASSWORD_MUST_NOT_BE_NULL_OR_EMPTY);
@@ -187,6 +197,7 @@ public class UserProfile {
 	 * 
 	 * @return the preferredGenres
 	 */
+	@Override
 	public List<Genre> getPreferredGenres() {
 		return this.preferredGenres;
 	}
@@ -196,6 +207,7 @@ public class UserProfile {
 	 *
 	 * @param preferredGenres the new preferred genres
 	 */
+	@Override
 	public void setPreferredGenres(List<Genre> preferredGenres) {
 		if (preferredGenres == null) {
 			throw new IllegalArgumentException("preferredGenres cannot be null");
@@ -208,6 +220,7 @@ public class UserProfile {
 	 *
 	 * @return the profile attributes
 	 */
+	@Override
 	public ProfileAttributes getProfileAttributes() {
 		return this.profileAttributes;
 	}
@@ -217,6 +230,7 @@ public class UserProfile {
 	 *
 	 * @return true, if is first time login
 	 */
+	@Override
 	public boolean isFirstTimeLogin() {
 		return this.firstTimeLogin;
 	}
@@ -226,6 +240,7 @@ public class UserProfile {
 	 *
 	 * @param firstTimeLogin the new first time login
 	 */
+	@Override
 	public void setFirstTimeLogin(boolean firstTimeLogin) {
 		this.firstTimeLogin = firstTimeLogin;
 	}
