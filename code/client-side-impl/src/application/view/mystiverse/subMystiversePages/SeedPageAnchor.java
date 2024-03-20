@@ -43,6 +43,9 @@ public class SeedPageAnchor {
 
     private SeedPageAnchorViewModel viewmodel;
     
+    /**
+     * Instantiates a new seed page anchor.
+     */
     public SeedPageAnchor() {
     	this.viewmodel = new SeedPageAnchorViewModel();
     }
@@ -50,7 +53,7 @@ public class SeedPageAnchor {
 	/**
 	 * Open anchor pane.
 	 *
-	 * @param parent        the parent
+	 * @param parent the parent
 	 * @param newAnchorPath the new anchor path
 	 */
 	public void openAnchorPane(BorderPane parent, String newAnchorPath) {
@@ -67,12 +70,12 @@ public class SeedPageAnchor {
 	
     @FXML
     void initialize() {
-        assert beginRecommendationsButton != null : "fx:id=\"beginRecommendationsButton\" was not injected: check your FXML file 'SeedPageAnchor.fxml'.";
-        assert gamesComboBox != null : "fx:id=\"gamesComboBox\" was not injected: check your FXML file 'SeedPageAnchor.fxml'.";
-        assert genresComboBox != null : "fx:id=\"genresComboBox\" was not injected: check your FXML file 'SeedPageAnchor.fxml'.";
-        assert seedPageAnchorPane != null : "fx:id=\"seedPageAnchorPane\" was not injected: check your FXML file 'SeedPageAnchor.fxml'.";
-        assert selectedGamesListView != null : "fx:id=\"selectedGamesListView\" was not injected: check your FXML file 'SeedPageAnchor.fxml'.";
-        assert selectedGenresListView != null : "fx:id=\"selectedGenresListView\" was not injected: check your FXML file 'SeedPageAnchor.fxml'.";
+        assert this.beginRecommendationsButton != null : "fx:id=\"beginRecommendationsButton\" was not injected: check your FXML file 'SeedPageAnchor.fxml'.";
+        assert this.gamesComboBox != null : "fx:id=\"gamesComboBox\" was not injected: check your FXML file 'SeedPageAnchor.fxml'.";
+        assert this.genresComboBox != null : "fx:id=\"genresComboBox\" was not injected: check your FXML file 'SeedPageAnchor.fxml'.";
+        assert this.seedPageAnchorPane != null : "fx:id=\"seedPageAnchorPane\" was not injected: check your FXML file 'SeedPageAnchor.fxml'.";
+        assert this.selectedGamesListView != null : "fx:id=\"selectedGamesListView\" was not injected: check your FXML file 'SeedPageAnchor.fxml'.";
+        assert this.selectedGenresListView != null : "fx:id=\"selectedGenresListView\" was not injected: check your FXML file 'SeedPageAnchor.fxml'.";
 
     }
 

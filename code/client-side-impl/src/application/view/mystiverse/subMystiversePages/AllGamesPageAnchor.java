@@ -14,6 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -21,6 +22,9 @@ public class AllGamesPageAnchor {
 
 	@FXML
     private ContextMenu addGameToInterestedMenuItem;
+	
+    @FXML
+    private ImageView gameSelectedImageView;
     
     @FXML
     private ResourceBundle resources;
@@ -42,6 +46,9 @@ public class AllGamesPageAnchor {
     
     private AllGamesPageAnchorViewModel viewmodel;
     
+    /**
+     * Instantiates a new all games page anchor.
+     */
     public AllGamesPageAnchor() {
     	this.viewmodel = new AllGamesPageAnchorViewModel();
     }
@@ -49,7 +56,7 @@ public class AllGamesPageAnchor {
 	/**
 	 * Open anchor pane.
 	 *
-	 * @param parent        the parent
+	 * @param parent the parent
 	 * @param newAnchorPath the new anchor path
 	 */
 	public void openAnchorPane(BorderPane parent, String newAnchorPath) {
@@ -102,6 +109,7 @@ public class AllGamesPageAnchor {
         assert this.allGamesListView != null : "fx:id=\"allGamesListView\" was not injected: check your FXML file 'AllGamesPageAnchor.fxml'.";
         assert this.genresComboBox != null : "fx:id=\"genresComboBox\" was not injected: check your FXML file 'AllGamesPageAnchor.fxml'.";
         assert this.addGameToInterestedMenuItem != null : "fx:id=\"addGameToInterestedMenuItem\" was not injected: check your FXML file 'AllGamesPageAnchor.fxml'.";
+        assert this.gameSelectedImageView != null : "fx:id=\"gameSlectedImageView\" was not injected: check your FXML file 'AllGamesPageAnchor.fxml'.";
         assert this.searchBar != null : "fx:id=\"searchBar\" was not injected: check your FXML file 'AllGamesPageAnchor.fxml'.";
     }
 

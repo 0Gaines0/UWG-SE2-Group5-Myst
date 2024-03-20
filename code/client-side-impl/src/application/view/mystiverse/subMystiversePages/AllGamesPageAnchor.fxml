@@ -5,9 +5,10 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="allGamesAnchorPane" prefHeight="530.0" prefWidth="844.0" style="-fx-background-color: #446662;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.mystiverse.subMystiversePages.AllGamesPageAnchor">
+<AnchorPane fx:id="allGamesAnchorPane" prefHeight="530.0" prefWidth="844.0" style="-fx-background-color: #446662;" xmlns="http://javafx.com/javafx/18.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.mystiverse.subMystiversePages.AllGamesPageAnchor">
    <children>
       <ListView fx:id="allGamesListView" layoutX="68.0" layoutY="265.0" prefHeight="244.0" prefWidth="709.0">
          <contextMenu>
@@ -19,5 +20,6 @@
          </contextMenu></ListView>
       <TextField fx:id="searchBar" layoutX="68.0" layoutY="214.0" promptText="Search..." />
       <ComboBox fx:id="genresComboBox" layoutX="241.0" layoutY="214.0" prefWidth="150.0" promptText="Genres" />
+      <ImageView fx:id="gameSelectedImageView" fitHeight="175.0" fitWidth="308.0" layoutX="269.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

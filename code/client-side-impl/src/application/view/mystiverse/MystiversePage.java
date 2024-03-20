@@ -27,101 +27,98 @@ import javafx.stage.Stage;
 
 public class MystiversePage {
 
-    @FXML
-    private ResourceBundle resources;
+	@FXML
+	private ResourceBundle resources;
 
-    @FXML
-    private URL location;
+	@FXML
+	private URL location;
 
-    @FXML
-    private AnchorPane baseAnchorPane;
+	@FXML
+	private AnchorPane baseAnchorPane;
 
-    @FXML
-    private HBox libraryNavBarHBox;
+	@FXML
+	private HBox libraryNavBarHBox;
 
-    @FXML
-    private Text mystTextNavbar;
+	@FXML
+	private Text mystTextNavbar;
 
-    @FXML
-    private HBox mystiverseNavBarHBox;
+	@FXML
+	private HBox mystiverseNavBarHBox;
 
-    @FXML
-    private AnchorPane navigationAchorPane;
+	@FXML
+	private AnchorPane navigationAchorPane;
 
-    @FXML
-    private BorderPane parentBorderPane;
+	@FXML
+	private BorderPane parentBorderPane;
 
-    @FXML
-    private ImageView profileImageNavBar;
+	@FXML
+	private ImageView profileImageNavBar;
 
-    @FXML
-    private HBox profileNavBarHBox;
+	@FXML
+	private HBox profileNavBarHBox;
 
-    @FXML
-    private HBox profilePhotoNavBarHBox;
+	@FXML
+	private HBox profilePhotoNavBarHBox;
 
-    @FXML
-    private HBox recommendationsTab;
+	@FXML
+	private HBox recommendationsTab;
 
-    @FXML
-    private HBox seedTab;
-    
-    @FXML
-    private HBox allGamesTab;
+	@FXML
+	private HBox seedTab;
 
-    @FXML
-    private AnchorPane sideBar;
+	@FXML
+	private HBox allGamesTab;
 
-    @FXML
-    private VBox vSideBox;
-    
-    private AllGamesPageAnchorViewModel allGamesViewModel;
-    private RecommendationPageAnchorViewModel recommendationViewModel;
-    private SeedPageAnchorViewModel seedViewModel;
-    private AllGamesPageAnchor allGamesCodeBehind;
-    private RecommendationPageAnchor recommendationCodeBehind;
-    private SeedPageAnchor seedCodeBehind;
-    
-    /**
-     * Instantiates a new mystiverse page.
-     */
-    public MystiversePage() {
-    	this.allGamesViewModel = new AllGamesPageAnchorViewModel();
-    	this.recommendationViewModel = new RecommendationPageAnchorViewModel();
-    	this.seedViewModel = new SeedPageAnchorViewModel();
-    	this.allGamesCodeBehind = new AllGamesPageAnchor();
-    	this.recommendationCodeBehind = new RecommendationPageAnchor();
-    	this.seedCodeBehind = new SeedPageAnchor();
-    }
+	@FXML
+	private AnchorPane sideBar;
 
-    @FXML
-    void initialize() {
-    	this.validateFxml();
-    	this.setUpNavBar();
-    	this.setupHboxes();
-    	this.configureStartingPage();
-    }
-    
-    private void configureStartingPage() {
-    	this.setPane(Main.MYSTIVERSE_PAGE_RECOMMENDATIONS_TAB_ONE);
-    }
-    
-    private void setupHboxes() {
-    	this.recommendationsTab.setOnMouseClicked((event) -> {
-    		this.recommendationCodeBehind.openAnchorPane(this.parentBorderPane, Main.MYSTIVERSE_PAGE_RECOMMENDATIONS_TAB_TWO);
-    	});
-    	this.allGamesTab.setOnMouseClicked((event) -> {
-    		this.allGamesCodeBehind.openAnchorPane(this.parentBorderPane, Main.MYSTIVERSE_PAGE_ALL_GAMES_TAB);
-    	});
-    	this.seedTab.setOnMouseClicked((event) -> {
-    		this.seedCodeBehind.openAnchorPane(this.parentBorderPane, Main.MYSTIVERSE_PAGE_SEED_TAB);
-    	});
-    }
-    
-    private void setPane(String path) {
+	@FXML
+	private VBox vSideBox;
+	
+	private AllGamesPageAnchorViewModel allGamesViewModel;
+	private RecommendationPageAnchorViewModel recommendationViewModel;
+	private SeedPageAnchorViewModel seedViewModel;
+	 
+	private AllGamesPageAnchor allGamesCodeBehind;
+	private RecommendationPageAnchor recommendationCodeBehind;
+	private SeedPageAnchor seedCodeBehind;
+
+	/**
+	 * Instantiates a new mystiverse page.
+	 */
+	public MystiversePage() {
+		this.allGamesViewModel = new AllGamesPageAnchorViewModel();
+		this.recommendationViewModel = new RecommendationPageAnchorViewModel();
+		this.seedViewModel = new SeedPageAnchorViewModel();
+		this.allGamesCodeBehind = new AllGamesPageAnchor();
+		this.recommendationCodeBehind = new RecommendationPageAnchor();
+		this.seedCodeBehind = new SeedPageAnchor();
+	}
+
+	@FXML
+	void initialize() {
+		this.validateFxml();
+		this.setUpNavBar();
+		this.setupHboxes();
+		this.setPane();
+	}
+
+	private void setupHboxes() {
+		this.recommendationsTab.setOnMouseClicked((event) -> {
+			this.recommendationCodeBehind.openAnchorPane(this.parentBorderPane, Main.MYSTIVERSE_PAGE_RECOMMENDATIONS_TAB);
+		});
+		this.allGamesTab.setOnMouseClicked((event) -> {
+			this.allGamesCodeBehind.openAnchorPane(this.parentBorderPane, Main.MYSTIVERSE_PAGE_ALL_GAMES_TAB_TWO);
+		});
+		this.seedTab.setOnMouseClicked((event) -> {
+			this.seedCodeBehind.openAnchorPane(this.parentBorderPane, Main.MYSTIVERSE_PAGE_SEED_TAB);
+		});
+	}
+
+	private void setPane() {
 		try {
 			BorderPane parentContainer = this.parentBorderPane;
-			var loader = new FXMLLoader(getClass().getResource(path));
+			var loader = new FXMLLoader(getClass().getResource(Main.MYSTIVERSE_PAGE_ALL_GAMES_TAB_ONE));
 			AnchorPane newAnchor = loader.load();
 			parentContainer.setCenter(newAnchor);
 			parentContainer.getChildren().remove(this.baseAnchorPane);
@@ -129,9 +126,9 @@ public class MystiversePage {
 		} catch (IOException error) {
 			error.printStackTrace();
 		}
-    }
-    
-    private void setUpNavBar() {
+	}
+
+	private void setUpNavBar() {
 		this.setUpLibraryNavBarHBox();
 		this.setUpMystiverseNavBarHbox();
 		this.setUpProfileNavBarHBox();
@@ -157,13 +154,12 @@ public class MystiversePage {
 			this.closeMystiverseWindow();
 		}));
 	}
-	
 
 	private void closeMystiverseWindow() {
 		Stage stage = (Stage) this.parentBorderPane.getScene().getWindow();
 		stage.close();
 	}
-	
+
 	/**
 	 * Redirect to page.
 	 *
@@ -185,20 +181,32 @@ public class MystiversePage {
 		}
 	}
 
-    private void validateFxml() {
-        assert this.allGamesTab != null : "fx:id=\"allGamesTab\" was not injected: check your FXML file 'MystiversePage.fxml'.";
-        assert this.baseAnchorPane != null : "fx:id=\"baseAnchorPane\" was not injected: check your FXML file 'MystiversePage.fxml'.";
-        assert this.libraryNavBarHBox != null : "fx:id=\"libraryNavBarHBox\" was not injected: check your FXML file 'MystiversePage.fxml'.";
-        assert this.mystTextNavbar != null : "fx:id=\"mystTextNavbar\" was not injected: check your FXML file 'MystiversePage.fxml'.";
-        assert this.mystiverseNavBarHBox != null : "fx:id=\"mystiverseNavBarHBox\" was not injected: check your FXML file 'MystiversePage.fxml'.";
-        assert this.navigationAchorPane != null : "fx:id=\"navigationAchorPane\" was not injected: check your FXML file 'MystiversePage.fxml'.";
-        assert this.parentBorderPane != null : "fx:id=\"parentBorderPane\" was not injected: check your FXML file 'MystiversePage.fxml'.";
-        assert this.profileImageNavBar != null : "fx:id=\"profileImageNavBar\" was not injected: check your FXML file 'MystiversePage.fxml'.";
-        assert this.profileNavBarHBox != null : "fx:id=\"profileNavBarHBox\" was not injected: check your FXML file 'MystiversePage.fxml'.";
-        assert this.profilePhotoNavBarHBox != null : "fx:id=\"profilePhotoNavBarHBox\" was not injected: check your FXML file 'MystiversePage.fxml'.";
-        assert this.recommendationsTab != null : "fx:id=\"recommendationsTab\" was not injected: check your FXML file 'MystiversePage.fxml'.";
-        assert this.seedTab != null : "fx:id=\"seedTab\" was not injected: check your FXML file 'MystiversePage.fxml'.";
-        assert this.sideBar != null : "fx:id=\"sideBar\" was not injected: check your FXML file 'MystiversePage.fxml'.";
-        assert this.vSideBox != null : "fx:id=\"vSideBox\" was not injected: check your FXML file 'MystiversePage.fxml'.";
-    }
+	private void validateFxml() {
+		assert this.allGamesTab != null
+				: "fx:id=\"allGamesTab\" was not injected: check your FXML file 'MystiversePage.fxml'.";
+		assert this.baseAnchorPane != null
+				: "fx:id=\"baseAnchorPane\" was not injected: check your FXML file 'MystiversePage.fxml'.";
+		assert this.libraryNavBarHBox != null
+				: "fx:id=\"libraryNavBarHBox\" was not injected: check your FXML file 'MystiversePage.fxml'.";
+		assert this.mystTextNavbar != null
+				: "fx:id=\"mystTextNavbar\" was not injected: check your FXML file 'MystiversePage.fxml'.";
+		assert this.mystiverseNavBarHBox != null
+				: "fx:id=\"mystiverseNavBarHBox\" was not injected: check your FXML file 'MystiversePage.fxml'.";
+		assert this.navigationAchorPane != null
+				: "fx:id=\"navigationAchorPane\" was not injected: check your FXML file 'MystiversePage.fxml'.";
+		assert this.parentBorderPane != null
+				: "fx:id=\"parentBorderPane\" was not injected: check your FXML file 'MystiversePage.fxml'.";
+		assert this.profileImageNavBar != null
+				: "fx:id=\"profileImageNavBar\" was not injected: check your FXML file 'MystiversePage.fxml'.";
+		assert this.profileNavBarHBox != null
+				: "fx:id=\"profileNavBarHBox\" was not injected: check your FXML file 'MystiversePage.fxml'.";
+		assert this.profilePhotoNavBarHBox != null
+				: "fx:id=\"profilePhotoNavBarHBox\" was not injected: check your FXML file 'MystiversePage.fxml'.";
+		assert this.recommendationsTab != null
+				: "fx:id=\"recommendationsTab\" was not injected: check your FXML file 'MystiversePage.fxml'.";
+		assert this.seedTab != null : "fx:id=\"seedTab\" was not injected: check your FXML file 'MystiversePage.fxml'.";
+		assert this.sideBar != null : "fx:id=\"sideBar\" was not injected: check your FXML file 'MystiversePage.fxml'.";
+		assert this.vSideBox != null
+				: "fx:id=\"vSideBox\" was not injected: check your FXML file 'MystiversePage.fxml'.";
+	}
 }

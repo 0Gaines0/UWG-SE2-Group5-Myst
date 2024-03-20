@@ -10,6 +10,9 @@ import application.model.local_impl.profile.ActiveUser;
 
 public class AllGamesPageAnchorViewModel {
 
+	/**
+	 * Instantiates a new all games page anchor view model.
+	 */
 	public AllGamesPageAnchorViewModel() {
 		
 	}
