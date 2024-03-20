@@ -49,7 +49,6 @@ public class RecommendationPageAnchor {
     private Button skipButton;
     
     private RecommendationPageAnchorViewModel viewmodel;
-    private List<Game> recommendations;
     
     /**
      * Instantiates a new recommendation page anchor.
@@ -60,7 +59,6 @@ public class RecommendationPageAnchor {
     
     private void setupRecommendations() {
     	this.viewmodel.setRecommendations(this.viewmodel.generateRecommendations());
-    	this.recommendations = this.viewmodel.getRecommendations();
     }
     
 	/**
@@ -86,6 +84,34 @@ public class RecommendationPageAnchor {
     	this.validateFxml();
     	this.setupProperties();
     	this.setupRecommendations();
+    	this.setupButtons();
+    	this.viewmodel.setProperties();
+    }
+    
+    private void setupButtons() {
+    	this.notInterestedButton.setOnAction((event) -> {
+    		this.viewmodel.notInterestedInGame(this.viewmodel.getRecommendations().get(0));
+        	this.refreshUI();
+    	});
+    	this.interestedButton.setOnAction((event) -> {
+    		this.viewmodel.interestedInGame(this.viewmodel.getRecommendations().get(0));
+        	this.refreshUI();
+    	});
+    	this.skipButton.setOnAction((event) -> {
+    		this.viewmodel.skipGame(this.viewmodel.getRecommendations().get(0));
+        	this.refreshUI();
+    	});
+    }
+    
+    private void refreshUI() {
+        if (this.viewmodel.getRecommendations().size() <= 1) {
+            Game currentGame = this.viewmodel.getRecommendations().get(0);
+            this.viewmodel.getTitleProperty().set(currentGame.getName());
+            this.viewmodel.getDescProperty().set(currentGame.getDescription());
+            this.viewmodel.getGenresProperty().set(currentGame.getGenres().toString());
+        } else {
+            this.viewmodel.generateRecommendations();
+        }
     }
     
     private void setupProperties() {

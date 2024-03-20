@@ -38,6 +38,16 @@ public class RecommendationPageAnchorViewModel {
 	}
 	
 	/**
+	 * Sets the properties.
+	 */
+	public void setProperties() {
+		this.titleProperty.set(this.recommendations.get(0).getName());
+		this.descProperty.set(this.recommendations.get(0).getDescription());
+		//this.imageProperty.setValue(this.recommendations.get(0).getGamePhoto());
+		this.genresProperty.set(this.recommendations.get(0).getGenres().toString());
+	}
+	
+	/**
 	 * Generate recommendations.
 	 *
 	 * @return the list
@@ -52,7 +62,8 @@ public class RecommendationPageAnchorViewModel {
 	 * @param game the game
 	 */
 	public void skipGame(Game game) {
-		
+		this.recommendations.remove(game);
+		this.checkForNoMoreRecommendations();
 	}
 	
 	/**
@@ -61,7 +72,9 @@ public class RecommendationPageAnchorViewModel {
 	 * @param game the game
 	 */
 	public void interestedInGame(Game game) {
-		
+		ActiveUser.getActiveUser().getAllLikedGames().add(game);
+		this.recommendations.remove(game);
+		this.checkForNoMoreRecommendations();
 	}
 	
 	/**
@@ -70,7 +83,15 @@ public class RecommendationPageAnchorViewModel {
 	 * @param game the game
 	 */
 	public void notInterestedInGame(Game game) {
-		
+		ActiveUser.getActiveUser().getAllDislikedGames().add(game);
+		this.recommendations.remove(game);
+		this.checkForNoMoreRecommendations();
+	}
+	
+	private void checkForNoMoreRecommendations() {
+		if (this.recommendations.size() <= 1) {
+			this.generateRecommendations();
+		}
 	}
 	
 	/**
