@@ -11,6 +11,7 @@ import application.view.profile.subProfilePages.EditPreferencesAnchor;
 import application.view.profile.subProfilePages.EditProfileAnchor;
 import application.view.profile.subProfilePages.ProfileAnchor;
 import application.view.profile.subProfilePages.SettingProfileAnchor;
+import application.viewModel.mystiverse.MystiverseViewModel;
 import application.viewModel.profile.UserProfilePageViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -168,7 +169,7 @@ public class UserProfilePage {
 
 	private void setUpMystiverseNavBarHbox() {
 		this.mystiverseNavBarHBox.setOnMouseClicked(((event) -> {
-			this.mystiverseCodeBehind.openMystiversePage();
+			this.mystiverseCodeBehind.redirectToPage(Main.MYSTIVERSE_PAGE);
 			this.closeProfilePage();
 		}));
 	}

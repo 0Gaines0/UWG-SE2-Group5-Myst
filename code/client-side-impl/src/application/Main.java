@@ -20,11 +20,14 @@ public class Main extends Application {
 	public static final String EDIT_PROFILE_ANCHOR = "../subProfilePages/EditProfileAnchor.fxml";
 	public static final String USER_GAME_LIBRARY_WINDOW = "../UserGameLibraryPage/UserGameLibraryPage.fxml";
 	public static final String MYSTIVERSE_PAGE = "../mystiverse/MystiversePage.fxml";
+	public static final String MYSTIVERSE_PAGE_RECOMMENDATIONS_TAB_ONE = "../mystiverse/subMystiversePages/RecommendationPageAnchor.fxml";
+	public static final String MYSTIVERSE_PAGE_RECOMMENDATIONS_TAB_TWO = "../subMystiversePages/RecommendationPageAnchor.fxml";
+	public static final String MYSTIVERSE_PAGE_SEED_TAB = "../subMystiversePages/SeedPageAnchor.fxml";
+	public static final String MYSTIVERSE_PAGE_ALL_GAMES_TAB = "../subMystiversePages/AllGamesPageAnchor.fxml";
 	public static final String EDIT_PREFERENCES_ANCHOR = "../subProfilePages/EditPreferencesAnchor.fxml";
 	public static final String PROFILE_SETTINGS_ANCHOR = "../subProfilePages/SettingsProfileAnchor.fxml";
 	public static final String GAME_CARD_PAGE = "../game/GameCardPage.fxml";
 	public static final String PREFERENCE_PAGE_WINDOW = "../login/PreferencePage.fxml";
-	
 	
 	private static List<Game> allGames;
 
