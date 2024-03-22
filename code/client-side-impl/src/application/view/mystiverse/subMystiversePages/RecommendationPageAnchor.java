@@ -101,16 +101,17 @@ public class RecommendationPageAnchor {
     		this.viewmodel.skipGame(this.viewmodel.getRecommendations().get(0));
         	this.refreshUI();
     	});
+    	//this.refreshUI();
     }
     
     private void refreshUI() {
-        if (this.viewmodel.getRecommendations().size() <= 1) {
+        if (!(this.viewmodel.getRecommendations().size() <= 1)) {
             Game currentGame = this.viewmodel.getRecommendations().get(0);
             this.viewmodel.getTitleProperty().set(currentGame.getName());
             this.viewmodel.getDescProperty().set(currentGame.getDescription());
             this.viewmodel.getGenresProperty().set(currentGame.getGenres().toString());
         } else {
-            this.viewmodel.generateRecommendations();
+        	this.setupRecommendations();
         }
     }
     

@@ -63,7 +63,6 @@ public class RecommendationPageAnchorViewModel {
 	 */
 	public void skipGame(Game game) {
 		this.recommendations.remove(game);
-		this.checkForNoMoreRecommendations();
 	}
 	
 	/**
@@ -74,7 +73,6 @@ public class RecommendationPageAnchorViewModel {
 	public void interestedInGame(Game game) {
 		ActiveUser.getActiveUser().getAllLikedGames().add(game);
 		this.recommendations.remove(game);
-		this.checkForNoMoreRecommendations();
 	}
 	
 	/**
@@ -85,13 +83,6 @@ public class RecommendationPageAnchorViewModel {
 	public void notInterestedInGame(Game game) {
 		ActiveUser.getActiveUser().getAllDislikedGames().add(game);
 		this.recommendations.remove(game);
-		this.checkForNoMoreRecommendations();
-	}
-	
-	private void checkForNoMoreRecommendations() {
-		if (this.recommendations.size() <= 1) {
-			this.generateRecommendations();
-		}
 	}
 	
 	/**
