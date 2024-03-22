@@ -22,7 +22,6 @@ public class PreferencePageViewModel {
 	
 	/** The liked games. */
 	private ListProperty<Game> allGames;	
-	
 	private ListProperty<Genre> allGenres;
 	
 	private List<Game> selectedLikedGames;

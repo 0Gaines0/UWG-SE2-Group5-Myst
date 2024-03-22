@@ -74,10 +74,6 @@ public class MystiversePage {
 
 	@FXML
 	private VBox vSideBox;
-	
-	private AllGamesPageAnchorViewModel allGamesViewModel;
-	private RecommendationPageAnchorViewModel recommendationViewModel;
-	private SeedPageAnchorViewModel seedViewModel;
 	 
 	private AllGamesPageAnchor allGamesCodeBehind;
 	private RecommendationPageAnchor recommendationCodeBehind;
@@ -87,9 +83,6 @@ public class MystiversePage {
 	 * Instantiates a new mystiverse page.
 	 */
 	public MystiversePage() {
-		this.allGamesViewModel = new AllGamesPageAnchorViewModel();
-		this.recommendationViewModel = new RecommendationPageAnchorViewModel();
-		this.seedViewModel = new SeedPageAnchorViewModel();
 		this.allGamesCodeBehind = new AllGamesPageAnchor();
 		this.recommendationCodeBehind = new RecommendationPageAnchor();
 		this.seedCodeBehind = new SeedPageAnchor();

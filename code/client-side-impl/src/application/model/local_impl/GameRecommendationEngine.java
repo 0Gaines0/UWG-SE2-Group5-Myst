@@ -66,7 +66,7 @@ public class GameRecommendationEngine {
 		var recommendedGames = this.gameDatabase.stream()
 				.filter(game -> !user.getAllDislikedGames().contains(game) && !user.getAllOwnedGames().contains(game)
 						&& !user.getAllLikedGames().contains(game))
-				.map(game -> new AbstractMap.SimpleEntry<>(game, this.calculateGameScore(game, user, userPreferredGenres)))
+				.map(game -> new AbstractMap.SimpleEntry<>(game, this.calculateGameScore(game, userPreferredGenres)))
 				.sorted(Comparator.comparing(AbstractMap.SimpleEntry<Game, Double>::getValue).reversed())
 				.limit(GameRecommendationEngine.NUMBER_RECOMMENDATIONS).map(AbstractMap.SimpleEntry::getKey)
 				.collect(Collectors.toList());
@@ -94,12 +94,40 @@ public class GameRecommendationEngine {
         var recommendedGames = sampledGames.stream()
                 .filter(game -> !user.getAllDislikedGames().contains(game) && !user.getAllOwnedGames().contains(game)
                         && !user.getAllLikedGames().contains(game))
-                .map(game -> new AbstractMap.SimpleEntry<>(game, this.calculateGameScore(game, user, userPreferredGenres)))
+                .map(game -> new AbstractMap.SimpleEntry<>(game, this.calculateGameScore(game, userPreferredGenres)))
                 .sorted(Comparator.comparing(AbstractMap.SimpleEntry<Game, Double>::getValue).reversed())
                 .limit(NUMBER_RECOMMENDATIONS)
                 .map(AbstractMap.SimpleEntry::getKey)
                 .collect(Collectors.toList());
         return recommendedGames;
+	}
+	
+	/**
+	 * Generates a list of game recommendations based on selected games and genres.
+	 * This method randomly samples a subset of games from the available database,
+	 * evaluates them based on the selected genres, and returns a sorted list of top recommendations.
+	 *
+	 * The recommendations are based on genre preferences, similarity to selected games,
+	 * average release year, and average playtime preferences.
+	 *
+	 * @param selectedGames   The list of selected games.
+	 * @param selectedGenres  The list of selected genres.
+	 * @return A List of recommended games, sorted by their recommendation score in descending order.
+	 */
+	public List<Game> generateRecommendationsForSelectedGamesAndGenres(List<Game> selectedGames, List<Genre> selectedGenres) {
+	    List<Game> sampledGames = new ArrayList<>(this.gameDatabase);
+	    Collections.shuffle(sampledGames);
+	    sampledGames = sampledGames.subList(0, Math.min(SAMPLE_SIZE, sampledGames.size()));
+
+	    var recommendedGames = sampledGames.stream()
+	            .filter(game -> !selectedGames.contains(game))
+	            .map(game -> new AbstractMap.SimpleEntry<>(game, this.calculateGameScore(game, selectedGenres)))
+	            .sorted(Comparator.comparing(AbstractMap.SimpleEntry<Game, Double>::getValue).reversed())
+	            .limit(NUMBER_RECOMMENDATIONS)
+	            .map(AbstractMap.SimpleEntry::getKey)
+	            .collect(Collectors.toList());
+
+	    return recommendedGames;
 	}
 
 	/**
@@ -117,7 +145,7 @@ public class GameRecommendationEngine {
 	 * @return A List of recommended games, sorted by their recommendation score in
 	 *         descending order.
 	 */
-	private double calculateGameScore(Game game, UserProfile user, List<Genre> userPreferredGenres) {
+	private double calculateGameScore(Game game, List<Genre> userPreferredGenres) {
 
 	    double score = 0.0;
 
@@ -134,17 +162,17 @@ public class GameRecommendationEngine {
 	    return score;
 	}
 	
-	private double calculateGenreMatchScore(Game game, List<Genre> userPreferredGenres) {
+	private double calculateGenreMatchScore(Game game, List<Genre> preferredGenres) {
 	    double matchScore = 0.0;
 	    int totalGenres = game.getGenres().size();
 	    int matchedGenres = 0;	    
 	    for (Genre genre : game.getGenres()) {
-	        if (userPreferredGenres.contains(genre)) {
+	        if (preferredGenres.contains(genre)) {
 	            matchedGenres += 1;
 	        }
 	    }	    
 	    if (totalGenres > 0) {
-	        matchScore = (double) matchedGenres / userPreferredGenres.size();
+	        matchScore = (double) matchedGenres / preferredGenres.size();
 	    } else {
 	        matchScore = 0;
 	    }	    

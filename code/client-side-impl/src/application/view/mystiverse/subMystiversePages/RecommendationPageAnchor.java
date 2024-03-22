@@ -57,6 +57,26 @@ public class RecommendationPageAnchor {
     	this.viewmodel = new RecommendationPageAnchorViewModel();
     }
     
+    /**
+     * Instantiates a new recommendation page anchor.
+     *
+     * @param recommendations the recommendations
+     */
+    public RecommendationPageAnchor(List<Game> recommendations) {
+    	this.viewmodel = new RecommendationPageAnchorViewModel();
+    	this.viewmodel.setRecommendations(recommendations);
+    }
+    
+    /**
+     * Sets the recommendations.
+     *
+     * @param recommendations the new recommendations
+     */
+    public void setRecommendations(List<Game> recommendations) {
+    	this.viewmodel.getRecommendations().clear();
+    	this.viewmodel.setRecommendations(recommendations);
+    }
+    
     private void setupRecommendations() {
     	this.viewmodel.setRecommendations(this.viewmodel.generateRecommendations());
     }
@@ -101,7 +121,6 @@ public class RecommendationPageAnchor {
     		this.viewmodel.skipGame(this.viewmodel.getRecommendations().get(0));
         	this.refreshUI();
     	});
-    	//this.refreshUI();
     }
     
     private void refreshUI() {
