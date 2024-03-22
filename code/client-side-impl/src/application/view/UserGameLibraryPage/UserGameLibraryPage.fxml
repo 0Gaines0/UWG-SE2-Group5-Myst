@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="600.0" maxWidth="1024.0" minHeight="600.0" minWidth="1024.0" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.UserGameLibraryPage.UserGameLibraryPage">
+<BorderPane maxHeight="600.0" maxWidth="1024.0" minHeight="600.0" minWidth="1024.0" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/18.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.UserGameLibraryPage.UserGameLibraryPage">
    <top>
       <AnchorPane prefHeight="72.0" prefWidth="600.0" style="-fx-background-color: #2E3138;" BorderPane.alignment="CENTER">
          <children>
