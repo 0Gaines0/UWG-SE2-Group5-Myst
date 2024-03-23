@@ -8,9 +8,7 @@ import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
 import application.model.local_impl.profile.ActiveUser;
 import javafx.beans.property.ListProperty;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -24,7 +22,6 @@ public class PreferencePageViewModel {
 	
 	/** The liked games. */
 	private ListProperty<Game> allGames;	
-	
 	private ListProperty<Genre> allGenres;
 	
 	private List<Game> selectedLikedGames;
