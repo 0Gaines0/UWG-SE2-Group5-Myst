@@ -6,11 +6,13 @@ Created on Mar 10, 2024
 
 from src.request_server import constants
 from src.model.profile.credentials.credential_manager import Credential_Manager
+from src.model.games.gamelibrary import GameLibrary
 
 class Server_Request_Handler:
     
     def __init__(self):
         self.credential_manager = Credential_Manager()
+        self.game_library = game_library
         self.credential_manager.add_credential("username", "password")
         
     
@@ -26,6 +28,8 @@ class Server_Request_Handler:
             response = self._username_exist(request)
         if request_type == constants.GET_SPECIFIED_CREDENTIAL_REQUEST_TYPE:
             response = self._get_specified_credential(request)
+        if request_type == constants.GET_GAME_LIBRARY_REQUEST_TYPE: 
+            response = self._get_game_library(request)
         
         return response
             
@@ -72,6 +76,32 @@ class Server_Request_Handler:
             response[constants.KEY_STATUS] = constants.VALUE_FAILURE
             response[constants.KEY_SUCCESS] = constants.VALUE_FALSE
             return response
+    def _get_game_library(self, request):
+        response = {}
+        try:
+            games_list = self.gameLibrary.get_games()
+            games_data = [self._game_to_dict(game) for game in games_list]
+            response[constants.KEY_STATUS] = constants.VALUE_ACCEPTED
+            response["games"] = games_data
+        except Exception as e:
+            response[constants.KEY_STATUS] = constants.VALUE_FAILURE
+            response[constants.KEY_FAILURE_MESSAGE] = str(e)
+        return response
+
+    def _game_to_dict(self, game):
+        return {
+            "name": game.name,
+            "genres": [str(genre) for genre in game.genres],  
+            "gameID": game.game_id,
+            "developers": game.developers,
+            "releaseDateYear": game.release_date_year,
+            "releaseDateMonth": game.release_date_month,
+            "numberPositiveReviews": game.number_positive_reviews,
+            "numberNegativeReviews": game.number_negative_reviews,
+            "averagePlaytime": game.average_playtime,
+            "photoLink": game.game_photo_link,
+            "description": game.description
+        }
             
             
             
