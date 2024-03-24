@@ -35,7 +35,6 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		Main.allGames = GameLibraryManager.fetchAndParseGameLibrary().getGames();
-		System.out.println(Main.allGames.size());
 		try {
 			Parent parent = FXMLLoader.load(getClass().getResource(Main.LOGIN_WINDOW));
 			Scene scene = new Scene(parent);
