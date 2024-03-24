@@ -27,7 +27,7 @@ class User_Profile:
     
     def set_username(self, new_username):
         if new_username is None:
-            raise Exception("username is none")
+            raise Exception("new_username is none")
         self.username = new_username
     
     def get_password(self):
@@ -35,7 +35,7 @@ class User_Profile:
     
     def set_password(self, new_password):
         if new_password is None:
-            raise Exception("username is none")
+            raise Exception("new_password is none")
         self.password = new_password
 
     def get_all_owned_games_game_library(self):

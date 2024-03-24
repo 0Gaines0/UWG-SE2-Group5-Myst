@@ -4,17 +4,19 @@ Created on Mar 10, 2024
 @author: Jeffrey
 '''
 
+from src.model.games.gameLibraryIO import GameLibraryIO
+from src.model.profile.user_manager import User_Manager
 from src.request_server import constants
 from src.model.profile.credentials.credential_manager import Credential_Manager
-from src.model.games.gamelibrary import GameLibrary
 
 class Server_Request_Handler:
     
     def __init__(self):
         self.credential_manager = Credential_Manager()
-        self.game_library = GameLibrary();
+        self.user_manager = User_Manager()
+        self.game_database = GameLibraryIO.parse_games_from_file("..\\..\\..\\..\\..\\database\\merged_steam_game_database.csv")
         self.credential_manager.add_credential("username", "password")
-        
+                
     
     def handle_request(self, request):
         response = {}
@@ -76,15 +78,18 @@ class Server_Request_Handler:
             response[constants.KEY_STATUS] = constants.VALUE_FAILURE
             response[constants.KEY_SUCCESS] = constants.VALUE_FALSE
             return response
+        
     def _get_game_library(self, request):
         response = {}
         try:
-            games_list = self.gameLibrary.get_games()
+            games_list = self.game_database.get_games()
             games_data = [self._game_to_dict(game) for game in games_list]
+            response[constants.KEY_SUCCESS] = constants.VALUE_TRUE
             response[constants.KEY_STATUS] = constants.VALUE_ACCEPTED
             response["games"] = games_data
         except Exception as e:
             response[constants.KEY_STATUS] = constants.VALUE_FAILURE
+            response[constants.KEY_SUCCESS] = constants.VALUE_FALSE
             response[constants.KEY_FAILURE_MESSAGE] = str(e)
         return response
 

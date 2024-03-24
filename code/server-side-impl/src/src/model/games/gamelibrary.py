@@ -8,6 +8,9 @@ class GameLibrary:
         if any(existing_game.game_id == game.game_id for existing_game in self.games):
             raise ValueError(f"Duplicate game ID: {game.game_id}")
         self.games.append(game)
+        
+    def get_games(self):
+        return self.games
 
     def remove_game(self, game_id):
         self.games = [game for game in self.games if game.game_id != game_id]

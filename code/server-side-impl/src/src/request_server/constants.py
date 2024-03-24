@@ -25,4 +25,4 @@ ADD_CREDENTIAL_REQUEST_TYPE = "add_credential"
 USERNAME_EXIST_REQUEST_TYPE = "username_exist"
 GET_SPECIFIED_CREDENTIAL_REQUEST_TYPE = "get_specified_credential"
 
-GET_GAME_LIBRARY_REQUEST_TYPE = "getGameLibrary"
+GET_GAME_LIBRARY_REQUEST_TYPE = "get_game_library"
