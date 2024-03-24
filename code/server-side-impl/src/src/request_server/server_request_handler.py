@@ -12,7 +12,7 @@ class Server_Request_Handler:
     
     def __init__(self):
         self.credential_manager = Credential_Manager()
-        self.game_library = game_library
+        self.game_library = GameLibrary();
         self.credential_manager.add_credential("username", "password")
         
     
