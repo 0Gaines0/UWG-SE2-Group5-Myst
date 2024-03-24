@@ -22,8 +22,14 @@ public class UserGameLibraryViewModel {
 	/** The user game library. */
 	private UserGameLibrary userGameLibrary;
 	
+	/** The liked games list property. */
+	private ListProperty<Game> likedGamesListProperty;
+	
+	/** The disliked games list property. */
+	private ListProperty<Game> dislikedGamesProperty;
+	
 	/** The owned games list property. */
-	private ListProperty<Game> ownedGamesListProperty;
+	private ListProperty<Game> ownedGamesProperty;
 	
 	/** The selected game. */
 	private Game selectedGame;
@@ -41,7 +47,9 @@ public class UserGameLibraryViewModel {
 	 * Creates a new userGameLibraryViewModel.
 	 */
 	public UserGameLibraryViewModel() {
-		this.ownedGamesListProperty = new SimpleListProperty<Game>();
+		this.likedGamesListProperty = new SimpleListProperty<Game>();
+		this.dislikedGamesProperty = new SimpleListProperty<Game>();
+		this.ownedGamesProperty = new SimpleListProperty<Game>();
 		this.selectedGameNameProperty = new SimpleStringProperty();
 		this.selectedGameDeveloperProperty = new SimpleStringProperty();
 		this.selectedGameGenresListProperty = new SimpleListProperty<Genre>();
@@ -53,8 +61,8 @@ public class UserGameLibraryViewModel {
 	 */
 	public void setUpGameLibrary() {
 		this.userGameLibrary = new UserGameLibrary(ActiveUser.getActiveUser());
-		ObservableList<Game> ownedGames = FXCollections.observableArrayList(this.userGameLibrary.getGameLibrary());
-		this.ownedGamesListProperty.set(ownedGames);
+		ObservableList<Game> likedGames = FXCollections.observableArrayList(this.userGameLibrary.getLikedGames());
+		this.likedGamesListProperty.set(likedGames);
 	}
 
 	/**
@@ -64,8 +72,30 @@ public class UserGameLibraryViewModel {
 	 * @pre none
 	 * @post none
 	 */
+	public ListProperty<Game> getLikedGames() {
+		return this.likedGamesListProperty;
+	}
+	
+	/**
+	 * Gets the list of disliked games.
+	 * 
+	 * @return the list of disliked games
+	 * @pre none
+	 * @post none
+	 */
+	public ListProperty<Game> getDislikedGames() {
+		return this.dislikedGamesProperty;
+	}
+	
+	/**
+	 * Gets the list of owned games.
+	 * 
+	 * @return the list of owned games.
+	 * @pre none
+	 * @post none
+	 */
 	public ListProperty<Game> getOwnedGames() {
-		return this.ownedGamesListProperty;
+		return this.ownedGamesProperty;
 	}
 
 	/**
