@@ -3,7 +3,7 @@ package application.view.login;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import application.model.local_impl.profile.ActiveUser;
+import application.model.server_impl.profile.ActiveUser;
 import application.view.profile.UserProfilePage;
 import application.viewModel.login.LoginPageViewModel;
 import javafx.fxml.FXML;

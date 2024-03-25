@@ -6,7 +6,8 @@ import java.util.List;
 import application.Main;
 import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
-import application.model.local_impl.profile.ActiveUser;
+import application.model.local_impl.profile.UserProfile;
+import application.model.server_impl.profile.ActiveUser;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -78,8 +79,8 @@ public class PreferencePageViewModel {
 	 * Configure new user preferences.
 	 */
 	public void configureNewUserPreferences() {
-		ActiveUser.getActiveUser().getAllLikedGames().addAll(this.selectedLikedGames);
-		ActiveUser.getActiveUser().getPreferredGenres().addAll(this.selectedLikedGenres);
+		ActiveUser.getActiveUser().setAllLikedGames(this.selectedLikedGames);
+		//ActiveUser.getActiveUser().getPreferredGenres().addAll(this.selectedLikedGenres);
 	}
 	
 	/**
