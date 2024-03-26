@@ -55,10 +55,50 @@ class Server_Request_Handler:
             
         if request_type == constants.GET_ABOUT_ME_DESCRIPTION:
             response = self._get_about_me_description(request)
-        
+            
+        if request_type == constants.GET_ALL_DISLIKED_GAMES:
+            response = self._get_all_disliked_games(request)
+            
+        if request_type == constants.GET_USER_PROFILE_PICTURE_PATH:
+            response = self._get_profile_picture_path(request)
+            
+        if request_type == constants.GET_FIRST_TIME_LOGIN:
+            response = self._get_first_time_login(request)
+            
+        if request_type == constants.SET_FIRST_TIME_LOGIN:
+            response = self._set_first_time_login(request)
+            
         return response
             
-            
+         
+    def _set_first_time_login(self, request):
+        response = {}
+        try:
+            username = request[constants.KEY_USERNAME]
+            first_time_login = request[constants.KEY_FIRST_TIME_LOGIN]
+            user = self.user_manager.get_user(username)
+            user.set_first_time_login(first_time_login)
+            response[constants.KEY_STATUS] = constants.VALUE_ACCEPTED
+            response[constants.KEY_SUCCESS] = constants.VALUE_TRUE
+        except Exception as e:
+            response[constants.KEY_STATUS] = constants.VALUE_FAILURE
+            response[constants.KEY_SUCCESS] = constants.VALUE_FALSE
+            response[constants.KEY_FAILURE_MESSAGE] = str(e)
+        return response
+         
+    def _get_first_time_login(self, request):
+        response = {}
+        try:
+            username = request[constants.KEY_USERNAME]
+            user = self.user_manager.get_user(username)
+            response[constants.KEY_STATUS] = constants.VALUE_ACCEPTED
+            response[constants.KEY_SUCCESS] = constants.VALUE_TRUE
+            response[constants.KEY_FIRST_TIME_LOGIN] = user.get_first_time_login() 
+        except Exception as e:
+            response[constants.KEY_STATUS] = constants.VALUE_FAILURE
+            response[constants.KEY_SUCCESS] = constants.VALUE_FALSE
+            response[constants.KEY_FAILURE_MESSAGE] = str(e)
+        return response
             
     def _get_about_me_description(self, request):
         response = {}
@@ -68,6 +108,20 @@ class Server_Request_Handler:
             response[constants.KEY_STATUS] = constants.VALUE_ACCEPTED
             response[constants.KEY_SUCCESS] = constants.VALUE_TRUE
             response[constants.KEY_DESCRIPTION] = user.get_about_me_description() 
+        except Exception as e:
+            response[constants.KEY_STATUS] = constants.VALUE_FAILURE
+            response[constants.KEY_SUCCESS] = constants.VALUE_FALSE
+            response[constants.KEY_FAILURE_MESSAGE] = str(e)
+        return response
+    
+    def _get_profile_picture_path(self, request):
+        response = {}
+        try:
+            username = request[constants.KEY_USERNAME]
+            user = self.user_manager.get_user(username)
+            response[constants.KEY_STATUS] = constants.VALUE_ACCEPTED
+            response[constants.KEY_SUCCESS] = constants.VALUE_TRUE
+            response[constants.KEY_PATH] = user.get_user_profile_picture_path() 
         except Exception as e:
             response[constants.KEY_STATUS] = constants.VALUE_FAILURE
             response[constants.KEY_SUCCESS] = constants.VALUE_FALSE
@@ -223,6 +277,23 @@ class Server_Request_Handler:
             response[constants.KEY_SUCCESS] = constants.VALUE_FALSE
             response[constants.KEY_FAILURE_MESSAGE] = str(e)
         return response
+    
+    
+    def _get_all_disliked_games(self, request):
+        response = {}
+        try:
+            username = request[constants.KEY_USERNAME]
+            user = self.user_manager.get_user(username)
+            disliked_games = [self._game_to_dict(game) for game in user.get_all_disliked_games_game_library().get_games()]
+            response[constants.KEY_SUCCESS] = constants.VALUE_TRUE
+            response[constants.KEY_STATUS] = constants.VALUE_ACCEPTED
+            response[constants.KEY_GAMES] = disliked_games
+        except Exception as e:
+            response[constants.KEY_STATUS] = constants.VALUE_FAILURE
+            response[constants.KEY_SUCCESS] = constants.VALUE_FALSE
+            response[constants.KEY_FAILURE_MESSAGE] = str(e)
+        return response
+    
 
             
             

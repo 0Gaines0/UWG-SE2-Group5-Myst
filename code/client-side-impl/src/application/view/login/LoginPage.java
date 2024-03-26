@@ -99,6 +99,7 @@ public class LoginPage {
 
 	private void navigateUser() {
 		if (ActiveUser.getActiveUser().isFirstTimeLogin()) {
+			ActiveUser.getActiveUser().setFirstTimeLogin(false);
 			this.preferencePageCodeBehind.openPreferencePage();
 		} else {
 			this.userProfileCodeBehind.openUserProfilePage();

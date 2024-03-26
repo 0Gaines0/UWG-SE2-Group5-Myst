@@ -21,9 +21,16 @@ class User_Profile:
         self.allDislikedGames = GameLibrary()
         self.preferredGenres = []
         
+        self.first_time_login = True
+        
         self.about_me_description = ""
         self.user_profile_picture_path = ""
 
+    def get_first_time_login(self):
+        return self.first_time_login
+    
+    def set_first_time_login(self, option):
+        self.first_time_login = option
 
     def get_about_me_description(self):
         return self.about_me_description

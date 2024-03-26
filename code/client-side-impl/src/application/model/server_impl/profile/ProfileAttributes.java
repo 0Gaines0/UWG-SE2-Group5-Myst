@@ -8,6 +8,9 @@ import application.model.server_impl.Server;
 
 public class ProfileAttributes extends application.model.abstract_impl.profile.ProfileAttributes {
 
+	private static final String DESCRIPTION_MUST_BE_VALID = "description inputted must not be null or empty";
+	private static final String IMAGE_PATH_MUST_BE_VALID = "image path inputted must not be null or empty";
+	
 	private String aboutMeDescription;
 	private Game favoriteGame;
 	private String userProfilePicturePath;
@@ -18,6 +21,27 @@ public class ProfileAttributes extends application.model.abstract_impl.profile.P
 	public ProfileAttributes() {
 		this.aboutMeDescription = "";
 		this.userProfilePicturePath = "";
+	}
+	
+	/**
+	 * Instantiates a new profile attributes.
+	 *
+	 * @param description the description
+	 * @param imagePath   the image path
+	 */
+	public ProfileAttributes(String description, String imagePath) {
+		if (description == null) {
+			throw new NullPointerException(DESCRIPTION_MUST_BE_VALID);
+		} else if (description.isBlank()) {
+			throw new IllegalArgumentException(DESCRIPTION_MUST_BE_VALID);
+		} else if (imagePath == null) {
+			throw new NullPointerException(IMAGE_PATH_MUST_BE_VALID);
+		} else if (imagePath.isBlank()) {
+			throw new IllegalArgumentException(IMAGE_PATH_MUST_BE_VALID);
+		}
+		this.aboutMeDescription = description;
+		this.userProfilePicturePath = imagePath;
+
 	}
 
 	@Override
@@ -30,6 +54,10 @@ public class ProfileAttributes extends application.model.abstract_impl.profile.P
 			json.put("username", username);
 
 			var response = Server.sendRequest(json.toString());
+			var responseJson = new JSONObject(response);
+			if (responseJson.getBoolean("success")) {
+				description = responseJson.get("description").toString();
+			}
 
 		} catch (JSONException e) {
 			throw new IllegalArgumentException(e.getMessage());

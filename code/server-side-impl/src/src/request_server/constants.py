@@ -18,6 +18,8 @@ KEY_SUCCESS = "success"
 KEY_GAMES = "games"
 KEY_GENRES = "genres"
 KEY_DESCRIPTION = "description"
+KEY_PATH = "path"
+KEY_FIRST_TIME_LOGIN = "first_time_login"
 
 VALUE_TRUE = "true"
 VALUE_FALSE = "false"
@@ -47,6 +49,9 @@ GET_FAVORITE_GAME = "get_favorite_game"
 SET_FAVORITE_GAME = "set_favorite_game"
 GET_USER_PROFILE_PICTURE_PATH = "get_user_profile_picture_path"
 SET_USER_PROFILE_PICTURE_PATH = "set_user_profile_picture_path"
+
+GET_FIRST_TIME_LOGIN = "get_first_time_login"
+SET_FIRST_TIME_LOGIN = "set_first_time_login"
 
 SET_ACTIVE_USER = "set_active_user"
 

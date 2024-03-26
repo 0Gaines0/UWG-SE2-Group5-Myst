@@ -18,7 +18,7 @@ import application.model.local_impl.profile.ProfileAttributes;
 import application.model.server_impl.Server;
 
 public class UserProfile extends application.model.abstract_impl.profile.UserProfile {
-	
+
 	private static final int LIMIT_GENRES = 6;
 
 	private static final String USERNAME_MUST_NOT_BE_NULL_OR_EMPTY = "username must not be null or empty";
@@ -27,7 +27,6 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 
 	private String username;
 	private String password;
-	private boolean firstTimeLogin;
 
 	/**
 	 * Instantiates a new user profile.
@@ -49,7 +48,6 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 
 		this.username = username;
 		this.password = password;
-		this.firstTimeLogin = true;
 	}
 
 	/**
@@ -142,7 +140,26 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 
 	@Override
 	public List<Game> getAllDislikedGames() {
-		return null;
+		var json = new JSONObject();
+		var username = ActiveUser.getActiveUser().getUsername();
+
+		var disliked = new ArrayList<Game>();
+
+		try {
+			json.put("request_type", "get_all_disliked_games");
+			json.put("username", username);
+
+			var response = Server.sendRequest(json.toString());
+			var jsonResponse = new JSONObject(response);
+			if (jsonResponse.getBoolean("success")) {
+				disliked = (ArrayList<Game>) GameLibraryIO.parseGamesFromJson(jsonResponse.getJSONArray("games"))
+						.getGames();
+			}
+
+		} catch (JSONException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
+		return disliked;
 	}
 
 	@Override
@@ -196,17 +213,78 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 
 	@Override
 	public ProfileAttributes getProfileAttributes() {
-		return null;
+		var descriptionJson = new JSONObject();
+		var profilePictureJson = new JSONObject();
+		var username = ActiveUser.getActiveUser().getUsername();
+
+		var profileAttributes = new ProfileAttributes();
+		try {
+			descriptionJson.put("request_type", "get_about_me_description");
+			profilePictureJson.put("request_type", "get_user_profile_picture_path");
+
+			descriptionJson.put("username", username);
+			profilePictureJson.put("username", username);
+
+			var descriptionResponse = Server.sendRequest(descriptionJson.toString());
+			var profilePictureResponse = Server.sendRequest(profilePictureJson.toString());
+
+			var descriptionResponseJson = new JSONObject(descriptionResponse);
+			var profilePictureResponseJson = new JSONObject(profilePictureResponse);
+			
+			if (descriptionResponseJson.getBoolean("success") && profilePictureResponseJson.getBoolean("success")) {
+				var description = descriptionResponseJson.get("description").toString();
+				var path = profilePictureResponseJson.get("path").toString();
+				
+				profileAttributes.setAboutMeDescription(description);
+				profileAttributes.setUserProfilePicturePath(path);
+			}
+
+		} catch (JSONException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
+		
+		return profileAttributes;
 	}
 
 	@Override
 	public boolean isFirstTimeLogin() {
-		return this.firstTimeLogin;
+		var json = new JSONObject();
+		var username = ActiveUser.getActiveUser().getUsername();
+
+		var firstTimeLogin = false;
+		
+		try {
+			json.put("request_type", "get_first_time_login");
+			json.put("username", username);
+			
+			var response = Server.sendRequest(json.toString());
+			var jsonResponse = new JSONObject(response);
+			if (jsonResponse.getBoolean("success")) {
+				firstTimeLogin = jsonResponse.getBoolean("first_time_login");
+			}
+			
+		} catch (JSONException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
+		return firstTimeLogin;
 	}
 
 	@Override
 	public void setFirstTimeLogin(boolean firstTimeLogin) {
-
+		var json = new JSONObject();
+		var username = ActiveUser.getActiveUser().getUsername();
+		
+		try {
+			json.put("request_type", "set_first_time_login");
+			json.put("username", username);
+			json.put("first_time_login", firstTimeLogin);
+			
+			Server.sendRequest(json.toString());
+			
+		} catch (JSONException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
+	
 	}
 
 	@Override
@@ -235,9 +313,9 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 		}
 
 		genrePercentages = genrePercentages.entrySet().stream()
-	            .sorted(Map.Entry.<Genre, Double>comparingByValue().reversed())
-	            .limit(LIMIT_GENRES)
-	            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+				.sorted(Map.Entry.<Genre, Double>comparingByValue().reversed()).limit(LIMIT_GENRES)
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (oldValue, newValue) -> oldValue,
+						LinkedHashMap::new));
 
 		return genrePercentages;
 	}
