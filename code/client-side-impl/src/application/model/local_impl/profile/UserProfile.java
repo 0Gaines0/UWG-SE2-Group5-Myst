@@ -251,6 +251,7 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 	 * @return A map of genres to their percentage representation among liked and
 	 *         owned games.
 	 */
+	@Override
 	public Map<Genre, Double> calculateGenrePercentages() {
 		Map<Genre, Integer> genreCounts = new HashMap<>();
 		int totalGenres = 0;

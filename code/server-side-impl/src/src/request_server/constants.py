@@ -16,6 +16,8 @@ KEY_USERNAME = "username"
 KEY_PASSWORD = "password"
 KEY_SUCCESS = "success"
 KEY_GAMES = "games"
+KEY_GENRES = "genres"
+KEY_DESCRIPTION = "description"
 
 VALUE_TRUE = "true"
 VALUE_FALSE = "false"
@@ -38,6 +40,13 @@ GET_PASSWORD = "get_password"
 SET_PASSWORD = "set_password"
 GET_PREFERRED_GENRES = "get_preferred_genres"
 SET_PREFERRED_GENRES = "set_preferred_genres"
+
+GET_ABOUT_ME_DESCRIPTION = "get_about_me_description"
+SET_ABOUT_ME_DESCRIPTION = "set_about_me_description"
+GET_FAVORITE_GAME = "get_favorite_game"
+SET_FAVORITE_GAME = "set_favorite_game"
+GET_USER_PROFILE_PICTURE_PATH = "get_user_profile_picture_path"
+SET_USER_PROFILE_PICTURE_PATH = "set_user_profile_picture_path"
 
 SET_ACTIVE_USER = "set_active_user"
 

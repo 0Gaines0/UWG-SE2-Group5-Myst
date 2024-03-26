@@ -2,7 +2,7 @@ package application.viewModel.profile.subProfilePages;
 
 import java.util.ArrayList;
 
-import application.model.local_impl.profile.ActiveUser;
+import application.model.server_impl.profile.ActiveUser;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;

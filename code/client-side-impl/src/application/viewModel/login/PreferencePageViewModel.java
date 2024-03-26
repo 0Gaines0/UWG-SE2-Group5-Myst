@@ -2,6 +2,7 @@ package application.viewModel.login;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import application.Main;
 import application.model.local_impl.game.Game;
@@ -80,7 +81,7 @@ public class PreferencePageViewModel {
 	 */
 	public void configureNewUserPreferences() {
 		ActiveUser.getActiveUser().setAllLikedGames(this.selectedLikedGames);
-		//ActiveUser.getActiveUser().getPreferredGenres().addAll(this.selectedLikedGenres);
+		ActiveUser.getActiveUser().setPreferredGenres(this.selectedLikedGenres);
 	}
 	
 	/**

@@ -4,6 +4,7 @@
 package application.model.abstract_impl.profile;
 
 import java.util.List;
+import java.util.Map;
 
 import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
@@ -116,6 +117,14 @@ public abstract class UserProfile {
 	 * @param firstTimeLogin the new first time login
 	 */
 	public abstract void setFirstTimeLogin(boolean firstTimeLogin);
+	
+	/**
+	 * Calculate genre percentages.
+	 *
+	 * @return the map
+	 */
+	public abstract Map<Genre, Double> calculateGenrePercentages();
+	
 	
 	
 	

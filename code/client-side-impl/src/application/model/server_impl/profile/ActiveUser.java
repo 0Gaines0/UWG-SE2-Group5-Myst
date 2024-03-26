@@ -11,14 +11,14 @@ import application.model.server_impl.Server;
  * @version Sprint 1
  */
 public class ActiveUser {
-	private static application.model.local_impl.profile.UserProfile activeUser;
+	private static UserProfile activeUser;
 
 	/**
 	 * Gets the active user.
 	 *
 	 * @return the active user
 	 */
-	public static application.model.local_impl.profile.UserProfile getActiveUser() {
+	public static UserProfile getActiveUser() {
 		return activeUser;
 	}
 
@@ -27,7 +27,7 @@ public class ActiveUser {
 	 *
 	 * @param activeUser the new active user
 	 */
-	public static void setActiveUser(application.model.local_impl.profile.UserProfile activeUser) {
+	public static void setActiveUser(UserProfile activeUser) {
 		var json = new JSONObject();
 		try {
 			json.put("request_type", "set_active_user");

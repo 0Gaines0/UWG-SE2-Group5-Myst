@@ -20,8 +20,23 @@ class User_Profile:
         self.allLikedGames = GameLibrary()
         self.allDislikedGames = GameLibrary()
         self.preferredGenres = []
+        
+        self.about_me_description = ""
+        self.user_profile_picture_path = ""
 
 
+    def get_about_me_description(self):
+        return self.about_me_description
+    
+    def set_about_me_description(self, description):
+        self.about_me_description = description
+        
+    def get_user_profile_picture_path(self):
+        return self.user_profile_picture_path
+    
+    def set_user_profile_picture_path(self, path):
+        self.user_profile_picture_path = path
+        
     def get_username(self):
         return self.username
     
