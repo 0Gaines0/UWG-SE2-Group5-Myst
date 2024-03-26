@@ -7,6 +7,8 @@ import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
 import application.model.local_impl.profile.ActiveUser;
 import application.viewModel.UserGameLibrary.UserGameLibraryViewModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -55,7 +57,7 @@ public class UserGameLibraryPage {
 	private ImageView profileImageNavBar;
 	
 	@FXML
-    private ComboBox<?> gameListComboBox;
+    private ComboBox<String> gameListComboBox;
 
 	private UserGameLibraryViewModel viewModel;
 
@@ -72,11 +74,13 @@ public class UserGameLibraryPage {
 	@FXML
 	public void initialize() {
 		this.validateFXMLComponents();
+		this.setupComboBox();
 		this.setupListView();
 		this.bindToViewModel();
 		this.setUpNavBar();
 		this.viewModel.setUpGameLibrary();
 		this.setUpGamesListViewListener();
+		this.setupGameListsComboBoxListener();
 		this.configureProfileImage();
 	}
 
@@ -109,6 +113,14 @@ public class UserGameLibraryPage {
 
 	private void setupListView() {
 		this.myGamesListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+	}
+	
+	private void setupComboBox() {
+		ObservableList<String> gameLists = FXCollections.observableArrayList();
+		gameLists.add("Liked Games");
+		gameLists.add("Disliked Games");
+		gameLists.add("Owned Games");
+		this.gameListComboBox.setItems(gameLists);
 	}
 
 	private void setUpNavBar() {
@@ -147,6 +159,22 @@ public class UserGameLibraryPage {
 	private void setUpGamesListViewListener() {
 		this.myGamesListView.getSelectionModel().selectedItemProperty()
 				.addListener((v, oldValue, newValue) -> this.updateSelectedGame());
+	}
+	
+	private void setupGameListsComboBoxListener() {
+		this.gameListComboBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> this.updateSelectedListDisplay());
+	}
+
+	private void updateSelectedListDisplay() {
+		String selectedList = this.gameListComboBox.getSelectionModel().getSelectedItem();
+		if (selectedList.equals("Liked Games")) {
+			this.myGamesListView.itemsProperty().bindBidirectional(this.viewModel.getLikedGames());
+		} else if (selectedList.equals("Disliked Games")) {
+			this.myGamesListView.itemsProperty().bindBidirectional(this.viewModel.getDislikedGames());
+		} else {
+			this.myGamesListView.itemsProperty().bindBidirectional(this.viewModel.getOwnedGames());
+		}
+		
 	}
 
 	private void configureProfileImage() {
