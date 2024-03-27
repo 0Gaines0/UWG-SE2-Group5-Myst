@@ -5,7 +5,7 @@ package application.viewModel.profile.subProfilePages;
 
 import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
-import application.model.local_impl.profile.ActiveUser;
+import application.model.server_impl.profile.ActiveUser;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -13,6 +13,7 @@ import javafx.beans.property.SimpleObjectProperty;
 
 /**
  * The Class EditPreferencesAnchorViewModel.
+ * 
  * @author Jeffrey Gaines
  * @version Sprint 1
  */
@@ -36,7 +37,7 @@ public class EditPreferencesAnchorViewModel {
 		this.selectedDislikedGameProperty = new SimpleObjectProperty<Game>();
 		this.selectedPreferredGenreProperty = new SimpleObjectProperty<Genre>();
 	}
-	
+
 	/**
 	 * Removes the selected game from liked list.
 	 *
@@ -45,12 +46,14 @@ public class EditPreferencesAnchorViewModel {
 	public boolean removeSelectedGameFromLikedList() {
 		if (this.selectedLikedGameProperty.getValue() != null) {
 			var game = this.selectedLikedGameProperty.getValue();
-			ActiveUser.getActiveUser().getAllLikedGames().remove(game);
+			var likedGames = ActiveUser.getActiveUser().getAllLikedGames();
+			likedGames.remove(game);
+			ActiveUser.getActiveUser().setAllLikedGames(likedGames);
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Removes the selected genre from preferred list.
 	 *
@@ -59,12 +62,14 @@ public class EditPreferencesAnchorViewModel {
 	public boolean removeSelectedGenreFromPreferredList() {
 		if (this.selectedPreferredGenreProperty.getValue() != null) {
 			var genre = this.selectedPreferredGenreProperty.getValue();
-			ActiveUser.getActiveUser().getPreferredGenres().remove(genre);
+			var genres = ActiveUser.getActiveUser().getPreferredGenres();
+			genres.remove(genre);
+			ActiveUser.getActiveUser().setPreferredGenres(genres);
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Removes the selected game from disliked list.
 	 *
@@ -73,7 +78,9 @@ public class EditPreferencesAnchorViewModel {
 	public boolean removeSelectedGameFromDislikedList() {
 		if (this.selectedDislikedGameProperty.getValue() != null) {
 			var game = this.selectedDislikedGameProperty.getValue();
-			ActiveUser.getActiveUser().getAllDislikedGames().remove(game);
+			var dislikedGames = ActiveUser.getActiveUser().getAllDislikedGames();
+			dislikedGames.remove(game);
+			ActiveUser.getActiveUser().setAllDislikedGames(dislikedGames);
 			return true;
 		}
 		return false;
@@ -87,13 +94,19 @@ public class EditPreferencesAnchorViewModel {
 	public boolean moveGameFromLikedListToDislikedList() {
 		if (this.selectedLikedGameProperty.getValue() != null) {
 			var game = this.selectedLikedGameProperty.getValue();
-			ActiveUser.getActiveUser().getAllLikedGames().remove(game);
-			ActiveUser.getActiveUser().getAllDislikedGames().add(game);
+
+			var likedGames = ActiveUser.getActiveUser().getAllLikedGames();
+			likedGames.remove(game);
+			ActiveUser.getActiveUser().setAllLikedGames(likedGames);
+
+			var dislikedGames = ActiveUser.getActiveUser().getAllDislikedGames();
+			dislikedGames.add(game);
+			ActiveUser.getActiveUser().setAllDislikedGames(dislikedGames);
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Move game from disliked list to liked list.
 	 *
@@ -104,6 +117,15 @@ public class EditPreferencesAnchorViewModel {
 			var game = this.selectedDislikedGameProperty.getValue();
 			ActiveUser.getActiveUser().getAllDislikedGames().remove(game);
 			ActiveUser.getActiveUser().getAllLikedGames().add(game);
+
+			var dislikedGames = ActiveUser.getActiveUser().getAllDislikedGames();
+			dislikedGames.remove(game);
+			ActiveUser.getActiveUser().setAllDislikedGames(dislikedGames);
+
+			var likedGames = ActiveUser.getActiveUser().getAllLikedGames();
+			likedGames.add(game);
+			ActiveUser.getActiveUser().setAllLikedGames(likedGames);
+
 			return true;
 		}
 		return false;

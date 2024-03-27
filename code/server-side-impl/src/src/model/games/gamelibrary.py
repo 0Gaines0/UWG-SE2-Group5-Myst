@@ -14,6 +14,9 @@ class GameLibrary:
 
     def remove_game(self, game_id):
         self.games = [game for game in self.games if game.game_id != game_id]
+    
+    def remove_all_games(self):
+        self.games = []
 
     def find_game_by_id(self, game_id):
         for game in self.games:

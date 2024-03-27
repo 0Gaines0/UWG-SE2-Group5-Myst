@@ -175,7 +175,13 @@ public class GameLibraryIO {
 		}
 	}
 
-	private static Optional<Genre> toGenre(String genreStr) {
+	/**
+	 * To genre.
+	 *
+	 * @param genreStr the genre str
+	 * @return the optional
+	 */
+	public static Optional<Genre> toGenre(String genreStr) {
 		String normalized = genreStr.toUpperCase().replace(" ", "_").replace("-", "_");
 		try {
 			return Optional.of(Genre.valueOf(normalized));

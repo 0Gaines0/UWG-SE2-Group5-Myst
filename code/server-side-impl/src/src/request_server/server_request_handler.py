@@ -15,7 +15,7 @@ class Server_Request_Handler:
     def __init__(self):
         self.credential_manager = Credential_Manager()
         self.user_manager = User_Manager()
-        self.game_database = GameLibraryIO.parse_games_from_file("..\\..\\..\\..\\..\\database\\testData.csv")
+        self.game_database = GameLibraryIO.parse_games_from_file("..\\..\\..\\..\\..\\database\\merged_steam_game_database.csv")
         self.credential_manager.add_credential("username", "password")
         self.user_manager.add_user("username", "password")
                 
@@ -68,9 +68,73 @@ class Server_Request_Handler:
         if request_type == constants.SET_FIRST_TIME_LOGIN:
             response = self._set_first_time_login(request)
             
+        if request_type == constants.GET_PREFERRED_GENRES:
+            response = self._get_all_perferred_genres(request)
+            
+        if request_type == constants.SET_ALL_DISLIKED_GAMES:
+            response = self._set_all_disliked_games(request)
+            
+        if request_type == constants.SET_ABOUT_ME_DESCRIPTION:
+            response = self._set_about_me_description(request)
+            
+        if request_type == constants.SET_USER_PROFILE_PICTURE_PATH:
+            response = self._set_profile_picture_path(request)
+            
+        if request_type == constants.SET_ALL_OWNED_GAMES:
+            response = self._set_all_owned_games(request)
+            
+            
+        return response
+    
+    def _set_profile_picture_path(self, request):
+        response = {}
+        try:
+            username = request[constants.KEY_USERNAME]
+            user = self.user_manager.get_user(username)
+            description = request[constants.KEY_PATH]
+            user.set_user_profile_picture_path(description)
+            response[constants.KEY_SUCCESS] = constants.VALUE_TRUE
+            response[constants.KEY_STATUS] = constants.VALUE_ACCEPTED
+        except Exception as e:
+            response[constants.KEY_STATUS] = constants.VALUE_FAILURE
+            response[constants.KEY_SUCCESS] = constants.VALUE_FALSE
+            response[constants.KEY_FAILURE_MESSAGE] = str(e)
         return response
             
-         
+    def _set_about_me_description(self, request):
+        response = {}
+        try:
+            username = request[constants.KEY_USERNAME]
+            user = self.user_manager.get_user(username)
+            description = request[constants.KEY_DESCRIPTION]
+            user.set_about_me_description(description)
+            response[constants.KEY_SUCCESS] = constants.VALUE_TRUE
+            response[constants.KEY_STATUS] = constants.VALUE_ACCEPTED
+        except Exception as e:
+            response[constants.KEY_STATUS] = constants.VALUE_FAILURE
+            response[constants.KEY_SUCCESS] = constants.VALUE_FALSE
+            response[constants.KEY_FAILURE_MESSAGE] = str(e)
+        return response
+    
+    
+    def _set_all_disliked_games(self, request):
+        response = {}
+        try:
+            username = request[constants.KEY_USERNAME]
+            user = self.user_manager.get_user(username)
+            user.get_all_disliked_games_game_library().remove_all_games()
+            liked_games = request[constants.KEY_GAMES]
+            for game in liked_games:
+                game = self.game_database.find_game_by_id(game["gameID"])
+                user.get_all_disliked_games_game_library().add_game(game)
+            response[constants.KEY_SUCCESS] = constants.VALUE_TRUE
+            response[constants.KEY_STATUS] = constants.VALUE_ACCEPTED
+        except Exception as e:
+            response[constants.KEY_STATUS] = constants.VALUE_FAILURE
+            response[constants.KEY_SUCCESS] = constants.VALUE_FALSE
+            response[constants.KEY_FAILURE_MESSAGE] = str(e)
+        return response
+     
     def _set_first_time_login(self, request):
         response = {}
         try:
@@ -222,10 +286,29 @@ class Server_Request_Handler:
         try:
             username = request[constants.KEY_USERNAME]
             user = self.user_manager.get_user(username)
+            user.get_all_liked_games_game_library().remove_all_games()
             liked_games = request[constants.KEY_GAMES]
             for game in liked_games:
                 game = self.game_database.find_game_by_id(game["gameID"])
                 user.get_all_liked_games_game_library().add_game(game)
+            response[constants.KEY_SUCCESS] = constants.VALUE_TRUE
+            response[constants.KEY_STATUS] = constants.VALUE_ACCEPTED
+        except Exception as e:
+            response[constants.KEY_STATUS] = constants.VALUE_FAILURE
+            response[constants.KEY_SUCCESS] = constants.VALUE_FALSE
+            response[constants.KEY_FAILURE_MESSAGE] = str(e)
+        return response
+    
+    def _set_all_owned_games(self, request):
+        response = {}
+        try:
+            username = request[constants.KEY_USERNAME]
+            user = self.user_manager.get_user(username)
+            user.get_all_owned_games_game_library().remove_all_games()
+            liked_games = request[constants.KEY_GAMES]
+            for game in liked_games:
+                game = self.game_database.find_game_by_id(game["gameID"])
+                user.get_all_owned_games_game_library().add_game(game)
             response[constants.KEY_SUCCESS] = constants.VALUE_TRUE
             response[constants.KEY_STATUS] = constants.VALUE_ACCEPTED
         except Exception as e:
@@ -240,10 +323,26 @@ class Server_Request_Handler:
             username = request[constants.KEY_USERNAME]
             user = self.user_manager.get_user(username)
             preferred_genres = request[constants.KEY_GENRES]
+            user.set_preferred_genres([])
             for genre in preferred_genres:
                 user.get_preferred_genres().append(genre)
             response[constants.KEY_SUCCESS] = constants.VALUE_TRUE
             response[constants.KEY_STATUS] = constants.VALUE_ACCEPTED
+        except Exception as e:
+            response[constants.KEY_STATUS] = constants.VALUE_FAILURE
+            response[constants.KEY_SUCCESS] = constants.VALUE_FALSE
+            response[constants.KEY_FAILURE_MESSAGE] = str(e)
+        return response
+    
+    def _get_all_perferred_genres(self, request):
+        response = {}
+        try:
+            username = request[constants.KEY_USERNAME]
+            user = self.user_manager.get_user(username)
+            preferred_genres = user.get_preferred_genres()
+            response[constants.KEY_SUCCESS] = constants.VALUE_TRUE
+            response[constants.KEY_STATUS] = constants.VALUE_ACCEPTED
+            response[constants.KEY_GENRES] = preferred_genres
         except Exception as e:
             response[constants.KEY_STATUS] = constants.VALUE_FAILURE
             response[constants.KEY_SUCCESS] = constants.VALUE_FALSE

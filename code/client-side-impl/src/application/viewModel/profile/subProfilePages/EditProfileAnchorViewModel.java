@@ -3,7 +3,7 @@
  */
 package application.viewModel.profile.subProfilePages;
 
-import application.model.local_impl.profile.ActiveUser;
+import application.model.server_impl.profile.ActiveUser;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 

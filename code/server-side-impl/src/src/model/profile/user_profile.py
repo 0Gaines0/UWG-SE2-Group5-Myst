@@ -71,3 +71,21 @@ class User_Profile:
     
     def get_preferred_genres(self):
         return self.preferredGenres
+    
+    def set_preferred_genres(self, genres):
+        self.preferredGenres = genres    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

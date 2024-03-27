@@ -68,7 +68,19 @@ public class ProfileAttributes extends application.model.abstract_impl.profile.P
 
 	@Override
 	public void setAboutMeDescription(String aboutMeDescription) {
+		var json = new JSONObject();
+		var username = ActiveUser.getActiveUser().getUsername();
+		
+		try {
+			json.put("request_type", "set_about_me_description");
+			json.put("username", username);
+			json.put("description", aboutMeDescription);
 
+			Server.sendRequest(json.toString());
+
+		} catch (JSONException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
 	}
 
 	@Override
@@ -83,12 +95,41 @@ public class ProfileAttributes extends application.model.abstract_impl.profile.P
 
 	@Override
 	public String getUserProfilePicturePath() {
-		return null;
+		var path = "";
+		var json = new JSONObject();
+		var username = ActiveUser.getActiveUser().getUsername();
+		try {
+			json.put("request_type", "get_user_profile_picture_path");
+			json.put("username", username);
+
+			var response = Server.sendRequest(json.toString());
+			var responseJson = new JSONObject(response);
+			if (responseJson.getBoolean("success")) {
+				path = responseJson.get("path").toString();
+			}
+
+		} catch (JSONException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
+		
+		return path;
 	}
 
 	@Override
 	public void setUserProfilePicturePath(String userProfilePicture) {
+		var json = new JSONObject();
+		var username = ActiveUser.getActiveUser().getUsername();
+		
+		try {
+			json.put("request_type", "set_user_profile_picture_path");
+			json.put("username", username);
+			json.put("path", userProfilePicture);
 
+			Server.sendRequest(json.toString());
+
+		} catch (JSONException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
 	}
 
 }

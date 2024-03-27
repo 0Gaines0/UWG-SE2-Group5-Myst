@@ -14,7 +14,7 @@ import org.json.JSONObject;
 import application.fileIO.GameLibraryIO;
 import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
-import application.model.local_impl.profile.ProfileAttributes;
+import application.model.server_impl.profile.ProfileAttributes;
 import application.model.server_impl.Server;
 
 public class UserProfile extends application.model.abstract_impl.profile.UserProfile {
@@ -164,6 +164,20 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 
 	@Override
 	public void setAllDislikedGames(List<Game> dislikedGames) {
+		var json = new JSONObject();
+		var username = ActiveUser.getActiveUser().getUsername();
+
+		try {
+			json.put("request_type", "set_all_disliked_games");
+			json.put("username", username);
+			var gamesArray = new JSONArray(dislikedGames);
+			json.put("games", gamesArray);
+
+			Server.sendRequest(json.toString());
+
+		} catch (JSONException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
 	}
 
 	@Override
@@ -187,7 +201,32 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 
 	@Override
 	public List<Genre> getPreferredGenres() {
-		return null;
+		var genres = new ArrayList<Genre>();
+		var username = ActiveUser.getActiveUser().getUsername();
+
+		var jsonObject = new JSONObject();
+
+		try {
+			jsonObject.put("request_type", "get_preferred_genres");
+			jsonObject.put("username", username);
+			
+			var response = Server.sendRequest(jsonObject.toString());
+			var responseJson = new JSONObject(response);
+			if (responseJson.getBoolean("success")) {
+				var genreStrings = responseJson.getJSONArray("genres");
+				for (int i = 0; i < genreStrings.length(); i++) {
+					var genreStr = genreStrings.getString(i);
+					var genre = GameLibraryIO.toGenre(genreStr).get();
+					genres.add(genre);
+				}
+			}
+						
+		} catch (JSONException e) {
+			throw new IllegalArgumentException(e.getMessage());
+
+		}
+
+		return genres;
 	}
 
 	@Override
@@ -230,11 +269,11 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 
 			var descriptionResponseJson = new JSONObject(descriptionResponse);
 			var profilePictureResponseJson = new JSONObject(profilePictureResponse);
-			
+
 			if (descriptionResponseJson.getBoolean("success") && profilePictureResponseJson.getBoolean("success")) {
 				var description = descriptionResponseJson.get("description").toString();
 				var path = profilePictureResponseJson.get("path").toString();
-				
+
 				profileAttributes.setAboutMeDescription(description);
 				profileAttributes.setUserProfilePicturePath(path);
 			}
@@ -242,7 +281,7 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 		} catch (JSONException e) {
 			throw new IllegalArgumentException(e.getMessage());
 		}
-		
+
 		return profileAttributes;
 	}
 
@@ -252,17 +291,17 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 		var username = ActiveUser.getActiveUser().getUsername();
 
 		var firstTimeLogin = false;
-		
+
 		try {
 			json.put("request_type", "get_first_time_login");
 			json.put("username", username);
-			
+
 			var response = Server.sendRequest(json.toString());
 			var jsonResponse = new JSONObject(response);
 			if (jsonResponse.getBoolean("success")) {
 				firstTimeLogin = jsonResponse.getBoolean("first_time_login");
 			}
-			
+
 		} catch (JSONException e) {
 			throw new IllegalArgumentException(e.getMessage());
 		}
@@ -273,18 +312,18 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 	public void setFirstTimeLogin(boolean firstTimeLogin) {
 		var json = new JSONObject();
 		var username = ActiveUser.getActiveUser().getUsername();
-		
+
 		try {
 			json.put("request_type", "set_first_time_login");
 			json.put("username", username);
 			json.put("first_time_login", firstTimeLogin);
-			
+
 			Server.sendRequest(json.toString());
-			
+
 		} catch (JSONException e) {
 			throw new IllegalArgumentException(e.getMessage());
 		}
-	
+
 	}
 
 	@Override
