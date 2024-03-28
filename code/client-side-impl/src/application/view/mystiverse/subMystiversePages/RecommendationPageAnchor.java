@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -105,7 +106,7 @@ public class RecommendationPageAnchor {
     	this.setupProperties();
     	this.setupRecommendations();
     	this.setupButtons();
-    	this.viewmodel.setProperties();
+    	this.viewmodel.setupInitialProperties();
     }
     
     private void setupButtons() {
@@ -125,14 +126,20 @@ public class RecommendationPageAnchor {
     
     private void refreshUI() {
         if (!(this.viewmodel.getRecommendations().size() <= 1)) {
-            Game currentGame = this.viewmodel.getRecommendations().get(0);
-            this.viewmodel.getTitleProperty().set(currentGame.getName());
-            this.viewmodel.getDescProperty().set(currentGame.getDescription());
-            this.viewmodel.getGenresProperty().set(currentGame.getGenres().toString());
+            this.setupCurrentGameProperties();
         } else {
         	this.setupRecommendations();
+        	this.setupCurrentGameProperties();
         }
     }
+
+	private void setupCurrentGameProperties() {
+		Game currentGame = this.viewmodel.getRecommendations().get(0);
+		this.viewmodel.getImageProperty().setValue(new Image(currentGame.getGamePhoto(), true));
+		this.viewmodel.getTitleProperty().set(currentGame.getName());
+		this.viewmodel.getDescProperty().set(currentGame.getDescription());
+		this.viewmodel.getGenresProperty().set(currentGame.getGenres().toString());
+	}
     
     private void setupProperties() {
     	this.gameImageView.imageProperty().bindBidirectional(this.viewmodel.getImageProperty());

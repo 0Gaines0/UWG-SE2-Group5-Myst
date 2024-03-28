@@ -27,7 +27,7 @@ public class AllGamesPageAnchorViewModel {
 	public List<Game> filterOnSearch(String text, List<Game> allGames) {
 		List<Game> results = new ArrayList<Game>();
 		if (text != null) {
-			var filteredGames = allGames.stream().filter(game -> game.getName().contains(text))
+			var filteredGames = allGames.stream().filter(game -> game.getName().toLowerCase().contains(text))
 					.toList();
 			if (filteredGames.size() != 0) {
 				results = filteredGames;
