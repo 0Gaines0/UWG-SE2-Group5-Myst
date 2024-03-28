@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -55,6 +56,9 @@ public class PreferencePage {
 
 	@FXML
 	private ListView<Game> selectedLikedGamesListView;
+
+	@FXML
+	private TextField searchGamesTextField;
 
 	private PreferencePageViewModel viewmodel;
 	private UserProfilePage userProfileCodeBehind;
@@ -102,6 +106,13 @@ public class PreferencePage {
 
 		this.setUpLikedGamesChangeListener();
 		this.setUpLikedGenresChangeListener();
+		this.setUpSearchGameChangeListener();
+	}
+
+	private void setUpSearchGameChangeListener() {
+		this.searchGamesTextField.textProperty().addListener((observable, oldValue, newValue) -> { 
+			this.viewmodel.searchAllGamesAndFilter(newValue);
+		});
 	}
 
 	private void setUpLikedGenresChangeListener() {
@@ -162,6 +173,8 @@ public class PreferencePage {
 				: "fx:id=\"selectedGenresListView\" was not injected: check your FXML file 'PreferencePage.fxml'.";
 		assert this.selectedLikedGamesListView != null
 				: "fx:id=\"selectedLikedGamesListView\" was not injected: check your FXML file 'PreferencePage.fxml'.";
+        assert this.searchGamesTextField != null : "fx:id=\"searchGamesTextField\" was not injected: check your FXML file 'PreferencePage.fxml'.";
+
 
 	}
 }

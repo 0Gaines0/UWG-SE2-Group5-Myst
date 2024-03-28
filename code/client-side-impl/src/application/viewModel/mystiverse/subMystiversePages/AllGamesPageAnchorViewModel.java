@@ -6,7 +6,7 @@ import java.util.List;
 import application.Main;
 import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
-import application.model.local_impl.profile.ActiveUser;
+import application.model.server_impl.profile.ActiveUser;
 
 public class AllGamesPageAnchorViewModel {
 
@@ -69,6 +69,8 @@ public class AllGamesPageAnchorViewModel {
 	 * @param game the game
 	 */
 	public void addGameToInterestedList(Game game) {
-		ActiveUser.getActiveUser().getAllLikedGames().add(game);
+		var likedGames = ActiveUser.getActiveUser().getAllLikedGames();
+		likedGames.add(game);
+		ActiveUser.getActiveUser().setAllLikedGames(likedGames);
 	}
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import application.Main;
-import application.model.local_impl.GameRecommendationEngine;
+import application.model.server_impl.GameRecommendationEngine;
 import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
 import javafx.beans.property.ListProperty;

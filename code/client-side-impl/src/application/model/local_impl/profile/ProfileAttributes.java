@@ -8,7 +8,7 @@ import application.model.local_impl.game.Game;
  * @author Jeffrey Gaines
  * @version Sprint 1
  */
-public class ProfileAttributes {
+public class ProfileAttributes extends application.model.abstract_impl.profile.ProfileAttributes {
 	private String aboutMeDescription;
 	private Game favoriteGame;
 	private String userProfilePicturePath;
@@ -50,6 +50,7 @@ public class ProfileAttributes {
 	 *
 	 * @return the about me description
 	 */
+	@Override
 	public String getAboutMeDescription() {
 		return this.aboutMeDescription;
 	}
@@ -59,6 +60,7 @@ public class ProfileAttributes {
 	 *
 	 * @param aboutMeDescription the new about me description
 	 */
+	@Override
 	public void setAboutMeDescription(String aboutMeDescription) {
 		this.aboutMeDescription = aboutMeDescription;
 	}
@@ -68,6 +70,7 @@ public class ProfileAttributes {
 	 *
 	 * @return the favorite game
 	 */
+	@Override
 	public Game getFavoriteGame() {
 		return this.favoriteGame;
 	}
@@ -77,6 +80,7 @@ public class ProfileAttributes {
 	 *
 	 * @param favoriteGame the new favorite game
 	 */
+	@Override
 	public void setFavoriteGame(Game favoriteGame) {
 		this.favoriteGame = favoriteGame;
 	}
@@ -86,6 +90,7 @@ public class ProfileAttributes {
 	 *
 	 * @return the user profile picture
 	 */
+	@Override
 	public String getUserProfilePicturePath() {
 		return this.userProfilePicturePath;
 	}
@@ -95,6 +100,7 @@ public class ProfileAttributes {
 	 *
 	 * @param userProfilePicture the new user profile picture
 	 */
+	@Override
 	public void setUserProfilePicturePath(String userProfilePicture) {
 		this.userProfilePicturePath = userProfilePicture;
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import application.fileIO.GameLibraryIO;
 import application.model.local_impl.game.Game;
+import application.model.server_impl.game.GameLibraryManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -33,7 +34,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		Main.allGames = GameLibraryIO.parseGamesFromFile().getGames();
+		Main.allGames = GameLibraryManager.fetchAndParseGameLibrary().getGames();
 		try {
 			Parent parent = FXMLLoader.load(getClass().getResource(Main.LOGIN_WINDOW));
 			Scene scene = new Scene(parent);

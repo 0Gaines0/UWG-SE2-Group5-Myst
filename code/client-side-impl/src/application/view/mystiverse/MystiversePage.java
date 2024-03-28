@@ -5,17 +5,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.Main;
+import application.model.server_impl.profile.ActiveUser;
 import application.view.mystiverse.subMystiversePages.AllGamesPageAnchor;
 import application.view.mystiverse.subMystiversePages.RecommendationPageAnchor;
 import application.view.mystiverse.subMystiversePages.SeedPageAnchor;
-import application.viewModel.mystiverse.subMystiversePages.AllGamesPageAnchorViewModel;
-import application.viewModel.mystiverse.subMystiversePages.RecommendationPageAnchorViewModel;
-import application.viewModel.mystiverse.subMystiversePages.SeedPageAnchorViewModel;
+import application.viewModel.mystiverse.MystiverseViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -78,6 +77,7 @@ public class MystiversePage {
 	private AllGamesPageAnchor allGamesCodeBehind;
 	private RecommendationPageAnchor recommendationCodeBehind;
 	private SeedPageAnchor seedCodeBehind;
+	private MystiverseViewModel viewModel;
 
 	/**
 	 * Instantiates a new mystiverse page.
@@ -86,6 +86,7 @@ public class MystiversePage {
 		this.allGamesCodeBehind = new AllGamesPageAnchor();
 		this.recommendationCodeBehind = new RecommendationPageAnchor();
 		this.seedCodeBehind = new SeedPageAnchor();
+		this.viewModel = new MystiverseViewModel();
 	}
 
 	@FXML
@@ -94,6 +95,21 @@ public class MystiversePage {
 		this.setUpNavBar();
 		this.setupHboxes();
 		this.setPane();
+		this.configurePage();
+	}
+	
+	private void configurePage() {
+		this.updateProfileImage();
+	}
+	
+	private void updateProfileImage() {
+		if (this.viewModel.profilePictureHasChanged()) {
+			var imagePath = ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath();
+			Image userImage = new Image(imagePath);
+			this.profileImageNavBar.setImage(userImage);
+			this.viewModel.setCachedProfilePicturePath(imagePath);
+		}
+
 	}
 
 	private void setupHboxes() {

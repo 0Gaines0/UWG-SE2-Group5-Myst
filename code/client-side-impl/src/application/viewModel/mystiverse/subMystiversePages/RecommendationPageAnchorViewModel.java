@@ -6,9 +6,9 @@ package application.viewModel.mystiverse.subMystiversePages;
 import java.util.ArrayList;
 import java.util.List;
 
-import application.model.local_impl.GameRecommendationEngine;
+import application.model.server_impl.GameRecommendationEngine;
 import application.model.local_impl.game.Game;
-import application.model.local_impl.profile.ActiveUser;
+import application.model.server_impl.profile.ActiveUser;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -71,7 +71,9 @@ public class RecommendationPageAnchorViewModel {
 	 * @param game the game
 	 */
 	public void interestedInGame(Game game) {
-		ActiveUser.getActiveUser().getAllLikedGames().add(game);
+		var likedGames = ActiveUser.getActiveUser().getAllLikedGames();
+		likedGames.add(game);
+		ActiveUser.getActiveUser().setAllLikedGames(likedGames);
 		this.recommendations.remove(game);
 	}
 	
@@ -81,7 +83,9 @@ public class RecommendationPageAnchorViewModel {
 	 * @param game the game
 	 */
 	public void notInterestedInGame(Game game) {
-		ActiveUser.getActiveUser().getAllDislikedGames().add(game);
+		var dislikedGames = ActiveUser.getActiveUser().getAllDislikedGames();
+		dislikedGames.add(game);
+		ActiveUser.getActiveUser().setAllDislikedGames(dislikedGames);
 		this.recommendations.remove(game);
 	}
 	
