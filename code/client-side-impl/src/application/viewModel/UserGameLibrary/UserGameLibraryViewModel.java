@@ -2,8 +2,8 @@ package application.viewModel.UserGameLibrary;
 
 import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
-import application.model.local_impl.profile.ActiveUser;
-import application.model.local_impl.profile.UserGameLibrary;
+import application.model.server_impl.profile.ActiveUser;
+import application.model.server_impl.profile.UserGameLibrary;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
