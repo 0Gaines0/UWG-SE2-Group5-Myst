@@ -2,11 +2,13 @@ package application.viewModel.login;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import application.Main;
 import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
-import application.model.local_impl.profile.ActiveUser;
+import application.model.local_impl.profile.UserProfile;
+import application.model.server_impl.profile.ActiveUser;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -39,6 +41,26 @@ public class PreferencePageViewModel {
 	}
 	
 	/**
+	 * Search all games and filter.
+	 *
+	 * @param filterValue the filter value
+	 */
+	public void searchAllGamesAndFilter(String filterValue) {
+		var filteredList = new ArrayList<Game>();
+		
+		for (var game : Main.getGames()) {
+			if (game.getName().toLowerCase().startsWith(filterValue.toLowerCase())) {
+				filteredList.add(game);
+			} else if (game.getName().toLowerCase().contains(filterValue.toLowerCase()) && !filteredList.contains(game)) {
+				filteredList.add(game);
+			}
+		}
+		ObservableList<Game> filteredGames = FXCollections.observableArrayList(filteredList);
+		this.allGames.setValue(filteredGames);
+		
+	}
+	
+	/**
 	 * Sets the up all games list.
 	 */
 	public void setUpAllGamesList() {
@@ -58,8 +80,8 @@ public class PreferencePageViewModel {
 	 * Configure new user preferences.
 	 */
 	public void configureNewUserPreferences() {
-		ActiveUser.getActiveUser().getAllLikedGames().addAll(this.selectedLikedGames);
-		ActiveUser.getActiveUser().getPreferredGenres().addAll(this.selectedLikedGenres);
+		ActiveUser.getActiveUser().setAllLikedGames(this.selectedLikedGames);
+		ActiveUser.getActiveUser().setPreferredGenres(this.selectedLikedGenres);
 	}
 	
 	/**

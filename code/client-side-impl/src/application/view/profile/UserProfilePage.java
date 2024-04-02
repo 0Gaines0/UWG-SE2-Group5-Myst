@@ -4,14 +4,13 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 
 import application.Main;
-import application.model.local_impl.profile.ActiveUser;
+import application.model.server_impl.profile.ActiveUser;
 import application.view.UserGameLibraryPage.UserGameLibraryPage;
 import application.view.mystiverse.MystiversePage;
 import application.view.profile.subProfilePages.EditPreferencesAnchor;
 import application.view.profile.subProfilePages.EditProfileAnchor;
 import application.view.profile.subProfilePages.ProfileAnchor;
 import application.view.profile.subProfilePages.SettingProfileAnchor;
-import application.viewModel.mystiverse.MystiverseViewModel;
 import application.viewModel.profile.UserProfilePageViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -1,7 +1,7 @@
 package application.viewModel.login;
 
-import application.model.local_impl.profile.ActiveUser;
-import application.model.local_impl.profile.UserProfile;
+import application.model.server_impl.profile.ActiveUser;
+import application.model.server_impl.profile.UserProfile;
 import application.model.server_impl.profile.credentials.CredentialManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -32,7 +32,6 @@ public class LoginPageViewModel {
 	 * @return true, if successful
 	 */
 	public boolean userLoginIsSuccessful() {
-		//this.credentialManager.setUpUserCredentials();
 		var username = this.usernameProperty.getValue().trim();
 		var password = this.passwordProperty.getValue().trim();
 		if (this.credentialManager.userNameExist(username)) {

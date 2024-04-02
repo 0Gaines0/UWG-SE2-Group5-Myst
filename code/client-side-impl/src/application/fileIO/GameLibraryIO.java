@@ -14,6 +14,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Utility class for parsing CSV data into a GameLibrary object. This class
  * provides functionality to read game information from a CSV-formatted string,
@@ -27,6 +31,53 @@ public class GameLibraryIO {
 
 	private static final String DATABASE_FILENAME = "merged_steam_game_database.csv";
 	// private static final String DATABASE_FILENAME = "testData.csv";
+	
+	/**
+     * Parses a JSON file containing game data and returns a populated GameLibrary instance.
+     *
+     * @param filename The path to the JSON file.
+     * @return A GameLibrary containing all the games parsed from the JSON data.
+	 * @throws JSONException 
+     */
+	public static GameLibrary parseGamesFromJson(JSONArray gamesArray) throws JSONException {
+	    GameLibrary library = new GameLibrary();
+	    for (int i = 0; i < gamesArray.length(); i++) {
+	        JSONObject gameObj = gamesArray.getJSONObject(i);
+	        Game game = parseGameFromJsonObject(gameObj);
+	        if (game != null) {
+	            library.addGame(game);
+	        }
+	    }
+	    return library;
+	}
+
+    private static Game parseGameFromJsonObject(JSONObject gameObj) {
+        try {
+            int appId = gameObj.getInt("gameID");
+            String name = gameObj.getString("name");
+            JSONArray genresJsonArray = gameObj.getJSONArray("genres");
+            List<Genre> genres = new ArrayList<>();
+            for (int i = 0; i < genresJsonArray.length(); i++) {
+                String genreStr = genresJsonArray.getString(i);
+                toGenre(genreStr).ifPresent(genres::add);
+            }
+            String developer = gameObj.getString("developers");
+            int releaseDateYear = gameObj.getInt("releaseDateYear");
+            int releaseDateMonth = gameObj.getInt("releaseDateMonth");
+            int positiveRatings = gameObj.getInt("numberPositiveReviews");
+            int negativeRatings = gameObj.getInt("numberNegativeReviews");
+            int averagePlaytime = gameObj.getInt("averagePlaytime");
+            String gamePhotoLink = gameObj.getString("photoLink");
+            String description = gameObj.getString("description");
+
+            return new Game(name, genres, appId, developer, releaseDateYear, releaseDateMonth, positiveRatings,
+                            negativeRatings, averagePlaytime, gamePhotoLink, description);
+        } catch (Exception e) {
+            System.err.println("Error parsing game from JSON object: " + e.getMessage());
+            return null;
+        }
+    }
+
 
 	/**
 	 * Parses a CSV string containing game data and returns a populated GameLibrary
@@ -124,7 +175,13 @@ public class GameLibraryIO {
 		}
 	}
 
-	private static Optional<Genre> toGenre(String genreStr) {
+	/**
+	 * To genre.
+	 *
+	 * @param genreStr the genre str
+	 * @return the optional
+	 */
+	public static Optional<Genre> toGenre(String genreStr) {
 		String normalized = genreStr.toUpperCase().replace(" ", "_").replace("-", "_");
 		try {
 			return Optional.of(Genre.valueOf(normalized));
