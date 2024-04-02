@@ -104,9 +104,9 @@ public class UserGameLibraryPage {
 	}
 
 	private void bindToViewModel() {
-		this.myGamesListView.itemsProperty().bindBidirectional(this.viewModel.getOwnedGames());
+		this.myGamesListView.itemsProperty().bindBidirectional(this.viewModel.getSelectedGamesListProperty());
 		this.gameTitleTextField.textProperty().bindBidirectional(this.viewModel.getSelectedGameName());
-		// this.gameDevelopersTextField.textProperty().bindBidirectional(this.viewModel.getSelectedGameDevelopers());
+		this.gameDevelopersTextField.textProperty().bindBidirectional(this.viewModel.getSelectedGameDevelopers());
 		this.gameGenresListView.itemsProperty().bindBidirectional(this.viewModel.getSelectedGameGenres());
 
 	}
@@ -167,14 +167,7 @@ public class UserGameLibraryPage {
 
 	private void updateSelectedListDisplay() {
 		String selectedList = this.gameListComboBox.getSelectionModel().getSelectedItem();
-		if (selectedList.equals("Liked Games")) {
-			this.myGamesListView.itemsProperty().bindBidirectional(this.viewModel.getLikedGames());
-		} else if (selectedList.equals("Disliked Games")) {
-			this.myGamesListView.itemsProperty().bindBidirectional(this.viewModel.getDislikedGames());
-		} else {
-			this.myGamesListView.itemsProperty().bindBidirectional(this.viewModel.getOwnedGames());
-		}
-		
+		this.viewModel.setSelectedList(selectedList);
 	}
 
 	private void configureProfileImage() {

@@ -42,6 +42,8 @@ public class UserGameLibraryViewModel {
 	
 	/** The selected game developer property. */
 	private StringProperty selectedGameDeveloperProperty;
+	
+	private ListProperty<Game> selectedGamesListProperty;
 
 	/**
 	 * Creates a new userGameLibraryViewModel.
@@ -53,6 +55,7 @@ public class UserGameLibraryViewModel {
 		this.selectedGameNameProperty = new SimpleStringProperty();
 		this.selectedGameDeveloperProperty = new SimpleStringProperty();
 		this.selectedGameGenresListProperty = new SimpleListProperty<Genre>();
+		this.selectedGamesListProperty = new SimpleListProperty<Game>();
 
 	}
 
@@ -62,7 +65,11 @@ public class UserGameLibraryViewModel {
 	public void setUpGameLibrary() {
 		this.userGameLibrary = new UserGameLibrary(ActiveUser.getActiveUser());
 		ObservableList<Game> likedGames = FXCollections.observableArrayList(this.userGameLibrary.getLikedGames());
+		ObservableList<Game> dislikedGames = FXCollections.observableArrayList(this.userGameLibrary.getDislikedGames());
+		ObservableList<Game> ownedGames = FXCollections.observableArrayList(this.userGameLibrary.getOwnedGames());
 		this.likedGamesListProperty.set(likedGames);
+		this.dislikedGamesProperty.set(dislikedGames);
+		this.ownedGamesProperty.set(ownedGames);
 	}
 
 	/**
@@ -130,6 +137,10 @@ public class UserGameLibraryViewModel {
 	public Game getSelectedGame() {
 		return this.selectedGame;
 	}
+	
+	public ListProperty<Game> getSelectedGamesListProperty() {
+		return this.selectedGamesListProperty;
+	}
 
 	/**
 	 * Sets the selected game.
@@ -146,6 +157,22 @@ public class UserGameLibraryViewModel {
 		this.selectedGameNameProperty.set(this.selectedGame.getName());
 		this.selectedGameDeveloperProperty.set(this.selectedGame.getDevelopers());
 
+	}
+	
+	public void setSelectedList(String selectedList) {
+		ObservableList<Game> likedGames = FXCollections.observableArrayList(this.userGameLibrary.getLikedGames());
+		ObservableList<Game> dislikedGames = FXCollections.observableArrayList(this.userGameLibrary.getDislikedGames());
+		ObservableList<Game> ownedGames = FXCollections.observableArrayList(this.userGameLibrary.getOwnedGames());
+		if (selectedList.equals("Liked Games")) {
+			this.selectedGamesListProperty.clear();
+			this.selectedGamesListProperty.set(likedGames);
+		} else if (selectedList.equals("Disliked Games")) {
+			this.selectedGamesListProperty.clear();
+			this.selectedGamesListProperty.set(dislikedGames);
+		} else {
+			this.selectedGamesListProperty.clear();
+			this.selectedGamesListProperty.set(ownedGames);
+		}
 	}
 
 	
