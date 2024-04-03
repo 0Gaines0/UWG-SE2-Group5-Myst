@@ -22,7 +22,7 @@ class TestUserGameLibrary {
 		UserGameLibrary gameLibrary = new UserGameLibrary(user);
 		
 		assertEquals(user, gameLibrary.getUser());
-		assertEquals(user.getAllOwnedGames(), gameLibrary.getGameLibrary());
+		assertEquals(user.getAllOwnedGames(), gameLibrary.getOwnedGames());
 	}
 
 }
