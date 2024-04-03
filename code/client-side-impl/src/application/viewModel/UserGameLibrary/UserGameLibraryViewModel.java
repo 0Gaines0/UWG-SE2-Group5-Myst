@@ -175,17 +175,38 @@ public class UserGameLibraryViewModel {
 		}
 	}
 	
-	public boolean removeSelectedGameFromList() {
+	public boolean removeSelectedGameFromList(String selectedList) {
 		if (this.selectedGame != null) {
 			var game = this.selectedGame;
-			var likedGames = ActiveUser.getActiveUser().getAllLikedGames();
-			likedGames.remove(game);
-			ActiveUser.getActiveUser().setAllLikedGames(likedGames);
-			ObservableList<Game> updatedLikedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllLikedGames());
-			this.likedGamesListProperty.set(updatedLikedGames);
-			this.selectedGamesListProperty.clear();
-			this.selectedGamesListProperty.set(updatedLikedGames);
-			return true;
+			if (selectedList.equals("Liked Games")) {
+				var likedGames = ActiveUser.getActiveUser().getAllLikedGames();
+				likedGames.remove(game);
+				ActiveUser.getActiveUser().setAllLikedGames(likedGames);
+				ObservableList<Game> updatedLikedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllLikedGames());
+				this.likedGamesListProperty.set(updatedLikedGames);
+				this.selectedGamesListProperty.clear();
+				this.selectedGamesListProperty.set(updatedLikedGames);
+				return true;
+			} else if (selectedList.equals("Disliked Games")) {
+				var dislikedGames = ActiveUser.getActiveUser().getAllDislikedGames();
+				dislikedGames.remove(game);
+				ActiveUser.getActiveUser().setAllDislikedGames(dislikedGames);
+				ObservableList<Game> updatedDislikedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllDislikedGames());
+				this.dislikedGamesProperty.set(updatedDislikedGames);
+				this.selectedGamesListProperty.clear();
+				this.selectedGamesListProperty.set(updatedDislikedGames);
+				return true;
+			} else {
+				var ownedGames = ActiveUser.getActiveUser().getAllOwnedGames();
+				ownedGames.remove(game);
+				ActiveUser.getActiveUser().setAllOwnedGames(ownedGames);
+				ObservableList<Game> updatedOwnedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllOwnedGames());
+				this.dislikedGamesProperty.set(updatedOwnedGames);
+				this.selectedGamesListProperty.clear();
+				this.selectedGamesListProperty.set(updatedOwnedGames);
+				return true;
+			}
+			
 		}
 		return false;
 	}

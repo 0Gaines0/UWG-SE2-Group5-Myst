@@ -86,7 +86,7 @@ public class UserGameLibraryPage {
 		this.validateFXMLComponents();
 		this.setupComboBox();
 		this.setupListView();
-		this.setUpRemoveLikedGameMenuItem();
+		this.setUpRemoveGameMenuItem();
 		this.bindToViewModel();
 		this.setUpNavBar();
 		this.viewModel.setUpGameLibrary();
@@ -189,9 +189,10 @@ public class UserGameLibraryPage {
 		}
 	}
 	
-	private void setUpRemoveLikedGameMenuItem() {
+	private void setUpRemoveGameMenuItem() {
 		this.removeGameContextMenuItem.setOnAction(((event) -> {
-			if (!this.viewModel.removeSelectedGameFromList()) {
+			String selectedList = this.gameListComboBox.getSelectionModel().getSelectedItem();
+			if (!this.viewModel.removeSelectedGameFromList(selectedList)) {
 				var errorPopUp = new Alert(AlertType.ERROR);
 				errorPopUp.setContentText("Game could not be remove, select and try again");
 				errorPopUp.showAndWait();
