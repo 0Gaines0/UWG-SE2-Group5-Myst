@@ -82,7 +82,7 @@ public class AllGamesPageAnchor {
     
     private void setupSearchbar() {
     	this.searchBar.setOnKeyReleased((event) -> {
-    		this.allGamesListView.getItems().setAll(this.viewmodel.filterOnSearch(this.searchBar.getText(), Main.getGames()));
+    		this.allGamesListView.getItems().setAll(this.viewmodel.filterOnSearch(this.searchBar.getText().toLowerCase(), Main.getGames()));
     	});
     }
     

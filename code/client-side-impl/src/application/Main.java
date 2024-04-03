@@ -64,4 +64,13 @@ public class Main extends Application {
 	public static List<Game> getGames() {
 		return Main.allGames;
 	}
+	
+	/**
+	 * Sets the games.
+	 *
+	 * @param games the new games
+	 */
+	public static void setGames(List<Game> games) {
+		Main.allGames = games;
+	}
 }
