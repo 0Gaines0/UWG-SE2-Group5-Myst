@@ -11,8 +11,29 @@ from src.model.profile.credentials.credential_manager import Credential_Manager
 from src.model.profile.active_user import Active_User
 
 class Server_Request_Handler:
+    """
+    A class responsible for handling and responding to server requests related to user management,
+    credential verification, and game library operations.
+
+    This class interfaces with `Credential_Manager`, `User_Manager`, and `GameLibraryIO` to
+    perform operations such as adding new credentials, checking for existing usernames, retrieving
+    game libraries, and managing user profile data including liked and disliked games, preferred genres,
+    and personal information.
+
+    Attributes:
+        credential_manager (Credential_Manager): Manages user credentials.
+        user_manager (User_Manager): Manages user profiles.
+        game_database (GameLibrary): Represents the game library, loaded from a CSV file.
+    
+    Methods:
+        handle_request(request): Determines the type of request and delegates it to the appropriate handler method.
+    """
     
     def __init__(self):
+        """
+        Initializes the Server_Request_Handler with a Credential_Manager, User_Manager, and loads the game
+        database from a CSV file. It also adds a default user for demonstration purposes.
+        """
         self.credential_manager = Credential_Manager()
         self.user_manager = User_Manager()
         self.game_database = GameLibraryIO.parse_games_from_file("..\\..\\..\\..\\..\\database\\merged_steam_game_database.csv")
@@ -21,6 +42,16 @@ class Server_Request_Handler:
                 
     
     def handle_request(self, request):
+        """
+        Handles incoming requests by determining the request type and calling the appropriate method
+        to process the request.
+
+        Args:
+            request (dict): A dictionary containing the request data and type.
+        
+        Returns:
+            dict: A response dictionary containing the results of the request processing or an error message.
+        """
         response = {}
         response[constants.KEY_STATUS] = constants.VALUE_FAILURE
         response[constants.KEY_FAILURE_MESSAGE] = "unsupported request type"
@@ -87,6 +118,15 @@ class Server_Request_Handler:
         return response
     
     def _set_profile_picture_path(self, request):
+        """
+        Sets the profile picture path for a specified user.
+        
+        Args:
+            request (dict): The request containing the username and the new profile picture path.
+        
+        Returns:
+            dict: The response indicating success or failure.
+        """
         response = {}
         try:
             username = request[constants.KEY_USERNAME]
@@ -102,6 +142,15 @@ class Server_Request_Handler:
         return response
             
     def _set_about_me_description(self, request):
+        """
+        Updates the 'About Me' description for a specified user.
+        
+        Args:
+            request (dict): The request containing the username and the new 'About Me' description.
+        
+        Returns:
+            dict: The response indicating success or failure.
+        """
         response = {}
         try:
             username = request[constants.KEY_USERNAME]
@@ -118,6 +167,15 @@ class Server_Request_Handler:
     
     
     def _set_all_disliked_games(self, request):
+        """
+        Sets the disliked games for a specified user, replacing any previously set dislikes.
+        
+        Args:
+            request (dict): The request containing the username and the list of disliked games.
+        
+        Returns:
+            dict: The response indicating success or failure.
+        """
         response = {}
         try:
             username = request[constants.KEY_USERNAME]
@@ -136,6 +194,15 @@ class Server_Request_Handler:
         return response
      
     def _set_first_time_login(self, request):
+        """
+        Updates the first time login status for a specified user.
+        
+        Args:
+            request (dict): The request containing the username and a boolean indicating the new first time login status.
+        
+        Returns:
+            dict: The response indicating success or failure, including the status of the operation.
+        """
         response = {}
         try:
             username = request[constants.KEY_USERNAME]
@@ -151,6 +218,15 @@ class Server_Request_Handler:
         return response
          
     def _get_first_time_login(self, request):
+        """
+        Retrieves the first time login status for a specified user.
+        
+        Args:
+            request (dict): The request containing the username.
+        
+        Returns:
+            dict: The response with the first time login status of the user, including success or failure indicators.
+        """
         response = {}
         try:
             username = request[constants.KEY_USERNAME]
@@ -165,6 +241,15 @@ class Server_Request_Handler:
         return response
             
     def _get_about_me_description(self, request):
+        """
+        Retrieves the 'About Me' description for a specified user.
+        
+        Args:
+            request (dict): The request containing the username.
+        
+        Returns:
+            dict: The response with the 'About Me' description of the user, including success or failure indicators.
+        """
         response = {}
         try:
             username = request[constants.KEY_USERNAME]
@@ -179,6 +264,15 @@ class Server_Request_Handler:
         return response
     
     def _get_profile_picture_path(self, request):
+        """
+        Retrieves the profile picture path for a specified user.
+        
+        Args:
+            request (dict): The request containing the username.
+        
+        Returns:
+            dict: The response with the profile picture path of the user, including success or failure indicators.
+        """
         response = {}
         try:
             username = request[constants.KEY_USERNAME]
@@ -194,6 +288,15 @@ class Server_Request_Handler:
 
             
     def _add_new_credential(self, request):
+        """
+        Adds a new set of credentials for a user.
+        
+        Args:
+            request (dict): The request containing the username and password to be added.
+        
+        Returns:
+            dict: The response indicating the success or failure of the operation.
+        """
         response = {}
         username = request[constants.KEY_USERNAME]
         password = request[constants.KEY_PASSWORD]
@@ -209,6 +312,16 @@ class Server_Request_Handler:
             return response
         
     def _username_exist(self, request):
+        """
+        Checks if a username already exists within the system.
+        
+        Args:
+            request (dict): The request containing the username to check.
+        
+        Returns:
+            dict: The response indicating whether the username exists, along with a success or failure status.
+        """
+
         response = {}
         username = request[constants.KEY_USERNAME]
         if self.credential_manager.username_exist(username):
@@ -222,6 +335,15 @@ class Server_Request_Handler:
         
         
     def _get_specified_credential(self, request):
+        """
+        Retrieves the credentials for a specified username.
+        
+        Args:
+            request (dict): The request containing the username whose credentials are to be retrieved.
+        
+        Returns:
+            dict: The response with the credentials if the username exists, including success or failure indicators.
+        """
         response = {}
         username = request[constants.KEY_USERNAME]
         if self.credential_manager.username_exist(username):
@@ -237,6 +359,15 @@ class Server_Request_Handler:
             return response
         
     def _get_game_library(self, request):
+        """
+        Retrieves the entire game library.
+        
+        Args:
+            request (dict): The request for retrieving the game library.
+        
+        Returns:
+            dict: The response containing a list of all games in the library, including success or failure indicators.
+        """
         response = {}
         try:
             games_list = self.game_database.get_games()
@@ -251,6 +382,37 @@ class Server_Request_Handler:
         return response
 
     def _game_to_dict(self, game):
+        """
+        Converts a Game object into a dictionary suitable for JSON serialization.
+        
+        This method is designed to transform a Game object into a dictionary format, making it
+        easier to serialize into JSON for API responses or data interchange. It extracts relevant
+        game attributes and organizes them into a structured dictionary.
+        
+        Args:
+            game (Game): The Game object to be converted into a dictionary.
+        
+        Returns:
+            dict: A dictionary representation of the Game object, including keys for the game's
+            name, genres, game ID, developers, release date (year and month), number of positive
+            and negative reviews, average playtime, photo link, and description. Each attribute of
+            the game is mapped to a corresponding key-value pair in the dictionary.
+            
+        Example of returned dictionary:
+            {
+                "name": "Example Game",
+                "genres": ["Action", "Adventure"],  
+                "gameID": 123456,
+                "developers": "Example Developer",
+                "releaseDateYear": 2020,
+                "releaseDateMonth": 5,
+                "numberPositiveReviews": 1000,
+                "numberNegativeReviews": 50,
+                "averagePlaytime": 20,
+                "photoLink": "http://example.com/game_photo.jpg",
+                "description": "An example game description."
+            }
+        """
         return {
             "name": game.name,
             "genres": [str(genre) for genre in game.genres],  
@@ -266,6 +428,15 @@ class Server_Request_Handler:
         }
         
     def _get_all_owned_games(self, request):
+        """
+        Retrieves all games owned by a specified user.
+        
+        Args:
+            request (dict): The request containing the username.
+        
+        Returns:
+            dict: The response with a list of all owned games by the user, including success or failure indicators.
+        """
         response = {}
         try:
             username = request[constants.KEY_USERNAME]
@@ -282,6 +453,15 @@ class Server_Request_Handler:
     
     
     def _set_all_liked_games(self, request):
+        """
+        Sets the liked games for a specified user, replacing any previously set likes.
+        
+        Args:
+            request (dict): The request containing the username and the list of liked games.
+        
+        Returns:
+            dict: The response indicating success or failure, including the status of the operation.
+        """
         response = {}
         try:
             username = request[constants.KEY_USERNAME]
@@ -300,6 +480,15 @@ class Server_Request_Handler:
         return response
     
     def _set_all_owned_games(self, request):
+        """
+        Sets the owned games for a specified user, replacing any previously owned games.
+        
+        Args:
+            request (dict): The request containing the username and the list of owned games.
+        
+        Returns:
+            dict: The response indicating success or failure, including the status of the operation.
+        """
         response = {}
         try:
             username = request[constants.KEY_USERNAME]
@@ -318,6 +507,15 @@ class Server_Request_Handler:
         return response
     
     def _set_all_perferred_genres(self, request):
+        """
+        Sets the preferred genres for a specified user.
+        
+        Args:
+            request (dict): The request containing the username and the list of preferred genres.
+        
+        Returns:
+            dict: The response indicating success or failure, including the status of the operation.
+        """
         response = {}
         try:
             username = request[constants.KEY_USERNAME]
@@ -335,6 +533,15 @@ class Server_Request_Handler:
         return response
     
     def _get_all_perferred_genres(self, request):
+        """
+        Retrieves the preferred genres for a specified user.
+        
+        Args:
+            request (dict): The request containing the username.
+        
+        Returns:
+            dict: The response with a list of the user's preferred genres, including success or failure indicators.
+        """
         response = {}
         try:
             username = request[constants.KEY_USERNAME]
@@ -351,6 +558,15 @@ class Server_Request_Handler:
             
                 
     def _set_current_active_user(self, request):    
+        """
+        Sets the current active user based on the specified username.
+        
+        Args:
+            request (dict): The request containing the username to be set as the active user.
+        
+        Returns:
+            dict: The response indicating success or failure, along with the status of the operation.
+        """
         response = {}
         
         username = request[constants.KEY_USERNAME]
@@ -363,6 +579,15 @@ class Server_Request_Handler:
         return response
     
     def _get_all_liked_games(self, request):
+        """
+        Retrieves all games liked by a specified user.
+        
+        Args:
+            request (dict): The request containing the username.
+        
+        Returns:
+            dict: The response with a list of all liked games by the user, including success or failure indicators.
+        """
         response = {}
         try:
             username = request[constants.KEY_USERNAME]
@@ -379,6 +604,15 @@ class Server_Request_Handler:
     
     
     def _get_all_disliked_games(self, request):
+        """
+        Retrieves all games disliked by a specified user.
+        
+        Args:
+            request (dict): The request containing the username.
+        
+        Returns:
+            dict: The response with a list of all disliked games by the user, including success or failure indicators.
+        """
         response = {}
         try:
             username = request[constants.KEY_USERNAME]
