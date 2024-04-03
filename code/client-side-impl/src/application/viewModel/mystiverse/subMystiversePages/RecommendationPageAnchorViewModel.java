@@ -43,7 +43,9 @@ public class RecommendationPageAnchorViewModel {
 	public void setupInitialProperties() {
 		this.titleProperty.set(this.recommendations.get(0).getName());
 		this.descProperty.set(this.recommendations.get(0).getDescription());
-		this.imageProperty.setValue(new Image(this.recommendations.get(0).getGamePhoto(), true));
+		var link = this.recommendations.get(0).getGamePhoto();
+		var image = new Image(link, true);
+		this.imageProperty.setValue(image);
 		this.genresProperty.set(this.recommendations.get(0).getGenres().toString());
 	}
 	
