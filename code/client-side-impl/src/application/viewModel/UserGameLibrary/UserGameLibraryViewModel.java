@@ -43,6 +43,7 @@ public class UserGameLibraryViewModel {
 	/** The selected game developer property. */
 	private StringProperty selectedGameDeveloperProperty;
 	
+	/** The selected games list property. */
 	private ListProperty<Game> selectedGamesListProperty;
 
 	/**
@@ -138,6 +139,13 @@ public class UserGameLibraryViewModel {
 		return this.selectedGame;
 	}
 	
+	/**
+	 * Gets the selected games list.
+	 * 
+	 * @return the selected games list.
+	 * @pre none
+	 * @post none
+	 */
 	public ListProperty<Game> getSelectedGamesListProperty() {
 		return this.selectedGamesListProperty;
 	}
@@ -159,6 +167,12 @@ public class UserGameLibraryViewModel {
 
 	}
 	
+	/**
+	 * Sets the selected games list.
+	 * @param selectedList the selected games list to set.
+	 * @pre none
+	 * @post this.selectedGamesListProperty = selectedList
+	 */
 	public void setSelectedList(String selectedList) {
 		ObservableList<Game> likedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllLikedGames());
 		ObservableList<Game> dislikedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllDislikedGames());
@@ -175,6 +189,13 @@ public class UserGameLibraryViewModel {
 		}
 	}
 	
+	/**
+	 * Removes the selected game from the list.
+	 * @param selectedList the currently selected list
+	 * @pre none
+	 * @post !selectedList.contains(selectedGame)
+	 * @return true if game removed.
+	 */
 	public boolean removeSelectedGameFromList(String selectedList) {
 		if (this.selectedGame != null) {
 			var game = this.selectedGame;

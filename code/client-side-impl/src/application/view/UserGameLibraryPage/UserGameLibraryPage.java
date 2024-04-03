@@ -6,6 +6,7 @@ import application.Main;
 import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
 import application.model.server_impl.profile.ActiveUser;
+import application.view.mystiverse.subMystiversePages.AllGamesPageAnchor;
 import application.viewModel.UserGameLibrary.UserGameLibraryViewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,13 +23,22 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class UserGameLibraryPage {
+	
+	@FXML
+	private AnchorPane baseAnchorPane;
+	
+	@FXML
+	private BorderPane parentBorderPane;
 
 	@FXML
 	private HBox libraryHBox;
@@ -68,6 +78,10 @@ public class UserGameLibraryPage {
 	
 	@FXML
     private MenuItem removeGameContextMenuItem;
+	
+	@FXML
+    private Button addGameButton;
+
 
 	private UserGameLibraryViewModel viewModel;
 
@@ -89,6 +103,7 @@ public class UserGameLibraryPage {
 		this.setUpRemoveGameMenuItem();
 		this.bindToViewModel();
 		this.setUpNavBar();
+		this.setupAddGameButton();
 		this.viewModel.setUpGameLibrary();
 		this.setUpGamesListViewListener();
 		this.setupGameListsComboBoxListener();
@@ -119,7 +134,24 @@ public class UserGameLibraryPage {
 		this.gameTitleTextField.textProperty().bindBidirectional(this.viewModel.getSelectedGameName());
 		this.gameDevelopersTextField.textProperty().bindBidirectional(this.viewModel.getSelectedGameDevelopers());
 		this.gameGenresListView.itemsProperty().bindBidirectional(this.viewModel.getSelectedGameGenres());
-
+	}
+	
+	private void setupAddGameButton() {
+		this.addGameButton.setOnMouseClicked((event) -> {
+			var newStage = new Stage();
+			try {
+				var loader = new FXMLLoader(getClass().getResource(Main.USER_GAME_LIBRARY_ADD_GAME_PAGE));
+				Parent parent = loader.load();
+				var scene = new Scene(parent);
+				newStage.initModality(Modality.WINDOW_MODAL);
+				newStage.initOwner(((Stage) (parent.getScene().getWindow())));
+				newStage.setTitle(Main.WINDOW_TITLE);
+				newStage.setScene(scene);
+				newStage.show();
+			} catch (IOException error) {
+				error.printStackTrace();
+			}
+		});
 	}
 
 	private void setupListView() {
@@ -228,6 +260,7 @@ public class UserGameLibraryPage {
 	}
 
 	private void validateFXMLComponents() {
+		assert addGameButton != null : "fx:id=\"addGameButton\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
         assert communityTextArea != null : "fx:id=\"communityTextArea\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
         assert gameDevelopersTextField != null : "fx:id=\"gameDevelopersTextField\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
         assert gameGenresListView != null : "fx:id=\"gameGenresListView\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
