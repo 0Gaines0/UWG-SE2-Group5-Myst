@@ -2,7 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -69,7 +71,14 @@
                   <Font name="Comic Sans MS" size="20.0" />
                </font>
             </Text>
-            <ListView fx:id="myGamesListView" layoutX="14.0" layoutY="48.0" prefHeight="429.0" prefWidth="200.0" />
+            <ListView fx:id="myGamesListView" layoutX="14.0" layoutY="48.0" prefHeight="429.0" prefWidth="200.0">
+               <contextMenu>
+                  <ContextMenu fx:id="myGamesListViewContextMenu">
+                    <items>
+                      <MenuItem fx:id="removeGameContextMenuItem" mnemonicParsing="false" text="Remove" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu></ListView>
             <Button fx:id="addGameButton" layoutX="148.0" layoutY="489.0" mnemonicParsing="false" text="Add Game" />
             <ComboBox fx:id="gameListComboBox" layoutX="114.0" layoutY="14.0" prefHeight="25.0" prefWidth="98.0" visibleRowCount="3" />
          </children>

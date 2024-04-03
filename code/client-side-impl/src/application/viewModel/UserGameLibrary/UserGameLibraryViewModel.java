@@ -64,9 +64,9 @@ public class UserGameLibraryViewModel {
 	 */
 	public void setUpGameLibrary() {
 		this.userGameLibrary = new UserGameLibrary(ActiveUser.getActiveUser());
-		ObservableList<Game> likedGames = FXCollections.observableArrayList(this.userGameLibrary.getLikedGames());
-		ObservableList<Game> dislikedGames = FXCollections.observableArrayList(this.userGameLibrary.getDislikedGames());
-		ObservableList<Game> ownedGames = FXCollections.observableArrayList(this.userGameLibrary.getOwnedGames());
+		ObservableList<Game> likedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllLikedGames());
+		ObservableList<Game> dislikedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllDislikedGames());
+		ObservableList<Game> ownedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllOwnedGames());
 		this.likedGamesListProperty.set(likedGames);
 		this.dislikedGamesProperty.set(dislikedGames);
 		this.ownedGamesProperty.set(ownedGames);
@@ -160,9 +160,9 @@ public class UserGameLibraryViewModel {
 	}
 	
 	public void setSelectedList(String selectedList) {
-		ObservableList<Game> likedGames = FXCollections.observableArrayList(this.userGameLibrary.getLikedGames());
-		ObservableList<Game> dislikedGames = FXCollections.observableArrayList(this.userGameLibrary.getDislikedGames());
-		ObservableList<Game> ownedGames = FXCollections.observableArrayList(this.userGameLibrary.getOwnedGames());
+		ObservableList<Game> likedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllLikedGames());
+		ObservableList<Game> dislikedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllDislikedGames());
+		ObservableList<Game> ownedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllOwnedGames());
 		if (selectedList.equals("Liked Games")) {
 			this.selectedGamesListProperty.clear();
 			this.selectedGamesListProperty.set(likedGames);
@@ -173,6 +173,21 @@ public class UserGameLibraryViewModel {
 			this.selectedGamesListProperty.clear();
 			this.selectedGamesListProperty.set(ownedGames);
 		}
+	}
+	
+	public boolean removeSelectedGameFromList() {
+		if (this.selectedGame != null) {
+			var game = this.selectedGame;
+			var likedGames = ActiveUser.getActiveUser().getAllLikedGames();
+			likedGames.remove(game);
+			ActiveUser.getActiveUser().setAllLikedGames(likedGames);
+			ObservableList<Game> updatedLikedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllLikedGames());
+			this.likedGamesListProperty.set(updatedLikedGames);
+			this.selectedGamesListProperty.clear();
+			this.selectedGamesListProperty.set(updatedLikedGames);
+			return true;
+		}
+		return false;
 	}
 
 	
