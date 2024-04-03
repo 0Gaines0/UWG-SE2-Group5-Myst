@@ -73,4 +73,26 @@ public class AllGamesPageAnchorViewModel {
 		likedGames.add(game);
 		ActiveUser.getActiveUser().setAllLikedGames(likedGames);
 	}
+	
+	/**
+	 * Adds the game to disliked list.
+	 * 
+	 * @param game the game
+	 */
+	public void addGameToDislikedList(Game game) {
+		var dislikedGames = ActiveUser.getActiveUser().getAllDislikedGames();
+		dislikedGames.add(game);
+		ActiveUser.getActiveUser().setAllDislikedGames(dislikedGames);
+	}
+	
+	/**
+	 * Adds game to owned list.
+	 * 
+	 * @param game the game
+	 */
+	public void addGameToOwnedList(Game game) {
+		var ownedGames = ActiveUser.getActiveUser().getAllOwnedGames();
+		ownedGames.add(game);
+		ActiveUser.getActiveUser().setAllOwnedGames(ownedGames);
+	}
 }
