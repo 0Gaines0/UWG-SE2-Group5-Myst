@@ -6,6 +6,11 @@ import org.json.JSONObject;
 import application.model.local_impl.profile.credentials.Credential;
 import application.model.server_impl.Server;
 
+/**
+ * The Class CredentialManager.
+ * @author Jeffrey Gaines
+ * @version Sprint 2
+ */
 public class CredentialManager extends application.model.abstract_impl.profile.credentials.CredentialManager {
 	private static final String USERNAME_MUST_BE_VALID = "username must not be null or empty";
 	private static final String PASSWORD_MUST_BE_VALID = "password must not be null or empty";
