@@ -5,11 +5,14 @@ import application.model.local_impl.game.Genre;
 import application.model.server_impl.profile.ActiveUser;
 import application.model.server_impl.profile.UserGameLibrary;
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 
 /**
  * The userGameLibraryViewModel.
@@ -43,8 +46,13 @@ public class UserGameLibraryViewModel {
 	/** The selected game developer property. */
 	private StringProperty selectedGameDeveloperProperty;
 	
+	private StringProperty gameDescriptionProperty;
+
 	/** The selected games list property. */
 	private ListProperty<Game> selectedGamesListProperty;
+	
+	private Property<Image> imageProperty;
+
 
 	/**
 	 * Creates a new userGameLibraryViewModel.
@@ -57,6 +65,9 @@ public class UserGameLibraryViewModel {
 		this.selectedGameDeveloperProperty = new SimpleStringProperty();
 		this.selectedGameGenresListProperty = new SimpleListProperty<Genre>();
 		this.selectedGamesListProperty = new SimpleListProperty<Game>();
+		this.imageProperty = new SimpleObjectProperty<Image>();
+		this.gameDescriptionProperty = new SimpleStringProperty();
+
 
 	}
 
@@ -164,6 +175,8 @@ public class UserGameLibraryViewModel {
 		this.selectedGameGenresListProperty.set(genres);
 		this.selectedGameNameProperty.set(this.selectedGame.getName());
 		this.selectedGameDeveloperProperty.set(this.selectedGame.getDevelopers());
+		this.imageProperty.setValue(new Image(game.getGamePhoto(), true));
+		this.gameDescriptionProperty.set(game.getDescription());
 
 	}
 	
@@ -240,6 +253,24 @@ public class UserGameLibraryViewModel {
 	 */
 	public ListProperty<Genre> getSelectedGameGenres() {
 		return this.selectedGameGenresListProperty;
+	}
+
+	/**
+	 * Gets the image property.
+	 *
+	 * @return the image property
+	 */
+	public Property<Image> getImageProperty() {
+		return this.imageProperty;
+	}
+
+	/**
+	 * Gets the game description property.
+	 *
+	 * @return the game description property
+	 */
+	public StringProperty getGameDescriptionProperty() {
+		return this.gameDescriptionProperty;
 	}
 
 }
