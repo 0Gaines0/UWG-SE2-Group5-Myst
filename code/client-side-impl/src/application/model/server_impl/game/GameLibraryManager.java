@@ -8,7 +8,7 @@ import application.model.local_impl.game.GameLibrary;
 import application.model.server_impl.Server;
 
 public class GameLibraryManager {
-    
+
     /**
      * Fetch and parse game library.
      *

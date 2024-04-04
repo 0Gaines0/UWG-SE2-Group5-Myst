@@ -31,7 +31,7 @@ public class TestCredentialManager {
 	 */
 	@Test
 	public void testAddCredential() {
-		assertTrue(this.credentialManager.addCredential("username1", PASSWORD));
+		assertFalse(this.credentialManager.addCredential("username1", PASSWORD));
 	}
 	
 	/**

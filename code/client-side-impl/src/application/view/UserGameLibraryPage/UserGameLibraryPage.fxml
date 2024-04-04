@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -12,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="600.0" maxWidth="1024.0" minHeight="600.0" minWidth="1024.0" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/18.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.UserGameLibraryPage.UserGameLibraryPage">
+<BorderPane fx:id="parentBorderPane" maxHeight="600.0" maxWidth="1024.0" minHeight="600.0" minWidth="1024.0" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.UserGameLibraryPage.UserGameLibraryPage">
    <top>
       <AnchorPane prefHeight="72.0" prefWidth="600.0" style="-fx-background-color: #2E3138;" BorderPane.alignment="CENTER">
          <children>
@@ -63,13 +66,21 @@
    <left>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="530.0" prefWidth="200.0" style="-fx-background-color: #446662;" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="67.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Games">
+            <Text layoutX="14.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Games">
                <font>
                   <Font name="Comic Sans MS" size="20.0" />
                </font>
             </Text>
-            <ListView fx:id="myGamesListView" layoutX="14.0" layoutY="48.0" prefHeight="429.0" prefWidth="200.0" />
+            <ListView fx:id="myGamesListView" layoutX="14.0" layoutY="48.0" prefHeight="429.0" prefWidth="200.0">
+               <contextMenu>
+                  <ContextMenu fx:id="myGamesListViewContextMenu">
+                    <items>
+                      <MenuItem fx:id="removeGameContextMenuItem" mnemonicParsing="false" text="Remove" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu></ListView>
             <Button fx:id="addGameButton" layoutX="148.0" layoutY="489.0" mnemonicParsing="false" text="Add Game" />
+            <ComboBox fx:id="gameListComboBox" layoutX="114.0" layoutY="14.0" prefHeight="25.0" prefWidth="98.0" visibleRowCount="3" />
          </children>
       </AnchorPane>
    </left>
@@ -81,10 +92,7 @@
                   <Font name="Comic Sans MS" size="20.0" />
                </font>
             </Text>
-            <ImageView fx:id="gamePhotoImageView" fitHeight="150.0" fitWidth="200.0" layoutX="216.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../profile/assets/fortnite-og-social-1920x1080-a5adda66fab9.jpg" />
-               </image></ImageView>
+            <ImageView fx:id="gamePhotoImageView" fitHeight="150.0" fitWidth="200.0" layoutX="216.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true" />
             <Text layoutX="50.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title">
                <font>
                   <Font size="15.0" />

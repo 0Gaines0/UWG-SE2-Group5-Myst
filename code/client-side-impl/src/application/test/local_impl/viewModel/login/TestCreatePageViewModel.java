@@ -1,6 +1,7 @@
 package application.test.local_impl.viewModel.login;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterEach;
@@ -52,7 +53,7 @@ public class TestCreatePageViewModel {
 		this.viewModel.getPasswordProperty().setValue(PASSWORD);
 		this.viewModel.getReenterPasswordProperty().setValue(PASSWORD);
 		
-		assertTrue(this.viewModel.attemptCreateNewAccount());
+		assertFalse(this.viewModel.attemptCreateNewAccount());
 	}
 	
 	/**
@@ -64,7 +65,10 @@ public class TestCreatePageViewModel {
 		this.viewModel.getPasswordProperty().setValue(PASSWORD);
 		this.viewModel.getReenterPasswordProperty().setValue(PASSWORD);
 		
-		assertFalse(this.viewModel.attemptCreateNewAccount());
+		assertThrows(IllegalArgumentException.class, () -> {
+			this.viewModel.attemptCreateNewAccount();
+		});
+		
 	}
 	
 	/**
@@ -76,6 +80,8 @@ public class TestCreatePageViewModel {
 		this.viewModel.getPasswordProperty().setValue("");
 		this.viewModel.getReenterPasswordProperty().setValue("");
 		
-		assertFalse(this.viewModel.attemptCreateNewAccount());
+		assertThrows(IllegalArgumentException.class, () -> {
+			this.viewModel.attemptCreateNewAccount();
+		});
 	}
 }

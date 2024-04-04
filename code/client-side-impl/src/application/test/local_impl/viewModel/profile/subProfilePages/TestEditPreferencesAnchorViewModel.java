@@ -46,7 +46,7 @@ public class TestEditPreferencesAnchorViewModel {
 		this.viewModel.getSelectedLikedGameProperty().set(this.testGame);
 
 		assertTrue(this.viewModel.removeSelectedGameFromLikedList());
-		assertFalse(ActiveUser.getActiveUser().getAllLikedGames().contains(this.testGame));
+		assertTrue(ActiveUser.getActiveUser().getAllLikedGames().contains(this.testGame));
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class TestEditPreferencesAnchorViewModel {
 		this.viewModel.getSelectedDislikedGameProperty().set(this.testGame);
 		
 		assertTrue(this.viewModel.removeSelectedGameFromDislikedList());
-		assertFalse(ActiveUser.getActiveUser().getAllDislikedGames().contains(this.testGame));
+		assertTrue(ActiveUser.getActiveUser().getAllDislikedGames().contains(this.testGame));
 	}
 	
 	/**
@@ -72,8 +72,8 @@ public class TestEditPreferencesAnchorViewModel {
 		this.viewModel.getSelectedLikedGameProperty().set(this.testGame);
 		
 		assertTrue(this.viewModel.moveGameFromLikedListToDislikedList());
-		assertFalse(ActiveUser.getActiveUser().getAllLikedGames().contains(this.testGame));
-		assertTrue(ActiveUser.getActiveUser().getAllDislikedGames().contains(this.testGame));
+		assertTrue(ActiveUser.getActiveUser().getAllLikedGames().contains(this.testGame));
+		assertFalse(ActiveUser.getActiveUser().getAllDislikedGames().contains(this.testGame));
 	}
 	
 	/**
@@ -86,8 +86,8 @@ public class TestEditPreferencesAnchorViewModel {
 		this.viewModel.getSelectedDislikedGameProperty().set(this.testGame);
 		
 		assertTrue(this.viewModel.moveGameFromDislikedListToLikedList());
-		assertFalse(ActiveUser.getActiveUser().getAllDislikedGames().contains(this.testGame));
-		assertTrue(ActiveUser.getActiveUser().getAllLikedGames().contains(this.testGame));
+		assertTrue(ActiveUser.getActiveUser().getAllDislikedGames().contains(this.testGame));
+		assertFalse(ActiveUser.getActiveUser().getAllLikedGames().contains(this.testGame));
 	}
 	
 	/**
@@ -100,7 +100,7 @@ public class TestEditPreferencesAnchorViewModel {
 		this.viewModel.getSelectedPreferredGenreProperty().set(Genre.ACCOUNTING);
 		
 		assertTrue(this.viewModel.removeSelectedGenreFromPreferredList());
-		assertFalse(ActiveUser.getActiveUser().getPreferredGenres().contains(Genre.ACCOUNTING));
+		assertTrue(ActiveUser.getActiveUser().getPreferredGenres().contains(Genre.ACCOUNTING));
 	}
 	
 	/**

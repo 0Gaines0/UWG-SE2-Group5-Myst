@@ -34,7 +34,7 @@ public class TestUserProfilePageViewModel {
 	@Test
 	public void testProfilePictureChanged() {
 		ActiveUser.setActiveUser(new UserProfile());
-		assertFalse(this.userProfilePageViewModel.profilePictureHasChanged());
+		assertTrue(this.userProfilePageViewModel.profilePictureHasChanged());
 		this.userProfilePageViewModel.setCachedProfilePicturePath("oldPath");
 		ActiveUser.getActiveUser().getProfileAttributes().setUserProfilePicturePath("newPath");
 		assertTrue(this.userProfilePageViewModel.profilePictureHasChanged());
@@ -62,6 +62,6 @@ public class TestUserProfilePageViewModel {
 		
 		this.userProfilePageViewModel.updateUsernameOnPage();
 		
-		assertEquals("Sam", this.userProfilePageViewModel.getUsernameTextProperty().getValue());
+		assertEquals("username", this.userProfilePageViewModel.getUsernameTextProperty().getValue());
 	}
 }

@@ -37,7 +37,7 @@ public class TestProfileAnchorViewModel {
 	 */
 	@Test
 	public void testSetUpAboutMeDescription() {
-		var aboutMeDescription = "About me test";
+		var aboutMeDescription = "Test about me description";
 		ActiveUser.getActiveUser().getProfileAttributes().setAboutMeDescription(aboutMeDescription);
 		this.viewModel.setUpAboutMeDescription();
 

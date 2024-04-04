@@ -27,7 +27,7 @@ public class AllGamesPageAnchorViewModel {
 	public List<Game> filterOnSearch(String text, List<Game> allGames) {
 		List<Game> results = new ArrayList<Game>();
 		if (text != null) {
-			var filteredGames = allGames.stream().filter(game -> game.getName().contains(text))
+			var filteredGames = allGames.stream().filter(game -> game.getName().toLowerCase().contains(text))
 					.toList();
 			if (filteredGames.size() != 0) {
 				results = filteredGames;
@@ -72,5 +72,27 @@ public class AllGamesPageAnchorViewModel {
 		var likedGames = ActiveUser.getActiveUser().getAllLikedGames();
 		likedGames.add(game);
 		ActiveUser.getActiveUser().setAllLikedGames(likedGames);
+	}
+	
+	/**
+	 * Adds the game to disliked list.
+	 * 
+	 * @param game the game
+	 */
+	public void addGameToDislikedList(Game game) {
+		var dislikedGames = ActiveUser.getActiveUser().getAllDislikedGames();
+		dislikedGames.add(game);
+		ActiveUser.getActiveUser().setAllDislikedGames(dislikedGames);
+	}
+	
+	/**
+	 * Adds game to owned list.
+	 * 
+	 * @param game the game
+	 */
+	public void addGameToOwnedList(Game game) {
+		var ownedGames = ActiveUser.getActiveUser().getAllOwnedGames();
+		ownedGames.add(game);
+		ActiveUser.getActiveUser().setAllOwnedGames(ownedGames);
 	}
 }

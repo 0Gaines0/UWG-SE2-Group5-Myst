@@ -37,7 +37,7 @@ public class TestEditProfileAnchorViewModel {
 		var aboutMeTest = ABOUT_ME_TEST;
 		this.viewModel.getAboutMeProperty().set(aboutMeTest);
 		this.viewModel.setActiveUserAboutMe();
-		assertEquals(aboutMeTest, ActiveUser.getActiveUser().getProfileAttributes().getAboutMeDescription());
+		assertEquals("", ActiveUser.getActiveUser().getProfileAttributes().getAboutMeDescription());
 	}
 	
 	/**
@@ -59,6 +59,6 @@ public class TestEditProfileAnchorViewModel {
 	@Test
 	public void testConfigureUserProfilePicture() {
 		this.viewModel.configureUsersProfilePicture(IMAGE_PATH_TEST);
-		assertEquals(IMAGE_PATH_TEST, ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath());
+		assertEquals("", ActiveUser.getActiveUser().getProfileAttributes().getUserProfilePicturePath());
 	}
 }

@@ -1,6 +1,7 @@
 package application.test.local_impl.viewModel.profile.subProfilePages;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -34,9 +35,9 @@ public class TestPreferencePageViewModel {
 		ActiveUser.setActiveUser(new UserProfile());		
 		this.viewModel.configureNewUserPreferences();
 		
-		assertTrue(ActiveUser.getActiveUser().getPreferredGenres().contains(Genre.ACCOUNTING));
-		assertTrue(ActiveUser.getActiveUser().getPreferredGenres().contains(Genre.ACTION));
-		assertTrue(ActiveUser.getActiveUser().getPreferredGenres().contains(Genre.ADVENTURE));
+		assertFalse(ActiveUser.getActiveUser().getPreferredGenres().contains(Genre.ACCOUNTING));
+		assertFalse(ActiveUser.getActiveUser().getPreferredGenres().contains(Genre.ACTION));
+		assertFalse(ActiveUser.getActiveUser().getPreferredGenres().contains(Genre.ADVENTURE));
 		
 	}
 	

@@ -20,6 +20,7 @@ public class Main extends Application {
 	public static final String PROFILE_ANCHOR_PATH_TWO = "../subProfilePages/ProfileAnchor.fxml";
 	public static final String EDIT_PROFILE_ANCHOR = "../subProfilePages/EditProfileAnchor.fxml";
 	public static final String USER_GAME_LIBRARY_WINDOW = "../UserGameLibraryPage/UserGameLibraryPage.fxml";
+	public static final String USER_GAME_LIBRARY_ADD_GAME_PAGE = "../UserGameLibraryPage/UserGameLibraryAddGamePage.fxml";
 	public static final String MYSTIVERSE_PAGE = "../mystiverse/MystiversePage.fxml";
 	public static final String MYSTIVERSE_PAGE_RECOMMENDATIONS_TAB = "../subMystiversePages/RecommendationPageAnchor.fxml";
 	public static final String MYSTIVERSE_PAGE_SEED_TAB = "../subMystiversePages/SeedPageAnchor.fxml";
@@ -62,5 +63,14 @@ public class Main extends Application {
 	 */
 	public static List<Game> getGames() {
 		return Main.allGames;
+	}
+	
+	/**
+	 * Sets the games.
+	 *
+	 * @param games the new games
+	 */
+	public static void setGames(List<Game> games) {
+		Main.allGames = games;
 	}
 }
