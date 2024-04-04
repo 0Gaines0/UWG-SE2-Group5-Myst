@@ -7,14 +7,19 @@ import application.Main;
 import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
 import application.model.server_impl.profile.ActiveUser;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.image.Image;
 
 public class AllGamesPageAnchorViewModel {
 
+	private Property<Image> imageProperty;
+	
 	/**
 	 * Instantiates a new all games page anchor view model.
 	 */
 	public AllGamesPageAnchorViewModel() {
-		
+		this.imageProperty = new SimpleObjectProperty<Image>();
 	}
 	
 	/**
@@ -94,5 +99,24 @@ public class AllGamesPageAnchorViewModel {
 		var ownedGames = ActiveUser.getActiveUser().getAllOwnedGames();
 		ownedGames.add(game);
 		ActiveUser.getActiveUser().setAllOwnedGames(ownedGames);
+	}
+	
+	/**
+	 * Gets the image property.
+	 *
+	 * @return the image property
+	 */
+	public Property<Image> getImageProperty() {
+		return this.imageProperty;
+	}
+
+	/**
+	 * Sets the image.
+	 *
+	 * @param link the new image
+	 */
+	public void setImage(String link) {
+		var image = new Image(link, true);
+		this.imageProperty.setValue(image);
 	}
 }

@@ -6,7 +6,6 @@ import application.Main;
 import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
 import application.model.server_impl.profile.ActiveUser;
-import application.view.mystiverse.subMystiversePages.AllGamesPageAnchor;
 import application.viewModel.UserGameLibrary.UserGameLibraryViewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -282,6 +281,5 @@ public class UserGameLibraryPage {
         assert this.profileImageNavBar != null : "fx:id=\"profileImageNavBar\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
         assert this.removeGameContextMenuItem != null : "fx:id=\"removeGameContextMenuItem\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
         assert this.gameDescriptionTextBox != null : "fx:id=\"gameDescriptionTextBox\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
-
 	}
 }

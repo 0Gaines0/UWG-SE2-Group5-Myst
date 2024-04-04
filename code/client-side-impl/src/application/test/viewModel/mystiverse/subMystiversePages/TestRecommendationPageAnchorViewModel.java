@@ -5,20 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import application.Main;
 import application.model.local_impl.game.Game;
-import application.model.local_impl.game.Genre;
-import application.model.server_impl.GameRecommendationEngine;
 import application.model.server_impl.game.GameLibraryManager;
 import application.model.server_impl.profile.ActiveUser;
 import application.model.server_impl.profile.UserProfile;
 import application.viewModel.mystiverse.subMystiversePages.RecommendationPageAnchorViewModel;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 class TestRecommendationPageAnchorViewModel {
 

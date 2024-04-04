@@ -3,7 +3,6 @@ package application.model.server_impl.profile;
 import java.util.List;
 
 import application.model.local_impl.game.Game;
-import application.model.server_impl.profile.UserProfile;
 
 /**
  * The Class UserGameLibrary.
