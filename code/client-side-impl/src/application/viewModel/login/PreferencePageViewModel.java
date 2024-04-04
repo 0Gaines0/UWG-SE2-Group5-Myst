@@ -2,12 +2,10 @@ package application.viewModel.login;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import application.Main;
 import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
-import application.model.local_impl.profile.UserProfile;
 import application.model.server_impl.profile.ActiveUser;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;

@@ -14,7 +14,6 @@ import org.json.JSONObject;
 import application.fileIO.GameLibraryIO;
 import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
-import application.model.server_impl.profile.ProfileAttributes;
 import application.model.server_impl.Server;
 import application.model.server_impl.ServerConstants;
 
@@ -24,7 +23,6 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 
 	private static final String USERNAME_MUST_NOT_BE_NULL_OR_EMPTY = "username must not be null or empty";
 	private static final String PASSWORD_MUST_NOT_BE_NULL_OR_EMPTY = "password must not be null or empty";
-	private static final String INPUT_LIST_MUST_NOT_BE_NULL = "inputted game list must not be null";
 
 	private String username;
 	private String password;
