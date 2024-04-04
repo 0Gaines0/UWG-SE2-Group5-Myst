@@ -17,7 +17,7 @@ class TestMystiverseViewModel {
 
     @BeforeEach
     void setUp() {
-        ActiveUser.setActiveUser(new UserProfile("danny", "phantom"));
+        ActiveUser.setActiveUser(new UserProfile("username", "password"));
         this.viewModel = new MystiverseViewModel();
     }
 
