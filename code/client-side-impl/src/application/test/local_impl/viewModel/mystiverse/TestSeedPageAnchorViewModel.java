@@ -1,4 +1,4 @@
-package application.test.viewModel.mystiverse.subMystiversePages;
+package application.test.local_impl.viewModel.mystiverse;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,6 +8,7 @@ import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
 import application.model.server_impl.game.GameLibraryManager;
 import application.viewModel.mystiverse.subMystiversePages.SeedPageAnchorViewModel;
+import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
 
 import static org.junit.Assert.assertEquals;
@@ -90,5 +91,19 @@ class TestSeedPageAnchorViewModel {
 		ObservableList<Genre> allGenresList = this.viewModel.getAllGenres().get();
 		assertNotNull(allGenresList);
 		assertEquals(Genre.values().length, allGenresList.size());
+	}
+	
+	@Test
+	void testSettersAndGetters() {
+		this.viewModel.setSelectedSeedGenres(new ArrayList<Genre>());
+		this.viewModel.setSelectedSeedGames(new ArrayList<Game>());
+		this.viewModel.setGeneratedRecommendations(new ArrayList<Game>());
+		this.viewModel.setAllGames(new SimpleListProperty<Game>());
+		this.viewModel.setAllGenres(new SimpleListProperty<Genre>());
+		
+		
+		assertNotNull(this.viewModel.getGeneratedRecommendations());
+		assertNotNull(this.viewModel.getSelectedSeedGenres());
+		assertNotNull(this.viewModel.getSelectedSeedGames());
 	}
 }

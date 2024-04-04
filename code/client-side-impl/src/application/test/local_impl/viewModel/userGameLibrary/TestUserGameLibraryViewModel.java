@@ -12,6 +12,7 @@ import application.model.local_impl.game.Genre;
 import application.model.local_impl.profile.ActiveUser;
 import application.model.local_impl.profile.UserProfile;
 import application.viewModel.UserGameLibrary.UserGameLibraryViewModel;
+import javafx.embed.swing.JFXPanel;
 
 public class TestUserGameLibraryViewModel {
 
@@ -65,8 +66,31 @@ public class TestUserGameLibraryViewModel {
 	 */
 	@Test
 	public void testSetSelectedGame() {
-		var testGame = new Game("Test1", new ArrayList<Genre>(), 002);
+		var testGame = new Game("Test1", new ArrayList<Genre>(), 002, "dev", 2000, 100, 100, 100, 100, "https://steamcdn-a.akamaihd.net/steam/apps/10/header.jpg?t=1528733245", "des");
+		new JFXPanel();
 		this.viewModel.setSelectedGame(testGame);
 		assertNotNull(this.viewModel.getSelectedGameDevelopers());
+		assertNotNull(this.viewModel.getLikedGames());
+		assertNotNull(this.viewModel.getDislikedGames());
+		assertNotNull(this.viewModel.getSelectedGame());
+		assertNotNull(this.viewModel.getSelectedGamesListProperty());
+		assertNotNull(this.viewModel.getImageProperty());
+		assertNotNull(this.viewModel.getGameDescriptionProperty());
+	}
+	
+	/**
+	 * Test set selected list.
+	 */
+	@Test
+	public void testSetSelectedList() {
+		this.viewModel.setSelectedList("Liked Games");
+		this.viewModel.setSelectedList("Disliked Games");
+		this.viewModel.setSelectedList("Owned Games");
+		
+		this.viewModel.removeSelectedGameFromList("Liked Games");
+		this.viewModel.removeSelectedGameFromList("Disliked Games");
+		this.viewModel.removeSelectedGameFromList("Owned Games");
+
+
 	}
 }

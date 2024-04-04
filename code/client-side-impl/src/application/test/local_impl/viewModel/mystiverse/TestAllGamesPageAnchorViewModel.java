@@ -1,4 +1,4 @@
-package application.test.viewModel.mystiverse.subMystiversePages;
+package application.test.local_impl.viewModel.mystiverse;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -65,4 +65,21 @@ class TestAllGamesPageAnchorViewModel {
         List<Game> likedGames = ActiveUser.getActiveUser().getAllLikedGames();
         assertTrue(likedGames.contains(newGame));
     }
+    
+    @Test
+    void testAddGameToDislikedList() {
+    	Game newGame = Main.getGames().get(0);
+        this.viewModel.addGameToDislikedList(newGame);
+        List<Game> dislikedGames = ActiveUser.getActiveUser().getAllDislikedGames();
+        assertTrue(dislikedGames.contains(newGame));
+    }
+    
+    @Test
+    void testAddGameToOwnedList() {
+    	Game newGame = Main.getGames().get(0);
+        this.viewModel.addGameToOwnedList(newGame);
+        List<Game> ownedGames = ActiveUser.getActiveUser().getAllOwnedGames();
+        assertTrue(ownedGames.contains(newGame));
+    }
+    
 }
