@@ -33,12 +33,12 @@ public class GameLibraryIO {
 	// private static final String DATABASE_FILENAME = "testData.csv";
 	
 	/**
-     * Parses a JSON file containing game data and returns a populated GameLibrary instance.
-     *
-     * @param filename The path to the JSON file.
-     * @return A GameLibrary containing all the games parsed from the JSON data.
-	 * @throws JSONException 
-     */
+	 * Parses a JSON file containing game data and returns a populated GameLibrary instance.
+	 *
+	 * @param gamesArray the games array
+	 * @return A GameLibrary containing all the games parsed from the JSON data.
+	 * @throws JSONException the JSON exception
+	 */
 	public static GameLibrary parseGamesFromJson(JSONArray gamesArray) throws JSONException {
 	    GameLibrary library = new GameLibrary();
 	    for (int i = 0; i < gamesArray.length(); i++) {

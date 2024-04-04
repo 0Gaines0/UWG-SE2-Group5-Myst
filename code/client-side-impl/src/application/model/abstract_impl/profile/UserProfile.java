@@ -8,7 +8,6 @@ import java.util.Map;
 
 import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
-import application.model.abstract_impl.profile.ProfileAttributes;
 
 public abstract class UserProfile {
 
