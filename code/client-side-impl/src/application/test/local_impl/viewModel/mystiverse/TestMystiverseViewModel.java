@@ -7,47 +7,46 @@ import static org.junit.Assert.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import application.model.local_impl.profile.ActiveUser;
-import application.model.local_impl.profile.UserProfile;
+import application.model.server_impl.profile.ActiveUser;
+import application.model.server_impl.profile.UserProfile;
 import application.viewModel.mystiverse.MystiverseViewModel;
 
 class TestMystiverseViewModel {
 
-    private MystiverseViewModel viewModel;
+	private MystiverseViewModel viewModel;
 
-    @BeforeEach
-    void setUp() {
-        ActiveUser.setActiveUser(new UserProfile("username", "password"));
-        this.viewModel = new MystiverseViewModel();
-    }
+	@BeforeEach
+	void setUp() {
+		ActiveUser.setActiveUser(new UserProfile("username", "password"));
+		this.viewModel = new MystiverseViewModel();
+	}
 
-	/*
-	 * @Test void testProfilePictureHasChanged() {
-	 * assertFalse(this.viewModel.profilePictureHasChanged());
-	 * this.viewModel.setCachedProfilePicturePath("cached/profile/picture.png");
-	 * ActiveUser.getActiveUser().getProfileAttributes().setUserProfilePicturePath(
-	 * "new/profile/picture.png");
-	 * assertTrue(this.viewModel.profilePictureHasChanged()); }
-	 * 
-	 * @Test void testProfilePictureNotChanged() {
-	 * assertFalse(this.viewModel.profilePictureHasChanged());
-	 * this.viewModel.setCachedProfilePicturePath("cached/profile/picture.png");
-	 * ActiveUser.getActiveUser().getProfileAttributes().setUserProfilePicturePath(
-	 * "cached/profile/picture.png");
-	 * assertFalse(this.viewModel.profilePictureHasChanged()); }
-	 */
+	@Test
+	void testProfilePictureHasChanged() {
+		this.viewModel.setCachedProfilePicturePath("cached/profile/picture.png");
+		ActiveUser.getActiveUser().getProfileAttributes().setUserProfilePicturePath("new/profile/picture.png");
+		assertTrue(this.viewModel.profilePictureHasChanged());
+	}
 
-    @Test
-    void testGetCachedProfilePicturePath() {
-        String cachedPath = "cached/profile/picture.png";
-        this.viewModel.setCachedProfilePicturePath(cachedPath);
-        assertEquals(cachedPath, this.viewModel.getCachedProfilePicturePath());
-    }
+	@Test
+	void testProfilePictureNotChanged() {
+		this.viewModel.setCachedProfilePicturePath("cached/profile/picture.png");
+		ActiveUser.getActiveUser().getProfileAttributes().setUserProfilePicturePath("cached/profile/picture.png");
+		assertFalse(this.viewModel.profilePictureHasChanged());
+	}
 
-    @Test
-    void testSetCachedProfilePicturePath() {
-        String newPath = "new/cached/profile/picture.png";
-        this.viewModel.setCachedProfilePicturePath(newPath);
-        assertEquals(newPath, this.viewModel.getCachedProfilePicturePath());
-    }
+	@Test
+	void testGetCachedProfilePicturePath() {
+		String cachedPath = "cached/profile/picture.png";
+		this.viewModel.setCachedProfilePicturePath(cachedPath);
+		assertEquals(cachedPath, this.viewModel.getCachedProfilePicturePath());
+	}
+
+	@Test
+	void testSetCachedProfilePicturePath() {
+		String newPath = "new/cached/profile/picture.png";
+		this.viewModel.setCachedProfilePicturePath(newPath);
+		assertEquals(newPath, this.viewModel.getCachedProfilePicturePath());
+	}
+
 }

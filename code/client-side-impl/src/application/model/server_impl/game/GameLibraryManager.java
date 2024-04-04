@@ -16,6 +16,7 @@ public class GameLibraryManager {
      * @return the game library
      */
     public static GameLibrary fetchAndParseGameLibrary() {
+    	var gameLibrary = new GameLibrary();
         try {
             JSONObject requestJson = new JSONObject();
             requestJson.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_GET_GAME_LIBRARY);
@@ -25,11 +26,11 @@ public class GameLibraryManager {
             
             if (jsonResponse.getBoolean(ServerConstants.KEY_SUCCESS)) {
                 JSONArray gamesArray = jsonResponse.getJSONArray(ServerConstants.KEY_GAMES);
-                return GameLibraryIO.parseGamesFromJson(gamesArray);
+                gameLibrary = GameLibraryIO.parseGamesFromJson(gamesArray);
             } 
         } catch (Exception e) {
             throw new IllegalArgumentException("Error fetching or parsing game library: " + e.getMessage());
         }
-        return null;
+        return gameLibrary;
     }
 }

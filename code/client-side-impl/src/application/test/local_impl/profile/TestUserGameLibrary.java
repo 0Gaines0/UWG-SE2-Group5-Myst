@@ -2,6 +2,7 @@ package application.test.local_impl.profile;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,9 @@ class TestUserGameLibrary {
 	void testValidConstrution() {
 		UserProfile user = new UserProfile();
 		UserGameLibrary gameLibrary = new UserGameLibrary(user);
+		
+		assertNotNull(gameLibrary.getLikedGames());
+		assertNotNull(gameLibrary.getDislikedGames());
 		
 		assertEquals(user, gameLibrary.getUser());
 		assertEquals(user.getAllOwnedGames(), gameLibrary.getOwnedGames());

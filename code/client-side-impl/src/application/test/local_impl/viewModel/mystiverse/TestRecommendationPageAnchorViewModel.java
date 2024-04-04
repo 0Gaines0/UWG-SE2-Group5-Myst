@@ -1,4 +1,4 @@
-package application.test.viewModel.mystiverse.subMystiversePages;
+package application.test.local_impl.viewModel.mystiverse;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,10 +11,14 @@ import application.model.server_impl.game.GameLibraryManager;
 import application.model.server_impl.profile.ActiveUser;
 import application.model.server_impl.profile.UserProfile;
 import application.viewModel.mystiverse.subMystiversePages.RecommendationPageAnchorViewModel;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.embed.swing.JFXPanel;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,22 +37,23 @@ class TestRecommendationPageAnchorViewModel {
     	this.viewModel = new RecommendationPageAnchorViewModel();
     }
 
-//    @Test
-//    void testSetupInitialProperties() {
-//        List<Game> recommendations = new ArrayList<>();
-//        Game game = Main.getGames().get(15);
-//        Game game1 = Main.getGames().get(20);
-//        recommendations.add(game);
-//        recommendations.add(game1);
-//
-//        this.viewModel.setRecommendations(recommendations);
-//        this.viewModel.setupInitialProperties();
-//
-//        assertEquals("Counter-Strike\r\n", this.viewModel.getTitleProperty().get());
-//        assertEquals("Test Description", this.viewModel.getDescProperty().get());
-//        assertEquals("[" + game.getGenres().toString() + "]", this.viewModel.getGenresProperty().get());
-//        assertNotNull(this.viewModel.getImageProperty().getValue());
-//    }
+    @Test
+    void testSetupInitialProperties() {
+        List<Game> recommendations = new ArrayList<>();
+        new JFXPanel();
+        Game game = Main.getGames().get(15);
+        Game game1 = Main.getGames().get(20);
+        recommendations.add(game);
+        recommendations.add(game1);
+
+        this.viewModel.setRecommendations(recommendations);
+        this.viewModel.setupInitialProperties();
+
+        assertEquals("Half-Life Deathmatch: Source", this.viewModel.getTitleProperty().get());
+        assertEquals("Half-Life Deathmatch: Source is a recreation of the first multiplayer game set in the Half-Life universe. Features all the classic weapons and most-played maps, now running on the Source engine.", this.viewModel.getDescProperty().get());
+        assertEquals(game.getGenres().toString(), this.viewModel.getGenresProperty().get());
+        assertNotNull(this.viewModel.getImageProperty().getValue());
+    }
 
     @Test
     void testSkipGame() {
@@ -74,5 +79,20 @@ class TestRecommendationPageAnchorViewModel {
         this.viewModel.getRecommendations().add(game);
         this.viewModel.notInterestedInGame(game);
         assertTrue(this.viewModel.getRecommendations().isEmpty());
+    }
+    
+    @Test
+    void testSetters() {
+    	this.viewModel.setRecommendations(new ArrayList<Game>());
+    	this.viewModel.setTitleProperty(new SimpleStringProperty());
+    	this.viewModel.setDescProperty(new SimpleStringProperty());
+    	this.viewModel.setImageProperty(null);
+    	this.viewModel.setGenresProperty(new SimpleStringProperty());
+    	
+    	assertNotNull(this.viewModel.getRecommendations());
+    	assertNotNull(this.viewModel.getTitleProperty());
+    	assertNotNull(this.viewModel.getDescProperty());
+    	assertNotNull(this.viewModel.getGenresProperty());
+    	assertNull(this.viewModel.getImageProperty());
     }
 }

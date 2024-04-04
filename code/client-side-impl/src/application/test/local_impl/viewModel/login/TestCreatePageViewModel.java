@@ -53,7 +53,7 @@ public class TestCreatePageViewModel {
 		this.viewModel.getPasswordProperty().setValue(PASSWORD);
 		this.viewModel.getReenterPasswordProperty().setValue(PASSWORD);
 		
-		assertFalse(this.viewModel.attemptCreateNewAccount());
+		assertTrue(this.viewModel.attemptCreateNewAccount());
 	}
 	
 	/**

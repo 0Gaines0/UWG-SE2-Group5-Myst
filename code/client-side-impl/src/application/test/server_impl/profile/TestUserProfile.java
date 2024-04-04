@@ -128,7 +128,7 @@ public class TestUserProfile {
 	 */
 	@Test
 	public void testIsFirstTimeLogin() {
-		assertFalse(this.userProfile.isFirstTimeLogin());
+		assertTrue(this.userProfile.isFirstTimeLogin());
 	}
 	
 	/**

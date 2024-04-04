@@ -6,17 +6,20 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import application.Main;
 import application.model.local_impl.GameRecommendationEngine;
 import application.model.local_impl.game.Game;
 import application.model.local_impl.game.GameLibrary;
 import application.model.local_impl.game.Genre;
 import application.model.local_impl.profile.UserProfile;
+import application.model.server_impl.game.GameLibraryManager;
 
 class GameRecommendationEngineTest {
 
@@ -51,5 +54,14 @@ class GameRecommendationEngineTest {
         assertNotNull(recommendations);
         assertFalse(recommendations.isEmpty());
         assertTrue(recommendations.stream().allMatch(game -> game.getGenres().stream().anyMatch(this.testUser.getPreferredGenres()::contains)));
+    }
+    
+    @Test
+    void testGenerateRecommendationsForSelectedGamesAndGenres() {
+		Main.setGames(GameLibraryManager.fetchAndParseGameLibrary().getGames());
+    	var game = Main.getGames().get(0);
+    	var list = new ArrayList<Game>();
+    	list.add(game);
+    	assertNotNull(this.engine.generateRecommendationsForSelectedGamesAndGenres(list, game.getGenres()));
     }
 }
