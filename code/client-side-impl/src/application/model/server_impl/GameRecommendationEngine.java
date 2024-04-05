@@ -67,7 +67,8 @@ public class GameRecommendationEngine {
 		var likedGames = user.getAllLikedGames();
 		var ownedGames = user.getAllOwnedGames();
 		var recommendedGames = this.gameDatabase.stream()
-				.filter(game -> !dislikedGames.contains(game) && !ownedGames.contains(game)
+				.filter(game -> !dislikedGames.contains(game) 
+						&& !ownedGames.contains(game)
 						&& !likedGames.contains(game))
 				.map(game -> new AbstractMap.SimpleEntry<>(game, this.calculateGameScore(game, userPreferredGenres)))
 				.sorted(Comparator.comparing(AbstractMap.SimpleEntry<Game, Double>::getValue).reversed())

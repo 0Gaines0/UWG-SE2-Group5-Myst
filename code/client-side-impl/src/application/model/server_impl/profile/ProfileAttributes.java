@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import application.model.local_impl.game.Game;
 import application.model.server_impl.Server;
+import application.model.server_impl.ServerConstants;
 
 public class ProfileAttributes extends application.model.abstract_impl.profile.ProfileAttributes {
 
@@ -50,13 +51,13 @@ public class ProfileAttributes extends application.model.abstract_impl.profile.P
 		var username = ActiveUser.getActiveUser().getUsername();
 		var description = "";
 		try {
-			json.put("request_type", "get_about_me_description");
-			json.put("username", username);
+			json.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_ABOUT_ME_DESCRIPTION);
+			json.put(ServerConstants.KEY_USERNAME, username);
 
 			var response = Server.sendRequest(json.toString());
 			var responseJson = new JSONObject(response);
-			if (responseJson.getBoolean("success")) {
-				description = responseJson.get("description").toString();
+			if (responseJson.getBoolean(ServerConstants.KEY_SUCCESS)) {
+				description = responseJson.get(ServerConstants.VALUE_DESCRIPTION).toString();
 			}
 
 		} catch (JSONException e) {
@@ -72,9 +73,9 @@ public class ProfileAttributes extends application.model.abstract_impl.profile.P
 		var username = ActiveUser.getActiveUser().getUsername();
 		
 		try {
-			json.put("request_type", "set_about_me_description");
-			json.put("username", username);
-			json.put("description", aboutMeDescription);
+			json.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_SET_ABOUT_ME_DESCRIPTION);
+			json.put(ServerConstants.KEY_USERNAME, username);
+			json.put(ServerConstants.VALUE_DESCRIPTION, aboutMeDescription);
 
 			Server.sendRequest(json.toString());
 
@@ -99,13 +100,13 @@ public class ProfileAttributes extends application.model.abstract_impl.profile.P
 		var json = new JSONObject();
 		var username = ActiveUser.getActiveUser().getUsername();
 		try {
-			json.put("request_type", "get_user_profile_picture_path");
-			json.put("username", username);
+			json.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_GET_USER_PROFILE_PICTURE_PATH);
+			json.put(ServerConstants.KEY_USERNAME, username);
 
 			var response = Server.sendRequest(json.toString());
 			var responseJson = new JSONObject(response);
-			if (responseJson.getBoolean("success")) {
-				path = responseJson.get("path").toString();
+			if (responseJson.getBoolean(ServerConstants.KEY_SUCCESS)) {
+				path = responseJson.get(ServerConstants.VALUE_PATH).toString();
 			}
 
 		} catch (JSONException e) {
@@ -121,9 +122,9 @@ public class ProfileAttributes extends application.model.abstract_impl.profile.P
 		var username = ActiveUser.getActiveUser().getUsername();
 		
 		try {
-			json.put("request_type", "set_user_profile_picture_path");
-			json.put("username", username);
-			json.put("path", userProfilePicture);
+			json.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_SET_USER_PROFILE_PICTURE_PATH);
+			json.put(ServerConstants.KEY_USERNAME, username);
+			json.put(ServerConstants.VALUE_PATH, userProfilePicture);
 
 			Server.sendRequest(json.toString());
 

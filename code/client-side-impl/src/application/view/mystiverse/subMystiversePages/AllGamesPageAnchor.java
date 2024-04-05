@@ -20,6 +20,9 @@ import javafx.scene.layout.BorderPane;
 
 public class AllGamesPageAnchor {
 
+    @FXML
+    private ImageView gameImageView;
+	
 	@FXML
     private ContextMenu addGameToInterestedMenuItem;
 	
@@ -78,11 +81,16 @@ public class AllGamesPageAnchor {
     	this.setupGenresComboBox();
     	this.setupListView();
     	this.setupContextMenu();
+    	this.setupImageView();
+    }
+    
+    private void setupImageView() {
+    	this.gameImageView.imageProperty().bindBidirectional(this.viewmodel.getImageProperty());
     }
     
     private void setupSearchbar() {
     	this.searchBar.setOnKeyReleased((event) -> {
-    		this.allGamesListView.getItems().setAll(this.viewmodel.filterOnSearch(this.searchBar.getText(), Main.getGames()));
+    		this.allGamesListView.getItems().setAll(this.viewmodel.filterOnSearch(this.searchBar.getText().toLowerCase(), Main.getGames()));
     	});
     }
     
@@ -96,6 +104,11 @@ public class AllGamesPageAnchor {
     
     private void setupListView() {
     	this.allGamesListView.getItems().setAll(Main.getGames());
+    	this.allGamesListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null) {
+				this.viewmodel.setImage(newValue.getGamePhoto());
+			}
+		});
     }
     
     private void setupContextMenu() {
@@ -107,6 +120,7 @@ public class AllGamesPageAnchor {
     private void validateFxml() {
         assert this.allGamesAnchorPane != null : "fx:id=\"allGamesAnchorPane\" was not injected: check your FXML file 'AllGamesPageAnchor.fxml'.";
         assert this.allGamesListView != null : "fx:id=\"allGamesListView\" was not injected: check your FXML file 'AllGamesPageAnchor.fxml'.";
+        assert this.gameImageView != null : "fx:id=\"gameImageView\" was not injected: check your FXML file 'AllGamesPageAnchor.fxml'.";
         assert this.genresComboBox != null : "fx:id=\"genresComboBox\" was not injected: check your FXML file 'AllGamesPageAnchor.fxml'.";
         assert this.addGameToInterestedMenuItem != null : "fx:id=\"addGameToInterestedMenuItem\" was not injected: check your FXML file 'AllGamesPageAnchor.fxml'.";
         assert this.gameSelectedImageView != null : "fx:id=\"gameSlectedImageView\" was not injected: check your FXML file 'AllGamesPageAnchor.fxml'.";

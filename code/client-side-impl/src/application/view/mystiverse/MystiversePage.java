@@ -141,6 +141,7 @@ public class MystiversePage {
 		this.setUpLibraryNavBarHBox();
 		this.setUpMystiverseNavBarHbox();
 		this.setUpProfileNavBarHBox();
+		this.setUpProfilePhotoNavBarHBox();
 	}
 
 	private void setUpProfileNavBarHBox() {
@@ -160,6 +161,13 @@ public class MystiversePage {
 	private void setUpLibraryNavBarHBox() {
 		this.libraryNavBarHBox.setOnMouseClicked(((event) -> {
 			this.redirectToPage(Main.USER_GAME_LIBRARY_WINDOW);
+			this.closeMystiverseWindow();
+		}));
+	}
+	
+	private void setUpProfilePhotoNavBarHBox() {
+		this.profilePhotoNavBarHBox.setOnMouseClicked(((event) -> {
+			this.redirectToPage(Main.USER_PROFILE_WINDOW);
 			this.closeMystiverseWindow();
 		}));
 	}

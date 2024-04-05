@@ -6,25 +6,31 @@ import org.json.JSONObject;
 import application.fileIO.GameLibraryIO;
 import application.model.local_impl.game.GameLibrary;
 import application.model.server_impl.Server;
+import application.model.server_impl.ServerConstants;
 
 public class GameLibraryManager {
+
+    /**
+     * Fetch and parse game library.
+     *
+     * @return the game library
+     */
     public static GameLibrary fetchAndParseGameLibrary() {
+    	var gameLibrary = new GameLibrary();
         try {
             JSONObject requestJson = new JSONObject();
-            requestJson.put("request_type", "get_game_library");
+            requestJson.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_GET_GAME_LIBRARY);
             
             String response = Server.sendRequest(requestJson.toString());
             JSONObject jsonResponse = new JSONObject(response);
             
-            if (jsonResponse.getBoolean("success")) {
-                JSONArray gamesArray = jsonResponse.getJSONArray("games");
-                return GameLibraryIO.parseGamesFromJson(gamesArray);
-            } else {
-                System.err.println("Failed to fetch game library: " + jsonResponse.optString("message"));
-            }
+            if (jsonResponse.getBoolean(ServerConstants.KEY_SUCCESS)) {
+                JSONArray gamesArray = jsonResponse.getJSONArray(ServerConstants.KEY_GAMES);
+                gameLibrary = GameLibraryIO.parseGamesFromJson(gamesArray);
+            } 
         } catch (Exception e) {
-            System.err.println("Error fetching or parsing game library: " + e.getMessage());
+            throw new IllegalArgumentException("Error fetching or parsing game library: " + e.getMessage());
         }
-        return null;
+        return gameLibrary;
     }
 }

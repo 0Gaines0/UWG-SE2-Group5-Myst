@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="530.0" prefWidth="844.0" style="-fx-background-color: #446662;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.UserGameLibraryPage.UserGameLibraryAddGamePage">
+   <children>
+      <ListView fx:id="gamesListView" layoutX="14.0" layoutY="235.0" prefHeight="271.0" prefWidth="813.0">
+         <contextMenu>
+            <ContextMenu fx:id="addGameToLibraryContextMenu">
+              <items>
+                <MenuItem fx:id="addToLikedMenuItem" mnemonicParsing="false" text="Add to Liked" />
+                <MenuItem fx:id="addToDislikedMenuItem" mnemonicParsing="false" text="Add to Disliked" />
+                <MenuItem fx:id="addToOwnedMenuItem" mnemonicParsing="false" text="Add to Owned" />
+              </items>
+            </ContextMenu>
+         </contextMenu></ListView>
+      <TextField fx:id="searchTextField" layoutX="14.0" layoutY="194.0" promptText="Search..." />
+      <ComboBox fx:id="genresComboBox" layoutX="191.0" layoutY="194.0" prefWidth="150.0" promptText="Genres" />
+      <ImageView fitHeight="103.0" fitWidth="199.0" layoutX="354.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
