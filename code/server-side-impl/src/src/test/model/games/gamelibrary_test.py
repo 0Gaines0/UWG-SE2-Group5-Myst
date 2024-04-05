@@ -4,7 +4,8 @@ Created on April 3, 2024
 @author: Thomas
 '''
 import unittest
-from your_module import GameLibrary, Game, Genre
+from src.model.games.game import Game, Genre
+from src.model.games.gamelibrary import GameLibrary
 
 class TestGameLibrary(unittest.TestCase):
 
