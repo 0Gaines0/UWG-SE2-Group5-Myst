@@ -1,0 +1,21 @@
+Context - User has existing account on system, User has ability to access server
+
+Primary Flow
+1 - User opens platform application
+2 - System presents login screen
+3 - User inputs their username and password 
+4 - User click "Login" button
+5 - System validates credentials ensuring correctness
+6 - System sends data to Server
+7 - Server validates, ensuring that this username exist with in the system
+8 - Server responses, verifying the success of the login
+9 - System autheticates user and grants access to application
+7 - User is redirected to landing page
+
+Alternate Flow(s)
+INVALID CREDENTIALS
+a1 - User inputs invalid username or password
+a2 - System attempts to verify credentials, finds them as invalid (invalid username and/or password)
+a3 - System displays error message, informing user of login attempt failed due to invalid credentials
+a4 - System prompts user to re-enter their credentials
+return to step 3

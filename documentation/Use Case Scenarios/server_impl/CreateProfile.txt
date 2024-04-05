@@ -1,0 +1,9 @@
+Context - None
+
+Primary Flow
+1 - User selects Create Profile
+2 - User inputs credentials: username, password, rentering password to ensure correct
+3 - System validates inputs and send data to Server
+4 - Server ensures username is unused, generates new profile, and stores information on the server
+5 - Server sends data back confirming creation of new username
+6 - System directs user to landing page
