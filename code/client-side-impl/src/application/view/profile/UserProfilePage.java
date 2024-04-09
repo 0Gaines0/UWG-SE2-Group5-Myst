@@ -95,7 +95,7 @@ public class UserProfilePage {
 	private VBox vSideBox;
 
 	@FXML
-	private HBox wishlistHBox;
+	private HBox suggestionsHBox;
 
 	private UserProfilePageViewModel userProfilePageViewModel;
 	private EditProfileAnchor editProfileCodeBehind;
@@ -195,7 +195,7 @@ public class UserProfilePage {
 	}
 
 	private void setUpWishListHBox() {
-		this.wishlistHBox.setOnMouseClicked(((event) -> {
+		this.suggestionsHBox.setOnMouseClicked(((event) -> {
 			var errorPopUp = new Alert(AlertType.CONFIRMATION);
 			errorPopUp.setContentText("Button Click Works!");
 			errorPopUp.showAndWait();
@@ -291,6 +291,7 @@ public class UserProfilePage {
 		this.validateSomeComponents();
 		this.validateOtherComponents();
 	}
+	
 
 	private void validateOtherComponents() {
 		assert this.profileImageSideBar != null
@@ -303,8 +304,8 @@ public class UserProfilePage {
 				: "fx:id=\"sideBar\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 		assert this.vSideBox != null
 				: "fx:id=\"vSideBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
-		assert this.wishlistHBox != null
-				: "fx:id=\"wishlistHBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
+		assert this.suggestionsHBox != null
+				: "fx:id=\"suggestionsHBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 		assert this.parentBorderPane != null
 				: "fx:id=\"parentBorderPane\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 		assert this.profileUsernameHBox != null

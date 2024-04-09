@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="530.0" prefWidth="844.0" style="-fx-background-color: #446662;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="14.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suggest a Game ?">
+         <font>
+            <Font name="Comic Sans MS" size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="searchGamesTextField" layoutX="14.0" layoutY="62.0" promptText="Search Game" style="-fx-background-color: #DDE2C6; -fx-prompt-text-fill: #598381;" />
+      <ListView fx:id="allGameListView" layoutX="14.0" layoutY="90.0" prefHeight="325.0" prefWidth="333.0" style="-fx-background-color: #DDE2C6;" styleClass="listview-cell" stylesheets="@../assets/styles.css" />
+      <TextField fx:id="usernameTextField" layoutX="14.0" layoutY="421.0" prefHeight="25.0" prefWidth="198.0" promptText="Enter username to suggest" style="-fx-background-color: #DDE2C6; -fx-prompt-text-fill: #598381;" />
+      <Button fx:id="suggestGameBtn" layoutX="235.0" layoutY="429.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="100.0" style="-fx-background-color: #DDE2C6; -fx-text-fill: #598381;" text="Suggest Game" />
+      <Text layoutX="462.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Games Suggested to you:">
+         <font>
+            <Font name="Comic Sans MS" size="18.0" />
+         </font>
+      </Text>
+      <ListView fx:id="gamesSuggestedToUserListView" layoutX="462.0" layoutY="75.0" prefHeight="325.0" prefWidth="333.0" style="-fx-background-color: #DDE2C6;" styleClass="listview-cell" stylesheets="@../assets/styles.css">
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem mnemonicParsing="false" text="Like Game" />
+                  <MenuItem mnemonicParsing="false" text="Dislike Game" />
+                  <MenuItem mnemonicParsing="false" text="Remove Game" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
+      </ListView>
+      <Button fx:id="listGameBtn" layoutX="467.0" layoutY="417.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="100.0" style="-fx-background-color: #DDE2C6; -fx-text-fill: #598381;" text="Like Game" />
+      <Button fx:id="dislikedGameBtn" layoutX="592.0" layoutY="417.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="100.0" style="-fx-background-color: #DDE2C6; -fx-text-fill: #598381;" text="Dislike Game" />
+      <Button fx:id="removeGameBtn" layoutX="712.0" layoutY="417.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="100.0" style="-fx-background-color: #DDE2C6; -fx-text-fill: #598381;" text="Remove Game" />
+   </children>
+</AnchorPane>

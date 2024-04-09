@@ -48,6 +48,30 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 		this.username = username;
 		this.password = password;
 	}
+	
+	/**
+	 * Gets the suggested to user games.
+	 *
+	 * @return the suggested to user games
+	 */
+	public List<Game> getSuggestedToUserGames() {
+		var suggestedGames = new ArrayList<Game>();
+		
+		//TODO
+		
+		return suggestedGames;
+	}
+	
+	/**
+	 * Sets the suggested to user games.
+	 *
+	 * @param suggestedGames the new suggested to user games
+	 */
+	public void setSuggestedToUserGames(List<Game> suggestedGames) {
+		//TODO
+		
+		
+	}
 
 	/**
 	 * Gets the all owned games.
