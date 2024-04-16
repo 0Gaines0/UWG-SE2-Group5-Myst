@@ -48,6 +48,45 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 		this.username = username;
 		this.password = password;
 	}
+	
+	/**
+	 * Gets the suggested to user games.
+	 *
+	 * @return the suggested to user games
+	 */
+	public List<Game> getSuggestedToUserGames() {
+		var suggestedGames = new ArrayList<Game>();
+		
+		var username = ActiveUser.getActiveUser().getUsername();
+		var json = new JSONObject();
+		try {
+			json.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_GET_SUGGESTED_GAMES);
+			json.put(ServerConstants.KEY_USERNAME, username);
+
+			var response = Server.sendRequest(json.toString());
+			var jsonResponse = new JSONObject(response);
+
+			if (jsonResponse.getBoolean(ServerConstants.KEY_SUCCESS)) {
+				JSONArray gamesArray = jsonResponse.getJSONArray(ServerConstants.KEY_GAMES);
+				suggestedGames = (ArrayList<Game>) GameLibraryIO.parseGamesFromJson(gamesArray).getGames();
+			} 
+		} catch (JSONException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
+		
+		return suggestedGames;
+	}
+	
+	/**
+	 * Sets the suggested to user games.
+	 *
+	 * @param suggestedGames the new suggested to user games
+	 */
+	public void setSuggestedToUserGames(List<Game> suggestedGames) {
+		//TODO
+		
+		
+	}
 
 	/**
 	 * Gets the all owned games.

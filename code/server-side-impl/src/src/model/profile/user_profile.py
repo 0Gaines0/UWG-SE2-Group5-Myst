@@ -51,6 +51,7 @@ class User_Profile:
         self.allOwnedGames = GameLibrary()
         self.allLikedGames = GameLibrary()
         self.allDislikedGames = GameLibrary()
+        self.suggestedGames = GameLibrary()
         self.preferredGenres = []
         
         self.first_time_login = True
@@ -204,6 +205,9 @@ class User_Profile:
             GameLibrary: The GameLibrary of owned games.
         """
         return self.allOwnedGames
+    
+    def get_suggested_games_game_library(self):
+        return self.suggestedGames
     
     def get_all_liked_games_game_library(self):
         """

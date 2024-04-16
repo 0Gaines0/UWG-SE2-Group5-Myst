@@ -11,6 +11,7 @@ import application.view.profile.subProfilePages.EditPreferencesAnchor;
 import application.view.profile.subProfilePages.EditProfileAnchor;
 import application.view.profile.subProfilePages.ProfileAnchor;
 import application.view.profile.subProfilePages.SettingProfileAnchor;
+import application.view.profile.subProfilePages.SuggestGamesProfileAnchor;
 import application.viewModel.profile.UserProfilePageViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -95,7 +96,7 @@ public class UserProfilePage {
 	private VBox vSideBox;
 
 	@FXML
-	private HBox wishlistHBox;
+	private HBox suggestionsHBox;
 
 	private UserProfilePageViewModel userProfilePageViewModel;
 	private EditProfileAnchor editProfileCodeBehind;
@@ -104,6 +105,8 @@ public class UserProfilePage {
 	private EditPreferencesAnchor editPreferencesCodeBehind;
 	private SettingProfileAnchor profileSettingsAnchorCodeBehind;
 	private MystiversePage mystiverseCodeBehind;
+	private SuggestGamesProfileAnchor suggestGameProfileAnchor;
+	
 	/**
 	 * Instantiates a new user profile page.
 	 */
@@ -115,6 +118,7 @@ public class UserProfilePage {
 		this.editPreferencesCodeBehind = new EditPreferencesAnchor();
 		this.userGameLibraryCodeBehind = new UserGameLibraryPage();
 		this.mystiverseCodeBehind = new MystiversePage();
+		this.suggestGameProfileAnchor = new SuggestGamesProfileAnchor();
 	}
 
 	@FXML
@@ -195,10 +199,8 @@ public class UserProfilePage {
 	}
 
 	private void setUpWishListHBox() {
-		this.wishlistHBox.setOnMouseClicked(((event) -> {
-			var errorPopUp = new Alert(AlertType.CONFIRMATION);
-			errorPopUp.setContentText("Button Click Works!");
-			errorPopUp.showAndWait();
+		this.suggestionsHBox.setOnMouseClicked(((event) -> {
+			this.suggestGameProfileAnchor.openAnchorPane(this.parentBorderPane, Main.SUGGEST_GAMES_ANCHOR);
 			this.updatePage();
 		}));
 	}
@@ -291,7 +293,7 @@ public class UserProfilePage {
 		this.validateSomeComponents();
 		this.validateOtherComponents();
 	}
-
+	
 	private void validateOtherComponents() {
 		assert this.profileImageSideBar != null
 				: "fx:id=\"profileImageSideBar\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
@@ -303,8 +305,8 @@ public class UserProfilePage {
 				: "fx:id=\"sideBar\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 		assert this.vSideBox != null
 				: "fx:id=\"vSideBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
-		assert this.wishlistHBox != null
-				: "fx:id=\"wishlistHBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
+		assert this.suggestionsHBox != null
+				: "fx:id=\"suggestionsHBox\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 		assert this.parentBorderPane != null
 				: "fx:id=\"parentBorderPane\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
 		assert this.profileUsernameHBox != null

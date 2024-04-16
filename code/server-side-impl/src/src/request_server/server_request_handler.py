@@ -114,7 +114,45 @@ class Server_Request_Handler:
         if request_type == constants.SET_ALL_OWNED_GAMES:
             response = self._set_all_owned_games(request)
             
+        if request_type == constants.GET_SUGGESTED_GAMES:
+            response = self._get_suggested_games(request)
             
+        if request_type == constants.SET_SUGGESTED_GAMES:
+            response = self._set_suggested_games(request)
+            
+        return response
+    
+    def _set_suggested_games(self, request):
+        response = {}
+        try:
+            username = request[constants.KEY_USERNAME]
+            user = self.user_manager.get_user(username)
+            user.get_suggested_games_game_library().remove_all_games()
+            suggested_games = request[constants.KEY_GAMES]
+            for game in suggested_games:
+                game = self.game_database.find_game_by_id(game["gameID"])
+                user.get_suggested_games_game_library().add_game(game)
+            response[constants.KEY_SUCCESS] = constants.VALUE_TRUE
+            response[constants.KEY_STATUS] = constants.VALUE_ACCEPTED
+        except Exception as e:
+            response[constants.KEY_STATUS] = constants.VALUE_FAILURE
+            response[constants.KEY_SUCCESS] = constants.VALUE_FALSE
+            response[constants.KEY_FAILURE_MESSAGE] = str(e)
+        return response
+    
+    def _get_suggested_games(self, request):
+        response = {}
+        try:
+            username = request[constants.KEY_USERNAME]
+            user = self.user_manager.get_user(username)
+            suggested_games = [self._game_to_dict(game) for game in user.get_suggested_games_game_library().get_games()]
+            response[constants.KEY_SUCCESS] = constants.VALUE_TRUE
+            response[constants.KEY_STATUS] = constants.VALUE_ACCEPTED
+            response[constants.KEY_GAMES] = suggested_games
+        except Exception as e:
+            response[constants.KEY_STATUS] = constants.VALUE_FAILURE
+            response[constants.KEY_SUCCESS] = constants.VALUE_FALSE
+            response[constants.KEY_FAILURE_MESSAGE] = str(e)
         return response
     
     def _set_profile_picture_path(self, request):
