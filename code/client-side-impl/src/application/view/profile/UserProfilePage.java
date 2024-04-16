@@ -11,6 +11,7 @@ import application.view.profile.subProfilePages.EditPreferencesAnchor;
 import application.view.profile.subProfilePages.EditProfileAnchor;
 import application.view.profile.subProfilePages.ProfileAnchor;
 import application.view.profile.subProfilePages.SettingProfileAnchor;
+import application.view.profile.subProfilePages.SuggestGamesProfileAnchor;
 import application.viewModel.profile.UserProfilePageViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -104,6 +105,8 @@ public class UserProfilePage {
 	private EditPreferencesAnchor editPreferencesCodeBehind;
 	private SettingProfileAnchor profileSettingsAnchorCodeBehind;
 	private MystiversePage mystiverseCodeBehind;
+	private SuggestGamesProfileAnchor suggestGameProfileAnchor;
+	
 	/**
 	 * Instantiates a new user profile page.
 	 */
@@ -115,6 +118,7 @@ public class UserProfilePage {
 		this.editPreferencesCodeBehind = new EditPreferencesAnchor();
 		this.userGameLibraryCodeBehind = new UserGameLibraryPage();
 		this.mystiverseCodeBehind = new MystiversePage();
+		this.suggestGameProfileAnchor = new SuggestGamesProfileAnchor();
 	}
 
 	@FXML
@@ -196,9 +200,7 @@ public class UserProfilePage {
 
 	private void setUpWishListHBox() {
 		this.suggestionsHBox.setOnMouseClicked(((event) -> {
-			var errorPopUp = new Alert(AlertType.CONFIRMATION);
-			errorPopUp.setContentText("Button Click Works!");
-			errorPopUp.showAndWait();
+			this.suggestGameProfileAnchor.openAnchorPane(this.parentBorderPane, Main.SUGGEST_GAMES_ANCHOR);
 			this.updatePage();
 		}));
 	}

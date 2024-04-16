@@ -1,13 +1,18 @@
 package application.view.profile.subProfilePages;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.model.local_impl.game.Game;
+import application.viewModel.profile.subProfilePages.SuggestGamesProfileAnchorViewModel;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 /**
  * The Class SuggestGamesProfileAnchor.
@@ -46,7 +51,16 @@ public class SuggestGamesProfileAnchor {
 
 	@FXML
 	private TextField usernameTextField;
+	
+	private SuggestGamesProfileAnchorViewModel viewModel;
 
+	/**
+	 * Instantiates a new suggest games profile anchor.
+	 */
+	public SuggestGamesProfileAnchor() {
+		this.viewModel = new SuggestGamesProfileAnchorViewModel();
+	}	
+	
 	@FXML
 	void initialize() {
 		this.validateFXMLComponents();
@@ -55,8 +69,28 @@ public class SuggestGamesProfileAnchor {
 		this.setUpAllListViews();
 	}
 	
-	private void bindToViewmodel() {
+	/**
+	 * Open anchor pane.
+	 *
+	 * @param parent        the parent
+	 * @param newAnchorPath the new anchor path
+	 */
+	public void openAnchorPane(BorderPane parent, String newAnchorPath) {
+		try {
+			AnchorPane currentAnchor = (AnchorPane) parent.getCenter();
+			var loader = new FXMLLoader(getClass().getResource(newAnchorPath));
+			AnchorPane newAnchor = loader.load();
 
+			parent.setCenter(newAnchor);
+			parent.getChildren().remove(currentAnchor);
+
+		} catch (IOException error) {
+
+		}
+	}
+	
+	private void bindToViewmodel() {
+		this.allGameListView.itemsProperty().bindBidirectional(this.viewModel.getAllGamesProperty());
 	}
 
 	private void setUpBtns() {
@@ -69,12 +103,13 @@ public class SuggestGamesProfileAnchor {
 	private void setUpAllListViews() {
 		this.setUpAllGamesListView();
 		this.setUpSuggestedGamesListView();
+		
 	}
 
 	
 
 	private void setUpAllGamesListView() {
-		// Method in viewModel
+		this.viewModel.setUpAllGamesList();
 	}
 
 	private void setUpSuggestedGamesListView() {
