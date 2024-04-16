@@ -5,12 +5,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.model.local_impl.game.Game;
+import application.model.server_impl.profile.ActiveUser;
 import application.viewModel.profile.subProfilePages.SuggestGamesProfileAnchorViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -90,7 +94,17 @@ public class SuggestGamesProfileAnchor {
 	}
 	
 	private void bindToViewmodel() {
+		this.usernameTextField.textProperty().bindBidirectional(this.viewModel.getInputtedUsernameProperty());
 		this.allGameListView.itemsProperty().bindBidirectional(this.viewModel.getAllGamesProperty());
+		this.gamesSuggestedToUserListView.itemsProperty().bindBidirectional(this.viewModel.getSuggestedGamesProperty());
+		this.viewModel.getSelectedGameToSuggestProperty().bind(this.allGameListView.getSelectionModel().selectedItemProperty());
+		this.setUpSearchGameChangeListener();
+	}
+
+	private void setUpSearchGameChangeListener() {
+		this.searchGamesTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+			this.viewModel.searchAllGamesAndFilter(newValue);
+		});
 	}
 
 	private void setUpBtns() {
@@ -106,20 +120,30 @@ public class SuggestGamesProfileAnchor {
 		
 	}
 
-	
-
 	private void setUpAllGamesListView() {
+		this.allGameListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 		this.viewModel.setUpAllGamesList();
 	}
 
 	private void setUpSuggestedGamesListView() {
-		// Method in viewmodel
+		this.viewModel.setUpSuggestedGamesToUserList();
 	}
 
 	private void setUpSuggestGameBtn() {
-		this.suggestGameBtn.setOnAction(((event -> {
-
-		})));
+		this.suggestGameBtn.setOnAction(((event) -> {
+			if (this.allGameListView.getSelectionModel().selectedItemProperty() != null) {
+				if (this.viewModel.isUsernameValid()) {
+					this.viewModel.recommendGameToSpecifiedUser();
+					var confirmPopUp = new Alert(AlertType.CONFIRMATION);
+					confirmPopUp.setContentText("Suggestion successful!");
+					confirmPopUp.showAndWait();
+				} else {
+					var errorPopUp = new Alert(AlertType.ERROR);
+					errorPopUp.setContentText("Suggestion failed, username does not exist");
+					errorPopUp.showAndWait();
+				}
+			}
+		}));
 	}
 
 	private void setUpLikeGameBtn() {

@@ -31,4 +31,6 @@ public class ServerConstants {
 	public static final String VALUE_PATH = "path";
 	public static final String VALUE_GENRES = "genres";
 	public static final String VALUE_FIRST_TIME_LOGIN = "first_time_login";
+	public static final String VALUE_GET_SUGGESTED_GAMES = "get_suggested_games";
+	public static final String VALUE_SET_SUGGESTED_GAMES = "set_suggested_games";
 }
