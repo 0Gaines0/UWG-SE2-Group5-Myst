@@ -122,6 +122,10 @@ public class UserGameLibraryAddGamePage {
          assert gamesListView != null : "fx:id=\"gamesListView\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
          assert genresComboBox != null : "fx:id=\"genresComboBox\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
          assert searchTextField != null : "fx:id=\"searchTextField\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
+    	assert this.addGameToLibraryContextMenu != null : "fx:id=\"addGameToLibraryContextMenu\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
+        assert this.gamesListView != null : "fx:id=\"gamesListView\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
+        assert this.genresComboBox != null : "fx:id=\"genresComboBox\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
+        assert this.searchTextField != null : "fx:id=\"searchTextField\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
     }
 
 }

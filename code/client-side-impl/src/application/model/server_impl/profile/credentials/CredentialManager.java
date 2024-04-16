@@ -5,7 +5,13 @@ import org.json.JSONObject;
 
 import application.model.local_impl.profile.credentials.Credential;
 import application.model.server_impl.Server;
+import application.model.server_impl.ServerConstants;
 
+/**
+ * The Class CredentialManager.
+ * @author Jeffrey Gaines
+ * @version Sprint 2
+ */
 public class CredentialManager extends application.model.abstract_impl.profile.credentials.CredentialManager {
 	private static final String USERNAME_MUST_BE_VALID = "username must not be null or empty";
 	private static final String PASSWORD_MUST_BE_VALID = "password must not be null or empty";
@@ -19,13 +25,13 @@ public class CredentialManager extends application.model.abstract_impl.profile.c
 		}
 		var json = new JSONObject();
 		try {
-			json.put("request_type", "username_exist");
-			json.put("username", username);
+			json.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_USERNAME_EXIST);
+			json.put(ServerConstants.KEY_USERNAME, username);
 			var response = Server.sendRequest(json.toString());
 			var responseJson = new JSONObject(response);
 
-			var result = responseJson.get("success");
-			if (result.equals("true")) {
+			var result = responseJson.get(ServerConstants.KEY_SUCCESS);
+			if (result.equals(ServerConstants.VALUE_TRUE)) {
 				return true;
 			}
 		} catch (JSONException e) {
@@ -45,13 +51,13 @@ public class CredentialManager extends application.model.abstract_impl.profile.c
 		var json = new JSONObject();
 
 		try {
-			json.put("request_type", "get_specified_credential");
-			json.put("username", username);
+			json.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_GET_SPECIFIED_CREDENTIAL);
+			json.put(ServerConstants.KEY_USERNAME, username);
 			var response = Server.sendRequest(json.toString());
 			var responseJson = new JSONObject(response);
 
-			var result = responseJson.get("success");
-			if (result.equals("true")) {
+			var result = responseJson.get(ServerConstants.KEY_SUCCESS);
+			if (result.equals(ServerConstants.VALUE_TRUE)) {
 				var responseUsername = (String) responseJson.get("username");
 				var responsePassword = (String) responseJson.get("password");
 				var credential = new Credential(responseUsername, responsePassword);
@@ -89,14 +95,14 @@ public class CredentialManager extends application.model.abstract_impl.profile.c
 		}
 		var json = new JSONObject();
 		try {
-			json.put("request_type", "add_credential");
-			json.put("username", username);
-			json.put("password", password);
+			json.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_ADD_CREDENTIAL);
+			json.put(ServerConstants.KEY_USERNAME, username);
+			json.put(ServerConstants.KEY_PASSWORD, password);
 			var response = Server.sendRequest(json.toString());
 			var responseJson = new JSONObject(response);
 
-			var result = responseJson.get("success");
-			if (result.equals("true")) {
+			var result = responseJson.get(ServerConstants.KEY_SUCCESS);
+			if (result.equals(ServerConstants.VALUE_TRUE)) {
 				return true;
 			}
 		} catch (JSONException e) {

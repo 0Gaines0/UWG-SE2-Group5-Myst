@@ -14,8 +14,8 @@ import org.json.JSONObject;
 import application.fileIO.GameLibraryIO;
 import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
-import application.model.server_impl.profile.ProfileAttributes;
 import application.model.server_impl.Server;
+import application.model.server_impl.ServerConstants;
 
 public class UserProfile extends application.model.abstract_impl.profile.UserProfile {
 
@@ -23,7 +23,6 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 
 	private static final String USERNAME_MUST_NOT_BE_NULL_OR_EMPTY = "username must not be null or empty";
 	private static final String PASSWORD_MUST_NOT_BE_NULL_OR_EMPTY = "password must not be null or empty";
-	private static final String INPUT_LIST_MUST_NOT_BE_NULL = "inputted game list must not be null";
 
 	private String username;
 	private String password;
@@ -60,14 +59,14 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 		var username = ActiveUser.getActiveUser().getUsername();
 		var json = new JSONObject();
 		try {
-			json.put("request_type", "get_all_owned_games");
-			json.put("username", username);
+			json.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_GET_ALL_OWNED_GAMES);
+			json.put(ServerConstants.KEY_USERNAME, username);
 
 			var response = Server.sendRequest(json.toString());
 			var jsonResponse = new JSONObject(response);
 
-			if (jsonResponse.getBoolean("success")) {
-				JSONArray gamesArray = jsonResponse.getJSONArray("games");
+			if (jsonResponse.getBoolean(ServerConstants.KEY_SUCCESS)) {
+				JSONArray gamesArray = jsonResponse.getJSONArray(ServerConstants.KEY_GAMES);
 				return GameLibraryIO.parseGamesFromJson(gamesArray).getGames();
 			} else {
 				System.err.println("Failed to fetch game library: " + jsonResponse.optString("message"));
@@ -84,10 +83,10 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 		var username = ActiveUser.getActiveUser().getUsername();
 
 		try {
-			json.put("request_type", "set_all_owned_games");
-			json.put("username", username);
+			json.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_SET_ALL_OWNED_GAMES);
+			json.put(ServerConstants.KEY_USERNAME, username);
 			var gamesArray = new JSONArray(ownedGames);
-			json.put("games", gamesArray);
+			json.put(ServerConstants.KEY_GAMES, gamesArray);
 
 			Server.sendRequest(json.toString());
 
@@ -104,12 +103,12 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 		var likedGames = new ArrayList<Game>();
 
 		try {
-			json.put("request_type", "get_all_liked_games");
-			json.put("username", username);
+			json.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_GET_ALL_LIKED_GAMES);
+			json.put(ServerConstants.KEY_USERNAME, username);
 
 			var response = Server.sendRequest(json.toString());
 			var jsonResponse = new JSONObject(response);
-			if (jsonResponse.getBoolean("success")) {
+			if (jsonResponse.getBoolean(ServerConstants.KEY_SUCCESS)) {
 				likedGames = (ArrayList<Game>) GameLibraryIO.parseGamesFromJson(jsonResponse.getJSONArray("games"))
 						.getGames();
 			}
@@ -126,10 +125,10 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 		var username = ActiveUser.getActiveUser().getUsername();
 
 		try {
-			json.put("request_type", "set_all_liked_games");
-			json.put("username", username);
+			json.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_SET_ALL_LIKED_GAMES);
+			json.put(ServerConstants.KEY_USERNAME, username);
 			var gamesArray = new JSONArray(likedGames);
-			json.put("games", gamesArray);
+			json.put(ServerConstants.KEY_GAMES, gamesArray);
 
 			Server.sendRequest(json.toString());
 
@@ -146,12 +145,12 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 		var disliked = new ArrayList<Game>();
 
 		try {
-			json.put("request_type", "get_all_disliked_games");
-			json.put("username", username);
+			json.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_GET_ALL_DISLIKED_GAMES);
+			json.put(ServerConstants.KEY_USERNAME, username);
 
 			var response = Server.sendRequest(json.toString());
 			var jsonResponse = new JSONObject(response);
-			if (jsonResponse.getBoolean("success")) {
+			if (jsonResponse.getBoolean(ServerConstants.KEY_SUCCESS)) {
 				disliked = (ArrayList<Game>) GameLibraryIO.parseGamesFromJson(jsonResponse.getJSONArray("games"))
 						.getGames();
 			}
@@ -168,10 +167,10 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 		var username = ActiveUser.getActiveUser().getUsername();
 
 		try {
-			json.put("request_type", "set_all_disliked_games");
-			json.put("username", username);
+			json.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_SET_ALL_DISLIKED_GAMES);
+			json.put(ServerConstants.KEY_USERNAME, username);
 			var gamesArray = new JSONArray(dislikedGames);
-			json.put("games", gamesArray);
+			json.put(ServerConstants.KEY_GAMES, gamesArray);
 
 			Server.sendRequest(json.toString());
 
@@ -207,13 +206,13 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 		var jsonObject = new JSONObject();
 
 		try {
-			jsonObject.put("request_type", "get_preferred_genres");
-			jsonObject.put("username", username);
+			jsonObject.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_GET_PREFERRED_GENRES);
+			jsonObject.put(ServerConstants.KEY_USERNAME, username);
 			
 			var response = Server.sendRequest(jsonObject.toString());
 			var responseJson = new JSONObject(response);
-			if (responseJson.getBoolean("success")) {
-				var genreStrings = responseJson.getJSONArray("genres");
+			if (responseJson.getBoolean(ServerConstants.KEY_SUCCESS)) {
+				var genreStrings = responseJson.getJSONArray(ServerConstants.VALUE_GENRES);
 				for (int i = 0; i < genreStrings.length(); i++) {
 					var genreStr = genreStrings.getString(i);
 					var genre = GameLibraryIO.toGenre(genreStr).get();
@@ -238,10 +237,10 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 			genreNames.add(genre.toString());
 		}
 		try {
-			json.put("request_type", "set_preferred_genres");
-			json.put("username", username);
+			json.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_SET_PREFERRED_GENRES);
+			json.put(ServerConstants.KEY_USERNAME, username);
 			var genreArray = new JSONArray(genreNames);
-			json.put("genres", genreArray);
+			json.put(ServerConstants.VALUE_GENRES, genreArray);
 
 			Server.sendRequest(json.toString());
 
@@ -258,11 +257,11 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 
 		var profileAttributes = new ProfileAttributes();
 		try {
-			descriptionJson.put("request_type", "get_about_me_description");
-			profilePictureJson.put("request_type", "get_user_profile_picture_path");
+			descriptionJson.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_ABOUT_ME_DESCRIPTION);
+			profilePictureJson.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_GET_USER_PROFILE_PICTURE_PATH);
 
-			descriptionJson.put("username", username);
-			profilePictureJson.put("username", username);
+			descriptionJson.put(ServerConstants.KEY_USERNAME, username);
+			profilePictureJson.put(ServerConstants.KEY_USERNAME, username);
 
 			var descriptionResponse = Server.sendRequest(descriptionJson.toString());
 			var profilePictureResponse = Server.sendRequest(profilePictureJson.toString());
@@ -270,9 +269,9 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 			var descriptionResponseJson = new JSONObject(descriptionResponse);
 			var profilePictureResponseJson = new JSONObject(profilePictureResponse);
 
-			if (descriptionResponseJson.getBoolean("success") && profilePictureResponseJson.getBoolean("success")) {
-				var description = descriptionResponseJson.get("description").toString();
-				var path = profilePictureResponseJson.get("path").toString();
+			if (descriptionResponseJson.getBoolean(ServerConstants.KEY_SUCCESS) && profilePictureResponseJson.getBoolean("success")) {
+				var description = descriptionResponseJson.get(ServerConstants.VALUE_DESCRIPTION).toString();
+				var path = profilePictureResponseJson.get(ServerConstants.VALUE_PATH).toString();
 
 				profileAttributes.setAboutMeDescription(description);
 				profileAttributes.setUserProfilePicturePath(path);
@@ -293,13 +292,13 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 		var firstTimeLogin = false;
 
 		try {
-			json.put("request_type", "get_first_time_login");
-			json.put("username", username);
+			json.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_GET_FIRST_TIME_LOGIN);
+			json.put(ServerConstants.KEY_USERNAME, username);
 
 			var response = Server.sendRequest(json.toString());
 			var jsonResponse = new JSONObject(response);
-			if (jsonResponse.getBoolean("success")) {
-				firstTimeLogin = jsonResponse.getBoolean("first_time_login");
+			if (jsonResponse.getBoolean(ServerConstants.KEY_SUCCESS)) {
+				firstTimeLogin = jsonResponse.getBoolean(ServerConstants.VALUE_FIRST_TIME_LOGIN);
 			}
 
 		} catch (JSONException e) {
@@ -314,9 +313,9 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 		var username = ActiveUser.getActiveUser().getUsername();
 
 		try {
-			json.put("request_type", "set_first_time_login");
-			json.put("username", username);
-			json.put("first_time_login", firstTimeLogin);
+			json.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_SET_FIRST_TIME_LOGIN);
+			json.put(ServerConstants.KEY_USERNAME, username);
+			json.put(ServerConstants.VALUE_FIRST_TIME_LOGIN, firstTimeLogin);
 
 			Server.sendRequest(json.toString());
 
