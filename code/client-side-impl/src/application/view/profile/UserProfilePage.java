@@ -292,7 +292,6 @@ public class UserProfilePage {
 		this.validateOtherComponents();
 	}
 	
-
 	private void validateOtherComponents() {
 		assert this.profileImageSideBar != null
 				: "fx:id=\"profileImageSideBar\" was not injected: check your FXML file 'UserProfilePage.fxml'.";
