@@ -64,7 +64,6 @@ public class UserGameLibraryViewModel {
 	 * Sets the up game library.
 	 */
 	public void setUpGameLibrary() {
-		this.userGameLibrary = new UserGameLibrary(ActiveUser.getActiveUser());
 		ObservableList<Game> likedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllLikedGames());
 		ObservableList<Game> dislikedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllDislikedGames());
 		ObservableList<Game> ownedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllOwnedGames());

@@ -156,6 +156,8 @@ public class UserGameLibraryPage {
 
 	private void setupListView() {
 		this.myGamesListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		this.gameListComboBox.getSelectionModel().select(0);
+		this.viewModel.setSelectedList("Liked Games");
 	}
 	
 	private void setupComboBox() {
