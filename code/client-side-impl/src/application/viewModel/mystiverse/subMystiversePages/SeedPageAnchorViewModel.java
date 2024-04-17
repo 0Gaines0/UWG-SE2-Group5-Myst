@@ -3,7 +3,6 @@ package application.viewModel.mystiverse.subMystiversePages;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import application.Main;
 import application.model.server_impl.GameRecommendationEngine;
@@ -104,11 +103,17 @@ public class SeedPageAnchorViewModel {
 		this.allGenres.setValue(allGenreList);
 	}
 	
+	/**
+	 * Sets the up selected games list.
+	 */
 	public void setUpSelectedGamesList() {
 		ObservableList<Game> selectedGames = FXCollections.observableArrayList(this.getSelectedSeedGames());
 		this.selectedSeedGames.setValue(selectedGames);
 	}
 	
+	/**
+	 * Sets the up selected genres list.
+	 */
 	public void setUpSelectedGenresList() {
 		ObservableList<Genre> selectedGenres = FXCollections.observableArrayList(this.getSelectedSeedGenres());
 		this.selectedSeedGenres.setValue(selectedGenres);
