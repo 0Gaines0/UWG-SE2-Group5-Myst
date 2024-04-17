@@ -9,17 +9,21 @@ import application.model.local_impl.game.Genre;
 import application.model.server_impl.profile.ActiveUser;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 
 public class AllGamesPageAnchorViewModel {
 
 	private Property<Image> imageProperty;
+	private StringProperty gameDescTextProperty;
 	
 	/**
 	 * Instantiates a new all games page anchor view model.
 	 */
 	public AllGamesPageAnchorViewModel() {
 		this.imageProperty = new SimpleObjectProperty<Image>();
+		this.gameDescTextProperty = new SimpleStringProperty();
 	}
 	
 	/**
@@ -118,5 +122,23 @@ public class AllGamesPageAnchorViewModel {
 	public void setImage(String link) {
 		var image = new Image(link, true);
 		this.imageProperty.setValue(image);
+	}
+	
+	/**
+	 * Gets the game desc string property.
+	 *
+	 * @return the game desc string property
+	 */
+	public StringProperty getGameDescStringProperty() {
+		return this.gameDescTextProperty;
+	}
+	
+	/**
+	 * Sets the game desc.
+	 *
+	 * @param string the new game desc
+	 */
+	public void setGameDesc(String string) {
+		this.gameDescTextProperty.setValue(string);
 	}
 }
