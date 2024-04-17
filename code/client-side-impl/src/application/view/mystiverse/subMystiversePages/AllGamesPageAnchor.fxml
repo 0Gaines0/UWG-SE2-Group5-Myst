@@ -27,8 +27,8 @@
       <ImageView fx:id="gameSelectedImageView" fitHeight="175.0" fitWidth="308.0" layoutX="269.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="gameImageView" fitHeight="150.0" fitWidth="266.0" layoutX="125.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" />
       <TextArea fx:id="gameDescTextArea" layoutX="444.0" layoutY="41.0" prefHeight="150.0" prefWidth="266.0" wrapText="true" />
-      <Button fx:id="addGameButton" layoutX="704.0" layoutY="214.0" mnemonicParsing="false" text="Add Game" />
-      <Label fx:id="addGameLabel" layoutX="686.0" layoutY="239.0" prefHeight="18.0" prefWidth="97.0" text="Add Game Successful" textFill="WHITE">
+      <Button fx:id="addGameButton" layoutX="659.0" layoutY="214.0" mnemonicParsing="false" text="Add Game to Liked" />
+      <Label fx:id="addGameLabel" layoutX="686.0" layoutY="239.0" prefHeight="18.0" prefWidth="97.0" text="Add Game Successful" textFill="WHITE" visible="false">
          <font>
             <Font name="Comic Sans MS" size="9.0" />
          </font>

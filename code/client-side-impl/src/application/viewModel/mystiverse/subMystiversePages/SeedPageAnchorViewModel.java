@@ -1,7 +1,9 @@
 package application.viewModel.mystiverse.subMystiversePages;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import application.Main;
 import application.model.server_impl.GameRecommendationEngine;
@@ -14,8 +16,8 @@ import javafx.collections.ObservableList;
 
 public class SeedPageAnchorViewModel {
 
-	private List<Genre> selectedSeedGenres;
-	private List<Game> selectedSeedGames;
+	private ListProperty<Genre> selectedSeedGenres;
+	private ListProperty<Game> selectedSeedGames;
 	private ListProperty<Game> allGames;	
 	private ListProperty<Genre> allGenres;
 	private List<Game> generatedRecommendations;
@@ -26,8 +28,8 @@ public class SeedPageAnchorViewModel {
 	public SeedPageAnchorViewModel() {
 		this.allGames = new SimpleListProperty<Game>();
 		this.allGenres = new SimpleListProperty<Genre>();
-		this.selectedSeedGames = new ArrayList<Game>();
-		this.selectedSeedGenres = new ArrayList<Genre>();
+		this.selectedSeedGames = new SimpleListProperty<Game>();
+		this.selectedSeedGenres = new SimpleListProperty<Genre>();
 	}
 	
 	/**
@@ -64,6 +66,27 @@ public class SeedPageAnchorViewModel {
 		}
 	}
 	
+	/**
+	 * Removes the selected game.
+	 *
+	 * @param newValue the new value
+	 */
+	public void removeSelectedGame(Game newValue) {
+		if (this.selectedSeedGames.contains(newValue)) {
+			this.selectedSeedGames.remove(newValue);
+		}
+	}
+
+	/**
+	 * Removes the selected genre.
+	 *
+	 * @param newGenre the new genre
+	 */
+	public void removeSelectedGenre(Genre newGenre) {
+		if (this.selectedSeedGenres.contains(newGenre)) {
+			this.getSelectedSeedGenres().remove(newGenre);
+		}
+	}
 	
 	/**
 	 * Sets the up all games list.
@@ -80,13 +103,23 @@ public class SeedPageAnchorViewModel {
 		ObservableList<Genre> allGenreList = FXCollections.observableArrayList(Genre.values());
 		this.allGenres.setValue(allGenreList);
 	}
+	
+	public void setUpSelectedGamesList() {
+		ObservableList<Game> selectedGames = FXCollections.observableArrayList(this.getSelectedSeedGames());
+		this.selectedSeedGames.setValue(selectedGames);
+	}
+	
+	public void setUpSelectedGenresList() {
+		ObservableList<Genre> selectedGenres = FXCollections.observableArrayList(this.getSelectedSeedGenres());
+		this.selectedSeedGenres.setValue(selectedGenres);
+	}
 
 	/**
 	 * Gets the selected seed genres.
 	 *
 	 * @return the selected seed genres
 	 */
-	public List<Genre> getSelectedSeedGenres() {
+	public ListProperty<Genre> getSelectedSeedGenres() {
 		return this.selectedSeedGenres;
 	}
 
@@ -95,7 +128,7 @@ public class SeedPageAnchorViewModel {
 	 *
 	 * @param selectedSeedGenres the new selected seed genres
 	 */
-	public void setSelectedSeedGenres(List<Genre> selectedSeedGenres) {
+	public void setSelectedSeedGenres(ListProperty<Genre> selectedSeedGenres) {
 		this.selectedSeedGenres = selectedSeedGenres;
 	}
 
@@ -104,7 +137,7 @@ public class SeedPageAnchorViewModel {
 	 *
 	 * @return the selected seed games
 	 */
-	public List<Game> getSelectedSeedGames() {
+	public ListProperty<Game> getSelectedSeedGames() {
 		return this.selectedSeedGames;
 	}
 
@@ -113,7 +146,7 @@ public class SeedPageAnchorViewModel {
 	 *
 	 * @param selectedSeedGames the new selected seed games
 	 */
-	public void setSelectedSeedGames(List<Game> selectedSeedGames) {
+	public void setSelectedSeedGames(ListProperty<Game> selectedSeedGames) {
 		this.selectedSeedGames = selectedSeedGames;
 	}
 
@@ -169,5 +202,52 @@ public class SeedPageAnchorViewModel {
 	 */
 	public void setAllGenres(ListProperty<Genre> allGenres) {
 		this.allGenres = allGenres;
+	}
+
+	/**
+	 * Filter games search.
+	 *
+	 * @param text the text
+	 * @param items the items
+	 * @return the list
+	 */
+	public List<Game> filterGamesSearch(String text, ObservableList<Game> items) {
+		List<Game> results = new ArrayList<Game>();
+		if (text != null) {
+			var filteredGames = items.stream().filter(game -> game.getName().toLowerCase().contains(text))
+					.toList();
+			if (filteredGames.size() != 0) {
+				results = filteredGames;
+			} else {
+				results = Main.getGames();
+			}
+		} else {
+			results = Main.getGames();
+		}
+		return results;
+	}
+
+	/**
+	 * Filter genres search.
+	 *
+	 * @param text the text
+	 * @param items the items
+	 * @return the list
+	 */
+	public List<Genre> filterGenresSearch(String text, ObservableList<Genre> items) {
+        List<Genre> results = new ArrayList<Genre>();
+        ArrayList<Genre> fullList = new ArrayList<Genre>(Arrays.asList(Genre.values()));
+        if (text != null && !text.isEmpty()) {
+            var filteredResults = items.stream()
+                           .filter(genre -> genre.toString().toLowerCase().contains(text)).toList();
+            if (filteredResults.size() != 0) {
+            	results = filteredResults;
+            } else {
+            	results = fullList;
+            }
+        } else {
+        	results = fullList;
+        }
+        return results;
 	}
 }

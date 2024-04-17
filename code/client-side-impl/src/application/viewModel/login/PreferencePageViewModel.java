@@ -131,8 +131,4 @@ public class PreferencePageViewModel {
 	public List<Game> getSelectedLikedGames() {
 		return this.selectedLikedGames;
 	}
-
-	
-
-	
 }
