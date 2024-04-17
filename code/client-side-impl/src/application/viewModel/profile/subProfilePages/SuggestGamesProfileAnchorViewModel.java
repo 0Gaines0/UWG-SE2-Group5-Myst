@@ -109,6 +109,39 @@ public class SuggestGamesProfileAnchorViewModel {
 			throw new IllegalArgumentException(e.getMessage());
 		}
 	}
+	
+	/**
+	 * Adds the selected game to liked games.
+	 */
+	public void addSelectedGameToLikedGames() {
+		var game = this.selectedSuggestedGameProperty.getValue();
+		var likedGames = ActiveUser.getActiveUser().getAllLikedGames();
+		likedGames.add(game);
+		ActiveUser.getActiveUser().setAllLikedGames(likedGames);
+		this.removeSelectedGameFromSuggestedGames();
+	}
+	
+	/**
+	 * Adds the selcted game to disliked games.
+	 */
+	public void addSelctedGameToDislikedGames() {
+		var game = this.selectedSuggestedGameProperty.getValue();
+		var dislikedGames = ActiveUser.getActiveUser().getAllDislikedGames();
+		dislikedGames.add(game);
+		ActiveUser.getActiveUser().setAllDislikedGames(dislikedGames);
+		this.removeSelectedGameFromSuggestedGames();
+	}
+	
+	/**
+	 * Removes the selected game from suggested games.
+	 */
+	public void removeSelectedGameFromSuggestedGames() {
+		var game = this.selectedSuggestedGameProperty.getValue();
+		var suggestedGames = ActiveUser.getActiveUser().getSuggestedToUserGames();
+		suggestedGames.remove(game);
+		ActiveUser.getActiveUser().setSuggestedToUserGames(suggestedGames);
+		
+	}
 
 	/**
 	 * Try username.

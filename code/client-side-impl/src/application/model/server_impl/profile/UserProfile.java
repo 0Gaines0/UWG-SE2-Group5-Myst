@@ -83,7 +83,21 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 	 * @param suggestedGames the new suggested to user games
 	 */
 	public void setSuggestedToUserGames(List<Game> suggestedGames) {
-		//TODO
+		var username = ActiveUser.getActiveUser().getUsername();
+		var json = new JSONObject();
+		
+		
+		try {
+			json.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_SET_SUGGESTED_GAMES);
+			json.put(ServerConstants.KEY_USERNAME, username);
+			var gamesArray = new JSONArray(suggestedGames);
+			json.put(ServerConstants.KEY_GAMES, gamesArray);
+			
+			Server.sendRequest(json.toString());
+			
+		} catch (JSONException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
 		
 		
 	}
