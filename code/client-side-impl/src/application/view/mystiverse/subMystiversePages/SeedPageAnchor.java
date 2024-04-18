@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -22,6 +23,12 @@ public class SeedPageAnchor {
     @FXML
     private ResourceBundle resources;
 
+    @FXML
+    private TextField gamesSearchBar;
+    
+    @FXML
+    private TextField genresSearchBar;
+    
     @FXML
     private URL location;
 
@@ -58,7 +65,17 @@ public class SeedPageAnchor {
     	this.bindToViewModel();
     	this.setupButton();
     	this.setupListView();
+    	this.setupSearchBars();
     }
+	
+	private void setupSearchBars() {
+    	this.gamesSearchBar.setOnKeyReleased((event) -> {
+    		this.gamesListView.getItems().setAll(this.viewmodel.filterGamesSearch(this.gamesSearchBar.getText().toLowerCase(), this.gamesListView.getItems()));
+    	});
+    	this.genresSearchBar.setOnKeyReleased((event) -> {
+    		this.genresListView.getItems().setAll(this.viewmodel.filterGenresSearch(this.genresSearchBar.getText().toLowerCase(), this.genresListView.getItems()));
+    	});
+	}
     
 	private void setupButton() {
 	    this.beginRecommendationsButton.setOnAction((event) -> {
@@ -87,16 +104,41 @@ public class SeedPageAnchor {
 		this.genresListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		this.viewmodel.setUpAllGamesList();
 		this.viewmodel.setUpAllGenresList();
+		this.viewmodel.setUpSelectedGamesList();
+		this.viewmodel.setUpSelectedGenresList();
 	}
     
 	private void bindToViewModel() {
 		this.gamesListView.itemsProperty().bindBidirectional(this.viewmodel.getAllGames());
 		this.genresListView.itemsProperty().bindBidirectional(this.viewmodel.getAllGenres());
-
+		this.selectedGamesListView.itemsProperty().bindBidirectional(this.viewmodel.getSelectedSeedGames());
+		this.selectedGenresListView.itemsProperty().bindBidirectional(this.viewmodel.getSelectedSeedGenres());
 		this.setUpLikedGamesChangeListener();
 		this.setUpLikedGenresChangeListener();
+		this.setUpSelectedGamesChangeListener();
+		this.setUpSelectedGenresChangeListener();
 	}
 
+	private void setUpLikedGamesChangeListener() {
+		this.gamesListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null) {
+				this.viewmodel.addSelectedGame(newValue);
+				if (!this.selectedGamesListView.getItems().contains(newValue)) {
+					this.selectedGamesListView.getItems().add(newValue);
+				}
+			}
+		});
+	}
+	
+	private void setUpSelectedGamesChangeListener() {
+		this.selectedGamesListView.setOnMouseClicked(event -> {
+			var item = this.selectedGamesListView.getSelectionModel().getSelectedItem();
+			if (item != null) {
+				this.viewmodel.removeSelectedGame(item);
+			}
+		});
+	}
+	
 	private void setUpLikedGenresChangeListener() {
 		this.genresListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue != null) {
@@ -107,17 +149,14 @@ public class SeedPageAnchor {
 			}
 		});
 	}
-
-	private void setUpLikedGamesChangeListener() {
-		this.gamesListView.getSelectionModel().selectedItemProperty()
-				.addListener((observable, oldValue, newValue) -> {
-					if (newValue != null) {
-						this.viewmodel.addSelectedGame(newValue);
-						if (!this.selectedGamesListView.getItems().contains(newValue)) {
-							this.selectedGamesListView.getItems().add(newValue);
-						}
-					}
-				});
+	
+	private void setUpSelectedGenresChangeListener() {
+		this.selectedGenresListView.setOnMouseClicked(event -> {
+			var item = this.selectedGenresListView.getSelectionModel().getSelectedItem();
+			if (item != null) {
+				this.viewmodel.removeSelectedGenre(item);
+			}
+		});
 	}
     
 	/**
@@ -140,6 +179,8 @@ public class SeedPageAnchor {
     
     private void validateFxml() {
         assert this.beginRecommendationsButton != null : "fx:id=\"beginRecommendationsButton\" was not injected: check your FXML file 'SeedPageAnchor.fxml'.";
+        assert this.gamesSearchBar != null : "fx:id=\"gamesSearchBar\" was not injected: check your FXML file 'SeedPageAnchor.fxml'.";
+        assert this.genresSearchBar != null : "fx:id=\"genresSearchBar\" was not injected: check your FXML file 'SeedPageAnchor.fxml'.";
         assert this.gamesListView != null : "fx:id=\"gamesListView\" was not injected: check your FXML file 'SeedPageAnchor.fxml'.";
         assert this.genresListView != null : "fx:id=\"genresListView\" was not injected: check your FXML file 'SeedPageAnchor.fxml'.";
         assert this.seedPageAnchorPane != null : "fx:id=\"seedPageAnchorPane\" was not injected: check your FXML file 'SeedPageAnchor.fxml'.";

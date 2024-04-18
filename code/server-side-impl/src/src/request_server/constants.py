@@ -42,6 +42,8 @@ GET_PASSWORD = "get_password"
 SET_PASSWORD = "set_password"
 GET_PREFERRED_GENRES = "get_preferred_genres"
 SET_PREFERRED_GENRES = "set_preferred_genres"
+GET_SUGGESTED_GAMES = "get_suggested_games"
+SET_SUGGESTED_GAMES = "set_suggested_games"
 
 GET_ABOUT_ME_DESCRIPTION = "get_about_me_description"
 SET_ABOUT_ME_DESCRIPTION = "set_about_me_description"

@@ -27,6 +27,7 @@ public class Main extends Application {
 	public static final String MYSTIVERSE_PAGE_ALL_GAMES_TAB_TWO = "../subMystiversePages/AllGamesPageAnchor.fxml";
 	public static final String EDIT_PREFERENCES_ANCHOR = "../subProfilePages/EditPreferencesAnchor.fxml";
 	public static final String PROFILE_SETTINGS_ANCHOR = "../subProfilePages/SettingsProfileAnchor.fxml";
+	public static final String SUGGEST_GAMES_ANCHOR = "../subProfilePages/SuggestGamesProfileAnchor.fxml";
 	public static final String GAME_CARD_PAGE = "../game/GameCardPage.fxml";
 	public static final String PREFERENCE_PAGE_WINDOW = "../login/PreferencePage.fxml";
 	
