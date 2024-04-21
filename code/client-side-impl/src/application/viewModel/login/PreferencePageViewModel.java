@@ -8,9 +8,14 @@ import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
 import application.model.server_impl.profile.ActiveUser;
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 
 /**
  * the first time login page view model.
@@ -27,6 +32,10 @@ public class PreferencePageViewModel {
 	private List<Game> selectedLikedGames;
 	private List<Genre> selectedLikedGenres;
 	
+	private Property<Image> imageProperty;
+	private StringProperty gameDescTextProperty;
+
+	
 	/**
 	 * the first time login page view model.
 	 */
@@ -36,6 +45,10 @@ public class PreferencePageViewModel {
 		
 		this.selectedLikedGames = new ArrayList<Game>();
 		this.selectedLikedGenres = new ArrayList<Genre>();
+		this.imageProperty = new SimpleObjectProperty<Image>();
+		this.gameDescTextProperty = new SimpleStringProperty();
+
+
 	}
 	
 	/**
@@ -94,6 +107,17 @@ public class PreferencePageViewModel {
 	}
 	
 	/**
+	 * Removes the selected game.
+	 *
+	 * @param newValue the new value
+	 */
+	public void removeSelectedGame(Game newValue) {
+		if (this.selectedLikedGames.contains(newValue)) {
+			this.selectedLikedGames.remove(newValue);
+		}
+	}
+	
+	/**
 	 * Adds the selected genre.
 	 *
 	 * @param newGenre the new genre
@@ -131,4 +155,42 @@ public class PreferencePageViewModel {
 	public List<Game> getSelectedLikedGames() {
 		return this.selectedLikedGames;
 	}
+	
+	/**
+	 * Gets the image property.
+	 *
+	 * @return the image property
+	 */
+	public Property<Image> getImageProperty() {
+		return this.imageProperty;
+	}
+	
+	/**
+	 * Sets the image.
+	 *
+	 * @param link the new image
+	 */
+	public void setImage(String link) {
+		var image = new Image(link, true);
+		this.imageProperty.setValue(image);
+	}
+	
+	/**
+	 * Gets the game desc string property.
+	 *
+	 * @return the game desc string property
+	 */
+	public StringProperty getGameDescStringProperty() {
+		return this.gameDescTextProperty;
+	}
+	
+	/**
+	 * Sets the game desc.
+	 *
+	 * @param string the new game desc
+	 */
+	public void setGameDesc(String string) {
+		this.gameDescTextProperty.setValue(string);
+	}
+
 }
