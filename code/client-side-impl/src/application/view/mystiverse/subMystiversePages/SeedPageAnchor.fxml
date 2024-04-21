@@ -14,21 +14,21 @@
       <Button fx:id="beginRecommendationsButton" layoutX="685.0" layoutY="491.0" mnemonicParsing="false" style="-fx-background-color: #DDE2C6; -fx-text-fill: #598381;" text="Begin with Custom Seed" />
       <ListView fx:id="genresListView" layoutX="177.0" layoutY="79.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #DDE2C6;" styleClass="listview-cell" stylesheets="@../../profile/assets/styles.css" />
       <ListView fx:id="gamesListView" layoutX="422.0" layoutY="79.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #DDE2C6;" styleClass="listview-cell" stylesheets="@../../profile/assets/styles.css" />
-      <Label layoutX="177.0" layoutY="14.0" prefHeight="17.0" prefWidth="200.0" text="Please Select Genres" textFill="WHITE">
+      <Label layoutX="177.0" layoutY="14.0" prefHeight="17.0" prefWidth="200.0" text="Please Select Genres">
          <font>
-            <Font name="Comic Sans MS" size="15.0" />
+            <Font name="Comic Sans MS Bold" size="15.0" />
          </font></Label>
-      <Label layoutX="422.0" layoutY="14.0" prefHeight="17.0" prefWidth="200.0" text="Please Select Games" textFill="WHITE">
+      <Label layoutX="422.0" layoutY="14.0" prefHeight="17.0" prefWidth="200.0" text="Please Select Games">
          <font>
-            <Font name="Comic Sans MS" size="15.0" />
+            <Font name="Comic Sans MS Bold" size="15.0" />
          </font></Label>
-      <Label layoutX="177.0" layoutY="279.0" prefHeight="17.0" prefWidth="200.0" text="Selected Genres" textFill="WHITE">
+      <Label layoutX="177.0" layoutY="279.0" prefHeight="17.0" prefWidth="200.0" text="Selected Genres">
          <font>
-            <Font name="Comic Sans MS" size="15.0" />
+            <Font name="Comic Sans MS Bold" size="15.0" />
          </font></Label>
-      <Label layoutX="422.0" layoutY="279.0" prefHeight="17.0" prefWidth="200.0" text="Selected Games" textFill="WHITE">
+      <Label layoutX="422.0" layoutY="279.0" prefHeight="17.0" prefWidth="200.0" text="Selected Games">
          <font>
-            <Font name="Comic Sans MS" size="15.0" />
+            <Font name="Comic Sans MS Bold" size="15.0" />
          </font></Label>
       <TextField fx:id="genresSearchBar" layoutX="177.0" layoutY="43.0" promptText="Search Genres" style="-fx-background-color: #DDE2C6; -fx-prompt-text-fill: #598381;" />
       <TextField fx:id="gamesSearchBar" layoutX="422.0" layoutY="43.0" promptText="Search Games" style="-fx-background-color: #DDE2C6; -fx-prompt-text-fill: #598381;" />
