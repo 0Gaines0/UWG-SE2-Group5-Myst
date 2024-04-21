@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="parentBorderPane" maxHeight="600.0" maxWidth="1024.0" minHeight="600.0" minWidth="1024.0" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.UserGameLibraryPage.UserGameLibraryPage">
+<BorderPane fx:id="parentBorderPane" maxHeight="600.0" maxWidth="1024.0" minHeight="600.0" minWidth="1024.0" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.UserGameLibraryPage.UserGameLibraryPage">
    <top>
       <AnchorPane prefHeight="72.0" prefWidth="600.0" style="-fx-background-color: #2E3138;" BorderPane.alignment="CENTER">
          <children>
@@ -72,7 +72,7 @@
                   <Font name="Comic Sans MS" size="20.0" />
                </font>
             </Text>
-            <ListView fx:id="myGamesListView" layoutX="14.0" layoutY="48.0" prefHeight="429.0" prefWidth="200.0">
+            <ListView fx:id="myGamesListView" layoutX="14.0" layoutY="48.0" prefHeight="429.0" prefWidth="200.0" style="-fx-background-color: #DDE2C6;" styleClass="listview-cell" stylesheets="@../profile/assets/styles.css">
                <contextMenu>
                   <ContextMenu fx:id="myGamesListViewContextMenu">
                     <items>
@@ -80,8 +80,8 @@
                     </items>
                   </ContextMenu>
                </contextMenu></ListView>
-            <Button fx:id="addGameButton" layoutX="148.0" layoutY="489.0" mnemonicParsing="false" text="Add Game" />
-            <ComboBox fx:id="gameListComboBox" layoutX="114.0" layoutY="14.0" prefHeight="25.0" prefWidth="98.0" visibleRowCount="3" />
+            <Button fx:id="addGameButton" layoutX="148.0" layoutY="489.0" mnemonicParsing="false" style="-fx-background-color: #DDE2C6; -fx-text-fill: #598381;" text="Add Game" />
+            <ComboBox fx:id="gameListComboBox" layoutX="114.0" layoutY="14.0" prefHeight="25.0" prefWidth="98.0" style="-fx-background-color: #DDE2C6;" visibleRowCount="3" />
          </children>
       </AnchorPane>
    </left>
@@ -98,31 +98,44 @@
                   <Font size="15.0" />
                </font>
             </Text>
-            <TextField fx:id="gameTitleTextField" editable="false" layoutX="50.0" layoutY="93.0" />
+            <TextField fx:id="gameTitleTextField" editable="false" layoutX="50.0" layoutY="93.0" style="-fx-background-color: #DDE2C6; -fx-prompt-text-fill: #598381;" />
             <Text layoutX="50.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developers">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <TextField fx:id="gameDevelopersTextField" editable="false" layoutX="50.0" layoutY="163.0" />
+            <TextField fx:id="gameDevelopersTextField" editable="false" layoutX="50.0" layoutY="163.0" style="-fx-background-color: #DDE2C6; -fx-prompt-text-fill: #598381;" />
             <Text layoutX="50.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genres">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <ListView fx:id="gameGenresListView" layoutX="50.0" layoutY="228.0" prefHeight="253.0" prefWidth="150.0" />
+            <ListView fx:id="gameGenresListView" layoutX="50.0" layoutY="228.0" prefHeight="253.0" prefWidth="150.0" style="-fx-background-color: #DDE2C6;" styleClass="listview-cell" stylesheets="@../profile/assets/styles.css" />
             <Text layoutX="587.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Community">
                <font>
                   <Font name="Comic Sans MS" size="20.0" />
                </font>
             </Text>
             <ImageView fx:id="gamePhotoImageView" fitHeight="161.0" fitWidth="243.0" layoutX="222.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" />
-            <TextArea fx:id="gameDescriptionTextBox" layoutX="221.0" layoutY="233.0" prefHeight="239.0" prefWidth="246.0" stylesheets="@../profile/assets/styles.css" wrapText="true">
+            <TextArea fx:id="gameDescriptionTextBox" layoutX="221.0" layoutY="233.0" prefHeight="265.0" prefWidth="246.0" stylesheets="@../profile/assets/styles.css" wrapText="true">
                <styleClass>
                   <String fx:value="content" />
                   <String fx:value="root" />
                   <String fx:value="text" />
                </styleClass></TextArea>
+            <TextArea fx:id="communityTextArea" editable="false" layoutX="494.0" layoutY="61.0" prefHeight="265.0" prefWidth="285.0" stylesheets="@../profile/assets/styles.css">
+               <styleClass>
+                  <String fx:value="content" />
+                  <String fx:value="root" />
+                  <String fx:value="text" />
+               </styleClass></TextArea>
+            <TextField fx:id="commentTextField" layoutX="498.0" layoutY="371.0" prefHeight="77.0" prefWidth="281.0" style="-fx-background-color: #DDE2C6; -fx-prompt-text-fill: #598381;" />
+            <Button fx:id="submitButton" layoutX="727.0" layoutY="456.0" mnemonicParsing="false" text="Submit" />
+            <Text layoutX="587.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Comment">
+               <font>
+                  <Font name="Comic Sans MS" size="20.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </center>

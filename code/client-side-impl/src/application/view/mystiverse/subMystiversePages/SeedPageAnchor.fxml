@@ -7,13 +7,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="seedPageAnchorPane" prefHeight="530.0" prefWidth="844.0" style="-fx-background-color: #446662;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.mystiverse.subMystiversePages.SeedPageAnchor">
+<AnchorPane fx:id="seedPageAnchorPane" prefHeight="530.0" prefWidth="844.0" style="-fx-background-color: #446662;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.mystiverse.subMystiversePages.SeedPageAnchor">
    <children>
-      <ListView fx:id="selectedGenresListView" layoutX="177.0" layoutY="304.0" prefHeight="200.0" prefWidth="200.0" />
-      <ListView fx:id="selectedGamesListView" layoutX="422.0" layoutY="304.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button fx:id="beginRecommendationsButton" layoutX="685.0" layoutY="491.0" mnemonicParsing="false" text="Begin with Custom Seed" />
-      <ListView fx:id="genresListView" layoutX="177.0" layoutY="79.0" prefHeight="200.0" prefWidth="200.0" />
-      <ListView fx:id="gamesListView" layoutX="422.0" layoutY="79.0" prefHeight="200.0" prefWidth="200.0" />
+      <ListView fx:id="selectedGenresListView" layoutX="177.0" layoutY="304.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #DDE2C6;" styleClass="listview-cell" stylesheets="@../../profile/assets/styles.css" />
+      <ListView fx:id="selectedGamesListView" layoutX="422.0" layoutY="304.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #DDE2C6;" styleClass="listview-cell" stylesheets="@../../profile/assets/styles.css" />
+      <Button fx:id="beginRecommendationsButton" layoutX="685.0" layoutY="491.0" mnemonicParsing="false" style="-fx-background-color: #DDE2C6; -fx-text-fill: #598381;" text="Begin with Custom Seed" />
+      <ListView fx:id="genresListView" layoutX="177.0" layoutY="79.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #DDE2C6;" styleClass="listview-cell" stylesheets="@../../profile/assets/styles.css" />
+      <ListView fx:id="gamesListView" layoutX="422.0" layoutY="79.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #DDE2C6;" styleClass="listview-cell" stylesheets="@../../profile/assets/styles.css" />
       <Label layoutX="177.0" layoutY="14.0" prefHeight="17.0" prefWidth="200.0" text="Please Select Genres" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS" size="15.0" />
@@ -30,7 +30,7 @@
          <font>
             <Font name="Comic Sans MS" size="15.0" />
          </font></Label>
-      <TextField fx:id="genresSearchBar" layoutX="177.0" layoutY="43.0" promptText="Search Genres" />
-      <TextField fx:id="gamesSearchBar" layoutX="422.0" layoutY="43.0" promptText="Search Games" />
+      <TextField fx:id="genresSearchBar" layoutX="177.0" layoutY="43.0" promptText="Search Genres" style="-fx-background-color: #DDE2C6; -fx-prompt-text-fill: #598381;" />
+      <TextField fx:id="gamesSearchBar" layoutX="422.0" layoutY="43.0" promptText="Search Games" style="-fx-background-color: #DDE2C6; -fx-prompt-text-fill: #598381;" />
    </children>
 </AnchorPane>
