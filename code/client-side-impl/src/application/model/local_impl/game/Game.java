@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import application.model.local_impl.profile.ActiveUser;
+
 /**
  * Stores and manages information for a single Game.
  *
@@ -25,6 +27,7 @@ public class Game {
 	private double averageReview;
 	private int totalNumberOfReviews;
 	private String description;
+	private String comments;
 
 	/**
 	 * Gets the description.
@@ -159,6 +162,18 @@ public class Game {
 	 */
 	public int getTotalNumberOfReviews() {
 		return this.totalNumberOfReviews;
+	}
+	
+	public String getComments() {
+		return this.comments;
+	}
+	
+	public void setComments(String newComment) {
+		if (this.comments == null) {
+			this.comments = newComment + "\n";
+		} else {
+			this.comments = this.comments + newComment + "\n";
+		}
 	}
 
 	/**

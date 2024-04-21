@@ -51,6 +51,8 @@ public class UserGameLibraryViewModel {
 	/** The selected games list property. */
 	private ListProperty<Game> selectedGamesListProperty;
 	
+	private StringProperty commentsProperty;
+	
 	private Property<Image> imageProperty;
 
 
@@ -67,6 +69,7 @@ public class UserGameLibraryViewModel {
 		this.selectedGamesListProperty = new SimpleListProperty<Game>();
 		this.imageProperty = new SimpleObjectProperty<Image>();
 		this.gameDescriptionProperty = new SimpleStringProperty();
+		this.commentsProperty = new SimpleStringProperty();
 
 
 	}
@@ -75,7 +78,6 @@ public class UserGameLibraryViewModel {
 	 * Sets the up game library.
 	 */
 	public void setUpGameLibrary() {
-		this.userGameLibrary = new UserGameLibrary(ActiveUser.getActiveUser());
 		ObservableList<Game> likedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllLikedGames());
 		ObservableList<Game> dislikedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllDislikedGames());
 		ObservableList<Game> ownedGames = FXCollections.observableArrayList(ActiveUser.getActiveUser().getAllOwnedGames());
@@ -160,6 +162,10 @@ public class UserGameLibraryViewModel {
 	public ListProperty<Game> getSelectedGamesListProperty() {
 		return this.selectedGamesListProperty;
 	}
+	
+	public StringProperty getCommentsProperty() {
+		return this.commentsProperty;
+	}
 
 	/**
 	 * Sets the selected game.
@@ -177,7 +183,13 @@ public class UserGameLibraryViewModel {
 		this.selectedGameDeveloperProperty.set(this.selectedGame.getDevelopers());
 		this.imageProperty.setValue(new Image(game.getGamePhoto(), true));
 		this.gameDescriptionProperty.set(game.getDescription());
+		this.commentsProperty.set(game.getComments());
 
+	}
+	
+	public void updateSelectedGameComments(String comment) {
+		this.selectedGame.setComments(comment);
+		this.commentsProperty.set(this.selectedGame.getComments());
 	}
 	
 	/**

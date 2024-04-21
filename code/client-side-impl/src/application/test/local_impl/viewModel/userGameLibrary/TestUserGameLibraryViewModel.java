@@ -1,5 +1,6 @@
 package application.test.local_impl.viewModel.userGameLibrary;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class TestUserGameLibraryViewModel {
 	@BeforeEach
 	public void setUp() {
 		this.viewModel = new UserGameLibraryViewModel();
-		ActiveUser.setActiveUser(new UserProfile());
+		ActiveUser.setActiveUser(new UserProfile("username", "password"));
 		this.viewModel.setUpGameLibrary();
 	}
 
@@ -33,7 +34,7 @@ public class TestUserGameLibraryViewModel {
 	 */
 	@Test
 	public void testSetUpGameLibrary() {
-		assertNotNull(this.viewModel.getOwnedGames());
+		assertEquals(ActiveUser.getActiveUser().getAllOwnedGames(), this.viewModel.getOwnedGames());
 	}
 
 	/**
