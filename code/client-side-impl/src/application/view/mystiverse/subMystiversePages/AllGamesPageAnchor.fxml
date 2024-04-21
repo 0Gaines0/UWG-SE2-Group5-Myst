@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ContextMenu?>
@@ -12,9 +13,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="allGamesAnchorPane" prefHeight="530.0" prefWidth="844.0" style="-fx-background-color: #446662;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.mystiverse.subMystiversePages.AllGamesPageAnchor">
+<AnchorPane fx:id="allGamesAnchorPane" prefHeight="530.0" prefWidth="844.0" style="-fx-background-color: #446662;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.mystiverse.subMystiversePages.AllGamesPageAnchor">
    <children>
-      <ListView fx:id="allGamesListView" layoutX="68.0" layoutY="265.0" prefHeight="244.0" prefWidth="709.0">
+      <ListView fx:id="allGamesListView" layoutX="68.0" layoutY="265.0" prefHeight="244.0" prefWidth="709.0" style="-fx-background-color: #DDE2C6;" styleClass="listview-cell" stylesheets="@../../profile/assets/styles.css">
          <contextMenu>
             <ContextMenu fx:id="addGameToInterestedMenuItem">
               <items>
@@ -22,12 +23,17 @@
               </items>
             </ContextMenu>
          </contextMenu></ListView>
-      <TextField fx:id="searchBar" layoutX="68.0" layoutY="214.0" promptText="Search..." />
-      <ComboBox fx:id="genresComboBox" layoutX="241.0" layoutY="214.0" prefWidth="150.0" promptText="Genres" />
+      <TextField fx:id="searchBar" layoutX="68.0" layoutY="227.0" promptText="Search..." style="-fx-background-color: #DDE2C6; -fx-prompt-text-fill: #598381;" />
+      <ComboBox fx:id="genresComboBox" layoutX="241.0" layoutY="227.0" prefWidth="150.0" promptText="Genres" style="-fx-background-color: #DDE2C6;" />
       <ImageView fx:id="gameSelectedImageView" fitHeight="175.0" fitWidth="308.0" layoutX="269.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="gameImageView" fitHeight="150.0" fitWidth="266.0" layoutX="125.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" />
-      <TextArea fx:id="gameDescTextArea" layoutX="444.0" layoutY="41.0" prefHeight="150.0" prefWidth="266.0" wrapText="true" />
-      <Button fx:id="addGameButton" layoutX="659.0" layoutY="214.0" mnemonicParsing="false" text="Add Game to Liked" />
+      <TextArea fx:id="gameDescTextArea" layoutX="444.0" layoutY="7.0" prefHeight="203.0" prefWidth="266.0" stylesheets="@../../profile/assets/styles.css" wrapText="true">
+         <styleClass>
+            <String fx:value="content" />
+            <String fx:value="root" />
+            <String fx:value="text" />
+         </styleClass></TextArea>
+      <Button fx:id="addGameButton" layoutX="659.0" layoutY="227.0" mnemonicParsing="false" style="-fx-background-color: #DDE2C6; -fx-text-fill: #598381;" text="Add Game to Liked" />
       <Label fx:id="addGameLabel" layoutX="686.0" layoutY="239.0" prefHeight="18.0" prefWidth="97.0" text="Add Game Successful" textFill="WHITE" visible="false">
          <font>
             <Font name="Comic Sans MS" size="9.0" />

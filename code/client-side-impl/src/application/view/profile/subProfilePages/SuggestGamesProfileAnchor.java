@@ -55,7 +55,7 @@ public class SuggestGamesProfileAnchor {
 
 	@FXML
 	private TextField usernameTextField;
-	
+
 	private SuggestGamesProfileAnchorViewModel viewModel;
 
 	/**
@@ -63,8 +63,8 @@ public class SuggestGamesProfileAnchor {
 	 */
 	public SuggestGamesProfileAnchor() {
 		this.viewModel = new SuggestGamesProfileAnchorViewModel();
-	}	
-	
+	}
+
 	@FXML
 	void initialize() {
 		this.validateFXMLComponents();
@@ -72,7 +72,7 @@ public class SuggestGamesProfileAnchor {
 		this.setUpBtns();
 		this.setUpAllListViews();
 	}
-	
+
 	/**
 	 * Open anchor pane.
 	 *
@@ -92,12 +92,14 @@ public class SuggestGamesProfileAnchor {
 
 		}
 	}
-	
+
 	private void bindToViewmodel() {
 		this.usernameTextField.textProperty().bindBidirectional(this.viewModel.getInputtedUsernameProperty());
 		this.allGameListView.itemsProperty().bindBidirectional(this.viewModel.getAllGamesProperty());
 		this.gamesSuggestedToUserListView.itemsProperty().bindBidirectional(this.viewModel.getSuggestedGamesProperty());
-		this.viewModel.getSelectedGameToSuggestProperty().bind(this.allGameListView.getSelectionModel().selectedItemProperty());
+		this.viewModel.getSelectedGameToSuggestProperty()
+				.bind(this.allGameListView.getSelectionModel().selectedItemProperty());
+		this.viewModel.getSelectedSuggestedGameProperty().bind(this.gamesSuggestedToUserListView.getSelectionModel().selectedItemProperty());
 		this.setUpSearchGameChangeListener();
 	}
 
@@ -117,7 +119,7 @@ public class SuggestGamesProfileAnchor {
 	private void setUpAllListViews() {
 		this.setUpAllGamesListView();
 		this.setUpSuggestedGamesListView();
-		
+
 	}
 
 	private void setUpAllGamesListView() {
@@ -137,6 +139,7 @@ public class SuggestGamesProfileAnchor {
 					var confirmPopUp = new Alert(AlertType.CONFIRMATION);
 					confirmPopUp.setContentText("Suggestion successful!");
 					confirmPopUp.showAndWait();
+					this.setUpSuggestedGamesListView();
 				} else {
 					var errorPopUp = new Alert(AlertType.ERROR);
 					errorPopUp.setContentText("Suggestion failed, username does not exist");
@@ -148,19 +151,37 @@ public class SuggestGamesProfileAnchor {
 
 	private void setUpLikeGameBtn() {
 		this.listGameBtn.setOnAction(((event -> {
-
+			if (this.gamesSuggestedToUserListView.getSelectionModel().getSelectedItem() != null) {
+				this.viewModel.addSelectedGameToLikedGames();
+				var confirmPopUp = new Alert(AlertType.CONFIRMATION);
+				confirmPopUp.setContentText("Game added to liked games successfully!");
+				confirmPopUp.showAndWait();
+				this.setUpSuggestedGamesListView();
+			}
 		})));
 	}
 
 	private void setUpDislikeGameBtn() {
 		this.dislikedGameBtn.setOnAction(((event -> {
-
+			if (this.gamesSuggestedToUserListView.getSelectionModel().getSelectedItem() != null) {
+				this.viewModel.addSelctedGameToDislikedGames();
+				var confirmPopUp = new Alert(AlertType.CONFIRMATION);
+				confirmPopUp.setContentText("Game added to disliked games successfully!");
+				confirmPopUp.showAndWait();
+				this.setUpSuggestedGamesListView();
+			}
 		})));
 	}
 
 	private void setUpRemoveGameBtn() {
 		this.removeGameBtn.setOnAction(((event -> {
-
+			if (this.gamesSuggestedToUserListView.getSelectionModel().getSelectedItem() != null) {
+				this.viewModel.removeSelectedGameFromSuggestedGames();
+				var confirmPopUp = new Alert(AlertType.CONFIRMATION);
+				confirmPopUp.setContentText("Suggested game removed successfully!");
+				confirmPopUp.showAndWait();
+				this.setUpSuggestedGamesListView();
+			}
 		})));
 	}
 

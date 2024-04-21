@@ -16,7 +16,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -58,6 +60,15 @@ public class PreferencePage {
 
 	@FXML
 	private TextField searchGamesTextField;
+
+	@FXML
+	private Button removeButton;
+
+	@FXML
+	private ImageView selectedGameImageView;
+
+	@FXML
+	private TextArea selectedGameShortDescriptionTextArea;
 
 	private PreferencePageViewModel viewmodel;
 	private UserProfilePage userProfileCodeBehind;
@@ -103,13 +114,15 @@ public class PreferencePage {
 		this.likedGamesListView.itemsProperty().bindBidirectional(this.viewmodel.getAllGames());
 		this.genresListView.itemsProperty().bindBidirectional(this.viewmodel.getAllGenreProperty());
 
+		this.selectedGameImageView.imageProperty().bindBidirectional(this.viewmodel.getImageProperty());
+		this.selectedGameShortDescriptionTextArea.textProperty().bindBidirectional(this.viewmodel.getGameDescStringProperty());
 		this.setUpLikedGamesChangeListener();
 		this.setUpLikedGenresChangeListener();
 		this.setUpSearchGameChangeListener();
 	}
 
 	private void setUpSearchGameChangeListener() {
-		this.searchGamesTextField.textProperty().addListener((observable, oldValue, newValue) -> { 
+		this.searchGamesTextField.textProperty().addListener((observable, oldValue, newValue) -> {
 			this.viewmodel.searchAllGamesAndFilter(newValue);
 		});
 	}
@@ -132,7 +145,10 @@ public class PreferencePage {
 						this.viewmodel.addSelectedGame(newValue);
 						if (!this.selectedLikedGamesListView.getItems().contains(newValue)) {
 							this.selectedLikedGamesListView.getItems().add(newValue);
+							
 						}
+						this.viewmodel.setImage(newValue.getGamePhoto());
+						this.viewmodel.setGameDesc(newValue.getDescription());
 					}
 				});
 	}
@@ -156,6 +172,13 @@ public class PreferencePage {
 			stage.close();
 			this.userProfileCodeBehind.openUserProfilePage();
 		});
+		this.removeButton.setOnAction(((event) -> {
+			var game = this.selectedLikedGamesListView.getSelectionModel().selectedItemProperty().get();
+			if (game != null) {
+				this.viewmodel.removeSelectedGame(game);
+				this.selectedLikedGamesListView.getItems().remove(game);
+			}
+		}));
 	}
 
 	private void fxmlValidCmponents() {
@@ -172,8 +195,14 @@ public class PreferencePage {
 				: "fx:id=\"selectedGenresListView\" was not injected: check your FXML file 'PreferencePage.fxml'.";
 		assert this.selectedLikedGamesListView != null
 				: "fx:id=\"selectedLikedGamesListView\" was not injected: check your FXML file 'PreferencePage.fxml'.";
-        assert this.searchGamesTextField != null : "fx:id=\"searchGamesTextField\" was not injected: check your FXML file 'PreferencePage.fxml'.";
-
+		assert this.searchGamesTextField != null
+				: "fx:id=\"searchGamesTextField\" was not injected: check your FXML file 'PreferencePage.fxml'.";
+		assert this.removeButton != null
+				: "fx:id=\"removeButton\" was not injected: check your FXML file 'PreferencePage.fxml'.";
+		assert this.selectedGameImageView != null
+				: "fx:id=\"selectedGameImageView\" was not injected: check your FXML file 'PreferencePage.fxml'.";
+		assert this.selectedGameShortDescriptionTextArea != null
+				: "fx:id=\"selectedGameShortDescriptionTextArea\" was not injected: check your FXML file 'PreferencePage.fxml'.";
 
 	}
 }

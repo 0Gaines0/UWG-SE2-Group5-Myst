@@ -8,6 +8,7 @@ import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
 import application.model.server_impl.game.GameLibraryManager;
 import application.viewModel.mystiverse.subMystiversePages.SeedPageAnchorViewModel;
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
 
@@ -95,8 +96,8 @@ class TestSeedPageAnchorViewModel {
 	
 	@Test
 	void testSettersAndGetters() {
-		this.viewModel.setSelectedSeedGenres(new ArrayList<Genre>());
-		this.viewModel.setSelectedSeedGames(new ArrayList<Game>());
+		this.viewModel.setSelectedSeedGenres(new SimpleListProperty<Genre>());
+		this.viewModel.setSelectedSeedGames(new SimpleListProperty<Game>());
 		this.viewModel.setGeneratedRecommendations(new ArrayList<Game>());
 		this.viewModel.setAllGames(new SimpleListProperty<Game>());
 		this.viewModel.setAllGenres(new SimpleListProperty<Genre>());
