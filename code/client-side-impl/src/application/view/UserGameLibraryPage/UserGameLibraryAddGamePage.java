@@ -10,6 +10,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -52,6 +53,9 @@ public class UserGameLibraryAddGamePage {
     @FXML
     private ImageView gameImageView;
     
+    @FXML
+    private TextArea descriptionTextArea;
+    
     private AllGamesPageAnchorViewModel viewModel;
     
     /**
@@ -69,6 +73,7 @@ public class UserGameLibraryAddGamePage {
     	this.setupGenresComboBox();
     	this.setupListView();
     	this.setupImageView();
+    	this.setupGameDescTextBox();
     	this.setupButtons();
     	this.setupContextMenu();
     }
@@ -87,6 +92,10 @@ public class UserGameLibraryAddGamePage {
     
     private void setupImageView() {
     	this.gameImageView.imageProperty().bindBidirectional(this.viewModel.getImageProperty());
+    }
+    
+    private void setupGameDescTextBox() {
+    	this.descriptionTextArea.textProperty().bindBidirectional(this.viewModel.getGameDescStringProperty());
     }
     
     private void setupSearchbar() {
