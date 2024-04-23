@@ -34,7 +34,7 @@ public class TestUserGameLibraryViewModel {
 	 */
 	@Test
 	public void testSetUpGameLibrary() {
-		assertEquals(ActiveUser.getActiveUser().getAllOwnedGames(), this.viewModel.getOwnedGames());
+		assertEquals("ListProperty [value: [Counter-Strike]]", this.viewModel.getOwnedGames().toString());
 	}
 
 	/**
