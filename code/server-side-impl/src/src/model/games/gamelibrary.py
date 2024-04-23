@@ -73,3 +73,36 @@ class GameLibrary:
             if game.game_id == game_id:
                 return game
         return None
+    
+    def get_comments_by_game_id(self, game_id):
+        """
+        Fetches comments for a specific game based on its ID.
+        
+        Args:
+            game_id (int): The ID of the game whose comments are to be retrieved.
+            
+        Returns:
+            list of str: List of comments for the game. Returns an empty list if no game is found.
+        """
+        game = self.find_game_by_id(game_id)
+        if game:
+            return game.get_comments()
+        return []
+    
+    def add_comment_to_game(self, game_id, comment):
+        """
+        Adds a comment to a specific game identified by its ID.
+        
+        Args:
+            game_id (int): The ID of the game to which the comment should be added.
+            comment (str): The comment to add.
+            
+        Raises:
+            ValueError: If no game with the given ID is found.
+        """
+        game = self.find_game_by_id(game_id)
+        if game:
+            game.add_comment(comment)
+        else:
+            raise ValueError("No game found with ID {}".format(game_id))
+        

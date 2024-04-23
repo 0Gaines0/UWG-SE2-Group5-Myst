@@ -6,6 +6,7 @@ public class ServerConstants {
 	public static final String KEY_PASSWORD = "password";
 	public static final String KEY_SUCCESS = "success";
 	public static final String KEY_GAMES = "games";
+	public static final String KEY_GAME_ID = "gameID";
 	
 	public static final String VALUE_SET_FIRST_TIME_LOGIN = "set_first_time_login";
 	public static final String VALUE_GET_FIRST_TIME_LOGIN = "get_first_time_login";
@@ -33,4 +34,6 @@ public class ServerConstants {
 	public static final String VALUE_FIRST_TIME_LOGIN = "first_time_login";
 	public static final String VALUE_GET_SUGGESTED_GAMES = "get_suggested_games";
 	public static final String VALUE_SET_SUGGESTED_GAMES = "set_suggested_games";
+	public static final String VALUE_GET_COMMENTS = "get_game_comments";
+	public static final String VALUE_SET_COMMENTS = "set_game_comments";
 }

@@ -135,3 +135,4 @@ class Game:
         self.average_playtime = average_playtime
         self.game_photo_link = game_photo_link
         self.description = description
+        self.comments = ""
