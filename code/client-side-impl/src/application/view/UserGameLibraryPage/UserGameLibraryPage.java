@@ -133,6 +133,7 @@ public class UserGameLibraryPage {
 			newStage.initOwner(((Stage) (parent.getScene().getWindow())));
 			newStage.setTitle(Main.WINDOW_TITLE);
 			newStage.setScene(scene);
+			newStage.setResizable(false);
 			newStage.show();
 		} catch (IOException error) {
 			error.printStackTrace();
@@ -161,6 +162,7 @@ public class UserGameLibraryPage {
 				newStage.initOwner(((Stage) (parent.getScene().getWindow())));
 				newStage.setTitle(Main.WINDOW_TITLE);
 				newStage.setScene(scene);
+				newStage.setResizable(false);
 				newStage.showAndWait();
 				this.updateSelectedListDisplay();
 			} catch (IOException error) {

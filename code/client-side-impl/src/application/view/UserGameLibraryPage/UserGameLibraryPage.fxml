@@ -72,7 +72,7 @@
                   <Font name="Comic Sans MS" size="20.0" />
                </font>
             </Text>
-            <ListView fx:id="myGamesListView" layoutX="14.0" layoutY="48.0" prefHeight="429.0" prefWidth="200.0" style="-fx-background-color: #DDE2C6;" styleClass="listview-cell" stylesheets="@../profile/assets/styles.css">
+            <ListView fx:id="myGamesListView" layoutX="14.0" layoutY="48.0" prefHeight="429.0" prefWidth="221.0" style="-fx-background-color: #DDE2C6;" styleClass="listview-cell" stylesheets="@../profile/assets/styles.css">
                <contextMenu>
                   <ContextMenu fx:id="myGamesListViewContextMenu">
                     <items>
@@ -80,8 +80,8 @@
                     </items>
                   </ContextMenu>
                </contextMenu></ListView>
-            <Button fx:id="addGameButton" layoutX="148.0" layoutY="489.0" mnemonicParsing="false" style="-fx-background-color: #DDE2C6; -fx-text-fill: #598381;" text="Add Game" />
-            <ComboBox fx:id="gameListComboBox" layoutX="114.0" layoutY="14.0" prefHeight="25.0" prefWidth="98.0" style="-fx-background-color: #DDE2C6;" visibleRowCount="3" />
+            <Button fx:id="addGameButton" layoutX="162.0" layoutY="489.0" mnemonicParsing="false" style="-fx-background-color: #DDE2C6; -fx-text-fill: #598381;" text="Add Game" />
+            <ComboBox fx:id="gameListComboBox" layoutX="114.0" layoutY="14.0" prefHeight="25.0" prefWidth="122.0" promptText="Liked Games" style="-fx-background-color: #DDE2C6;" visibleRowCount="3" />
          </children>
       </AnchorPane>
    </left>

@@ -15,7 +15,7 @@
 
 <AnchorPane fx:id="allGamesAnchorPane" prefHeight="530.0" prefWidth="844.0" style="-fx-background-color: #446662;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.mystiverse.subMystiversePages.AllGamesPageAnchor">
    <children>
-      <ListView fx:id="allGamesListView" layoutX="68.0" layoutY="265.0" prefHeight="244.0" prefWidth="709.0" style="-fx-background-color: #DDE2C6;" styleClass="listview-cell" stylesheets="@../../profile/assets/styles.css">
+      <ListView fx:id="allGamesListView" layoutX="47.0" layoutY="272.0" prefHeight="244.0" prefWidth="709.0" style="-fx-background-color: #DDE2C6;" styleClass="listview-cell" stylesheets="@../../profile/assets/styles.css">
          <contextMenu>
             <ContextMenu fx:id="addGameToInterestedMenuItem">
               <items>
