@@ -5,6 +5,7 @@ import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
 import application.viewModel.mystiverse.subMystiversePages.AllGamesPageAnchorViewModel;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
@@ -12,6 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -125,11 +127,20 @@ public class UserGameLibraryAddGamePage {
     private void setupContextMenu() {
     	this.addToLikedMenuItem.setOnAction((event) -> {
     		this.viewModel.addGameToInterestedList(this.gamesListView.getSelectionModel().getSelectedItem());
+    		var errorPopUp = new Alert(AlertType.CONFIRMATION);
+			errorPopUp.setContentText("Selected game was added to your liked games !");
+			errorPopUp.showAndWait();
     	});
     	this.addToDislikedMenuItem.setOnAction((event) -> {
     		this.viewModel.addGameToDislikedList(this.gamesListView.getSelectionModel().getSelectedItem());
+    		var errorPopUp = new Alert(AlertType.CONFIRMATION);
+			errorPopUp.setContentText("Selected game was added to your disliked games !");
+			errorPopUp.showAndWait();
     	});
     	this.addToOwnedMenuItem.setOnAction((event) -> {
+    		var errorPopUp = new Alert(AlertType.CONFIRMATION);
+			errorPopUp.setContentText("Selected game was added to your owned games !");
+			errorPopUp.showAndWait();
     		this.viewModel.addGameToOwnedList(this.gamesListView.getSelectionModel().getSelectedItem());
     	});
     }
