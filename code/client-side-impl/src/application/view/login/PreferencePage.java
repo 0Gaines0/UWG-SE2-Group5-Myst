@@ -94,6 +94,7 @@ public class PreferencePage {
 			newStage.initOwner(((Stage) (parent.getScene().getWindow())));
 			newStage.setTitle(Main.WINDOW_TITLE);
 			newStage.setScene(scene);
+			newStage.setResizable(false);
 			newStage.show();
 
 		} catch (IOException error) {

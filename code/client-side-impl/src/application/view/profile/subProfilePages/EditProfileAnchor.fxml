@@ -2,16 +2,14 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="530.0" prefWidth="844.0" style="-fx-background-color: #446662;" xmlns="http://javafx.com/javafx/18.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.profile.subProfilePages.EditProfileAnchor">
+<AnchorPane fx:id="anchorPane" prefHeight="530.0" prefWidth="844.0" style="-fx-background-color: #446662;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.profile.subProfilePages.EditProfileAnchor">
    <children>
       <Text layoutX="14.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit About Me: ">
          <font>
@@ -53,23 +51,5 @@
             <Font name="Comic Sans MS" size="14.0" />
          </font>
       </Text>
-      <Text layoutX="403.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a Favorite Game:">
-         <font>
-            <Font name="Comic Sans MS" size="18.0" />
-         </font>
-      </Text>
-      <ComboBox fx:id="selectAGameComboBox" layoutX="529.0" layoutY="322.0" prefWidth="150.0" promptText="Select a Game" />
-      <Text layoutX="498.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:">
-         <font>
-            <Font name="Comic Sans MS" size="14.0" />
-         </font>
-      </Text>
-      <TextField fx:id="gameTitleTextFIeld" layoutX="546.0" layoutY="361.0" style="-fx-background-color: #000; -fx-text-fill: #FFF;" />
-      <Text layoutX="498.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre(s):">
-         <font>
-            <Font name="Comic Sans MS" size="14.0" />
-         </font>
-      </Text>
-      <TextField fx:id="genreTitleTextField" layoutX="568.0" layoutY="392.0" style="-fx-background-color: #000; -fx-text-fill: #FFF;" />
    </children>
 </AnchorPane>
