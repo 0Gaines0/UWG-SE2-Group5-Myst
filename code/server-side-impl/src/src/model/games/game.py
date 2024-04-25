@@ -135,4 +135,20 @@ class Game:
         self.average_playtime = average_playtime
         self.game_photo_link = game_photo_link
         self.description = description
-        self.comments = ""
+        self.comments = []
+        
+    def get_comments(self):
+        """
+        Returns a list of comments associated with the game.
+        """
+        return self.comments
+
+    def add_comment(self, comment):
+        """
+        Adds a new comment to the game.
+        
+        Args:
+            comment (str): The comment to be added.
+        """
+        if comment:  # Ensure the comment is not empty
+            self.comments.append(comment)

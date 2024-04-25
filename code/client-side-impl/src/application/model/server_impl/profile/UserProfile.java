@@ -302,30 +302,6 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 		}
 	}
 	
-	public String fetchComments(int gameID) {
-	    JSONObject requestJson = new JSONObject();
-	    try {
-	        requestJson.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_GET_COMMENTS);
-	        requestJson.put(ServerConstants.KEY_GAME_ID, gameID);
-	        String response = Server.sendRequest(requestJson.toString());
-	        return new JSONObject(response).getString("comments");
-	    } catch (JSONException e) {
-	    	throw new IllegalArgumentException(e.getMessage());
-	    }
-	}
-
-	public void sendComment(int gameID, String comment) {
-	    JSONObject requestJson = new JSONObject();
-	    try {
-	        requestJson.put(ServerConstants.KEY_REQUEST_TYPE, ServerConstants.VALUE_GET_COMMENTS);
-	        requestJson.put(ServerConstants.KEY_GAME_ID, gameID);
-	        requestJson.put("comment", comment);
-	        Server.sendRequest(requestJson.toString());
-	    } catch (JSONException e) {
-	    	throw new IllegalArgumentException(e.getMessage());
-	    }
-	}
-
 	@Override
 	public ProfileAttributes getProfileAttributes() {
 		var descriptionJson = new JSONObject();
