@@ -2,6 +2,7 @@ package application.viewModel.UserGameLibrary;
 
 import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
+import application.model.server_impl.game.GameLibraryManager;
 import application.model.server_impl.profile.ActiveUser;
 import application.model.server_impl.profile.UserGameLibrary;
 import javafx.beans.property.ListProperty;
@@ -183,13 +184,13 @@ public class UserGameLibraryViewModel {
 		this.selectedGameDeveloperProperty.set(this.selectedGame.getDevelopers());
 		this.imageProperty.setValue(new Image(game.getGamePhoto(), true));
 		this.gameDescriptionProperty.set(game.getDescription());
-		this.commentsProperty.set(game.getComments());
+		this.commentsProperty.set(GameLibraryManager.fetchComments(game.getGameID()));
 
 	}
 	
 	public void updateSelectedGameComments(String comment) {
-		this.selectedGame.setComments(comment);
-		this.commentsProperty.set(this.selectedGame.getComments());
+		GameLibraryManager.sendComment(this.selectedGame.getGameID(), comment);
+		this.commentsProperty.set(GameLibraryManager.fetchComments(this.selectedGame.getGameID()));
 	}
 	
 	/**

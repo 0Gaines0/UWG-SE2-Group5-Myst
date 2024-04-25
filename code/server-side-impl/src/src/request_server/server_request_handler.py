@@ -120,6 +120,13 @@ class Server_Request_Handler:
         if request_type == constants.SET_SUGGESTED_GAMES:
             response = self._set_suggested_games(request)
             
+        if request_type == constants.SET_GAME_COMMENTS:
+            response = self._set_game_comments(request)
+            
+        if request_type == constants.GET_GAME_COMMENTS:
+            response = self._get_game_comments(request)
+            
+            
         return response
     
     def _set_suggested_games(self, request):
@@ -665,6 +672,29 @@ class Server_Request_Handler:
             response[constants.KEY_FAILURE_MESSAGE] = str(e)
         return response
     
+    def _get_game_comments(self, request):
+        response = {}
+        try:
+            game_id = request['gameID']
+            comments = self.game_database.get_comments_by_game_id(game_id)
+            response[constants.KEY_SUCCESS] = constants.VALUE_TRUE
+            response['comments'] = comments
+        except Exception as e:
+            response[constants.KEY_SUCCESS] = constants.VALUE_FALSE
+            response['error'] = str(e)
+        return response
+
+    def _set_game_comments(self, request):
+        response = {}
+        try:
+            game_id = request['gameID']
+            comment = request['comment']
+            self.game_database.add_comment_to_game(game_id, comment)  
+            response[constants.KEY_SUCCESS] = constants.VALUE_TRUE
+        except Exception as e:
+            response[constants.KEY_SUCCESS] = constants.VALUE_FALSE
+            response['error'] = str(e)
+        return response
 
             
             

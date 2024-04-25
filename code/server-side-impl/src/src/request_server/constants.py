@@ -57,5 +57,8 @@ SET_FIRST_TIME_LOGIN = "set_first_time_login"
 
 SET_ACTIVE_USER = "set_active_user"
 
+SET_GAME_COMMENTS = "set_game_comments"
+GET_GAME_COMMENTS =  "get_game_comments"
+
 
 GET_GAME_LIBRARY_REQUEST_TYPE = "get_game_library"

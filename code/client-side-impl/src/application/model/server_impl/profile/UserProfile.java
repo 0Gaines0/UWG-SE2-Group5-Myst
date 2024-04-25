@@ -301,7 +301,7 @@ public class UserProfile extends application.model.abstract_impl.profile.UserPro
 			throw new IllegalArgumentException(e.getMessage());
 		}
 	}
-
+	
 	@Override
 	public ProfileAttributes getProfileAttributes() {
 		var descriptionJson = new JSONObject();
