@@ -156,29 +156,29 @@ public class UserGameLibraryAddGamePage {
 	}
 
 	private void validateFXML() {
-		assert addGameToLibraryContextMenu != null
+		assert this.addGameToLibraryContextMenu != null
 				: "fx:id=\"addGameToLibraryContextMenu\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
-		assert addToDislikedButton != null
+		assert this.addToDislikedButton != null
 				: "fx:id=\"addToDislikedButton\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
-		assert addToDislikedMenuItem != null
+		assert this.addToDislikedMenuItem != null
 				: "fx:id=\"addToDislikedMenuItem\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
-		assert addToLikedButton != null
+		assert this.addToLikedButton != null
 				: "fx:id=\"addToLikedButton\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
-		assert addToLikedMenuItem != null
+		assert this.addToLikedMenuItem != null
 				: "fx:id=\"addToLikedMenuItem\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
-		assert addToOwnedButton != null
+		assert this.addToOwnedButton != null
 				: "fx:id=\"addToOwnedButton\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
-		assert addToOwnedMenuItem != null
+		assert this.addToOwnedMenuItem != null
 				: "fx:id=\"addToOwnedMenuItem\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
-		assert anchorPane != null
+		assert this.anchorPane != null
 				: "fx:id=\"anchorPane\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
-		assert gameImageView != null
+		assert this.gameImageView != null
 				: "fx:id=\"gameImageView\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
-		assert gamesListView != null
+		assert this.gamesListView != null
 				: "fx:id=\"gamesListView\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
-		assert genresComboBox != null
+		assert this.genresComboBox != null
 				: "fx:id=\"genresComboBox\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
-		assert searchTextField != null
+		assert this.searchTextField != null
 				: "fx:id=\"searchTextField\" was not injected: check your FXML file 'UserGameLibraryAddGamePage.fxml'.";
 	}
 

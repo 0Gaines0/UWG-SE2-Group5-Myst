@@ -12,8 +12,11 @@ public class ProfileAttributes extends application.model.abstract_impl.profile.P
 	private static final String DESCRIPTION_MUST_BE_VALID = "description inputted must not be null or empty";
 	private static final String IMAGE_PATH_MUST_BE_VALID = "image path inputted must not be null or empty";
 	
+	@SuppressWarnings("unused")
 	private String aboutMeDescription;
+	@SuppressWarnings("unused")
 	private Game favoriteGame;
+	@SuppressWarnings("unused")
 	private String userProfilePicturePath;
 
 	/**

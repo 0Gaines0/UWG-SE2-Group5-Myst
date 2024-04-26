@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import application.model.local_impl.profile.ActiveUser;
 
 /**
  * Stores and manages information for a single Game.
@@ -100,7 +99,7 @@ public class Game {
 	public int getReleaseDateYear() {
 		return this.releaseDateYear;
 	}
-	
+
 	/**
 	 * Sets the release date year.
 	 *
@@ -154,7 +153,7 @@ public class Game {
 	public double getAverageReview() {
 		return this.averageReview;
 	}
-	
+
 	/**
 	 * Gets the average playtime of the game.
 	 * 
@@ -163,11 +162,29 @@ public class Game {
 	public int getTotalNumberOfReviews() {
 		return this.totalNumberOfReviews;
 	}
-	
+
+	/**
+	 * Retrieves the concatenated string of all comments associated with this game.
+	 *
+	 * This method returns a string containing all comments added to this game. Each
+	 * comment is separated by a newline character.
+	 *
+	 * @return a String containing all comments, or an empty string if no comments
+	 *         are present.
+	 */
 	public String getComments() {
 		return this.comments;
 	}
-	
+
+	/**
+	 * Adds a new comment to this game.
+	 *
+	 * This method appends a new comment to the existing comments string. Each
+	 * comment will be separated by a newline character. If there are no existing
+	 * comments, it initializes the comments string with the new comment.
+	 *
+	 * @param newComment the new comment to be added.
+	 */
 	public void setComments(String newComment) {
 		if (this.comments == null) {
 			this.comments = newComment + "\n";
@@ -188,10 +205,10 @@ public class Game {
 			throw new IllegalArgumentException("Name must not be null");
 		}
 		this.genres = (genres == null) ? new ArrayList<>() : new ArrayList<>(genres);
-	    if (this.genres.isEmpty()) {
-	        this.genres.add(Genre.MISSING_GENRE);
-	        System.out.println(this.genres);
-	    }
+		if (this.genres.isEmpty()) {
+			this.genres.add(Genre.MISSING_GENRE);
+			System.out.println(this.genres);
+		}
 		if (gameID == 0) {
 			throw new IllegalArgumentException("Genre must not be null");
 		}
@@ -212,7 +229,7 @@ public class Game {
 	 * @param numberNegativeReviews the number negative reviews
 	 * @param averagePlaytime       the average playtime
 	 * @param gamePhotoLink         the game photo link
-	 * @param description the description
+	 * @param description           the description
 	 */
 	public Game(String name, List<Genre> genres, int gameID, String developers, int releaseDateYear,
 			int releaseDateMonth, int numberPositiveReviews, int numberNegativeReviews, int averagePlaytime,
@@ -231,31 +248,32 @@ public class Game {
 	}
 
 	private double calculateWeightedAverage(int numberPositiveReviews, int numberNegativeReviews) {
-	    final double baselineScore = 5.0;
-	    final double baselineCount = 10.0;
-	    final double reviewVolumeWeight = 0.5;
-	    final double maxVolumeEffect = 2.0;
-	    double totalReviews = numberPositiveReviews + numberNegativeReviews;
-	    double weightedScore;
+		final double baselineScore = 5.0;
+		final double baselineCount = 10.0;
+		final double reviewVolumeWeight = 0.5;
+		final double maxVolumeEffect = 2.0;
+		double totalReviews = numberPositiveReviews + numberNegativeReviews;
+		double weightedScore;
 
-	    if (totalReviews == 0) {
-	        return baselineScore; 
-	    } else {
-	        weightedScore = ((double) numberPositiveReviews + baselineScore * baselineCount - numberNegativeReviews) / (totalReviews + baselineCount);
-	    }
+		if (totalReviews == 0) {
+			return baselineScore;
+		} else {
+			weightedScore = ((double) numberPositiveReviews + baselineScore * baselineCount - numberNegativeReviews)
+					/ (totalReviews + baselineCount);
+		}
 
-	    double reviewVolumeFactor = Math.min(1.0 + Math.log10(1 + totalReviews) * reviewVolumeWeight, maxVolumeEffect);
-	    weightedScore *= reviewVolumeFactor;
+		double reviewVolumeFactor = Math.min(1.0 + Math.log10(1 + totalReviews) * reviewVolumeWeight, maxVolumeEffect);
+		weightedScore *= reviewVolumeFactor;
 
-	    weightedScore = Math.max(weightedScore, 0); 
+		weightedScore = Math.max(weightedScore, 0);
 
-	    double minScale = 1.0;
-	    double maxScale = 10.0;
-	    double normalizedScore = ((weightedScore + 1) / 2) * (maxScale - minScale) + minScale;
+		double minScale = 1.0;
+		double maxScale = 10.0;
+		double normalizedScore = ((weightedScore + 1) / 2) * (maxScale - minScale) + minScale;
 
-	    normalizedScore = Math.max(minScale, Math.min(normalizedScore, maxScale));
+		normalizedScore = Math.max(minScale, Math.min(normalizedScore, maxScale));
 
-	    return normalizedScore;
+		return normalizedScore;
 	}
 
 	@Override

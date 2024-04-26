@@ -32,10 +32,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class UserGameLibraryPage {
-	
+
 	@FXML
 	private AnchorPane baseAnchorPane;
-	
+
 	@FXML
 	private BorderPane parentBorderPane;
 
@@ -68,29 +68,27 @@ public class UserGameLibraryPage {
 
 	@FXML
 	private ImageView profileImageNavBar;
-	
+
 	@FXML
-    private ComboBox<String> gameListComboBox;
-	
+	private ComboBox<String> gameListComboBox;
+
 	@FXML
 	private ContextMenu myGamesListViewContextMenu;
-	
-	@FXML
-    private MenuItem removeGameContextMenuItem;
-	
-	@FXML
-    private Button addGameButton;
-	
-    @FXML
-    private TextArea gameDescriptionTextBox;
-    
-    @FXML
-    private TextField commentTextField;
-    
-    @FXML
-    private Button submitButton;
 
+	@FXML
+	private MenuItem removeGameContextMenuItem;
 
+	@FXML
+	private Button addGameButton;
+
+	@FXML
+	private TextArea gameDescriptionTextBox;
+
+	@FXML
+	private TextField commentTextField;
+
+	@FXML
+	private Button submitButton;
 
 	private UserGameLibraryViewModel viewModel;
 
@@ -145,12 +143,12 @@ public class UserGameLibraryPage {
 		this.gameTitleTextField.textProperty().bindBidirectional(this.viewModel.getSelectedGameName());
 		this.gameDevelopersTextField.textProperty().bindBidirectional(this.viewModel.getSelectedGameDevelopers());
 		this.gameGenresListView.itemsProperty().bindBidirectional(this.viewModel.getSelectedGameGenres());
-    	this.gamePhotoImageView.imageProperty().bindBidirectional(this.viewModel.getImageProperty());
-    	this.gameDescriptionTextBox.textProperty().bindBidirectional(this.viewModel.getGameDescriptionProperty());
-    	this.communityTextArea.textProperty().bindBidirectional(this.viewModel.getCommentsProperty());
+		this.gamePhotoImageView.imageProperty().bindBidirectional(this.viewModel.getImageProperty());
+		this.gameDescriptionTextBox.textProperty().bindBidirectional(this.viewModel.getGameDescriptionProperty());
+		this.communityTextArea.textProperty().bindBidirectional(this.viewModel.getCommentsProperty());
 
 	}
-	
+
 	private void setupAddGameButton() {
 		this.addGameButton.setOnMouseClicked((event) -> {
 			var newStage = new Stage();
@@ -176,7 +174,7 @@ public class UserGameLibraryPage {
 		this.gameListComboBox.getSelectionModel().select(0);
 		this.viewModel.setSelectedList("Liked Games");
 	}
-	
+
 	private void setupComboBox() {
 		ObservableList<String> gameLists = FXCollections.observableArrayList();
 		gameLists.add("Liked Games");
@@ -222,20 +220,21 @@ public class UserGameLibraryPage {
 		this.myGamesListView.getSelectionModel().selectedItemProperty()
 				.addListener((v, oldValue, newValue) -> this.updateSelectedGame());
 	}
-	
+
 	private void setupGameListsComboBoxListener() {
-		this.gameListComboBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> this.updateSelectedListDisplay());
+		this.gameListComboBox.getSelectionModel().selectedItemProperty()
+				.addListener((v, oldValue, newValue) -> this.updateSelectedListDisplay());
 	}
-	
+
 	private void setupCommentListener() {
 		this.submitButton.setOnAction((event) -> {
 			if (!this.commentTextField.getText().isBlank()) {
-				this.viewModel.updateSelectedGameComments(this.commentTextField.getText() + " - " + ActiveUser.getActiveUser().getUsername());
+				this.viewModel.updateSelectedGameComments(
+						this.commentTextField.getText() + " - " + ActiveUser.getActiveUser().getUsername());
 				this.commentTextField.clear();
-				}	
-			});
-			
-		
+			}
+		});
+
 	}
 
 	private void updateSelectedListDisplay() {
@@ -250,7 +249,7 @@ public class UserGameLibraryPage {
 			this.profileImageNavBar.setImage(userImage);
 		}
 	}
-	
+
 	private void setUpRemoveGameMenuItem() {
 		this.removeGameContextMenuItem.setOnAction(((event) -> {
 			String selectedList = this.gameListComboBox.getSelectionModel().getSelectedItem();
@@ -290,23 +289,41 @@ public class UserGameLibraryPage {
 	}
 
 	private void validateFXMLComponents() {
-		assert addGameButton != null : "fx:id=\"addGameButton\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
-        assert commentTextField != null : "fx:id=\"commentTextField\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
-        assert communityTextArea != null : "fx:id=\"communityTextArea\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
-        assert gameDescriptionTextBox != null : "fx:id=\"gameDescriptionTextBox\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
-        assert gameDevelopersTextField != null : "fx:id=\"gameDevelopersTextField\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
-        assert gameGenresListView != null : "fx:id=\"gameGenresListView\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
-        assert gameListComboBox != null : "fx:id=\"gameListComboBox\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
-        assert gamePhotoImageView != null : "fx:id=\"gamePhotoImageView\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
-        assert gameTitleTextField != null : "fx:id=\"gameTitleTextField\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
-        assert libraryHBox != null : "fx:id=\"libraryHBox\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
-        assert myGamesListView != null : "fx:id=\"myGamesListView\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
-        assert myGamesListViewContextMenu != null : "fx:id=\"myGamesListViewContextMenu\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
-        assert mystiverseHBox != null : "fx:id=\"mystiverseHBox\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
-        assert parentBorderPane != null : "fx:id=\"parentBorderPane\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
-        assert profileHBox != null : "fx:id=\"profileHBox\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
-        assert profileImageNavBar != null : "fx:id=\"profileImageNavBar\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
-        assert removeGameContextMenuItem != null : "fx:id=\"removeGameContextMenuItem\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
-        assert submitButton != null : "fx:id=\"submitButton\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+		assert this.addGameButton != null
+				: "fx:id=\"addGameButton\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+		assert this.commentTextField != null
+				: "fx:id=\"commentTextField\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+		assert this.communityTextArea != null
+				: "fx:id=\"communityTextArea\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+		assert this.gameDescriptionTextBox != null
+				: "fx:id=\"gameDescriptionTextBox\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+		assert this.gameDevelopersTextField != null
+				: "fx:id=\"gameDevelopersTextField\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+		assert this.gameGenresListView != null
+				: "fx:id=\"gameGenresListView\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+		assert this.gameListComboBox != null
+				: "fx:id=\"gameListComboBox\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+		assert this.gamePhotoImageView != null
+				: "fx:id=\"gamePhotoImageView\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+		assert this.gameTitleTextField != null
+				: "fx:id=\"gameTitleTextField\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+		assert this.libraryHBox != null
+				: "fx:id=\"libraryHBox\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+		assert this.myGamesListView != null
+				: "fx:id=\"myGamesListView\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+		assert this.myGamesListViewContextMenu != null
+				: "fx:id=\"myGamesListViewContextMenu\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+		assert this.mystiverseHBox != null
+				: "fx:id=\"mystiverseHBox\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+		assert this.parentBorderPane != null
+				: "fx:id=\"parentBorderPane\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+		assert this.profileHBox != null
+				: "fx:id=\"profileHBox\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+		assert this.profileImageNavBar != null
+				: "fx:id=\"profileImageNavBar\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+		assert this.removeGameContextMenuItem != null
+				: "fx:id=\"removeGameContextMenuItem\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
+		assert this.submitButton != null
+				: "fx:id=\"submitButton\" was not injected: check your FXML file 'UserGameLibraryPage.fxml'.";
 	}
 }

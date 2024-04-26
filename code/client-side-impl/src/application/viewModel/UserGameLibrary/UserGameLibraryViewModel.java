@@ -4,7 +4,6 @@ import application.model.local_impl.game.Game;
 import application.model.local_impl.game.Genre;
 import application.model.server_impl.game.GameLibraryManager;
 import application.model.server_impl.profile.ActiveUser;
-import application.model.server_impl.profile.UserGameLibrary;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleListProperty;
@@ -23,9 +22,6 @@ import javafx.scene.image.Image;
  */
 public class UserGameLibraryViewModel {
 
-	/** The user game library. */
-	private UserGameLibrary userGameLibrary;
-	
 	/** The liked games list property. */
 	private ListProperty<Game> likedGamesListProperty;
 	
@@ -164,6 +160,13 @@ public class UserGameLibraryViewModel {
 		return this.selectedGamesListProperty;
 	}
 	
+	/**
+	 * Gets the selected game comments
+	 *
+	 * @return the selected game comments
+	 * @pre none
+	 * @post none
+	 */
 	public StringProperty getCommentsProperty() {
 		return this.commentsProperty;
 	}
@@ -188,6 +191,15 @@ public class UserGameLibraryViewModel {
 
 	}
 	
+	/**
+	 * Updates the comments for the selected game by sending a new comment to the server and refreshing the displayed comments.
+	 *
+	 * This method sends a new comment to the server for the currently selected game. It then fetches the updated list of comments
+	 * from the server to refresh the comments displayed on the user interface. This ensures that the comments displayed are
+	 * always current and include the latest submitted comment.
+	 *
+	 * @param comment the new comment to add to the selected game.
+	 */
 	public void updateSelectedGameComments(String comment) {
 		GameLibraryManager.sendComment(this.selectedGame.getGameID(), comment);
 		this.commentsProperty.set(GameLibraryManager.fetchComments(this.selectedGame.getGameID()));
