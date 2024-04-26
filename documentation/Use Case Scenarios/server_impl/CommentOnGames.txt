@@ -1,0 +1,13 @@
+Context
+- User is logged in and wants to add a comment to a game in one of their libraries
+
+Primary Flow
+1.User navigates to their game library within the application.
+2.User selects a game from the library to view more details.
+3.System displays the game details along with existing comments, if any.
+4.User enters their comment into the provided text field.
+5.User clicks the "Add Comment" button.
+6.System sends the comment to the server along with the game ID.
+7.Server processes the request, saves the comment, and confirms successful operation.
+8.System displays the newly added comment under the game details.
+9.User can see their comment added in real-time.

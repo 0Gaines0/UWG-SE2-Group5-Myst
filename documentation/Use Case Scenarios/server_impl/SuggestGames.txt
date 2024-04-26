@@ -1,0 +1,18 @@
+Context
+- User is logged in and wants to suggest a game to another user
+Primary Flow
+1. User navigates to the their profile page
+2. User clicks on a "Suggest to Friend" button.
+3. System prompts user to enter the username of the friend to receive the suggestion.
+4. User inputs the friend’s username and submits the suggestion.
+5. System verifies the existence of the friend’s username in the database.
+6. The username exists, the system sends the game suggestion to the friend.
+7. Server confirms successful transmission of the suggestion.
+8. User receives confirmation that the game suggestion has been sent successfully.
+
+Alternate Flow
+User Not Found
+
+A5. System displays an error message indicating that the username is not found.
+A6. User is prompted to check the username and try again or cancel the operation.
+A7. Return to main 4

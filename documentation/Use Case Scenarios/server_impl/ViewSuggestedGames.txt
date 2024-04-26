@@ -1,0 +1,13 @@
+Context
+- User is logged in and wants to view their suggested games from other users
+Primary Flow
+1. User navigates to the their profile page
+2. User can see game suggestions from profile
+3. User selects one of the games suggested to them
+4. Game can be added to the users library as either liked or not interested.
+5. The game clears from the user's suggestions
+
+Alternate Flow
+No suggestions found
+
+A3. No game suggestions are found, the suggestions field remains unpopulated
